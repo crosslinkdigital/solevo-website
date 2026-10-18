@@ -1,0 +1,20 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/themes.php?page=solevo-setup",
+	"preferredVersions": { "php": "8.3", "wp": "latest" },
+	"features": { "networking": true },
+	"steps": [
+		{ "step": "login", "username": "admin", "password": "password" },
+		{
+			"step": "installTheme",
+			"themeData": {
+				"resource": "git:directory",
+				"url": "https://github.com/OWNER/solevo-website",
+				"ref": "main",
+				"path": "theme/solevo"
+			},
+			"options": { "activate": true }
+		},
+		{ "step": "wp-cli", "command": "wp solevo setup" }
+	]
+}

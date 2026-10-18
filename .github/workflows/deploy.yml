@@ -1,0 +1,53 @@
+# Deploys the theme folder to Bluehost over SSH.
+#   push to main          -> staging
+#   Actions > Deploy > Run workflow (target: production) -> live site
+#
+# Repository secrets (Settings > Secrets and variables > Actions):
+#   BLUEHOST_HOST          e.g. solevo.com.au or the server hostname from Bluehost
+#   BLUEHOST_USER          cPanel / SSH username
+#   BLUEHOST_SSH_KEY       private key; add the public key in Bluehost > Advanced > SSH Access
+#   BLUEHOST_STAGING_PATH  e.g. /home/USER/public_html/staging/wp-content/themes/solevo
+#   BLUEHOST_LIVE_PATH     e.g. /home/USER/public_html/wp-content/themes/solevo
+name: Deploy theme
+
+on:
+  push:
+    branches: [main]
+    paths: ['theme/solevo/**']
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Where to deploy'
+        required: true
+        default: staging
+        type: choice
+        options: [staging, production]
+
+concurrency:
+  group: deploy-${{ github.event.inputs.target || 'staging' }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.target || 'staging' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint PHP
+        run: find theme/solevo -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.BLUEHOST_SSH_KEY }}" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -H "${{ secrets.BLUEHOST_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Rsync theme
+        env:
+          DEST: ${{ (github.event.inputs.target == 'production') && secrets.BLUEHOST_LIVE_PATH || secrets.BLUEHOST_STAGING_PATH }}
+        run: |
+          rsync -az --delete --exclude '.DS_Store' \
+            -e "ssh -i ~/.ssh/id_deploy" \
+            theme/solevo/ "${{ secrets.BLUEHOST_USER }}@${{ secrets.BLUEHOST_HOST }}:${DEST}/"
