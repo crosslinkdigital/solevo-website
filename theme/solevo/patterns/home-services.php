@@ -7,58 +7,46 @@
  */
 
 $services = array(
-	array(
-		'title' => 'General Physiotherapy',
-		'tags'  => array( 'Manual therapy', 'Joint mobilisation', 'Soft tissue therapy', 'Exercise prescription', 'Movement assessments' ),
-		'text'  => 'Comprehensive assessment and treatment for neck, shoulder, back, hip, knee, ankle/foot pain, headaches, postural dysfunction and workplace injuries.',
-	),
-	array(
-		'title' => 'Sports Physiotherapy',
-		'tags'  => array( 'Return to play programming', 'Marathon &amp; endurance prep', 'Strength &amp; conditioning integration' ),
-		'text'  => 'Designed for athletes and active individuals. Managing acute sporting injuries, muscle strains, ligament sprains, tendinopathy and overuse injuries.',
-	),
-	array(
-		'title' => 'Rehabilitation &amp; Strength',
-		'tags'  => array( 'Strength', 'Capacity', 'Long term resilience' ),
-		'text'  => 'We move beyond passive treatment. Progressive loading programs, gym based rehabilitation, post operative rehab (ACL, shoulder, spinal).',
-	),
-	array(
-		'title' => 'Adjunct Therapies',
-		'tags'  => array( 'Dry needling', 'Shockwave therapy', 'Compression recovery therapy', 'Trigger point release' ),
-		'text'  => 'Used strategically within a broader rehab plan to accelerate recovery.',
-	),
+	array( 'General Physiotherapy', array( 'Manual therapy', 'Joint mobilisation', 'Soft tissue therapy', 'Exercise prescription', 'Movement assessments' ), 'Comprehensive assessment and treatment for neck, shoulder, back, hip, knee, ankle/foot pain, headaches, postural dysfunction and workplace injuries.' ),
+	array( 'Sports Physiotherapy', array( 'Return to play programming', 'Marathon &amp; endurance prep', 'Strength &amp; conditioning integration' ), 'Designed for athletes and active individuals. Managing acute sporting injuries, muscle strains, ligament sprains, tendinopathy and overuse injuries.' ),
+	array( 'Rehabilitation &amp; Strength', array( 'Strength', 'Capacity', 'Long term resilience' ), 'We move beyond passive treatment. Progressive loading programs, gym based rehabilitation, post operative rehab (ACL, shoulder, spinal).' ),
+	array( 'Adjunct Therapies', array( 'Dry needling', 'Shockwave therapy', 'Compression recovery therapy', 'Trigger point release' ), 'Used strategically within a broader rehab plan to accelerate recovery.' ),
 );
 ?>
-<!-- wp:group {"tagName":"section","anchor":"services","align":"full","className":"solevo-section","layout":{"type":"constrained"}} -->
-<section id="services" class="wp-block-group alignfull solevo-section"><!-- wp:group {"align":"wide","className":"solevo-section-head","layout":{"type":"default"}} -->
-<div class="wp-block-group alignwide solevo-section-head"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-<p class="is-style-eyebrow">Our Expertise</p>
+<!-- wp:group {"tagName":"section","anchor":"services","align":"full","className":"solevo-section solevo-services-section","layout":{"type":"constrained"}} -->
+<section id="services" class="wp-block-group alignfull solevo-section solevo-services-section"><!-- wp:group {"align":"wide","className":"solevo-head","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide solevo-head"><!-- wp:paragraph {"className":"solevo-eyebrow"} -->
+<p class="solevo-eyebrow">Our Expertise</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
-<h2 class="wp-block-heading">Physiotherapy services</h2>
+<h2 class="wp-block-heading">Physiotherapy Services</h2>
 <!-- /wp:heading --></div>
 <!-- /wp:group -->
 
-<!-- wp:group {"align":"wide","className":"solevo-grid","layout":{"type":"grid","minimumColumnWidth":"17rem"}} -->
-<div class="wp-block-group alignwide solevo-grid"><?php foreach ( $services as $s ) : ?><!-- wp:group {"className":"is-style-card","layout":{"type":"default"}} -->
-<div class="wp-block-group is-style-card"><!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading"><?php echo $s['title']; // phpcs:ignore ?></h3>
+<!-- wp:group {"align":"wide","className":"solevo-service-list","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide solevo-service-list"><?php foreach ( $services as $s ) : ?><!-- wp:columns {"className":"solevo-service"} -->
+<div class="wp-block-columns solevo-service"><!-- wp:column {"width":"43%"} -->
+<div class="wp-block-column" style="flex-basis:43%"><!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading"><?php echo $s[0]; // phpcs:ignore ?></h3>
 <!-- /wp:heading -->
 
-<!-- wp:list {"className":"is-style-pills"} -->
-<ul class="wp-block-list is-style-pills"><?php foreach ( $s['tags'] as $t ) : ?><!-- wp:list-item -->
+<!-- wp:list {"className":"solevo-plaintags"} -->
+<ul class="wp-block-list solevo-plaintags"><?php foreach ( $s[1] as $t ) : ?><!-- wp:list-item -->
 <li><?php echo $t; // phpcs:ignore ?></li>
 <!-- /wp:list-item --><?php endforeach; ?></ul>
-<!-- /wp:list -->
+<!-- /wp:list --></div>
+<!-- /wp:column -->
 
-<!-- wp:paragraph -->
-<p><?php echo $s['text']; // phpcs:ignore ?></p>
+<!-- wp:column {"width":"57%"} -->
+<div class="wp-block-column" style="flex-basis:57%"><!-- wp:paragraph {"className":"solevo-service__desc"} -->
+<p class="solevo-service__desc"><?php echo $s[2]; // phpcs:ignore ?></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"className":"solevo-arrow-link"} -->
-<p class="solevo-arrow-link"><a href="#cliniko">Book now →</a></p>
+<!-- wp:paragraph {"className":"solevo-textlink"} -->
+<p class="solevo-textlink"><a href="#cliniko">Book now →</a></p>
 <!-- /wp:paragraph --></div>
-<!-- /wp:group --><?php endforeach; ?></div>
+<!-- /wp:column --></div>
+<!-- /wp:columns --><?php endforeach; ?></div>
 <!-- /wp:group --></section>
 <!-- /wp:group -->

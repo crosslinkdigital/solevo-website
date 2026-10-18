@@ -45,7 +45,7 @@ function solevo_build_menus( $page_ids ) {
 	};
 
 	$landing = implode( '', array(
-		solevo_nav_link( 'Physio', '/#physio' ),
+		solevo_nav_link( 'About', '/#physio' ),
 		solevo_nav_link( 'Team', '/#team' ),
 		solevo_nav_link( 'Services', '/#services' ),
 		solevo_nav_link( 'Studio', '/#studio' ),

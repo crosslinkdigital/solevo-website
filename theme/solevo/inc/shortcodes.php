@@ -23,7 +23,20 @@ add_shortcode( 'solevo_year', function () {
 } );
 
 add_shortcode( 'solevo_copyright', function () {
-	return '<p class="solevo-small">&copy; ' . esc_html( wp_date( 'Y' ) . ' ' . solevo_opt( 'business_name' ) ) . '. Integrated with The Foot Company Podiatry.</p>';
+	return '<p class="solevo-copyright">&copy; ' . esc_html( wp_date( 'Y' ) . ' ' . solevo_opt( 'business_name' ) ) . '. Integrated with The Foot Company Podiatry.</p>';
+} );
+
+add_shortcode( 'solevo_social', function ( $atts ) {
+	$atts = shortcode_atts( array( 'label' => '' ), $atts );
+	$icon = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
+	$out  = '<div class="solevo-social">';
+	if ( solevo_opt( 'instagram_url' ) ) {
+		$out .= sprintf( '<a href="%s" rel="noopener" aria-label="Solevo on Instagram">%s</a>', esc_url( solevo_opt( 'instagram_url' ) ), $icon );
+	}
+	if ( $atts['label'] ) {
+		$out .= '<span>' . esc_html( $atts['label'] ) . '</span>';
+	}
+	return $out . '</div>';
 } );
 
 add_shortcode( 'solevo_breadcrumbs', function () {
@@ -155,3 +168,16 @@ add_shortcode( 'solevo_instagram', function () {
 function solevo_admin_hint( $text ) {
 	return '<p class="solevo-admin-hint"><strong>Editor note (only you can see this):</strong> ' . esc_html( $text ) . '</p>';
 }
+
+// Shortcode blocks inside patterns and template parts are not run through the_content,
+// so expand our own shortcodes when the block renders.
+add_filter( 'render_block_core/shortcode', function ( $content ) {
+	if ( false === strpos( $content, '[solevo_' ) ) {
+		return $content;
+	}
+	$trimmed = trim( $content );
+	if ( preg_match( '#^<p>\s*(\[solevo_[^\]]*\])\s*</p>$#', $trimmed, $m ) ) {
+		$trimmed = $m[1]; // Drop the wpautop wrapper so block-level output is not nested in a <p>.
+	}
+	return do_shortcode( $trimmed );
+}, 5 );

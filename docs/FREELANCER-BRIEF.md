@@ -7,7 +7,7 @@
 ## What is already done
 
 - Theme, design system, header, footer, booking band, 404, breadcrumbs, SEO fields, sitemap, tracking hooks.
-- Homepage rebuilt from the old one-page site with all current copy, team, services, classes and pricing.
+- Homepage rebuilt as a replica of the current solevo.com.au design with all current copy, team, services, classes and pricing. Photos are interim copies from the live site; replace them with Steph's originals.
 - All 30 pages created with the agreed URL, parent, template, SEO title, meta description and excerpt.
 - Each draft page has a **scaffold** that follows the agreed page template. Anything in `[square brackets]` is yours to write.
 
@@ -18,7 +18,7 @@
 3. Keep **one H1** (already in the hero). It contains the primary keyword and Brookvale. Do not add another.
 4. Check the SEO box under the page: title ≤ 60 characters, meta 140 to 155. They are pre-filled; adjust only if the copy changes the angle.
 5. Booking buttons: physio pages use `#cliniko`, class pages use `#mindbody`. Never paste raw booking URLs into buttons.
-6. Images: select the placeholder > **Replace** > upload the real photo with descriptive alt text. Upload JPG or PNG; WordPress serves WebP.
+6. Images: select the image > **Replace** > upload the real photo with descriptive alt text. Upload JPG or PNG; WordPress serves WebP.
 7. Health pages (all `/conditions/*` and physio services): fill the **Reviewed by** line with the clinician's name, qualification and review date, and keep the red-flags block on condition pages.
 8. Update the **Excerpt** (page sidebar) if needed. It is the one-line text on the cards on `/physio`, `/pilates` and `/conditions`.
 9. Preview on mobile, then **Publish**.

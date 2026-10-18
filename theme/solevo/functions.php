@@ -46,7 +46,7 @@ add_action( 'wp_enqueue_scripts', function () {
 
 // Preload the hero fonts so the H1 paints in the right face (LCP).
 add_action( 'wp_head', function () {
-	foreach ( array( 'instrument-serif-regular.woff', 'manrope-variable.woff' ) as $font ) {
+	foreach ( array( 'cormorant-garamond.woff', 'jost.woff' ) as $font ) {
 		printf( '<link rel="preload" href="%s" as="font" type="font/woff" crossorigin>' . "\n", esc_url( SOLEVO_URI . '/assets/fonts/' . $font ) );
 	}
 }, 1 );

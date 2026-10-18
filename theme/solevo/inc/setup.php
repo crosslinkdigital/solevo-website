@@ -112,7 +112,7 @@ function solevo_scaffold( $page ) {
 
 	switch ( $type ) {
 		case 'home':
-			foreach ( array( 'home-hero', 'home-about', 'home-team', 'home-services', 'home-conditions', 'home-technology', 'home-why', 'home-studio', 'home-pricing', 'home-reviews', 'home-book', 'home-instagram', 'home-find-us' ) as $slug ) {
+			foreach ( array( 'home-hero', 'home-about', 'home-team', 'home-services', 'home-conditions', 'home-technology', 'home-why', 'home-studio', 'home-pricing', 'home-timetable', 'home-instagram', 'home-book' ) as $slug ) {
 				$c .= solevo_pattern_markup( $slug );
 			}
 			return $c;
@@ -128,7 +128,7 @@ function solevo_scaffold( $page ) {
 			if ( 'physio' === $path ) {
 				$c .= solevo_pattern_markup( 'home-services' ) . solevo_pattern_markup( 'home-technology' ) . solevo_pattern_markup( 'home-why' );
 			} elseif ( 'pilates' === $path ) {
-				$c .= solevo_pattern_markup( 'home-studio' ) . solevo_pattern_markup( 'home-pricing' ) . solevo_pattern_markup( 'home-book' );
+				$c .= solevo_pattern_markup( 'home-studio' ) . solevo_pattern_markup( 'home-pricing' ) . solevo_pattern_markup( 'home-timetable' );
 			} else {
 				$c .= solevo_pattern_markup( 'home-conditions' );
 			}
@@ -222,7 +222,7 @@ function solevo_scaffold( $page ) {
 
 		case 'book':
 			$c .= solevo_b_section( solevo_b_p( 'Book', 'is-style-eyebrow' ) . solevo_b_h( esc_html( $page['h1'] ), 1 ) . solevo_b_p( 'Two ways to book. Physio appointments are booked through Cliniko. Pilates, mat and yoga classes are booked through Mindbody.', 'solevo-lead' ), array( 'class' => 'solevo-page-hero', 'inner_class' => 'solevo-narrow' ) );
-			$c .= solevo_pattern_markup( 'home-book' );
+			$c .= solevo_pattern_markup( 'home-timetable' );
 			$c .= solevo_pattern_markup( 'home-pricing' );
 			$c .= solevo_pattern_markup( 'home-find-us' );
 			return $c;

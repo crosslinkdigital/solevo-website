@@ -3,7 +3,7 @@
 WordPress block theme and site setup for **Solevo Physio & Studio**, Brookvale (solevo.com.au).
 Built by CrossLink DGTL under the Solevo Website Build Addendum (30 pages, WordPress + GitHub + Bluehost).
 
-- **Live today:** the homepage, rebuilt from the current one-page site, fully editable in WordPress.
+- **Live today:** the homepage, a replica of the current solevo.com.au design (Cormorant Garamond + Jost, olive palette, wave dividers), fully editable in WordPress.
 - **Set up, ready to fill:** the other 29 pages as drafts, each with URL, template, SEO title, meta description and a content scaffold.
 - **Owner:** Solevo owns this repository, the WordPress admin and the Bluehost account (Addendum section 4).
 
@@ -58,7 +58,7 @@ Any local WordPress (LocalWP, wp-env, DDEV). Symlink `theme/solevo` into `wp-con
 
 | What | Where |
 |---|---|
-| Page text, images, sections | Pages > edit. Images: select > **Replace**. Placeholders are flagged in the Media Library. |
+| Page text, images, sections | Pages > edit. Images: select > **Replace**. The photos shipped with the theme are interim copies taken from the current site at screen resolution; swap in Steph's originals (flagged in the Media Library). |
 | Add a section to any page | Block inserter > Patterns > **Solevo** (team, studio classes, pricing, booking, reviews, find us, ...). |
 | Booking links | Link any button or text to `#cliniko` (physio) or `#mindbody` (classes). The real URL comes from Settings > Solevo, and the click is tracked. Also `#phone`, `#email`, `#booknow`. |
 | Address, phone, email, hours, suburbs | **Settings > Solevo**. Shown everywhere via `[solevo_contact]`, `[solevo_hours]`, `[solevo_suburbs]`, so NAP is always identical. |

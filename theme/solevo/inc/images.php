@@ -1,6 +1,6 @@
 <?php
 /**
- * Image registry. Placeholders ship in /assets/images; setup imports them into the
+ * Image registry. Interim images (taken from the current site) ship in /assets/images; setup imports them into the
  * Media Library so Steph can swap each one with "Replace" in the editor, no code.
  *
  * @package Solevo
@@ -11,17 +11,15 @@ defined( 'ABSPATH' ) || exit;
 /** Key => [file, alt text]. Filenames match the current solevo.com.au assets. */
 function solevo_image_registry() {
 	return array(
-		'logo'             => array( 'solevo-logo.png', 'Solevo Physiotherapy' ),
-		'hero'             => array( 'hero.jpg', 'Reformer Pilates class at Solevo, Brookvale' ),
-		'yoga-stretch'     => array( 'yoga-stretch.jpg', 'Yoga practice at Solevo studio' ),
-		'emma-docker'      => array( 'team-emma-docker.jpg', 'Emma Docker, Physiotherapist at Solevo' ),
-		'rikki-xu'         => array( 'team-rikki-xu.jpg', 'Rikki Xu, Pilates Instructor at Solevo' ),
-		'yasmin-mcfadden'  => array( 'team-yasmin-mcfadden.jpg', 'Yasmin McFadden, Yoga Instructor at Solevo' ),
+		'logo'               => array( 'solevo-logo.png', 'Solevo Physio, Pilates, Yoga' ),
+		'yoga-stretch'       => array( 'yoga-stretch.jpg', 'Yoga practice at Solevo studio' ),
+		'emma-docker'        => array( 'team-emma-docker.jpg', 'Emma Docker, Physiotherapist at Solevo' ),
+		'rikki-xu'           => array( 'team-rikki-xu.jpg', 'Rikki Xu, Pilates Instructor at Solevo' ),
+		'yasmin-mcfadden'    => array( 'team-yasmin-mcfadden.jpg', 'Yasmin McFadden, Yoga Instructor at Solevo' ),
 		'running-assessment' => array( 'running-assessment.jpg', 'Running gait analysis at Solevo' ),
-		'why-stretch'      => array( 'why-stretch.jpg', 'Athlete stretching' ),
-		'why-strength'     => array( 'why-strength.jpg', 'Strength training with barbell' ),
-		'studio-stretch'   => array( 'studio-stretch.jpg', 'Movement and flexibility at Solevo Studio' ),
-		'service'          => array( 'service-generic.jpg', 'Physiotherapy session at Solevo, Brookvale' ),
+		'why-stretch'        => array( 'why-stretch.jpg', 'Athlete stretching' ),
+		'why-strength'       => array( 'why-strength.jpg', 'Strength training with barbell' ),
+		'studio-stretch'     => array( 'studio-stretch.jpg', 'Movement and flexibility at Solevo Studio' ),
 	);
 }
 

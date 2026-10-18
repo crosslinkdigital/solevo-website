@@ -13,20 +13,20 @@ $reasons = array(
 	array( '04', 'Northern Beaches Performance Hub', 'Purpose built space in Brookvale designed for movement and recovery.' ),
 );
 ?>
-<!-- wp:group {"tagName":"section","align":"full","backgroundColor":"surface","className":"solevo-section","layout":{"type":"constrained"}} -->
-<section class="wp-block-group alignfull solevo-section has-surface-background-color has-background"><!-- wp:columns {"align":"wide","className":"solevo-split"} -->
-<div class="wp-block-columns alignwide solevo-split"><!-- wp:column -->
-<div class="wp-block-column"><!-- wp:paragraph {"className":"is-style-eyebrow"} -->
-<p class="is-style-eyebrow">The Difference</p>
+<!-- wp:group {"tagName":"section","align":"full","className":"solevo-section solevo-why-section solevo-wave solevo-wave--after-olive","layout":{"type":"constrained"}} -->
+<section class="wp-block-group alignfull solevo-section solevo-why-section solevo-wave solevo-wave--after-olive"><!-- wp:group {"align":"wide","className":"solevo-head","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide solevo-head"><!-- wp:paragraph {"className":"solevo-eyebrow"} -->
+<p class="solevo-eyebrow">The Difference</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
 <h2 class="wp-block-heading">Why Solevo Physio?</h2>
-<!-- /wp:heading -->
+<!-- /wp:heading --></div>
+<!-- /wp:group -->
 
-<!-- wp:group {"className":"solevo-reasons","layout":{"type":"grid","minimumColumnWidth":"14rem"}} -->
-<div class="wp-block-group solevo-reasons"><?php foreach ( $reasons as $r ) : ?><!-- wp:group {"className":"solevo-reason","layout":{"type":"default"}} -->
-<div class="wp-block-group solevo-reason"><!-- wp:paragraph {"className":"solevo-num"} -->
+<!-- wp:columns {"align":"wide","className":"solevo-reasons"} -->
+<div class="wp-block-columns alignwide solevo-reasons"><?php foreach ( $reasons as $r ) : ?><!-- wp:column {"className":"solevo-reason"} -->
+<div class="wp-block-column solevo-reason"><!-- wp:paragraph {"className":"solevo-num"} -->
 <p class="solevo-num"><?php echo $r[0]; // phpcs:ignore ?></p>
 <!-- /wp:paragraph -->
 
@@ -37,14 +37,16 @@ $reasons = array(
 <!-- wp:paragraph -->
 <p><?php echo $r[2]; // phpcs:ignore ?></p>
 <!-- /wp:paragraph --></div>
-<!-- /wp:group --><?php endforeach; ?></div>
-<!-- /wp:group --></div>
+<!-- /wp:column --><?php endforeach; ?></div>
+<!-- /wp:columns -->
+
+<!-- wp:columns {"align":"wide","className":"solevo-why__photos"} -->
+<div class="wp-block-columns alignwide solevo-why__photos"><!-- wp:column -->
+<div class="wp-block-column"><?php echo solevo_img( 'why-stretch', 'solevo-photo', 'large' ); // phpcs:ignore ?></div>
 <!-- /wp:column -->
 
-<!-- wp:column {"className":"solevo-duo"} -->
-<div class="wp-block-column solevo-duo"><?php echo solevo_img( 'why-stretch', 'is-style-rounded' ); // phpcs:ignore ?>
-
-<?php echo solevo_img( 'why-strength', 'is-style-rounded' ); // phpcs:ignore ?></div>
+<!-- wp:column -->
+<div class="wp-block-column"><?php echo solevo_img( 'why-strength', 'solevo-photo', 'large' ); // phpcs:ignore ?></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></section>
 <!-- /wp:group -->
