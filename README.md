@@ -83,7 +83,7 @@ dataLayer events pushed by `assets/js/site.js`: `click_book_physio`, `click_book
 
 - Branch from `main`, open a pull request, merge. Merging to `main` deploys `theme/solevo` to **staging** (`.github/workflows/deploy.yml`).
 - Production: Actions > **Deploy theme** > Run workflow > `production`.
-- Secrets needed: `BLUEHOST_HOST`, `BLUEHOST_USER`, `BLUEHOST_SSH_KEY`, `BLUEHOST_STAGING_PATH`, `BLUEHOST_LIVE_PATH` (enable SSH in Bluehost first).
+- Secrets needed: `DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`, `DEPLOY_STAGING_PATH`, and at launch `DEPLOY_LIVE_PATH` (enable SSH on the host first). Staging runs on CrossLink's Hostinger account; the live site moves to Solevo's Bluehost at launch.
 - Content lives in the WordPress database, not in Git. Back it up with Bluehost backups or a plugin (UpdraftPlus) before launch.
 - Template changes belong in code. If someone edits a template in the Site Editor, WordPress stores an override in the database; use **Reset** in the Site Editor to go back to the theme file.
 
