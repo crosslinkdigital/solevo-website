@@ -9,7 +9,7 @@
 			"step": "installTheme",
 			"themeData": {
 				"resource": "git:directory",
-				"url": "https://github.com/OWNER/solevo-website",
+				"url": "https://github.com/crosslinkdigital/solevo-website",
 				"ref": "main",
 				"path": "theme/solevo"
 			},

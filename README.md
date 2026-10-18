@@ -40,8 +40,7 @@ solevo-website/
 3. **Appearance > Solevo setup > Run setup.** Visit the site.
 
 Playground lives in your browser tab. It resets unless you use its Save option. Use it to preview, never as the site.
-Once this repo is public (or the zip is attached to a GitHub release) you can instead open
-`https://playground.wordpress.net/?blueprint-url=<raw URL of playground/blueprint.json>` after replacing `OWNER` in that file.
+The one-click Playground link (`https://playground.wordpress.net/?blueprint-url=` + the raw URL of `playground/blueprint.json`) only works while the repo is public; with a private repo, use the zip upload above.
 
 **B. Bluehost staging (the real build environment)**
 1. In Bluehost, create a **staging** WordPress install (Websites > Staging, or a `staging.solevo.com.au` subdomain with WordPress).
