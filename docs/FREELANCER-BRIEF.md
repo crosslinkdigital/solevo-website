@@ -26,7 +26,7 @@
 Recommended order (KPI pages first): `/pilates/mums-and-bubs`, `/pilates/seniors`, `/physio`, `/pilates`, `/book`, `/contact`, `/about`, then the remaining Pilates and Physio services, then conditions.
 When Physio, Pilates and Conditions are published: Appearance > Solevo setup > **Switch to Full site menu**.
 
-## Rules (from the SEO foundations doc)
+## Rules
 
 - **Slugs never change.** If one must, add a 301. Never create pages outside the 30 without sign-off from Hayo.
 - One page = one search intent. If two pages would answer the same query, flag it rather than writing both.
@@ -39,7 +39,7 @@ When Physio, Pilates and Conditions are published: Appearance > Solevo setup > *
 
 ## Access you will get
 
-- WordPress admin on Bluehost **staging** (Editor role is enough for content; Administrator if you also connect plugins).
+- WordPress Editor login on the **staging** site: https://lime-goldfinch-863020.hostingersite.com/wp-admin (the site moves to Solevo's Bluehost at launch).
 - GitHub repository access for code changes. Merging to `main` deploys to staging automatically.
 
 ## Open items to confirm with the client (do not guess)
