@@ -70,6 +70,23 @@ Design tokens (`:root` in `style.css`): body 17px mobile to 18px desktop; charco
 
 Pages already on staging keep their current template until rebuilt; selecting the template in the page sidebar is enough.
 
+### All pages written (23 Oct)
+
+Every page except `/conditions/shin-splints` now has near-final copy, built from one content file per page in `theme/solevo/inc/content/` and one builder per page type in `inc/templates.php`:
+
+| Template | Section order | Reference page |
+|---|---|---|
+| Condition | hero, what it is + symptoms, what can contribute, how physio helps (3 steps + what to expect), services that can help, red flags, FAQs + reviewed by, related conditions, locations, booking band | `/conditions/lower-back-pain` |
+| Service | hero, who it is for, question boxes, journey + first appointment, why Solevo, practitioner, fees + FAQs, related care, locations, booking band | `/physio`, `/physio/sports-physiotherapy` |
+| Studio / class | hero, what it is + who it is for, benefits, formats, how it works, Clinical vs Studio vs Physio, clinical oversight, timetable, pricing, FAQs, related, Instagram, booking band | `/pilates/clinical-pilates` |
+| General / info | hero, then page-specific components (booking paths, timetable, prices, location cards, contact details, team) | `/book`, `/contact`, `/about`, `/conditions` |
+
+Copy rules applied: patient language, no outcome promises, no testimonials, no unconfirmed therapies, red flags on every condition page (emergency signs say call 000), studio prices taken from the current solevo.com.au price list. Anything Solevo has not confirmed is left out for visitors and flagged for editors with a "To confirm" note.
+
+Shin splints is held: The Foot Company's keyword plan also targets it, so it stays a placeholder draft until Hayo decides which site owns it. Links to it are left out everywhere.
+
+Links to pages that are still drafts are hidden from visitors automatically, so publishing pages in any order never creates a 404.
+
 ## D. Physio page decisions
 
 Built from `inc/scaffold-physio.php` in the brief's order: hero, what can we help you with, services (with the Physio / Clinical Pilates / Studio pathway), journey, why Solevo, facilities, practitioner and trust, fees and FAQs, locations, final Book Physio band.
@@ -88,7 +105,8 @@ https://crosslinkdigital.github.io/solevo-website/physio.html, rendered from a l
 
 1. Code changes land on a branch, then a pull request into `main`.
 2. Merging to `main` runs `.github/workflows/deploy.yml`: PHP lint, then rsync of `theme/solevo` to Hostinger over SSH. Until the SSH secrets are added, upload `solevo-theme.zip` in Appearance > Themes instead.
-3. In WordPress: **Appearance > Solevo setup**, tick **Rebuild /physio**, Run setup. The old content stays under Revisions. Other pages are untouched.
+3. In WordPress: **Appearance > Solevo setup** > **Rebuild pages from the design system**, tick the pages to replace (or Select all), Run setup. The previous content of each stays under Revisions. Unticked pages are untouched, so any copy Thanh Hien has already written is kept unless you tick that page.
+   Then Switch to Full site menu, and publish the pages once their To confirm notes are cleared.
 4. **Settings > Solevo**: confirm the Terrey Hills address, add the Cliniko URL (and per-location Cliniko links if wanted).
 5. Check the theme version in Appearance > Themes matches `style.css` (1.2.0) so staging matches GitHub.
 
@@ -105,6 +123,21 @@ Future edits:
 Never edit theme files in wp-admin or override templates in the Site Editor: the next deploy would overwrite them, and GitHub must stay the source of truth.
 
 ## Open items (do not guess)
+
+Page-level items are also shown on each page as editor-only "To confirm" notes.
+
+| Item | Pages |
+|---|---|
+| Mums and Bubs: can babies attend, who runs it, missed classes, pregnant mums | `/pilates/mums-and-bubs` (Google Ads page) |
+| Seniors Pilates price, group size, class and program length, timetable | `/pilates/seniors` (Google Ads page) |
+| Over 50s class format, price, timetable | `/pilates/over-50s-fitness` |
+| Clinician for pregnancy, postnatal and pelvic floor; internal exams offered; men seen | women's health pages, bladder leakage |
+| Who runs Clinical Pilates; private health claimability | `/pilates/clinical-pilates` |
+| Medicare CDM referrals accepted | `/physio/seniors-physiotherapy` |
+| Parking and access, Brookvale and Terrey Hills | `/contact` |
+| Babies in postnatal classes; mats provided; class pack expiry; cancellation policy | studio pages, `/book` |
+| Solevo story; Rikki and Yasmin listing and photos | `/about` |
+| Shin splints ownership (Solevo or TFC) | `/conditions/shin-splints` |
 
 | Item | Where it shows |
 |---|---|

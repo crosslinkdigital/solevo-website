@@ -243,7 +243,7 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 	$atts  = shortcode_atts( array( 'service' => 'physio' ), $atts );
 	$cards = '';
 	foreach ( solevo_locations() as $loc ) {
-		if ( 'studio' === $atts['service'] && ! $loc['studio'] ) {
+		if ( in_array( $atts['service'], array( 'studio', 'clinical' ), true ) && ! $loc['studio'] ) {
 			continue;
 		}
 		$hours = solevo_lines( $loc['hours'] );
@@ -254,7 +254,10 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 			: ( current_user_can( 'edit_pages' ) ? solevo_admin_hint( 'Add opening hours in Settings > Solevo.' ) : '' );
 		$book  = 'studio' === $atts['service']
 			? '<a class="wp-block-button__link wp-element-button" href="#mindbody">Book Studio</a>'
-			: sprintf( '<a class="wp-block-button__link wp-element-button" href="#cliniko-%s">Book Physio in %s</a>', esc_attr( $loc['key'] ), esc_html( $loc['area'] ) );
+			: ( 'clinical' === $atts['service'] ? '<a class="wp-block-button__link wp-element-button" href="#cliniko-location1">Book Clinical Pilates</a>' : '' );
+		$book  = $book ?: ( 'studio' === $atts['service']
+			? ''
+			: sprintf( '<a class="wp-block-button__link wp-element-button" href="#cliniko-%s">Book Physio in %s</a>', esc_attr( $loc['key'] ), esc_html( $loc['area'] ) ) );
 		$phone = ( 'location1' === $loc['key'] && solevo_opt( 'phone' ) )
 			? sprintf( '<br><a class="solevo-call" data-track="click_call" href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', solevo_opt( 'phone' ) ) ), esc_html( solevo_opt( 'phone' ) ) )
 			: '';
@@ -303,7 +306,12 @@ add_shortcode( 'solevo_cta_band', function () {
 	$def     = solevo_page_def();
 	$booking = $def['booking'] ?? 'both';
 	$phys    = $def['cta'] ?? 'Book Physio';
-	$areas   = implode( ' or ', array_filter( wp_list_pluck( solevo_locations(), 'area' ) ) );
+	$locs    = solevo_locations();
+	// Clinical Pilates and other studio services run in Brookvale only.
+	if ( $def && 'pilates' === strtok( $def['path'], '/' ) ) {
+		$locs = array_slice( $locs, 0, 1 );
+	}
+	$areas   = implode( ' or ', array_filter( wp_list_pluck( $locs, 'area' ) ) );
 	$btn     = function ( $label, $href, $style = 'solevo-btn-light' ) {
 		return sprintf( '<div class="wp-block-button %s"><a class="wp-block-button__link wp-element-button" href="%s">%s</a></div>', esc_attr( $style ), esc_attr( $href ), esc_html( $label ) );
 	};

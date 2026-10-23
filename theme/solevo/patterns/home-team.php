@@ -17,7 +17,7 @@ $team = array(
 			'She uses a combination of hands on treatment, targeted exercise prescription, movement retraining and education to help manage pain and injury. Emma believes in meeting people where they are at, taking a collaborative approach to treatment that is tailored to each individual’s needs and goals.',
 			'Emma enjoys working with clients of all ages and fitness levels, particularly active individuals wanting to return to sport, stay active long term, and move with confidence.',
 		),
-		'tags'  => array( 'Clinical Pilates', 'Dry Needling', 'Sports Physiotherapy', 'Ankle &amp; ACL', 'Shoulder', 'Running Injuries' ),
+		'tags'  => array( 'Clinical Pilates', 'Sports Physiotherapy', 'Ankle &amp; ACL', 'Shoulder', 'Running Injuries' ),
 		'note'  => 'Outside of work, Emma is busy chasing after a toddler. She enjoys good coffee, reading, and fitting in exercise whenever she can.',
 	),
 	array(

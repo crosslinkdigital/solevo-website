@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . '/blocks.php';
 require_once __DIR__ . '/components.php';
 require_once __DIR__ . '/scaffold-physio.php';
+require_once __DIR__ . '/templates.php';
 
 /* ---------------------------------------------------------------------------
  * Content scaffolds
@@ -111,6 +112,14 @@ function solevo_scaffold( $page ) {
 	$path = $page['path'];
 	$type = $page['type'];
 	$c    = '';
+
+	// Pages with a content file (inc/content/) are built from the design system templates.
+	if ( 'home' !== $type && 'physio' !== $path ) {
+		$built = solevo_build_page( $page );
+		if ( $built ) {
+			return $built;
+		}
+	}
 
 	switch ( $type ) {
 		case 'home':
@@ -436,7 +445,14 @@ function solevo_render_setup_page() {
 			<?php wp_nonce_field( 'solevo_setup' ); ?>
 			<input type="hidden" name="action" value="solevo_setup">
 			<p><label><input type="checkbox" name="rebuild_home" value="1"> Reset the homepage to the theme design (overwrites homepage edits)</label></p>
-			<p><label><input type="checkbox" name="rebuild[]" value="physio"> Rebuild <code>/physio</code> from the gold-standard design (replaces its content; the previous version stays under Revisions)</label></p>
+			<details style="margin:1em 0"><summary><strong>Rebuild pages from the design system</strong> (replaces their content; the previous version stays under Revisions)</summary>
+				<p style="margin:.5em 0">Only tick pages nobody has written in yet, or whose copy you want replaced.</p>
+				<p><label><input type="checkbox" id="solevo-all"> Select all</label></p>
+				<?php foreach ( solevo_site_pages() as $p ) : if ( '' === $p['path'] ) { continue; } ?>
+					<label style="display:inline-block;min-width:22em;margin:.15em 0"><input type="checkbox" class="solevo-rb" name="rebuild[]" value="<?php echo esc_attr( $p['path'] ); ?>"> <code>/<?php echo esc_html( $p['path'] ); ?></code></label>
+				<?php endforeach; ?>
+				<script>document.getElementById('solevo-all').addEventListener('change',function(e){document.querySelectorAll('.solevo-rb').forEach(function(c){c.checked=e.target.checked;});});</script>
+			</details>
 			<?php submit_button( get_option( 'solevo_setup_done' ) ? 'Run setup again' : 'Run setup', 'primary', 'submit', false ); ?>
 		</form>
 

@@ -123,7 +123,7 @@ add_filter( 'render_block_core/button', function ( $content, $block ) {
 	$booking = solevo_page_booking();
 	$def     = solevo_page_def();
 	if ( 'cliniko' === $booking ) {
-		$label = $def['cta'] ?? 'Book Physio';
+		$label = isset( $def['cta'] ) ? 'Book Now' : 'Book Physio'; // keep the header button short on mobile
 		$href  = '#cliniko';
 	} elseif ( 'mindbody' === $booking ) {
 		$label = 'Book Studio';

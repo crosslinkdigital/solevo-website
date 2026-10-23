@@ -145,7 +145,7 @@ function solevo_c_pathway( $title, $intro, $items ) {
  * Patient journey: three numbered steps, then "your first appointment" facts.
  * $steps: [title, text]; $facts: [title, html]
  */
-function solevo_c_journey( $head, $steps, $facts = array(), $after = '' ) {
+function solevo_c_journey( $head, $steps, $facts = array(), $after = '', $facts_title = 'Your first appointment', $opts = array() ) {
 	$items = array();
 	foreach ( $steps as $s ) {
 		$items[] = '<strong>' . $s[0] . '</strong>' . $s[1];
@@ -156,19 +156,19 @@ function solevo_c_journey( $head, $steps, $facts = array(), $after = '' ) {
 		foreach ( $facts as $fact ) {
 			$f .= solevo_c_box( solevo_b_h( $fact[0], 3 ) . solevo_b_p( $fact[1] ), 'solevo-first__item' );
 		}
-		$inner .= solevo_c_box( solevo_b_h( 'Your first appointment', 3, 'solevo-first__title' ) . solevo_c_box( $f, 'solevo-first__grid' ), 'solevo-first' );
+		$inner .= solevo_c_box( solevo_b_h( $facts_title, 3, 'solevo-first__title' ) . solevo_c_box( $f, 'solevo-first__grid' ), 'solevo-first' );
 	}
-	return solevo_b_section( $inner . $after, array( 'class' => 'solevo-c solevo-journey-wrap', 'anchor' => 'journey' ) );
+	return solevo_b_section( $inner . $after, array( 'class' => 'solevo-c solevo-journey-wrap', 'anchor' => $opts['anchor'] ?? 'journey', 'bg' => $opts['bg'] ?? '' ) );
 }
 
 /** Four reasons ("Why choose Solevo"). $items: [title, text]; $extra: list of short points. */
-function solevo_c_why( $head, $items, $extra = array() ) {
+function solevo_c_why( $head, $items, $extra = array(), $opts = array() ) {
 	$cols = '';
 	foreach ( $items as $i => $it ) {
 		$cols .= solevo_c_box( solevo_b_p( sprintf( '%02d', $i + 1 ), 'solevo-why4__num' ) . solevo_b_h( $it[0], 3 ) . solevo_b_p( $it[1] ), 'solevo-why4__item' );
 	}
 	$inner = $head . solevo_c_box( $cols, 'solevo-why4' ) . ( $extra ? solevo_b_list( $extra, 'solevo-why4__extra' ) : '' );
-	return solevo_b_section( $inner, array( 'class' => 'solevo-c solevo-why2', 'bg' => 'sand' ) );
+	return solevo_b_section( $inner, array( 'class' => 'solevo-c solevo-why2', 'bg' => $opts['bg'] ?? 'sand', 'anchor' => $opts['anchor'] ?? '' ) );
 }
 
 /**
@@ -200,7 +200,8 @@ function solevo_c_practitioner( $a ) {
 		. solevo_b_p( $a['bio'] )
 		. ( ! empty( $a['points'] ) ? solevo_b_list( $a['points'], 'solevo-trust' ) : '' )
 		. ( ! empty( $a['link'] ) ? solevo_c_more( $a['link'][0], $a['link'][1] ) : '' );
-	$grid = solevo_c_box( solevo_img( $a['image'], 'solevo-person2__img', 'large' ) . solevo_c_box( $text, 'solevo-person2__text' ), 'solevo-person2' );
+	$img  = ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-person2__img', 'large' ) : '';
+	$grid = solevo_c_box( $img . solevo_c_box( $text, 'solevo-person2__text' ), 'solevo-person2' . ( $img ? '' : ' no-image' ) );
 	return solevo_b_section( $grid, array( 'class' => 'solevo-c solevo-person2-wrap', 'bg' => 'surface', 'anchor' => 'team' ) );
 }
 
@@ -214,7 +215,7 @@ function solevo_c_fees_faq( $head, $fees, $funding, $faqs, $fee_after = '', $aft
 		$rows .= solevo_c_box( solevo_b_p( $f[0] . ( $f[1] ? '<br><span>' . $f[1] . '</span>' : '' ), 'solevo-fee__label' ) . solevo_b_p( $f[2], 'solevo-fee__price' ), 'solevo-fee' );
 	}
 	$card = solevo_b_h( 'Fees', 3 ) . solevo_c_box( $rows, 'solevo-fees__rows' )
-		. solevo_b_h( 'Funding and referrals', 3 ) . solevo_b_list( $funding, 'solevo-ticks' ) . $fee_after;
+		. ( $funding ? solevo_b_h( 'Funding and referrals', 3 ) . solevo_b_list( $funding, 'solevo-ticks' ) : '' ) . $fee_after;
 	$q = '';
 	foreach ( $faqs as $f ) {
 		$q .= solevo_c_details( $f[0], solevo_b_p( $f[1] ), 'solevo-faq2__item' );
@@ -225,12 +226,12 @@ function solevo_c_fees_faq( $head, $fees, $funding, $faqs, $fee_after = '', $aft
 }
 
 /** FAQ accordion on its own (condition, studio and info pages). $faqs: [[q, a_html]] */
-function solevo_c_faq( $title, $faqs ) {
+function solevo_c_faq( $title, $faqs, $after = '' ) {
 	$q = '';
 	foreach ( $faqs as $f ) {
 		$q .= solevo_c_details( $f[0], solevo_b_p( $f[1] ), 'solevo-faq2__item' );
 	}
-	return solevo_b_section( solevo_b_h( $title, 2 ) . solevo_c_box( $q, 'solevo-faq2' ), array( 'class' => 'solevo-c solevo-faq-wrap', 'inner_class' => 'solevo-narrow', 'anchor' => 'faq' ) );
+	return solevo_b_section( solevo_b_p( 'FAQs', 'is-style-eyebrow' ) . solevo_b_h( $title, 2 ) . solevo_c_box( $q, 'solevo-faq2' ) . $after, array( 'class' => 'solevo-c solevo-faq-wrap', 'inner_class' => 'solevo-narrow', 'anchor' => 'faq' ) );
 }
 
 /** Instagram: heading and Follow button always; the live feed appears once Smash Balloon is connected. */
@@ -258,4 +259,113 @@ function solevo_c_related( $title, $paths ) {
 /** "Reviewed by" line for health pages. Renders only once a clinician is filled in. Placed inside a section. */
 function solevo_c_reviewed() {
 	return solevo_b_shortcode( '[solevo_reviewed by="" role="" date=""]' );
+}
+
+/* ---------------------------------------------------------------------------
+ * Components for the Condition, Studio and General templates
+ * ------------------------------------------------------------------------ */
+
+/**
+ * Two-column text section: copy on the left, a ticked list (or photo) on the right.
+ * $a: eyebrow, title, paras [html], list [html], list_title, image, bg, anchor, after
+ */
+function solevo_c_split( $a ) {
+	$text = ( ! empty( $a['eyebrow'] ) ? solevo_b_p( $a['eyebrow'], 'is-style-eyebrow' ) : '' ) . solevo_b_h( $a['title'], 2 );
+	foreach ( (array) ( $a['paras'] ?? array() ) as $p ) {
+		$text .= solevo_b_p( $p );
+	}
+	$text .= $a['after_text'] ?? '';
+	$side = '';
+	if ( ! empty( $a['list'] ) ) {
+		$side = solevo_c_box( ( ! empty( $a['list_title'] ) ? solevo_b_h( $a['list_title'], 3 ) : '' ) . solevo_b_list( $a['list'], 'solevo-ticks' ), 'solevo-split2__card' );
+	} elseif ( ! empty( $a['image'] ) ) {
+		$side = solevo_img( $a['image'], 'solevo-split2__img', 'large' );
+	}
+	$grid = solevo_c_box( solevo_c_box( $text, 'solevo-split2__text' ) . $side, 'solevo-split2' . ( $side ? '' : ' is-single' ) );
+	return solevo_b_section( $grid . ( $a['after'] ?? '' ), array( 'class' => 'solevo-c solevo-split2-wrap', 'bg' => $a['bg'] ?? '', 'anchor' => $a['anchor'] ?? '' ) );
+}
+
+/** Red flags: when to see a GP or call 000 first. */
+function solevo_c_redflags( $title, $items, $note = 'If any of these apply, see your GP or call your maternity or medical team before booking. In an emergency call 000.' ) {
+	$inner = solevo_b_p( 'Safety first', 'is-style-eyebrow' ) . solevo_b_h( $title, 2 ) . solevo_b_list( $items, 'solevo-flags' ) . solevo_b_p( $note, 'solevo-flags__note' );
+	return solevo_b_section( solevo_c_box( $inner, 'solevo-flagbox' ), array( 'class' => 'solevo-c solevo-flags-wrap', 'anchor' => 'red-flags' ) );
+}
+
+/**
+ * Class or program formats. $items: [name, tag, text, best, meta]
+ */
+function solevo_c_classes( $head, $items, $after = '', $opts = array() ) {
+	$cards = '';
+	foreach ( $items as $it ) {
+		$inner = ( ! empty( $it['meta'] ) ? solevo_b_p( $it['meta'], 'solevo-class2__meta' ) : '' )
+			. solevo_b_h( $it['name'], 3 )
+			. ( ! empty( $it['tag'] ) ? solevo_b_p( $it['tag'], 'solevo-class2__tag' ) : '' )
+			. solevo_b_p( $it['text'] )
+			. ( ! empty( $it['best'] ) ? solevo_b_p( '<strong>Best for:</strong> ' . $it['best'], 'solevo-class2__best' ) : '' );
+		$cards .= solevo_c_box( $inner, 'solevo-scard solevo-class2' );
+	}
+	return solevo_b_section( $head . solevo_c_box( $cards, 'solevo-scards' ) . $after, array( 'class' => 'solevo-c solevo-classes-wrap', 'bg' => $opts['bg'] ?? 'surface', 'anchor' => $opts['anchor'] ?? 'classes' ) );
+}
+
+/**
+ * Price cards. $groups: [title, meta, rows [[label, sub, price]]]
+ */
+function solevo_c_prices( $head, $groups, $after = '' ) {
+	$cards = '';
+	foreach ( $groups as $g ) {
+		$rows = '';
+		foreach ( $g['rows'] as $r ) {
+			$rows .= solevo_c_box( solevo_b_p( $r[0] . ( $r[1] ? '<br><span>' . $r[1] . '</span>' : '' ), 'solevo-fee__label' ) . solevo_b_p( $r[2], 'solevo-fee__price' ), 'solevo-fee' );
+		}
+		$cards .= solevo_c_box( solevo_b_h( $g['title'], 3 ) . ( ! empty( $g['meta'] ) ? solevo_b_p( $g['meta'], 'solevo-price2__meta' ) : '' ) . solevo_c_box( $rows, 'solevo-fees__rows' ), 'solevo-fees solevo-price2' );
+	}
+	return solevo_b_section( $head . solevo_c_box( $cards, 'solevo-prices2' ) . $after, array( 'class' => 'solevo-c solevo-prices-wrap', 'anchor' => 'pricing' ) );
+}
+
+/** Live Mindbody timetable (or a Book Studio button until the widget code is in Settings). */
+function solevo_c_timetable( $title = 'Timetable', $intro = 'See live class times and book your spot online.' ) {
+	return solevo_b_section( solevo_c_head( 'Book Studio', $title, $intro ) . solevo_c_box( solevo_b_shortcode( '[solevo_timetable]' ), 'solevo-tt' ), array( 'class' => 'solevo-c solevo-tt-wrap', 'bg' => 'sand', 'anchor' => 'timetable' ) );
+}
+
+/** Cards linking to other pages in the 30-page map, using their excerpt. $paths: page paths */
+function solevo_c_link_cards( $head, $paths, $opts = array() ) {
+	$all   = array();
+	foreach ( solevo_site_pages() as $p ) {
+		$all[ $p['path'] ] = $p;
+	}
+	$items = array();
+	foreach ( $paths as $path ) {
+		if ( ! isset( $all[ $path ] ) ) {
+			continue;
+		}
+		$items[] = array( 'title' => esc_html( $all[ $path ]['title'] ), 'text' => esc_html( $all[ $path ]['excerpt'] ?? '' ), 'more' => array( 'Learn more', home_url( '/' . $path ) ) );
+	}
+	return solevo_c_service_cards( $head, $items, '', array( 'bg' => $opts['bg'] ?? '', 'anchor' => $opts['anchor'] ?? 'related' ) );
+}
+
+/** Plain text section, narrow column. $paras: [html] */
+function solevo_c_text( $eyebrow, $title, $paras, $opts = array() ) {
+	$inner = ( $eyebrow ? solevo_b_p( $eyebrow, 'is-style-eyebrow' ) : '' ) . solevo_b_h( $title, 2 );
+	foreach ( $paras as $p ) {
+		$inner .= solevo_b_p( $p );
+	}
+	return solevo_b_section( $inner . ( $opts['after'] ?? '' ), array( 'class' => 'solevo-c solevo-text-wrap', 'inner_class' => 'solevo-narrow', 'bg' => $opts['bg'] ?? '', 'anchor' => $opts['anchor'] ?? '' ) );
+}
+
+/** Two booking paths side by side (Book page): physio through Cliniko, studio through Mindbody. */
+function solevo_c_booking_paths( $head ) {
+	$cols = solevo_c_box(
+		solevo_b_p( 'Cliniko', 'solevo-path__step' ) . solevo_b_h( 'Book Physio', 3 )
+		. solevo_b_p( 'One-on-one physiotherapy and Clinical Pilates in Brookvale, and physiotherapy at Terrey Hills on Wednesdays.' )
+		. solevo_b_list( array( 'Pain, injury or rehab after surgery', 'Pregnancy, postnatal and pelvic floor care', 'Clinical Pilates assessments and sessions' ), 'solevo-ticks' )
+		. solevo_b_buttons( array( array( 'Book Physio', '#cliniko' ) ) ),
+		'solevo-path__item is-current'
+	) . solevo_c_box(
+		solevo_b_p( 'Mindbody', 'solevo-path__step' ) . solevo_b_h( 'Book Studio', 3 )
+		. solevo_b_p( 'Reformer Pilates, mat Pilates, pregnancy and postnatal classes and yoga at our Brookvale studio.' )
+		. solevo_b_list( array( 'Group classes of up to 6 reformers or 14 mats', 'Private and duo sessions', 'Class packs and casual visits' ), 'solevo-ticks' )
+		. solevo_b_buttons( array( array( 'Book Studio', '#mindbody' ) ) ),
+		'solevo-path__item is-current'
+	);
+	return solevo_b_section( $head . solevo_c_box( $cols, 'solevo-path__grid solevo-path__grid--two' ), array( 'class' => 'solevo-c solevo-bookpaths', 'anchor' => 'choose' ) );
 }

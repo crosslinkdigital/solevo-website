@@ -861,3 +861,56 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 .solevo-ig__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; margin-bottom: 1.5rem; }
 .solevo-ig__head .solevo-sh { margin-bottom: 0 !important; }
 .solevo-ig .solevo-feed--placeholder { max-width: none; }
+
+/* =========================================================
+   Components: Condition, Studio and General templates
+   ========================================================= */
+.solevo-hero2__grid:not(:has(.solevo-hero2__media)) { grid-template-columns: minmax(0, 1fr); }
+.solevo-hero2__grid:not(:has(.solevo-hero2__media)) .solevo-hero2__title { max-width: 22ch; }
+
+/* Split: copy + ticked card or photo */
+.solevo-split2 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.75rem, 5vw, 4rem); align-items: start; }
+.solevo-split2.is-single { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.solevo-split2 > * { margin-block: 0 !important; }
+.solevo-split2__text > p:not([class]) { max-width: 62ch; }
+.solevo-split2__card { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 3vw, 2.25rem); }
+.solevo-split2__card > * { margin-top: 0 !important; }
+.solevo-split2__card .solevo-ticks { margin-top: .75rem; }
+.solevo-split2__img { margin: 0 !important; }
+.solevo-split2__img img { width: 100%; display: block; aspect-ratio: 4 / 5; max-height: 520px; object-fit: cover; border-radius: var(--ds-radius-lg); }
+
+/* Red flags */
+.solevo-flagbox { background: #FBF3EC; border: 1px solid #E8D5C4; border-left: 4px solid #9A5B34; border-radius: var(--ds-radius); padding: clamp(1.5rem, 3vw, 2.25rem); max-width: 860px; }
+.solevo-flagbox > * { margin-top: 0 !important; }
+.solevo-ds .solevo-flagbox .is-style-eyebrow { color: #7A4526 !important; }
+.solevo-flags { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: .6rem; }
+.solevo-flags li { position: relative; padding-left: 1.75rem; font-size: 1.0625rem; color: var(--ds-ink); }
+.solevo-flags li::before { content: "!"; position: absolute; left: 0; top: .2em; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: #9A5B34; color: #fff; font-size: .75rem; font-weight: 700; line-height: 1.15rem; text-align: center; }
+.solevo-flags__note { font-size: 1rem; color: var(--ds-text); margin: 0 !important; font-weight: 500; }
+
+/* Classes and formats */
+.solevo-class2__meta { font-size: .78rem !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: var(--ds-olive-text); margin-bottom: .5rem !important; }
+.solevo-class2__tag { font-style: italic; color: var(--ds-olive-text) !important; font-size: 1rem !important; margin-bottom: .5rem !important; }
+.solevo-class2__best { margin-top: auto !important; padding-top: .75rem; border-top: 1px solid var(--ds-line); font-size: .9375rem !important; }
+
+/* Price cards */
+.solevo-prices2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: var(--ds-gap); align-items: start; }
+.solevo-prices2 > * { margin-block: 0 !important; }
+.solevo-price2__meta { font-size: .9375rem; color: var(--ds-soft); margin: 0 0 .5rem !important; }
+.solevo-price2 .solevo-fees__rows { margin-bottom: 0 !important; }
+
+/* Timetable */
+.solevo-tt { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 4vw, 3rem); }
+.solevo-tt .solevo-timetable--fallback .wp-block-buttons { justify-content: flex-start; }
+
+/* Two booking paths */
+.solevo-path__grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.solevo-path__grid--two .solevo-path__item::after { display: none; }
+.solevo-path__grid--two .solevo-ticks { margin: .25rem 0 1.25rem; }
+
+/* Practitioner without a photo */
+.solevo-person2.no-image { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+
+@media (max-width: 781px) {
+	.solevo-split2, .solevo-path__grid--two { grid-template-columns: 1fr; }
+}
