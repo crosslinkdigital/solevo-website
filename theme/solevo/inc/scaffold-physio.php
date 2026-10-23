@@ -98,7 +98,7 @@ function solevo_scaffold_physio( $page ) {
 				'title'  => 'Physiotherapy',
 				'text'   => 'One-on-one with a physiotherapist. Assessment, diagnosis, hands-on treatment and a rehab plan.',
 				'booked' => 'Booked online through Cliniko',
-				'button' => array( 'Book Physio', '#cliniko' ),
+				'button' => array( 'Book Physio', '#cliniko', true ),
 			),
 			array(
 				'label'  => 'Then',
