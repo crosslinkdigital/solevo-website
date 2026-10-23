@@ -96,7 +96,7 @@ function solevo_c_help_grid( $head, $items, $after = '' ) {
 			$inner .= solevo_b_list( $it['links'], 'solevo-qbox__links' );
 		}
 		$cta    = $it['cta'] ?? array( 'Book Physio', '#cliniko' );
-		$inner .= solevo_c_more( $cta[0], $cta[1] );
+		$inner .= solevo_b_p( sprintf( '<a href="%s">%s</a>', esc_attr( $cta[1] ), $cta[0] ), 'solevo-qbox__cta' );
 		$boxes .= solevo_c_details( $it['title'] . '<br><em>' . $it['hint'] . '</em>', $inner, 'solevo-qbox solevo-icon--' . $it['icon'] );
 	}
 	return solevo_b_section( $head . solevo_c_box( $boxes, 'solevo-qgrid' ) . $after, array( 'class' => 'solevo-c solevo-help', 'anchor' => 'help' ) );
