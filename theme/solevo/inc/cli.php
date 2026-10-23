@@ -1,7 +1,7 @@
 <?php
 /**
  * WP-CLI:
- *   wp solevo setup [--rebuild-home] [--rebuild-all]
+ *   wp solevo setup [--rebuild-home] [--rebuild-all] [--rebuild=physio,pilates]
  *   wp solevo menu <landing|full>
  *   wp solevo publish <path>...      e.g. wp solevo publish physio pilates/mums-and-bubs
  *
@@ -14,6 +14,7 @@ WP_CLI::add_command( 'solevo setup', function ( $args, $assoc ) {
 	solevo_run_setup( array(
 		'rebuild_home' => isset( $assoc['rebuild-home'] ),
 		'rebuild_all'  => isset( $assoc['rebuild-all'] ),
+		'rebuild'      => isset( $assoc['rebuild'] ) ? array_map( 'trim', explode( ',', $assoc['rebuild'] ) ) : array(),
 		'log'          => function ( $l ) {
 			WP_CLI::log( $l );
 		},

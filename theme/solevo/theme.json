@@ -397,6 +397,13 @@
 			]
 		},
 		{
+			"name": "page-studio",
+			"title": "Studio / class page",
+			"postTypes": [
+				"page"
+			]
+		},
+		{
 			"name": "page-condition",
 			"title": "Condition page",
 			"postTypes": [
@@ -405,7 +412,7 @@
 		},
 		{
 			"name": "page-full",
-			"title": "Full width (no title)",
+			"title": "General / info page (full width)",
 			"postTypes": [
 				"page"
 			]

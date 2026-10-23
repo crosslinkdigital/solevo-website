@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.1.0
+Version: 1.2.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -21,8 +21,8 @@ Text Domain: solevo
 	--s-olive-hover: #4E5943;
 	--s-olive-deep: #414A36;
 	--s-ink: #2C2C2C;
-	--s-text: #4A4A4A;
-	--s-muted: #7D8570;
+	--s-text: #333230;
+	--s-muted: #5A6250;
 	--s-line: #E7E0D2;
 	--s-line-soft: #EFEAE0;
 	--s-paper: #FDFBF8;
@@ -34,7 +34,7 @@ Text Domain: solevo
 	--s-header-h: 76px;
 	--s-serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
 	--s-sans: Jost, "Futura", system-ui, sans-serif;
-	--s-section-y: clamp(4rem, 7vw, 6rem);
+	--s-section-y: clamp(3rem, 5.5vw, 4.5rem);
 	--s-wave-h: clamp(48px, 6vw, 90px);
 }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--s-header-h) + 8px); }
@@ -392,8 +392,8 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-page-hero .solevo-nap { margin-top: 1.25rem; font-size: .9375rem; color: var(--s-text); }
 .solevo-page-hero .wp-block-buttons { margin-top: 2rem; }
 .page-service .solevo-section, .page-condition .solevo-section { padding-top: clamp(3rem, 6vw, 4.5rem); padding-bottom: clamp(3rem, 6vw, 4.5rem); }
-.page-service .solevo-section:not(.has-background):not(.solevo-wave) + .solevo-section:not(.has-background):not(.solevo-wave),
-.page-condition .solevo-section:not(.has-background):not(.solevo-wave) + .solevo-section:not(.has-background):not(.solevo-wave) { padding-top: 0; }
+.page-service .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c) + .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c),
+.page-condition .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c) + .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c) { padding-top: 0; }
 .is-style-pills { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
 .is-style-pills li { font-size: .9375rem; padding: .5rem 1rem; background: var(--s-cream); border: 1px solid var(--s-line); }
 .is-style-pills li a { color: var(--s-text); text-decoration: none; }
@@ -446,3 +446,471 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 	.solevo-price-row p { font-size: 1rem; }
 }
 .wp-site-blocks > * + * { margin-block-start: 0; }
+
+/* =========================================================
+   DESIGN SYSTEM (v1.2) - inner page templates (.solevo-ds)
+   Service, Condition, Studio and General templates. The homepage
+   adopts it in phase 5. Body 17px mobile / 18px desktop, charcoal
+   text, AA contrast on every text and button colour pair.
+   ========================================================= */
+:root {
+	--ds-ink: #262626;          /* headings          14.2:1 on linen */
+	--ds-text: #333230;         /* body              12.0:1 */
+	--ds-soft: #57534C;         /* secondary text     7.2:1 */
+	--ds-olive: #5F6B52;        /* buttons, accents   5.3:1 (white on olive 5.7:1) */
+	--ds-olive-text: #4C573F;   /* small olive text   7.2:1 */
+	--ds-line: #E3DCCD;
+	--ds-card: #FFFDF9;
+	--ds-radius: 12px;
+	--ds-radius-lg: 18px;
+	--ds-y: clamp(3rem, 5.5vw, 4.5rem);
+	--ds-gap: clamp(1rem, 2vw, 1.5rem);
+	--ds-body: clamp(1.0625rem, 1rem + .25vw, 1.125rem);
+	--ds-shadow: 0 1px 2px rgba(38,38,38,.04), 0 12px 28px -18px rgba(38,38,38,.28);
+}
+
+/* ---- Typography ---- */
+.solevo-ds { color: var(--ds-text); font-size: var(--ds-body); line-height: 1.65; font-variant-numeric: lining-nums; }
+/* Grid and card children: no flow-layout top margins */
+.solevo-qgrid > *, .solevo-scards > *, .solevo-path__grid > *, .solevo-first__grid > *, .solevo-why4 > *, .solevo-feesfaq > *, .solevo-assess > *, .solevo-person2 > *, .solevo-hero2__grid > *, .solevo-assess__media > * { margin-block: 0 !important; }
+.solevo-ds p, .solevo-ds li { font-weight: 400; }
+.solevo-ds h1, .solevo-ds h2, .solevo-ds h3 { color: var(--ds-ink); font-family: var(--s-serif); text-wrap: balance; }
+.solevo-ds h1.wp-block-heading { font-size: clamp(2.5rem, 1.7rem + 3.2vw, 4rem); font-weight: 600; line-height: 1.06; letter-spacing: -.01em; margin: 0 0 1.25rem; }
+.solevo-ds h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weight: 600; line-height: 1.12; margin-bottom: .75rem; }
+.solevo-ds h3.wp-block-heading { font-size: clamp(1.4rem, 1.25rem + .45vw, 1.65rem); font-weight: 600; line-height: 1.2; margin-bottom: .5rem; }
+.solevo-ds :is(p, ul, ol, .wp-block-buttons) + h3.wp-block-heading { margin-top: 2rem; }
+.solevo-ds .is-style-eyebrow, .solevo-ds .solevo-eyebrow { font-size: .78rem !important; letter-spacing: .22em; font-weight: 500; color: var(--ds-olive-text); opacity: 1; margin: 0 0 .85rem !important; }
+.solevo-ds a { color: var(--ds-olive-text); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.solevo-ds a:hover { color: var(--ds-ink); }
+.solevo-ds .solevo-intro { font-size: clamp(1.075rem, 1rem + .3vw, 1.2rem); color: var(--ds-soft); max-width: 62ch; margin: 0; }
+.solevo-ds strong { font-weight: 600; color: var(--ds-ink); }
+
+/* ---- Sections ---- */
+.solevo-ds .solevo-section.solevo-c { padding-top: var(--ds-y); padding-bottom: var(--ds-y); }
+.solevo-ds .solevo-section.has-surface-background-color { border-top: 1px solid var(--ds-line); border-bottom: 1px solid var(--ds-line); }
+.solevo-ds .solevo-sh { max-width: 760px; margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem) !important; }
+.solevo-ds .solevo-crumbs-wrap { padding-top: 1rem; padding-bottom: 0; }
+.solevo-ds .solevo-breadcrumbs ol { color: var(--ds-soft); font-size: .8125rem; letter-spacing: .04em; }
+.solevo-ds .solevo-crumbs-wrap + .wp-block-post-content > .solevo-hero2:first-child { margin-top: -2.75rem !important; padding-top: 4.25rem; }
+
+/* ---- Buttons: one primary, one outline, one text link ---- */
+.solevo-ds .wp-block-button__link { font-size: .875rem; font-weight: 500; letter-spacing: .14em; padding: .95rem 1.9rem; border-radius: 0; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
+.solevo-ds .wp-block-button:not(.is-style-outline):not(.solevo-btn-light):not(.solevo-btn-ghost) > .wp-block-button__link { background: var(--ds-olive); color: #fff; }
+.solevo-ds .wp-block-button:not(.is-style-outline):not(.solevo-btn-light):not(.solevo-btn-ghost) > .wp-block-button__link:hover { background: var(--s-olive-deep); color: #fff; }
+.solevo-ds .wp-block-button.is-style-outline > .wp-block-button__link { border: 1.5px solid var(--ds-olive); color: var(--ds-olive-text); background: transparent; padding-top: calc(.95rem - 1.5px); padding-bottom: calc(.95rem - 1.5px); }
+.solevo-ds .wp-block-button.is-style-outline > .wp-block-button__link:hover { background: var(--ds-olive); color: #fff; }
+.solevo-ds .wp-block-buttons { gap: .75rem; }
+.solevo-more { margin: auto 0 0 !important; padding-top: .75rem; }
+.solevo-more a { font-size: .8125rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--ds-olive-text); }
+.solevo-more a:hover { color: var(--ds-ink); text-decoration: underline; }
+
+/* ---- 1. Hero ---- */
+.solevo-hero2 {
+	background:
+		radial-gradient(ellipse 40% 60% at 92% 30%, rgba(193,196,178,.55), rgba(193,196,178,0) 70%),
+		radial-gradient(ellipse 35% 50% at 10% 90%, rgba(222,200,186,.45), rgba(222,200,186,0) 70%),
+		linear-gradient(180deg, #F1ECE5 0%, #EEE8DF 100%);
+	padding-bottom: clamp(3rem, 6vw, 4.5rem) !important;
+}
+.solevo-hero2__grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.solevo-hero2__title { max-width: 17ch; }
+.solevo-hero2__lead { font-size: clamp(1.1rem, 1rem + .4vw, 1.25rem); color: var(--ds-text); max-width: 54ch; margin: 0 0 1.75rem; }
+.solevo-hero2 .wp-block-buttons { margin-bottom: 1.5rem; }
+.solevo-hero2__media { margin: 0 !important; position: relative; isolation: isolate; }
+.solevo-hero2__media img { display: block; width: 100%; aspect-ratio: 4 / 5; max-height: 560px; object-fit: cover; object-position: center 20%; border-radius: var(--ds-radius-lg); box-shadow: var(--ds-shadow); }
+.solevo-hero2__media::after { content: ""; position: absolute; inset: 0; transform: translate(14px, 14px); border: 1.5px solid #D3CCBE; border-radius: var(--ds-radius-lg); z-index: -1; }
+.solevo-chips { list-style: none; padding: 0; margin: 0 0 1.25rem; display: flex; flex-wrap: wrap; gap: .6rem; }
+.solevo-chips a { display: flex; flex-direction: column; gap: .1rem; padding: .6rem 1rem .6rem 2.4rem; background: rgba(255,253,249,.8); border: 1px solid var(--ds-line); border-radius: 10px; text-decoration: none; position: relative; transition: border-color .2s; }
+.solevo-chips a:hover { border-color: var(--ds-olive); }
+.solevo-chips a::before { content: ""; position: absolute; left: .9rem; top: .85rem; width: 16px; height: 16px; background: var(--ds-olive); -webkit-mask: var(--icon-pin) center / contain no-repeat; mask: var(--icon-pin) center / contain no-repeat; }
+.solevo-chip__area { font-weight: 600; color: var(--ds-ink); font-size: .95rem; line-height: 1.3; }
+.solevo-chip__detail { font-size: .85rem; color: var(--ds-soft); line-height: 1.3; }
+.solevo-trustline { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; }
+.solevo-trustline li { position: relative; padding-left: 1.4rem; font-size: .9375rem; color: var(--ds-soft); }
+.solevo-trustline li::before, .solevo-ticks li::before, .solevo-trust li::before { content: ""; position: absolute; left: 0; top: .32em; width: 15px; height: 15px; background: var(--ds-olive); -webkit-mask: var(--icon-tick) center / contain no-repeat; mask: var(--icon-tick) center / contain no-repeat; }
+
+/* ---- 2. Question boxes (core/details) ---- */
+.solevo-qgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(16rem, 100%), 1fr)); gap: var(--ds-gap); align-items: start; }
+.solevo-ds .solevo-qbox { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); padding: 0; margin: 0 !important; transition: border-color .2s, box-shadow .2s; }
+.solevo-ds .solevo-qbox:hover { border-color: #C9C2B2; box-shadow: var(--ds-shadow); }
+.solevo-ds .solevo-qbox[open] { border-color: var(--ds-olive); box-shadow: var(--ds-shadow); }
+.solevo-ds .solevo-qbox summary { display: block; position: relative; padding: 4.1rem 3rem 1.25rem 1.35rem; font-family: var(--s-serif); font-size: 1.45rem; font-weight: 600; line-height: 1.15; color: var(--ds-ink); }
+.solevo-ds .solevo-qbox summary em { display: block; font-family: var(--s-sans); font-style: normal; font-size: .9rem; font-weight: 400; line-height: 1.4; color: var(--ds-soft); margin-top: .4rem; }
+.solevo-ds .solevo-qbox summary::before { content: ""; position: absolute; left: 1.35rem; top: 1.3rem; width: 34px; height: 34px; border-radius: 50%; background: #E9ECE3; }
+.solevo-ds .solevo-qbox summary::after { content: ""; position: absolute; right: 1.1rem; top: 1.2rem; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--ds-line); background: var(--icon-plus) center / 12px no-repeat; transition: transform .2s; }
+.solevo-ds .solevo-qbox[open] summary::after { transform: rotate(45deg); background-color: var(--ds-olive); border-color: var(--ds-olive); background-image: var(--icon-plus-w); }
+.solevo-ds .solevo-qbox > :not(summary) { margin-left: 1.35rem; margin-right: 1.35rem; }
+.solevo-ds .solevo-qbox:not([open]) summary { min-height: 7.9rem; }
+.solevo-ds .solevo-qbox > :not(summary) { margin-top: 0 !important; margin-bottom: .75rem; }
+.solevo-ds .solevo-qbox > p:not(.solevo-more) { font-size: 1rem; }
+.solevo-ds .solevo-qbox > :last-child { padding-bottom: 1.35rem; }
+.solevo-qbox__links, .solevo-scard__links { list-style: none; padding: 0; margin: .25rem 0 .25rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+.solevo-qbox__links a, .solevo-scard__links a { display: inline-block; font-size: .875rem; padding: .35rem .7rem; background: #F3F0E8; border: 1px solid var(--ds-line); border-radius: 6px; text-decoration: none; color: var(--ds-ink); }
+.solevo-qbox__links a:hover, .solevo-scard__links a:hover { border-color: var(--ds-olive); color: var(--ds-olive-text); }
+.solevo-help__after { margin-top: 1.75rem !important; color: var(--ds-soft); }
+.solevo-qbox { --i: var(--icon-plus); }
+.solevo-icon--back { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M12 2.5v19M8.5 5.5h7M8 9.5h8M8.5 13.5h7M9 17.5h6'/%3E%3C/svg%3E"); }
+.solevo-icon--shoulder { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='12' cy='6' r='3.2'/%3E%3Cpath d='M4 21v-2.5a6.5 6.5 0 0 1 6.5-6.5h3a6.5 6.5 0 0 1 6.5 6.5V21'/%3E%3C/svg%3E"); }
+.solevo-icon--knee { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 2.5v7.5a4 4 0 0 0 4 4 4 4 0 0 1 4 4v3.5M12 2.5v5'/%3E%3Ccircle cx='12' cy='14' r='1.2'/%3E%3C/svg%3E"); }
+.solevo-icon--sport { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 12h4l3-7.5 5 15 3-7.5h4'/%3E%3C/svg%3E"); }
+.solevo-icon--tendon { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17 2.5l3.5 3.5L17 9.5M3.5 11V10a4 4 0 0 1 4-4h13M7 21.5L3.5 18 7 14.5M20.5 13v1a4 4 0 0 1-4 4h-13'/%3E%3C/svg%3E"); }
+.solevo-icon--surgery { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4.5' y='4' width='15' height='17.5' rx='2'/%3E%3Cpath d='M9 2.5h6V6H9zM12 10.5v6M9 13.5h6'/%3E%3C/svg%3E"); }
+.solevo-icon--womens { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linejoin='round'%3E%3Cpath d='M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z'/%3E%3C/svg%3E"); }
+.solevo-icon--strength { --i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M6.5 6.5v11M17.5 6.5v11M3 9.5v5M21 9.5v5M6.5 12h11'/%3E%3C/svg%3E"); }
+.solevo-ds .solevo-qbox { position: relative; }
+.solevo-ds .solevo-qbox::after { content: ""; position: absolute; left: calc(1.35rem + 8px); top: calc(1.3rem + 8px); width: 18px; height: 18px; background: var(--ds-olive-text); -webkit-mask: var(--i) center / contain no-repeat; mask: var(--i) center / contain no-repeat; pointer-events: none; }
+
+/* ---- 3. Service cards + care pathway ---- */
+.solevo-scards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(18rem, 100%), 1fr)); gap: var(--ds-gap); }
+.solevo-scard { display: flex; flex-direction: column; background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); padding: 1.5rem 1.5rem 1.35rem; margin: 0 !important; transition: border-color .2s, box-shadow .2s; }
+.solevo-scard:hover { border-color: #C9C2B2; box-shadow: var(--ds-shadow); }
+.solevo-scard > * { margin-top: 0 !important; }
+.solevo-scard > .solevo-more { margin-top: auto !important; }
+.solevo-scard p:not(.solevo-more) { font-size: 1rem; color: var(--ds-soft); margin-bottom: .5rem; }
+.solevo-path { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+.solevo-ds .solevo-path__title { font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem) !important; }
+.solevo-path__intro { color: var(--ds-soft); margin: 0 0 1.5rem !important; }
+.solevo-path__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-gap); counter-reset: path; }
+.solevo-path__item { position: relative; background: transparent; border: 1px solid var(--ds-line); border-radius: var(--ds-radius); padding: 1.5rem; margin: 0 !important; display: flex; flex-direction: column; }
+.solevo-path__item > * { margin-top: 0 !important; }
+.solevo-path__item.is-current { background: var(--ds-card); border: 1.5px solid var(--ds-olive); box-shadow: var(--ds-shadow); }
+.solevo-path__item:not(:last-child)::after { content: ""; position: absolute; right: calc(-1 * var(--ds-gap) / 2 - 9px); top: 50%; width: 18px; height: 18px; margin-top: -9px; z-index: 2; border-radius: 50%; background: var(--s-linen) var(--icon-arrow) center / 10px no-repeat; border: 1px solid var(--ds-line); }
+.solevo-path__step { font-size: .75rem !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: var(--ds-olive-text); margin-bottom: .5rem !important; }
+.solevo-path__item p:not([class]) { font-size: 1rem; color: var(--ds-soft); }
+.solevo-path__booked { font-size: .875rem; color: var(--ds-soft); border-top: 1px solid var(--ds-line); padding-top: .75rem; margin: auto 0 1rem !important; }
+.solevo-path__item .wp-block-buttons { margin: 0; }
+
+/* ---- 4. Journey ---- */
+.solevo-ds ol.solevo-journey { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-gap); counter-reset: j; }
+.solevo-journey li { counter-increment: j; position: relative; padding: 4.5rem 1.5rem 1.5rem; background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); font-size: 1rem; color: var(--ds-soft); }
+.solevo-journey li::before { content: counter(j); position: absolute; left: 1.5rem; top: 1.25rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--ds-olive); color: #fff; font-family: var(--s-serif); font-size: 1.35rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.solevo-journey li:not(:last-child)::after { content: ""; position: absolute; left: 4.4rem; right: -1rem; top: 2.45rem; height: 1px; background: repeating-linear-gradient(90deg, var(--ds-line) 0 6px, transparent 6px 11px); }
+.solevo-journey li strong { display: block; font-family: var(--s-serif); font-size: 1.45rem; line-height: 1.2; font-weight: 600; color: var(--ds-ink); margin-bottom: .5rem; }
+.solevo-first { margin-top: clamp(1.75rem, 3.5vw, 2.5rem) !important; background: #F2EEE6; border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 3vw, 2.25rem); }
+.solevo-ds .solevo-first__title { font-size: 1.4rem !important; margin-bottom: 1rem !important; }
+.solevo-first__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+.solevo-first__item > * { margin-top: 0 !important; }
+.solevo-ds .solevo-first__item h3 { font-family: var(--s-sans); font-size: .78rem !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--ds-olive-text); margin-bottom: .4rem; }
+.solevo-first__item p { font-size: .975rem; margin: 0; }
+
+/* ---- 5. Why (four reasons) ---- */
+.solevo-why4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ds-gap); }
+.solevo-why4__item { border-top: 2px solid var(--ds-olive); padding-top: 1.25rem; margin: 0 !important; }
+.solevo-why4__item > * { margin-top: 0 !important; }
+.solevo-why4__num { font-family: var(--s-serif); font-size: 2.25rem; line-height: 1; color: #9C9686; margin-bottom: .75rem !important; }
+.solevo-why4__item p:not(.solevo-why4__num) { font-size: 1rem; color: var(--ds-soft); }
+.solevo-why4__extra { list-style: none; padding: 1.25rem 0 0; margin: clamp(2rem, 4vw, 2.75rem) 0 0; border-top: 1px solid var(--ds-line); display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
+.solevo-why4__extra li { position: relative; padding-left: 1.1rem; font-size: .95rem; color: var(--ds-ink); }
+.solevo-why4__extra li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--ds-olive); }
+
+/* ---- 6. Facilities (olive) ---- */
+.solevo-assess-wrap { background-color: var(--s-olive); }
+.solevo-assess { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.solevo-assess__media { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+.solevo-assess__media figure { margin: 0 !important; }
+.solevo-assess__media img { width: 100%; display: block; object-fit: cover; border-radius: var(--ds-radius); }
+.solevo-assess__media figure:first-child { grid-column: 1 / -1; }
+.solevo-assess__media figure:first-child img { aspect-ratio: 16 / 9; }
+.solevo-assess__media.count-1 figure img { aspect-ratio: 1 / 1; object-position: 42% 45%; }
+.solevo-assess__media img { box-shadow: 0 0 0 1px rgba(250,247,243,.18); }
+.solevo-assess__media figure:not(:first-child) img { aspect-ratio: 4 / 3; }
+.solevo-assess__media.count-2 figure:last-child { grid-column: 1 / -1; }
+.solevo-assess__media.count-2 figure:last-child img { aspect-ratio: 21 / 9; object-position: center 35%; }
+.solevo-ds .solevo-assess-wrap h2, .solevo-ds .solevo-assess-wrap strong { color: #FAF7F3; }
+.solevo-ds .solevo-assess-wrap h2 em { color: #E4E7DA; font-weight: 600; }
+.solevo-ds .solevo-assess-wrap .is-style-eyebrow { color: #F1F2EC; }
+.solevo-ds .solevo-assess-wrap .solevo-intro, .solevo-ds .solevo-assess-wrap li { color: #F6F3EC; }
+.solevo-assess__list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .9rem; }
+.solevo-assess__list li { position: relative; padding: 0 0 .9rem 1.6rem; border-bottom: 1px solid rgba(250,247,243,.16); font-size: 1rem; }
+.solevo-assess__list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.solevo-assess__list li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #DCE0D2; }
+
+/* ---- 7. Practitioner + trust ---- */
+.solevo-person2 { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; max-width: 1000px; }
+.solevo-person2__img { margin: 0 !important; }
+.solevo-person2__img img { width: 100%; display: block; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: var(--ds-radius-lg); }
+.solevo-person2__text > * { margin-top: 0 !important; }
+.solevo-ds .solevo-person2__name { font-size: clamp(1.8rem, 1.5rem + 1vw, 2.3rem) !important; margin-bottom: .25rem !important; }
+.solevo-person2__role { font-size: .9rem; color: var(--ds-olive-text); font-weight: 500; margin-bottom: 1rem !important; }
+.solevo-trust, .solevo-ticks { list-style: none; padding: 0; margin: 1.25rem 0 0; display: grid; gap: .55rem; }
+.solevo-trust li, .solevo-ticks li { position: relative; padding-left: 1.65rem; font-size: 1rem; }
+.solevo-trust li::before, .solevo-ticks li::before { top: .35em; }
+
+/* ---- 8. Fees + FAQ ---- */
+.solevo-feesfaq { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+.solevo-fees { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 3vw, 2.25rem); }
+.solevo-fees > * { margin-top: 0 !important; }
+.solevo-fees__rows { margin-bottom: 1.75rem !important; }
+.solevo-fee { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--ds-line); margin: 0 !important; }
+.solevo-fee:last-child { border-bottom: 0; }
+.solevo-fee__label { margin: 0 !important; font-weight: 500; color: var(--ds-ink); line-height: 1.35; font-size: 1rem; }
+.solevo-fee__label span { font-size: .85rem; font-weight: 400; color: var(--ds-soft); }
+.solevo-fee__price { margin: 0 !important; font-family: var(--s-serif); font-size: 1.6rem; font-weight: 600; color: var(--ds-ink); white-space: nowrap; }
+.solevo-fees .solevo-ticks li { font-size: .95rem; color: var(--ds-soft); }
+.solevo-ds .solevo-faq2__col > h3 { margin: calc(clamp(1.5rem, 3vw, 2.25rem) + 1px) 0 .75rem !important; }
+.solevo-ds .solevo-feesfaq-wrap .solevo-reviewed { margin-top: 2rem; }
+.solevo-faq2 { border-top: 1px solid var(--ds-line); }
+.solevo-ds .solevo-faq2__item { border-bottom: 1px solid var(--ds-line); padding: 0; margin: 0 !important; }
+.solevo-ds .solevo-faq2__item summary { padding: 1.1rem 2.5rem 1.1rem 0; position: relative; font-weight: 500; color: var(--ds-ink); font-size: 1.05rem; display: block; }
+.solevo-ds .solevo-faq2__item summary::after { content: ""; position: absolute; right: .25rem; top: 50%; margin-top: -12px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--ds-line); background: var(--icon-plus) center / 10px no-repeat; transition: transform .2s; }
+.solevo-ds .solevo-faq2__item[open] summary::after { transform: rotate(45deg); }
+.solevo-ds .solevo-faq2__item p { margin: 0 0 1.15rem; color: var(--ds-soft); font-size: 1rem; max-width: 64ch; }
+
+/* ---- 9. Locations ---- */
+.solevo-locs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); gap: var(--ds-gap); }
+.solevo-loc { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; }
+.solevo-loc > * { margin-top: 0; }
+.solevo-ds .solevo-loc__name { font-family: var(--s-serif); font-size: 1.6rem; font-weight: 600; line-height: 1.2; color: var(--ds-ink); margin: 0 0 .35rem; }
+.solevo-loc__note { color: var(--ds-soft); font-size: .95rem; margin: 0 0 1rem; }
+.solevo-loc .solevo-nap { font-size: 1rem; margin-bottom: .75rem; line-height: 1.6; }
+.solevo-loc__hours { list-style: none; padding: 0; margin: 0 0 1.25rem; font-size: .95rem; color: var(--ds-ink); }
+.solevo-loc .wp-block-buttons { display: flex; flex-direction: column; align-items: flex-start; margin-top: auto; }
+
+/* ---- 10. Final CTA band (template part) ---- */
+.solevo-ds .wp-block-post-content > .solevo-section:last-child { padding-bottom: calc(var(--ds-y) + var(--s-wave-h)) !important; }
+.solevo-cta2 { position: relative; text-align: center; margin-top: 0; padding: clamp(3.5rem, 7vw, 5.5rem) 1.25rem clamp(4rem, 8vw, 6rem); }
+.solevo-cta2__inner { max-width: 720px; margin: 0 auto; }
+.solevo-cta2 h2.wp-block-heading { font-family: var(--s-serif); font-size: clamp(2.1rem, 1.6rem + 2vw, 3.1rem); font-weight: 600; line-height: 1.12; color: var(--s-on-dark); margin: 0 0 .75rem; }
+.solevo-cta2__sub { color: #F6F3EC; font-size: 1.1rem; margin: 0 0 2rem; }
+.solevo-cta2__btns { justify-content: center; display: flex; flex-wrap: wrap; gap: .85rem; }
+.solevo-cta2 .solevo-btn-light .wp-block-button__link, .solevo-cta2 .solevo-btn-ghost .wp-block-button__link { padding: 1.05rem 2.4rem; font-size: .875rem; font-weight: 500; letter-spacing: .16em; min-height: 52px; }
+.solevo-cta2 .solevo-btn-light .wp-block-button__link { color: var(--s-olive-deep); }
+.solevo-cta2__alt { margin: 1.75rem 0 0; color: #F1EEE6; font-size: .95rem; }
+.solevo-cta2__alt a { color: #fff; text-underline-offset: 3px; }
+
+/* ---- Related, reviewed, editor notes ---- */
+.solevo-ds .solevo-reviewed { color: var(--ds-soft); }
+.solevo-todo { margin: 1rem auto !important; max-width: 1152px; }
+.solevo-ds .wp-block-post-content > .wp-block-shortcode:has(.solevo-todo) { max-width: 1152px; }
+
+/* ---- Sticky mobile booking bar ---- */
+.solevo-sticky { display: none; }
+@media (max-width: 781px) {
+	.solevo-sticky { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; gap: .5rem; padding: .6rem .75rem calc(.6rem + env(safe-area-inset-bottom)); background: rgba(253,251,248,.96); backdrop-filter: blur(8px); box-shadow: 0 -1px 0 var(--ds-line), 0 -10px 24px -18px rgba(0,0,0,.35); transform: translateY(110%); transition: transform .25s ease; }
+	.solevo-sticky.is-visible { transform: none; }
+	.solevo-sticky__btn { flex: 1 1 0; display: flex; align-items: center; justify-content: center; min-height: 48px; font-family: var(--s-sans); font-size: .85rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--ds-olive); color: var(--ds-olive-text); background: transparent; }
+	.solevo-sticky__btn.is-primary { flex-grow: 2; background: var(--ds-olive); color: #fff; }
+	.solevo-sticky__btn.is-alt { background: var(--s-ink); border-color: var(--s-ink); }
+	body:has(.solevo-sticky) .solevo-footer { padding-bottom: 7rem; }
+}
+@media (max-width: 599px) { .solevo-hero2__media { display: none; } }
+@media (prefers-reduced-motion: reduce) { .solevo-sticky { transition: none; } }
+
+/* ---- Icons (masks) ---- */
+:root {
+	--icon-pin: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2'%3E%3Cpath d='M12 21.5s-7-6.1-7-11.5a7 7 0 0 1 14 0c0 5.4-7 11.5-7 11.5z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E");
+	--icon-tick: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5 10-11'/%3E%3C/svg%3E");
+	--icon-plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%234C573F' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M6 1v10M1 6h10'/%3E%3C/svg%3E");
+	--icon-plus-w: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M6 1v10M1 6h10'/%3E%3C/svg%3E");
+	--icon-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%234C573F' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 2l4 4-4 4'/%3E%3C/svg%3E");
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1023px) {
+	.solevo-why4 { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; }
+	.solevo-first__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.solevo-feesfaq { grid-template-columns: 1fr; }
+}
+@media (max-width: 781px) {
+	.solevo-hero2__grid { grid-template-columns: 1fr; }
+	.solevo-hero2__media { order: -1; max-width: 420px; }
+	.solevo-ds .solevo-faq2__col > h3 { margin-top: 0 !important; }
+	.solevo-hero2__media img { aspect-ratio: 16 / 11; max-height: 300px; }
+	.solevo-hero2__media::after { display: none; }
+	.solevo-ds .solevo-crumbs-wrap + .wp-block-post-content > .solevo-hero2:first-child { padding-top: 3.5rem; }
+	.solevo-hero2 .wp-block-buttons { flex-direction: column; align-items: stretch; }
+	.solevo-hero2 .wp-block-button, .solevo-hero2 .wp-block-button__link { width: 100%; }
+	.solevo-path__grid, .solevo-ds ol.solevo-journey { grid-template-columns: 1fr; }
+	.solevo-path__item:not(:last-child)::after { right: auto; left: 50%; top: auto; bottom: calc(-1 * var(--ds-gap) / 2 - 9px); margin: 0 0 0 -9px; transform: rotate(90deg); }
+	.solevo-journey li { padding: 1.25rem 1.25rem 1.25rem 4.5rem; }
+	.solevo-journey li::before { left: 1.15rem; top: 1.2rem; }
+	.solevo-journey li:not(:last-child)::after { left: 2.35rem; right: auto; top: 3.8rem; bottom: -1.25rem; width: 1px; height: auto; background: repeating-linear-gradient(180deg, var(--ds-line) 0 6px, transparent 6px 11px); }
+	.solevo-assess { grid-template-columns: 1fr; }
+	.solevo-person2 { grid-template-columns: 1fr; }
+	.solevo-person2__img { max-width: 260px; }
+	.solevo-why4 { grid-template-columns: 1fr; }
+	.solevo-first__grid { grid-template-columns: 1fr; gap: 1rem; }
+	.solevo-ds .solevo-qbox summary, .solevo-ds .solevo-qbox:not([open]) summary { min-height: 0; padding: 1.1rem 3rem 1.1rem 4.1rem; font-size: 1.3rem; }
+	.solevo-ds .solevo-qbox summary::before { left: 1rem; top: 1.05rem; }
+	.solevo-ds .solevo-qbox::after { left: calc(1rem + 8px); top: calc(1.05rem + 8px); }
+	.solevo-ds .solevo-qbox summary::after { top: 1.1rem; right: .9rem; }
+	.solevo-ds .solevo-qbox > :not(summary) { margin-left: 1.1rem; margin-right: 1.1rem; }
+	.solevo-loc .wp-block-buttons { flex-direction: column; align-items: stretch; }
+	.solevo-loc .wp-block-button__link { width: 100%; }
+}
+.solevo-person2__text > ul { margin-top: 1rem !important; }
+
+/* Question box booking button: solid like the primary button, compact, aligned with the box text */
+.solevo-ds .solevo-qbox > .solevo-qbox__cta { margin: .5rem 1.35rem 0 !important; padding-bottom: 1.35rem; }
+.solevo-qbox__cta a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: .55rem 1.25rem; background: var(--ds-olive); color: #fff !important; font-size: .8125rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+.solevo-qbox__cta a:hover { background: var(--s-olive-deep); }
+@media (max-width: 781px) { .solevo-ds .solevo-qbox > .solevo-qbox__cta { margin-left: 1.1rem !important; margin-right: 1.1rem !important; } }
+
+
+/* =========================================================
+   READABILITY LAYER (client feedback, 23 Oct 2026)
+   Site-wide, including the homepage and footer:
+   - charcoal body copy, regular weight (no 300-weight body text)
+   - body 17px mobile / 18px desktop; descriptors, bullets, links and footer raised to match
+   - every text colour on cream, olive and the dark footer meets WCAG AA (4.5:1+)
+   - smaller heading-to-body gap, more line spacing, less empty space
+   ========================================================= */
+body { font-size: var(--ds-body); line-height: 1.7; color: var(--ds-text); }
+p, li { font-weight: 400; }
+
+/* Type: supporting copy */
+.solevo-sub, .solevo-lead, .solevo-hero__lead { font-weight: 400 !important; color: var(--ds-text); }
+.solevo-sub { font-size: clamp(1.0625rem, 1rem + .3vw, 1.2rem); }
+.solevo-eyebrow, .is-style-eyebrow { color: var(--ds-olive-text) !important; opacity: 1 !important; font-weight: 500 !important; font-size: .8125rem !important; letter-spacing: .22em; }
+.solevo-dots li { font-weight: 400; font-size: var(--ds-body); line-height: 1.55; }
+.solevo-condtags li a { font-weight: 400; font-size: 1rem; color: var(--ds-ink); }
+.solevo-plaintags li { font-size: 1rem; color: var(--ds-soft); }
+.solevo-service__desc { font-size: var(--ds-body); color: var(--ds-text); }
+.solevo-textlink a, .solevo-card__more, .solevo-arrow-link a { font-size: .875rem; font-weight: 500; color: var(--ds-olive-text); }
+.solevo-member__text > p:not([class]), .solevo-studio__intro p:not([class]) { font-size: var(--ds-body); }
+.solevo-member__label { font-size: .8125rem !important; }
+.solevo-boxtags li { font-size: 1rem; }
+.solevo-reason p:not(.solevo-num) { font-size: var(--ds-body); max-width: 19rem; }
+.solevo-class p:not([class]) { font-size: 1.0625rem; line-height: 1.7; }
+.solevo-class__tag { font-weight: 400; font-size: .9375rem; color: var(--ds-olive-text); }
+.solevo-class__best { font-size: .8125rem; color: var(--ds-soft); }
+.solevo-cat__places { font-size: .78rem !important; color: var(--ds-soft) !important; }
+.solevo-price-row p { font-size: 1.0625rem; }
+.solevo-price-row p span { font-size: .875rem; font-weight: 400; color: var(--ds-soft); }
+.solevo-price-card__meta { font-size: .78rem !important; }
+.solevo-expiry__list li { font-size: 1rem; }
+.solevo-founders .solevo-eyebrow { font-size: .8125rem !important; }
+.solevo-founders__per { font-size: .9375rem; }
+.solevo-card__text, .is-style-pills li, .solevo-page-hero .solevo-nap { font-size: 1rem; }
+.solevo-person__role { font-size: .875rem; color: var(--ds-olive-text); }
+.solevo-reviewed { font-size: .9375rem; color: var(--ds-soft); }
+.solevo-breadcrumbs ol { font-size: .875rem; color: var(--ds-soft); }
+
+/* Headings: keep the serif, narrow the gap to body copy */
+h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weight: 600; line-height: 1.12; }
+.solevo-h2-xl { font-size: clamp(2rem, 1.5rem + 1.9vw, 2.9rem) !important; line-height: 1.18 !important; }
+.solevo-h2-sm { font-size: clamp(1.9rem, 1.45rem + 1.5vw, 2.6rem) !important; }
+.solevo-hero__title { font-size: clamp(2.75rem, 1.9rem + 3.6vw, 4.9rem) !important; line-height: 1.06 !important; }
+.solevo-band__title { font-size: clamp(2rem, 1.5rem + 2vw, 3.1rem) !important; line-height: 1.2 !important; margin-bottom: 2rem !important; }
+.solevo-member__name { font-size: clamp(1.75rem, 1.45rem + 1vw, 2.2rem) !important; font-weight: 600 !important; }
+.solevo-service h3 { font-size: clamp(1.55rem, 1.35rem + .7vw, 1.9rem) !important; font-weight: 600 !important; }
+.solevo-reason h3, .solevo-cat h3, .solevo-class h4, .solevo-price-card h3 { font-weight: 600 !important; }
+.solevo-num { font-size: clamp(3rem, 4.5vw, 4rem); color: #9C9686; margin-bottom: 1rem; font-variant-numeric: lining-nums; }
+.solevo-price, .solevo-founders__price { font-variant-numeric: lining-nums; }
+
+/* Olive sections: solid light text, no translucent copy */
+.solevo-olive .solevo-eyebrow, .solevo-olive .is-style-eyebrow { color: #EEF0E8 !important; letter-spacing: .24em; }
+.solevo-note { font-weight: 400; }
+.solevo-olive .solevo-sub, .solevo-olive .solevo-dots li, .solevo-olive p { color: #F6F3EC; }
+.solevo-olive .solevo-dots li::before { background: #EEF0E8; }
+.solevo-video__play a { color: #F6F3EC; }
+.solevo-band__caption { font-size: .9375rem; font-weight: 400; color: #F6F3EC; opacity: 1; }
+.solevo-btn-light .wp-block-button__link { color: var(--s-olive-deep); font-size: .875rem; font-weight: 500; }
+.solevo-btn-ghost .wp-block-button__link { color: #fff; border: 1.5px solid #F6F3EC; font-size: .875rem; font-weight: 500; }
+
+/* Footer: larger text, AA on the dark background */
+.solevo-footer { color: #D6D3CE; padding-top: clamp(5.5rem, 9vw, 8rem); }
+.solevo-footer .solevo-eyebrow { color: #B9C2A9 !important; font-size: .8125rem !important; }
+.solevo-footer__brand p:not([class]) { font-weight: 400; font-size: 1rem; color: #D6D3CE; }
+.solevo-footer__italic { color: #BDBAB4; font-size: 1rem; font-weight: 400; }
+.solevo-footer__links li { color: #CFCCC6; font-size: 1rem; }
+.solevo-footer__find .solevo-nap { color: #BDBAB4; font-weight: 400; font-size: 1rem; }
+.solevo-copyright { color: #B3B0AA; font-size: .9375rem; font-weight: 400; }
+.solevo-social, .solevo-social a { color: #BDBAB4; font-size: .9375rem; }
+.solevo-footer__find { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+.solevo-footer__mark { margin-top: clamp(2rem, 4vw, 3rem) !important; }
+
+/* Less empty space (homepage replica) */
+.solevo-hero { min-height: min(100svh, 820px); padding-bottom: 5rem; }
+.solevo-hero .solevo-eyebrow { margin-bottom: 1.5rem !important; }
+.solevo-hero__lead { margin-top: 1.75rem !important; }
+.solevo-hero__cta { margin-top: 2.25rem !important; }
+.solevo-head { margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem); }
+.solevo-about h2 { margin-bottom: clamp(1.75rem, 3.5vw, 3rem); }
+.solevo-dot::before { margin-bottom: clamp(1.25rem, 2.5vw, 2rem); }
+.solevo-wide-photo, .solevo-video { margin-top: clamp(2rem, 4vw, 3.25rem) !important; }
+.solevo-member { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+.solevo-services-section { padding-bottom: calc(var(--s-section-y) + 1rem); }
+.solevo-why-section { padding-top: calc(var(--s-section-y) + 1.5rem); }
+.solevo-why__photos { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+.solevo-num { margin-bottom: 1rem; }
+.solevo-cat { margin-top: clamp(2.75rem, 5vw, 4rem) !important; }
+.solevo-founders { margin-top: clamp(2.75rem, 5vw, 4rem) !important; }
+.solevo-conditions-section { padding-bottom: calc(var(--s-section-y) + 1.5rem); }
+.solevo-band { min-height: 0; padding-top: clamp(3.5rem, 7vw, 5.5rem); padding-bottom: clamp(4rem, 8vw, 6rem); }
+.solevo-timetable-box { padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 6vw, 5rem); }
+@media (max-width: 781px) {
+	.solevo-hero { min-height: 0; padding-top: calc(var(--s-header-h) + 3rem); padding-bottom: 4rem; }
+}
+
+/* Physio and inner pages: supporting copy at 17px, links at 14px */
+.solevo-scard p:not(.solevo-more), .solevo-qbox > p:not(.solevo-more):not(.solevo-qbox__cta), .solevo-path__item p:not([class]),
+.solevo-journey li, .solevo-why4__item p:not(.solevo-why4__num), .solevo-assess__list li, .solevo-trust li, .solevo-ticks li,
+.solevo-first__item p, .solevo-faq2__item p, .solevo-fees .solevo-ticks li { font-size: 1.0625rem; }
+.solevo-ds .solevo-qbox summary em { font-size: 1rem; }
+.solevo-chip__detail, .solevo-path__booked, .solevo-fee__label span, .solevo-loc__note, .solevo-loc__hours { font-size: .9375rem; }
+.solevo-trustline li, .solevo-why4__extra li { font-size: 1rem; }
+.solevo-more a, .solevo-qbox__cta a { font-size: .875rem; }
+.solevo-ds .solevo-faq2__item summary { font-size: 1.0625rem; }
+
+/* Location map, hero jump links, Instagram */
+.solevo-loc__map { margin: calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) 1.5rem; aspect-ratio: 16 / 8; background: #ECE7DE; border-radius: var(--ds-radius-lg) var(--ds-radius-lg) 0 0; overflow: hidden; }
+.solevo-loc__map iframe { display: block; width: 100%; height: 100%; border: 0; }
+.solevo-jump { margin: 1rem 0 0 !important; font-size: 1rem; color: var(--ds-soft); }
+.solevo-jump a { font-weight: 500; }
+.solevo-ig__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; margin-bottom: 1.5rem; }
+.solevo-ig__head .solevo-sh { margin-bottom: 0 !important; }
+.solevo-ig .solevo-feed--placeholder { max-width: none; }
+
+/* =========================================================
+   Components: Condition, Studio and General templates
+   ========================================================= */
+.solevo-hero2__grid:not(:has(.solevo-hero2__media)) { grid-template-columns: minmax(0, 1fr); }
+.solevo-hero2__grid:not(:has(.solevo-hero2__media)) .solevo-hero2__title { max-width: 22ch; }
+
+/* Split: copy + ticked card or photo */
+.solevo-split2 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(1.75rem, 5vw, 4rem); align-items: start; }
+.solevo-split2.is-single { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.solevo-split2 > * { margin-block: 0 !important; }
+.solevo-split2__text > p:not([class]) { max-width: 62ch; }
+.solevo-split2__card { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 3vw, 2.25rem); }
+.solevo-split2__card > * { margin-top: 0 !important; }
+.solevo-split2__card .solevo-ticks { margin-top: .75rem; }
+.solevo-split2__img { margin: 0 !important; }
+.solevo-split2__img img { width: 100%; display: block; aspect-ratio: 4 / 5; max-height: 520px; object-fit: cover; border-radius: var(--ds-radius-lg); }
+
+/* Red flags */
+.solevo-flagbox { background: #FBF3EC; border: 1px solid #E8D5C4; border-left: 4px solid #9A5B34; border-radius: var(--ds-radius); padding: clamp(1.5rem, 3vw, 2.25rem); max-width: 860px; }
+.solevo-flagbox > * { margin-top: 0 !important; }
+.solevo-ds .solevo-flagbox .is-style-eyebrow { color: #7A4526 !important; }
+.solevo-flags { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: .6rem; }
+.solevo-flags li { position: relative; padding-left: 1.75rem; font-size: 1.0625rem; color: var(--ds-ink); }
+.solevo-flags li::before { content: "!"; position: absolute; left: 0; top: .2em; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: #9A5B34; color: #fff; font-size: .75rem; font-weight: 700; line-height: 1.15rem; text-align: center; }
+.solevo-flags__note { font-size: 1rem; color: var(--ds-text); margin: 0 !important; font-weight: 500; }
+
+/* Classes and formats */
+.solevo-class2__meta { font-size: .78rem !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: var(--ds-olive-text); margin-bottom: .5rem !important; }
+.solevo-class2__tag { font-style: italic; color: var(--ds-olive-text) !important; font-size: 1rem !important; margin-bottom: .5rem !important; }
+.solevo-class2__best { margin-top: auto !important; padding-top: .75rem; border-top: 1px solid var(--ds-line); font-size: .9375rem !important; }
+
+/* Price cards */
+.solevo-prices2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: var(--ds-gap); align-items: start; }
+.solevo-prices2 > * { margin-block: 0 !important; }
+.solevo-price2__meta { font-size: .9375rem; color: var(--ds-soft); margin: 0 0 .5rem !important; }
+.solevo-price2 .solevo-fees__rows { margin-bottom: 0 !important; }
+
+/* Timetable */
+.solevo-tt { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 4vw, 3rem); }
+.solevo-tt .solevo-timetable--fallback .wp-block-buttons { justify-content: flex-start; }
+
+/* Two booking paths */
+.solevo-path__grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.solevo-path__grid--two .solevo-path__item::after { display: none; }
+.solevo-path__grid--two .solevo-ticks { margin: .25rem 0 1.25rem; }
+
+/* Practitioner without a photo */
+.solevo-person2.no-image { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+
+@media (max-width: 781px) {
+	.solevo-split2, .solevo-path__grid--two { grid-template-columns: 1fr; }
+}

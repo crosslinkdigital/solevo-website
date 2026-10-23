@@ -114,7 +114,7 @@
 <!-- /wp:shortcode -->
 
 <!-- wp:shortcode -->
-[solevo_social label="Brookvale Performance Hub"]
+[solevo_social label="Brookvale and Terrey Hills"]
 <!-- /wp:shortcode --></div>
 <!-- /wp:group --></div>
 <!-- /wp:group -->

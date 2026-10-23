@@ -17,9 +17,9 @@ function solevo_site_pages() {
 		array( 'path' => '', 'title' => 'Home', 'h1' => 'Move Better. Train Harder. Recover Smarter.', 'type' => 'home', 'booking' => 'both', 'keyword' => '(brand)',
 			'seo_title' => 'Physio & Reformer Pilates Brookvale | Solevo',
 			'meta' => 'Physiotherapy, clinical Pilates, reformer Pilates and yoga under one roof in Brookvale. Strength-led rehab and small classes of six. Book online today.' ),
-		array( 'path' => 'physio', 'title' => 'Physio', 'h1' => 'Physio in Brookvale', 'type' => 'hub', 'booking' => 'cliniko', 'keyword' => 'physio close to me',
-			'seo_title' => 'Physio Brookvale | Strength-Led Physiotherapy | Solevo',
-			'meta' => 'Physio in Brookvale for back, neck, shoulder, knee and sports injuries. Hands-on treatment and strength-led rehab with Solevo physios. Book online.',
+		array( 'path' => 'physio', 'title' => 'Physio', 'h1' => 'Physiotherapy in Brookvale & Terrey Hills', 'type' => 'hub', 'booking' => 'cliniko', 'keyword' => 'physio close to me',
+			'seo_title' => 'Physio Brookvale & Terrey Hills | Solevo Physio',
+			'meta' => 'Physiotherapy in Brookvale and Terrey Hills for back, neck, shoulder, knee and sports injuries. One-on-one care and strength-based rehab. Book online.',
 			'excerpt' => 'Assessment, hands-on treatment and strength-led rehab for pain and injury.' ),
 		array( 'path' => 'pilates', 'title' => 'Pilates', 'h1' => 'Reformer Pilates in Brookvale', 'type' => 'hub', 'booking' => 'mindbody', 'keyword' => 'reformer pilates near me',
 			'seo_title' => 'Reformer Pilates Brookvale | Max 6 Per Class | Solevo',
@@ -52,7 +52,7 @@ function solevo_site_pages() {
 			'related' => array( 'pilates/over-50s-fitness', 'physio/seniors-physiotherapy', 'conditions/balance-falls-prevention', 'conditions/osteoporosis-pilates', 'conditions/spinal-stenosis' ) ),
 
 		/* ---------- Pilates services ---------- */
-		array( 'path' => 'pilates/clinical-pilates', 'title' => 'Clinical Pilates', 'h1' => 'Clinical Pilates in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'clinical pilates near me',
+		array( 'path' => 'pilates/clinical-pilates', 'title' => 'Clinical Pilates', 'h1' => 'Clinical Pilates in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'cta' => 'Book Clinical Pilates', 'keyword' => 'clinical pilates near me',
 			'seo_title' => 'Clinical Pilates Brookvale | Physio-Led | Solevo',
 			'meta' => 'Physio-led clinical Pilates in Brookvale. A 60-minute 1:1 assessment, then 1:1 sessions or small groups of six on the reformer. Rehab that builds strength.',
 			'excerpt' => 'Physio-led Pilates that bridges treatment and training.',
@@ -162,4 +162,25 @@ function solevo_site_pages() {
 			'excerpt' => 'Common, treatable, and how pelvic floor physio helps.',
 			'related' => array( 'physio/pelvic-floor-physiotherapy', 'physio/postnatal-physiotherapy', 'pilates/postnatal-pilates' ) ),
 	);
+}
+
+/** The pages.php entry for a page (by its path), or null. Defaults to the page being viewed. */
+function solevo_page_def( $post = null ) {
+	$post = $post ? get_post( $post ) : ( is_singular( 'page' ) ? get_queried_object() : null );
+	if ( ! $post || 'page' !== $post->post_type ) {
+		return null;
+	}
+	$path = (int) get_option( 'page_on_front' ) === $post->ID ? '' : get_page_uri( $post );
+	foreach ( solevo_site_pages() as $page ) {
+		if ( $page['path'] === $path ) {
+			return $page;
+		}
+	}
+	return null;
+}
+
+/** Booking path for the page being viewed: cliniko | mindbody | both. */
+function solevo_page_booking() {
+	$def = solevo_page_def();
+	return $def['booking'] ?? 'both';
 }

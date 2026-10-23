@@ -15,7 +15,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:heading {"className":"solevo-left"} -->
-<h2 class="wp-block-heading solevo-left">Brookvale Performance Hub</h2>
+<h2 class="wp-block-heading solevo-left">Find us in Brookvale</h2>
 <!-- /wp:heading -->
 
 <!-- wp:shortcode -->

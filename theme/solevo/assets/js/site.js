@@ -22,6 +22,7 @@
 			event: event,
 			link_url: link.href,
 			link_text: (link.textContent || '').trim().slice(0, 80),
+			location: link.getAttribute('data-location') || '',
 			page_path: window.location.pathname
 		});
 	}, { passive: true });
@@ -34,7 +35,21 @@
 		}
 	});
 
-	// 4. Header shadow once the page scrolls.
+	// 4. Mobile sticky booking bar: show once the hero's own buttons have scrolled away.
+	var sticky = document.querySelector('.solevo-sticky');
+	if (sticky) {
+		var heroBtns = document.querySelector('.solevo-hero2 .wp-block-buttons, .solevo-page-hero .wp-block-buttons, .solevo-hero__cta');
+		var band = document.querySelector('.solevo-cta2, .solevo-band');
+		var state = { hero: !heroBtns, band: false };
+		var update = function () { sticky.classList.toggle('is-visible', state.hero && !state.band); };
+		if ('IntersectionObserver' in window) {
+			if (heroBtns) new IntersectionObserver(function (e) { state.hero = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; update(); }).observe(heroBtns);
+			if (band) new IntersectionObserver(function (e) { state.band = e[0].isIntersecting; update(); }).observe(band);
+		} else { state.hero = true; }
+		update();
+	}
+
+	// 5. Header shadow once the page scrolls.
 	var header = document.querySelector('.solevo-header');
 	if (header) {
 		var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 8); };

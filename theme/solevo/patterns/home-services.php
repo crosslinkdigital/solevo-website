@@ -10,7 +10,7 @@ $services = array(
 	array( 'General Physiotherapy', array( 'Manual therapy', 'Joint mobilisation', 'Soft tissue therapy', 'Exercise prescription', 'Movement assessments' ), 'Comprehensive assessment and treatment for neck, shoulder, back, hip, knee, ankle/foot pain, headaches, postural dysfunction and workplace injuries.' ),
 	array( 'Sports Physiotherapy', array( 'Return to play programming', 'Marathon &amp; endurance prep', 'Strength &amp; conditioning integration' ), 'Designed for athletes and active individuals. Managing acute sporting injuries, muscle strains, ligament sprains, tendinopathy and overuse injuries.' ),
 	array( 'Rehabilitation &amp; Strength', array( 'Strength', 'Capacity', 'Long term resilience' ), 'We move beyond passive treatment. Progressive loading programs, gym based rehabilitation, post operative rehab (ACL, shoulder, spinal).' ),
-	array( 'Adjunct Therapies', array( 'Dry needling', 'Shockwave therapy', 'Compression recovery therapy', 'Trigger point release' ), 'Used strategically within a broader rehab plan to accelerate recovery.' ),
+	// Adjunct therapies (dry needling, shockwave, compression) removed until Solevo confirms they are offered.
 );
 ?>
 <!-- wp:group {"tagName":"section","anchor":"services","align":"full","className":"solevo-section solevo-services-section","layout":{"type":"constrained"}} -->

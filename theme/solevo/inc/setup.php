@@ -15,6 +15,9 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once __DIR__ . '/blocks.php';
+require_once __DIR__ . '/components.php';
+require_once __DIR__ . '/scaffold-physio.php';
+require_once __DIR__ . '/templates.php';
 
 /* ---------------------------------------------------------------------------
  * Content scaffolds
@@ -110,6 +113,14 @@ function solevo_scaffold( $page ) {
 	$type = $page['type'];
 	$c    = '';
 
+	// Pages with a content file (inc/content/) are built from the design system templates.
+	if ( 'home' !== $type && 'physio' !== $path ) {
+		$built = solevo_build_page( $page );
+		if ( $built ) {
+			return $built;
+		}
+	}
+
 	switch ( $type ) {
 		case 'home':
 			foreach ( array( 'home-hero', 'home-about', 'home-team', 'home-services', 'home-conditions', 'home-technology', 'home-why', 'home-studio', 'home-pricing', 'home-timetable', 'home-instagram', 'home-book' ) as $slug ) {
@@ -118,6 +129,9 @@ function solevo_scaffold( $page ) {
 			return $c;
 
 		case 'hub':
+			if ( 'physio' === $path ) {
+				return solevo_scaffold_physio( $page ); // Gold-standard page, see scaffold-physio.php.
+			}
 			$leads = array(
 				'physio'     => 'Physiotherapy built around strength, movement and long term resilience. Hands-on treatment, progressive rehab and the assessment tools to find the cause, not just the pain.',
 				'pilates'    => 'Boutique reformer Pilates, mat Pilates and yoga in Brookvale. Classes designed with physiotherapists, capped at six reformers so every session is coached.',
@@ -247,19 +261,28 @@ function solevo_scaffold( $page ) {
 	return $c;
 }
 
-function solevo_template_for( $type ) {
-	switch ( $type ) {
-		case 'home':
-			return '';
-		case 'condition':
-			return 'page-condition';
-		case 'book':
-		case 'contact':
-		case 'about':
-			return 'page-full';
-		default:
-			return 'page-service';
+/**
+ * The five page types:
+ *   Homepage          front page (bespoke)
+ *   Service           page-service    /physio and /physio/*
+ *   Condition         page-condition  /conditions/*
+ *   Studio / class    page-studio     /pilates and /pilates/*
+ *   General / info    page-full       /book, /contact, /about
+ */
+function solevo_template_for( $type, $path = '' ) {
+	if ( 'home' === $type ) {
+		return '';
 	}
+	if ( 'condition' === $type ) {
+		return 'page-condition';
+	}
+	if ( in_array( $type, array( 'book', 'contact', 'about' ), true ) ) {
+		return 'page-full';
+	}
+	if ( 'pilates' === strtok( $path, '/' ) ) {
+		return 'page-studio';
+	}
+	return 'page-service';
 }
 
 /* ---------------------------------------------------------------------------
@@ -270,7 +293,7 @@ function solevo_template_for( $type ) {
  * @param array $args rebuild_home (bool), rebuild_all (bool), log (callable)
  */
 function solevo_run_setup( $args = array() ) {
-	$args = wp_parse_args( $args, array( 'rebuild_home' => false, 'rebuild_all' => false, 'log' => null ) );
+	$args = wp_parse_args( $args, array( 'rebuild_home' => false, 'rebuild_all' => false, 'rebuild' => array(), 'log' => null ) );
 	$log  = is_callable( $args['log'] ) ? $args['log'] : function () {};
 
 	$map = solevo_import_images();
@@ -303,7 +326,7 @@ function solevo_run_setup( $args = array() ) {
 		}
 		$slug = $is_home ? 'home' : basename( $path );
 
-		$overwrite = $existing && ( $args['rebuild_all'] || ( $is_home && $args['rebuild_home'] ) );
+		$overwrite = $existing && ( $args['rebuild_all'] || ( $is_home && $args['rebuild_home'] ) || in_array( $path, (array) $args['rebuild'], true ) );
 		if ( $existing && ! $overwrite ) {
 			$ids[ $path ] = $existing->ID;
 			$log( sprintf( 'Kept     /%s (%s)', $path, $existing->post_status ) );
@@ -332,7 +355,7 @@ function solevo_run_setup( $args = array() ) {
 		}
 		$ids[ $path ] = $id;
 
-		$template = solevo_template_for( $page['type'] );
+		$template = solevo_template_for( $page['type'], $page['path'] );
 		if ( $template ) {
 			update_post_meta( $id, '_wp_page_template', $template );
 		} else {
@@ -384,6 +407,7 @@ add_action( 'admin_post_solevo_setup', function () {
 	$lines = array();
 	solevo_run_setup( array(
 		'rebuild_home' => ! empty( $_POST['rebuild_home'] ),
+		'rebuild'      => isset( $_POST['rebuild'] ) ? array_map( 'sanitize_text_field', wp_unslash( (array) $_POST['rebuild'] ) ) : array(),
 		'log'          => function ( $l ) use ( &$lines ) {
 			$lines[] = $l;
 		},
@@ -421,6 +445,14 @@ function solevo_render_setup_page() {
 			<?php wp_nonce_field( 'solevo_setup' ); ?>
 			<input type="hidden" name="action" value="solevo_setup">
 			<p><label><input type="checkbox" name="rebuild_home" value="1"> Reset the homepage to the theme design (overwrites homepage edits)</label></p>
+			<details style="margin:1em 0"><summary><strong>Rebuild pages from the design system</strong> (replaces their content; the previous version stays under Revisions)</summary>
+				<p style="margin:.5em 0">Only tick pages nobody has written in yet, or whose copy you want replaced.</p>
+				<p><label><input type="checkbox" id="solevo-all"> Select all</label></p>
+				<?php foreach ( solevo_site_pages() as $p ) : if ( '' === $p['path'] ) { continue; } ?>
+					<label style="display:inline-block;min-width:22em;margin:.15em 0"><input type="checkbox" class="solevo-rb" name="rebuild[]" value="<?php echo esc_attr( $p['path'] ); ?>"> <code>/<?php echo esc_html( $p['path'] ); ?></code></label>
+				<?php endforeach; ?>
+				<script>document.getElementById('solevo-all').addEventListener('change',function(e){document.querySelectorAll('.solevo-rb').forEach(function(c){c.checked=e.target.checked;});});</script>
+			</details>
 			<?php submit_button( get_option( 'solevo_setup_done' ) ? 'Run setup again' : 'Run setup', 'primary', 'submit', false ); ?>
 		</form>
 

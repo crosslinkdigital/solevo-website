@@ -11,6 +11,13 @@
 - All 30 pages created with the agreed URL, parent, template, SEO title, meta description and excerpt.
 - Each draft page has a **scaffold** that follows the agreed page template. Anything in `[square brackets]` is yours to write.
 
+## New in v1.2 (design system)
+
+- `/physio` is the gold-standard page. Its sections are reusable: Block inserter > Patterns > **Solevo components** (hero, question boxes, service cards, journey, why Solevo, facilities, practitioner, fees and FAQs, locations). Build other pages from these rather than inventing layouts. See `docs/DESIGN-SYSTEM.md`.
+- Grey **"To confirm"** boxes are only visible to logged-in editors. They mark facts Solevo still has to confirm. Leave them until the fact is confirmed, then update the copy and delete the box.
+- The final booking band, header button and mobile booking bar switch automatically between Book Physio and Book Studio. Do not add another band at the bottom of a page.
+- Health pages: use the `[solevo_reviewed by="Name" role="Physiotherapist" date="Oct 2026"]` shortcode for the Reviewed by line.
+
 ## Your job, per page
 
 1. Open the draft (Pages, or Appearance > Solevo setup > Edit).
@@ -33,7 +40,7 @@ When Physio, Pilates and Conditions are published: Appearance > Solevo setup > *
 - No suburb landing pages. Suburbs live on `/contact` (Settings > Solevo > Suburbs served).
 - Link down from category pages to children, and back up to the parent with the parent's keyword as anchor text (the scaffolds already do this).
 - Link to The Foot Company once per relevant page, in body text, with a descriptive anchor. Foot, heel, orthotic and gait-for-footwear questions go to TFC.
-- Only real Google reviews. No invented testimonials.
+- No testimonials or reviews about clinical outcomes on physio, condition or Clinical Pilates pages (Ahpra advertising rules). Real Google reviews only, and only on non-clinical pages. Never invent one.
 - No outcome promises in health copy. Name the reviewing clinician.
 - Content edits happen in WordPress. Code and template changes go through GitHub pull requests, never the wp-admin file editor or Site Editor template overrides.
 
