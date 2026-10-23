@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SOLEVO_VERSION', '1.0.0' );
+define( 'SOLEVO_VERSION', '1.2.0' );
 define( 'SOLEVO_DIR', get_template_directory() );
 define( 'SOLEVO_URI', get_template_directory_uri() );
 
@@ -18,6 +18,9 @@ require SOLEVO_DIR . '/inc/shortcodes.php';
 require SOLEVO_DIR . '/inc/seo.php';
 require SOLEVO_DIR . '/inc/tracking.php';
 require SOLEVO_DIR . '/inc/pages.php';
+require SOLEVO_DIR . '/inc/blocks.php';
+require SOLEVO_DIR . '/inc/components.php';
+require SOLEVO_DIR . '/inc/schema.php';
 require SOLEVO_DIR . '/inc/menus.php';
 require SOLEVO_DIR . '/inc/setup.php';
 
@@ -55,6 +58,7 @@ add_action( 'wp_head', function () {
 add_action( 'init', function () {
 	register_block_pattern_category( 'solevo', array( 'label' => __( 'Solevo', 'solevo' ) ) );
 	register_block_pattern_category( 'solevo-home', array( 'label' => __( 'Solevo homepage sections', 'solevo' ) ) );
+	register_block_pattern_category( 'solevo-components', array( 'label' => __( 'Solevo components', 'solevo' ) ) );
 } );
 
 // Serve resized images as WebP (originals are kept).

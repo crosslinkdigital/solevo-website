@@ -2,7 +2,7 @@
 /**
  * Two menus:
  *   Landing   - jumps to sections on the one-page homepage (live now)
- *   Full site - Physio, Pilates, Conditions, About, Contact (switch on once pages are published)
+ *   Full site - Physio, Studio, Pricing, About, Contact (switch on once pages are published)
  * The header navigation uses whichever is active (Appearance > Solevo setup).
  *
  * @package Solevo
@@ -52,32 +52,31 @@ function solevo_build_menus( $page_ids ) {
 		solevo_nav_link( 'Pricing', '/#pricing' ),
 	) );
 
+	// Full site menu (rebuild brief, section 19): Physio, Studio, Pricing, About, Contact + the header Book button.
 	$full = implode( '', array(
 		solevo_nav_submenu( 'Physio', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
-			$link( 'physio/sports-physiotherapy', 'Sports' ),
-			$link( 'physio/seniors-physiotherapy', 'Seniors' ),
+			$link( 'physio', 'Physiotherapy' ),
+			$link( 'physio/sports-physiotherapy', 'Sports physiotherapy' ),
 			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy' ),
 			$link( 'physio/postnatal-physiotherapy', 'Postnatal' ),
 			$link( 'physio/pelvic-floor-physiotherapy', 'Pelvic floor' ),
+			$link( 'physio/seniors-physiotherapy', 'Seniors' ),
+			$link( 'conditions', 'Conditions we treat' ),
 		) ),
-		solevo_nav_submenu( 'Pilates', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
-			$link( 'pilates/clinical-pilates', 'Clinical' ),
-			$link( 'pilates/mat-pilates', 'Mat' ),
-			$link( 'pilates/private-pilates', 'Private' ),
-			$link( 'pilates/over-50s-fitness', 'Over 50s fitness' ),
+		solevo_nav_submenu( 'Studio', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
+			$link( 'pilates', 'Reformer Pilates' ),
+			$link( 'pilates/clinical-pilates', 'Clinical Pilates' ),
+			$link( 'pilates/mat-pilates', 'Mat Pilates' ),
+			$link( 'pilates/private-pilates', 'Private Pilates' ),
 			$link( 'pilates/mums-and-bubs', 'Mums and Bubs' ),
 			$link( 'pilates/seniors', 'Seniors' ),
 			$link( 'pilates/pregnancy-pilates', 'Pregnancy' ),
 			$link( 'pilates/postnatal-pilates', 'Postnatal' ),
+			$link( 'pilates/over-50s-fitness', 'Over 50s fitness' ),
 		) ),
-		solevo_nav_submenu( 'Conditions', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
-			$link( 'conditions/lower-back-pain', 'Back and spine' ),
-			$link( 'conditions/sports-injuries-rehab', 'Sports and lower limb' ),
-			$link( 'conditions/pregnancy-back-pain', 'Mums, bubs and pelvic health' ),
-			$link( 'conditions/balance-falls-prevention', 'Seniors' ),
-		) ),
+		solevo_nav_link( 'Pricing', home_url( '/book#pricing' ) ),
 		$link( 'about', 'About' ),
-		$link( 'contact', 'Contact us' ),
+		$link( 'contact', 'Contact' ),
 	) );
 
 	$ids = get_option( 'solevo_menu_ids', array() );

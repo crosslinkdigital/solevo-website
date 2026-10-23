@@ -15,6 +15,8 @@ solevo-website/
 │   ├── functions.php        Bootstrap
 │   ├── inc/
 │   │   ├── pages.php        THE 30-PAGE SITE MAP: slugs, titles, metas, keywords
+│   │   ├── components.php   DESIGN SYSTEM: reusable sections (see docs/DESIGN-SYSTEM.md)
+│   │   ├── scaffold-physio.php  The gold-standard /physio page
 │   │   ├── setup.php        Appearance > Solevo setup, and the page scaffolds
 │   │   ├── settings.php     Settings > Solevo (booking URLs, phone, hours, GTM)
 │   │   ├── booking.php      #cliniko / #mindbody link rewriting + click tracking classes
@@ -27,6 +29,7 @@ solevo-website/
 │   └── assets/              Self-hosted fonts, placeholder images, site.js
 ├── docs/
 │   ├── FREELANCER-BRIEF.md  Start here if you are building out the pages
+│   ├── DESIGN-SYSTEM.md     Audit, components, template map, how changes ship
 │   └── PAGES.md             The 30 pages at a glance
 ├── playground/blueprint.json  One-click WordPress Playground preview
 └── .github/workflows/deploy.yml  Push to main = deploy to Bluehost staging
