@@ -78,7 +78,10 @@ function solevo_c_hero( $a ) {
 		. solevo_b_p( $a['lead'], 'solevo-hero2__lead' )
 		. solevo_b_buttons( $a['buttons'] )
 		. ( ! empty( $a['locations'] ) ? solevo_b_shortcode( '[solevo_location_chips]' ) : '' )
-		. ( ! empty( $a['trust'] ) ? solevo_b_list( $a['trust'], 'solevo-trustline' ) : '' );
+		. ( ! empty( $a['trust'] ) ? solevo_b_list( $a['trust'], 'solevo-trustline' ) : '' )
+		. ( ! empty( $a['jump'] ) ? solevo_b_p( implode( ' <span aria-hidden="true">·</span> ', array_map( function ( $j ) {
+			return sprintf( '<a href="%s">%s</a>', esc_attr( $j[1] ), $j[0] );
+		}, $a['jump'] ) ), 'solevo-jump' ) : '' );
 	$media = ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-hero2__media', 'large' ) : '';
 	$grid  = solevo_c_box( solevo_c_box( $text, 'solevo-hero2__text' ) . $media, 'solevo-hero2__grid' );
 	return solevo_b_section( $grid, array( 'class' => 'solevo-c solevo-hero2', 'anchor' => $a['anchor'] ?? '' ) );
@@ -228,6 +231,14 @@ function solevo_c_faq( $title, $faqs ) {
 		$q .= solevo_c_details( $f[0], solevo_b_p( $f[1] ), 'solevo-faq2__item' );
 	}
 	return solevo_b_section( solevo_b_h( $title, 2 ) . solevo_c_box( $q, 'solevo-faq2' ), array( 'class' => 'solevo-c solevo-faq-wrap', 'inner_class' => 'solevo-narrow', 'anchor' => 'faq' ) );
+}
+
+/** Instagram: heading and Follow button always; the live feed appears once Smash Balloon is connected. */
+function solevo_c_instagram( $title = 'Follow us on Instagram', $intro = '' ) {
+	$handle = '@' . trim( wp_parse_url( solevo_opt( 'instagram_url' ), PHP_URL_PATH ) ?: 'solevo.studio', '/' );
+	$head   = solevo_c_head( 'Instagram', $title, $intro );
+	$btn    = solevo_b_buttons( array( array( 'Follow ' . esc_html( $handle ), esc_url( solevo_opt( 'instagram_url' ) ), true ) ) );
+	return solevo_b_section( solevo_c_box( $head . $btn, 'solevo-ig__head' ) . solevo_b_shortcode( '[solevo_instagram]' ), array( 'class' => 'solevo-c solevo-ig', 'anchor' => 'instagram' ) );
 }
 
 /** Location cards from Settings > Solevo (one source of truth for NAP). */

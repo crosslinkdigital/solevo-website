@@ -258,8 +258,13 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 		$phone = ( 'location1' === $loc['key'] && solevo_opt( 'phone' ) )
 			? sprintf( '<br><a class="solevo-call" data-track="click_call" href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', solevo_opt( 'phone' ) ) ), esc_html( solevo_opt( 'phone' ) ) )
 			: '';
+		$map = sprintf(
+			'<div class="solevo-loc__map"><iframe title="Map to %1$s" src="https://www.google.com/maps?q=%2$s&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>',
+			esc_attr( $loc['name'] ),
+			rawurlencode( $loc['name'] . ' ' . $loc['address'] )
+		);
 		$cards .= sprintf(
-			'<article class="solevo-loc"><p class="is-style-eyebrow">%1$s</p><h3 class="solevo-loc__name">%2$s</h3><p class="solevo-loc__note">%3$s</p><address class="solevo-nap"><a href="%4$s" rel="noopener">%5$s</a>%6$s</address>%7$s<div class="wp-block-buttons"><div class="wp-block-button">%8$s</div><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="%4$s" rel="noopener" data-track="click_directions">Directions</a></div></div></article>',
+			'<article class="solevo-loc">%9$s<p class="is-style-eyebrow">%1$s</p><h3 class="solevo-loc__name">%2$s</h3><p class="solevo-loc__note">%3$s</p><address class="solevo-nap"><a href="%4$s" rel="noopener">%5$s</a>%6$s</address>%7$s<div class="wp-block-buttons"><div class="wp-block-button">%8$s</div><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="%4$s" rel="noopener" data-track="click_directions">Directions</a></div></div></article>',
 			esc_html( $loc['area'] ),
 			esc_html( $loc['name'] ),
 			esc_html( $loc['note'] ),
@@ -267,7 +272,8 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 			esc_html( $loc['address'] ),
 			$phone,
 			$hours_html,
-			$book
+			$book,
+			$map
 		);
 	}
 	return solevo_rewrite_links( '<div class="solevo-locs">' . $cards . '</div>' );

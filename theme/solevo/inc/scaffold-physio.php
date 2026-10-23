@@ -23,6 +23,7 @@ function solevo_scaffold_physio( $page ) {
 		'buttons'   => array( array( 'Book Physio', '#cliniko' ), array( 'What we treat', '#help', true ) ),
 		'locations' => true,
 		'trust'     => array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
+		'jump'      => array( array( 'Fees and FAQs', '#fees' ), array( 'Locations and hours', '#locations' ) ),
 		'image'     => 'emma-docker',
 	) );
 
@@ -186,6 +187,9 @@ function solevo_scaffold_physio( $page ) {
 		'points'  => array( 'AHPRA-registered physiotherapist', 'Clinical Pilates trained', 'Works alongside The Foot Company podiatry' ),
 		'link'    => array( 'Meet the team', home_url( '/about' ) ),
 	) );
+
+	/* 7b. Instagram (as on The Foot Company site) -------------------------- */
+	$c .= solevo_c_instagram( 'See inside the clinic', 'Rehab sessions, Clinical Pilates and life at Solevo in Brookvale.' );
 
 	/* 8. Fees, funding and FAQs ------------------------------------------ */
 	$c .= solevo_c_fees_faq(

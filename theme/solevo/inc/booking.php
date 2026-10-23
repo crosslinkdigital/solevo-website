@@ -163,3 +163,28 @@ add_action( 'wp_footer', function () {
 	}
 	echo solevo_rewrite_links( $html . '</nav>' ); // phpcs:ignore WordPress.Security.EscapeOutput
 } );
+
+/**
+ * Links to pages that are not published yet (drafts) would 404 for visitors. Until a page
+ * goes live, hide the pill, text link or button that points to it. Editors still see it.
+ */
+function solevo_unpublished_target( $html ) {
+	if ( ! preg_match( '/href="(' . preg_quote( home_url( '/' ), '/' ) . '[^"#?]+)/', $html, $m ) ) {
+		return false;
+	}
+	$path = trim( wp_parse_url( $m[1], PHP_URL_PATH ), '/' );
+	$page = $path ? get_page_by_path( $path ) : null;
+	return $page && 'publish' !== $page->post_status;
+}
+add_filter( 'render_block', function ( $content, $block ) {
+	if ( is_admin() || current_user_can( 'edit_pages' ) ) {
+		return $content;
+	}
+	$name  = $block['blockName'];
+	$class = $block['attrs']['className'] ?? '';
+	$check = 'core/list-item' === $name || 'core/button' === $name || ( 'core/paragraph' === $name && preg_match( '/solevo-more|solevo-qbox__cta/', $class ) );
+	if ( $check && solevo_unpublished_target( $content ) ) {
+		return '';
+	}
+	return $content;
+}, 20, 2 );
