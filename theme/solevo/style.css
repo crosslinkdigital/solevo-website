@@ -21,8 +21,8 @@ Text Domain: solevo
 	--s-olive-hover: #4E5943;
 	--s-olive-deep: #414A36;
 	--s-ink: #2C2C2C;
-	--s-text: #4A4A4A;
-	--s-muted: #7D8570;
+	--s-text: #333230;
+	--s-muted: #5A6250;
 	--s-line: #E7E0D2;
 	--s-line-soft: #EFEAE0;
 	--s-paper: #FDFBF8;
@@ -34,7 +34,7 @@ Text Domain: solevo
 	--s-header-h: 76px;
 	--s-serif: "Cormorant Garamond", Garamond, "Times New Roman", serif;
 	--s-sans: Jost, "Futura", system-ui, sans-serif;
-	--s-section-y: clamp(4rem, 7vw, 6rem);
+	--s-section-y: clamp(3rem, 5.5vw, 4.5rem);
 	--s-wave-h: clamp(48px, 6vw, 90px);
 }
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--s-header-h) + 8px); }
@@ -463,7 +463,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 	--ds-card: #FFFDF9;
 	--ds-radius: 12px;
 	--ds-radius-lg: 18px;
-	--ds-y: clamp(3.25rem, 6vw, 5.5rem);
+	--ds-y: clamp(3rem, 5.5vw, 4.5rem);
 	--ds-gap: clamp(1rem, 2vw, 1.5rem);
 	--ds-body: clamp(1.0625rem, 1rem + .25vw, 1.125rem);
 	--ds-shadow: 0 1px 2px rgba(38,38,38,.04), 0 12px 28px -18px rgba(38,38,38,.28);
@@ -745,3 +745,110 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-qbox__cta a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: .55rem 1.25rem; background: var(--ds-olive); color: #fff !important; font-size: .8125rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
 .solevo-qbox__cta a:hover { background: var(--s-olive-deep); }
 @media (max-width: 781px) { .solevo-ds .solevo-qbox > .solevo-qbox__cta { margin-left: 1.1rem !important; margin-right: 1.1rem !important; } }
+
+
+/* =========================================================
+   READABILITY LAYER (client feedback, 23 Oct 2026)
+   Site-wide, including the homepage and footer:
+   - charcoal body copy, regular weight (no 300-weight body text)
+   - body 17px mobile / 18px desktop; descriptors, bullets, links and footer raised to match
+   - every text colour on cream, olive and the dark footer meets WCAG AA (4.5:1+)
+   - smaller heading-to-body gap, more line spacing, less empty space
+   ========================================================= */
+body { font-size: var(--ds-body); line-height: 1.7; color: var(--ds-text); }
+p, li { font-weight: 400; }
+
+/* Type: supporting copy */
+.solevo-sub, .solevo-lead, .solevo-hero__lead { font-weight: 400 !important; color: var(--ds-text); }
+.solevo-sub { font-size: clamp(1.0625rem, 1rem + .3vw, 1.2rem); }
+.solevo-eyebrow, .is-style-eyebrow { color: var(--ds-olive-text) !important; opacity: 1 !important; font-weight: 500 !important; font-size: .8125rem !important; letter-spacing: .22em; }
+.solevo-dots li { font-weight: 400; font-size: var(--ds-body); line-height: 1.55; }
+.solevo-condtags li a { font-weight: 400; font-size: 1rem; color: var(--ds-ink); }
+.solevo-plaintags li { font-size: 1rem; color: var(--ds-soft); }
+.solevo-service__desc { font-size: var(--ds-body); color: var(--ds-text); }
+.solevo-textlink a, .solevo-card__more, .solevo-arrow-link a { font-size: .875rem; font-weight: 500; color: var(--ds-olive-text); }
+.solevo-member__text > p:not([class]), .solevo-studio__intro p:not([class]) { font-size: var(--ds-body); }
+.solevo-member__label { font-size: .8125rem !important; }
+.solevo-boxtags li { font-size: 1rem; }
+.solevo-reason p:not(.solevo-num) { font-size: var(--ds-body); max-width: 19rem; }
+.solevo-class p:not([class]) { font-size: 1.0625rem; line-height: 1.7; }
+.solevo-class__tag { font-weight: 400; font-size: .9375rem; color: var(--ds-olive-text); }
+.solevo-class__best { font-size: .8125rem; color: var(--ds-soft); }
+.solevo-cat__places { font-size: .78rem !important; color: var(--ds-soft) !important; }
+.solevo-price-row p { font-size: 1.0625rem; }
+.solevo-price-row p span { font-size: .875rem; font-weight: 400; color: var(--ds-soft); }
+.solevo-price-card__meta { font-size: .78rem !important; }
+.solevo-expiry__list li { font-size: 1rem; }
+.solevo-founders .solevo-eyebrow { font-size: .8125rem !important; }
+.solevo-founders__per { font-size: .9375rem; }
+.solevo-card__text, .is-style-pills li, .solevo-page-hero .solevo-nap { font-size: 1rem; }
+.solevo-person__role { font-size: .875rem; color: var(--ds-olive-text); }
+.solevo-reviewed { font-size: .9375rem; color: var(--ds-soft); }
+.solevo-breadcrumbs ol { font-size: .875rem; color: var(--ds-soft); }
+
+/* Headings: keep the serif, narrow the gap to body copy */
+h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weight: 600; line-height: 1.12; }
+.solevo-h2-xl { font-size: clamp(2rem, 1.5rem + 1.9vw, 2.9rem) !important; line-height: 1.18 !important; }
+.solevo-h2-sm { font-size: clamp(1.9rem, 1.45rem + 1.5vw, 2.6rem) !important; }
+.solevo-hero__title { font-size: clamp(2.75rem, 1.9rem + 3.6vw, 4.9rem) !important; line-height: 1.06 !important; }
+.solevo-band__title { font-size: clamp(2rem, 1.5rem + 2vw, 3.1rem) !important; line-height: 1.2 !important; margin-bottom: 2rem !important; }
+.solevo-member__name { font-size: clamp(1.75rem, 1.45rem + 1vw, 2.2rem) !important; font-weight: 600 !important; }
+.solevo-service h3 { font-size: clamp(1.55rem, 1.35rem + .7vw, 1.9rem) !important; font-weight: 600 !important; }
+.solevo-reason h3, .solevo-cat h3, .solevo-class h4, .solevo-price-card h3 { font-weight: 600 !important; }
+.solevo-num { font-size: clamp(3rem, 4.5vw, 4rem); color: #9C9686; margin-bottom: 1rem; font-variant-numeric: lining-nums; }
+.solevo-price, .solevo-founders__price { font-variant-numeric: lining-nums; }
+
+/* Olive sections: solid light text, no translucent copy */
+.solevo-olive .solevo-eyebrow, .solevo-olive .is-style-eyebrow { color: #EEF0E8 !important; letter-spacing: .24em; }
+.solevo-note { font-weight: 400; }
+.solevo-olive .solevo-sub, .solevo-olive .solevo-dots li, .solevo-olive p { color: #F6F3EC; }
+.solevo-olive .solevo-dots li::before { background: #EEF0E8; }
+.solevo-video__play a { color: #F6F3EC; }
+.solevo-band__caption { font-size: .9375rem; font-weight: 400; color: #F6F3EC; opacity: 1; }
+.solevo-btn-light .wp-block-button__link { color: var(--s-olive-deep); font-size: .875rem; font-weight: 500; }
+.solevo-btn-ghost .wp-block-button__link { color: #fff; border: 1.5px solid #F6F3EC; font-size: .875rem; font-weight: 500; }
+
+/* Footer: larger text, AA on the dark background */
+.solevo-footer { color: #D6D3CE; padding-top: clamp(5.5rem, 9vw, 8rem); }
+.solevo-footer .solevo-eyebrow { color: #B9C2A9 !important; font-size: .8125rem !important; }
+.solevo-footer__brand p:not([class]) { font-weight: 400; font-size: 1rem; color: #D6D3CE; }
+.solevo-footer__italic { color: #BDBAB4; font-size: 1rem; font-weight: 400; }
+.solevo-footer__links li { color: #CFCCC6; font-size: 1rem; }
+.solevo-footer__find .solevo-nap { color: #BDBAB4; font-weight: 400; font-size: 1rem; }
+.solevo-copyright { color: #B3B0AA; font-size: .9375rem; font-weight: 400; }
+.solevo-social, .solevo-social a { color: #BDBAB4; font-size: .9375rem; }
+.solevo-footer__find { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+.solevo-footer__mark { margin-top: clamp(2rem, 4vw, 3rem) !important; }
+
+/* Less empty space (homepage replica) */
+.solevo-hero { min-height: min(100svh, 820px); padding-bottom: 5rem; }
+.solevo-hero .solevo-eyebrow { margin-bottom: 1.5rem !important; }
+.solevo-hero__lead { margin-top: 1.75rem !important; }
+.solevo-hero__cta { margin-top: 2.25rem !important; }
+.solevo-head { margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem); }
+.solevo-about h2 { margin-bottom: clamp(1.75rem, 3.5vw, 3rem); }
+.solevo-dot::before { margin-bottom: clamp(1.25rem, 2.5vw, 2rem); }
+.solevo-wide-photo, .solevo-video { margin-top: clamp(2rem, 4vw, 3.25rem) !important; }
+.solevo-member { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+.solevo-services-section { padding-bottom: calc(var(--s-section-y) + 1rem); }
+.solevo-why-section { padding-top: calc(var(--s-section-y) + 1.5rem); }
+.solevo-why__photos { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
+.solevo-num { margin-bottom: 1rem; }
+.solevo-cat { margin-top: clamp(2.75rem, 5vw, 4rem) !important; }
+.solevo-founders { margin-top: clamp(2.75rem, 5vw, 4rem) !important; }
+.solevo-conditions-section { padding-bottom: calc(var(--s-section-y) + 1.5rem); }
+.solevo-band { min-height: 0; padding-top: clamp(3.5rem, 7vw, 5.5rem); padding-bottom: clamp(4rem, 8vw, 6rem); }
+.solevo-timetable-box { padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 6vw, 5rem); }
+@media (max-width: 781px) {
+	.solevo-hero { min-height: 0; padding-top: calc(var(--s-header-h) + 3rem); padding-bottom: 4rem; }
+}
+
+/* Physio and inner pages: supporting copy at 17px, links at 14px */
+.solevo-scard p:not(.solevo-more), .solevo-qbox > p:not(.solevo-more):not(.solevo-qbox__cta), .solevo-path__item p:not([class]),
+.solevo-journey li, .solevo-why4__item p:not(.solevo-why4__num), .solevo-assess__list li, .solevo-trust li, .solevo-ticks li,
+.solevo-first__item p, .solevo-faq2__item p, .solevo-fees .solevo-ticks li { font-size: 1.0625rem; }
+.solevo-ds .solevo-qbox summary em { font-size: 1rem; }
+.solevo-chip__detail, .solevo-path__booked, .solevo-fee__label span, .solevo-loc__note, .solevo-loc__hours { font-size: .9375rem; }
+.solevo-trustline li, .solevo-why4__extra li { font-size: 1rem; }
+.solevo-more a, .solevo-qbox__cta a { font-size: .875rem; }
+.solevo-ds .solevo-faq2__item summary { font-size: 1.0625rem; }

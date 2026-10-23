@@ -49,6 +49,15 @@ Preview (view-only, noindex): https://crosslinkdigital.github.io/solevo-website/
 
 Design tokens (`:root` in `style.css`): body 17px mobile to 18px desktop; charcoal text `#333230` (12:1 on linen); secondary `#57534C` (7.2:1); olive `#5F6B52` for buttons (white text 5.7:1); small olive text `#4C573F` (7.2:1). Every text and button pair meets WCAG AA. H1 to body ratio is about 3.5:1 on desktop, smaller on mobile. Buttons: primary (olive), outline, and an uppercase text link. Minimum tap target 48px.
 
+### Client readability feedback (23 Oct), applied site-wide
+
+| Feedback | Done |
+|---|---|
+| Light grey on cream, pale copy on olive | Body text charcoal `#333230`, no 300-weight body copy. Text on olive is solid `#F6F3EC` (5.1:1), eyebrows `#EEF0E8` (4.9:1). Footer text 6.5 to 9.4:1. All pairs WCAG AA. |
+| Body 17 to 18px, descriptors, bullets, links, footer up too | Body 17px mobile, 18px desktop everywhere. Descriptors, bullets and FAQ answers 17px; small labels 15px minimum; booking links and buttons 14px uppercase; footer 15 to 16px. |
+| Smaller heading gap, more line spacing, strong buttons | H2 now 32 to 44px (was up to 54px), hero H1 up to 78px (was 100px). Line height 1.7. Buttons olive with white (5.7:1) or cream with dark olive (8.2:1). |
+| Oversized empty space, mobile layout, sticky booking | Section padding 48 to 72px (was 64 to 96px); booking band no longer forced to 44rem; homepage hero capped and auto height on mobile; tighter gaps between headings, photos and team profiles. Sticky Book Physio / Book Studio bar on mobile on the homepage and every service, condition and studio page. |
+
 ## C. Page and template map
 
 | Page type | Template | Pages |

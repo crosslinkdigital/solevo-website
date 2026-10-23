@@ -137,10 +137,10 @@ add_filter( 'render_block_core/button', function ( $content, $block ) {
 
 /** Mobile sticky booking bar on physio and studio pages. */
 add_action( 'wp_footer', function () {
-	if ( ! is_singular( 'page' ) || is_front_page() ) {
+	if ( ! is_singular( 'page' ) && ! is_front_page() ) {
 		return;
 	}
-	$def = solevo_page_def();
+	$def = is_front_page() ? array( 'type' => 'home', 'booking' => 'both' ) : solevo_page_def();
 	if ( ! $def || in_array( $def['type'], array( 'book', 'contact' ), true ) ) {
 		return;
 	}
