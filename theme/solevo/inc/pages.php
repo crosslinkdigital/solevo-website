@@ -14,9 +14,9 @@ defined( 'ABSPATH' ) || exit;
 function solevo_site_pages() {
 	return array(
 		/* ---------- Core ---------- */
-		array( 'path' => '', 'title' => 'Home', 'h1' => 'Move Better. Train Harder. Recover Smarter.', 'type' => 'home', 'booking' => 'both', 'keyword' => '(brand)',
-			'seo_title' => 'Physio & Reformer Pilates Brookvale | Solevo',
-			'meta' => 'Physiotherapy, clinical Pilates, reformer Pilates and yoga under one roof in Brookvale. Strength-led rehab and small classes of six. Book online today.' ),
+		array( 'path' => '', 'title' => 'Home', 'h1' => 'Physiotherapy in Brookvale', 'type' => 'home', 'booking' => 'cliniko', 'keyword' => 'physio brookvale',
+			'seo_title' => 'Physio Brookvale | Solevo Physio & Studio',
+			'meta' => 'Physiotherapy in Brookvale and Terrey Hills for pain, injury and sports rehab. One-on-one care, no GP referral needed and a rehab gym on site. Book online.' ),
 		array( 'path' => 'physio', 'title' => 'Physio', 'h1' => 'Physiotherapy in Brookvale & Terrey Hills', 'type' => 'hub', 'booking' => 'cliniko', 'keyword' => 'physio close to me',
 			'seo_title' => 'Physio Brookvale & Terrey Hills | Solevo Physio',
 			'meta' => 'Physiotherapy in Brookvale and Terrey Hills for back, neck, shoulder, knee and sports injuries. One-on-one care and strength-based rehab. Book online.',

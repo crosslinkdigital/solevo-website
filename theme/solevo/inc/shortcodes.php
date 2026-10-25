@@ -149,10 +149,19 @@ add_shortcode( 'solevo_reviews', function () {
 	if ( shortcode_exists( 'trustindex' ) ) {
 		return '<div class="solevo-feed solevo-feed--reviews">' . do_shortcode( '[trustindex no-registration=google]' ) . '</div>';
 	}
-	if ( current_user_can( 'activate_plugins' ) ) {
-		return '<div class="solevo-feed solevo-feed--placeholder">' . solevo_admin_hint( 'Google reviews: install the free "Widgets for Google Reviews" plugin by Trustindex, connect the Solevo Google Business Profile, and this section fills automatically. Visitors do not see this section until then.' ) . '</div>';
+	// Not connected yet: still show the section, with a link to the real reviews on Google.
+	$url = solevo_opt( 'google_reviews_url' );
+	if ( ! $url ) {
+		$url = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( solevo_opt( 'business_name' ) . ' ' . solevo_opt( 'address' ) );
 	}
-	return '';
+	$hint = current_user_can( 'activate_plugins' )
+		? solevo_admin_hint( 'Google reviews: install the free "Widgets for Google Reviews" plugin by Trustindex and connect the Solevo Google Business Profile to show the live feed here. Until then visitors see this link to Google. Paste the exact reviews link in Settings > Solevo.' )
+		: '';
+	return sprintf(
+		'<div class="solevo-feed solevo-revlink"><p class="solevo-revlink__text">See what our clients say about Solevo on Google.</p><div class="wp-block-buttons"><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="%s" target="_blank" rel="noopener" data-track="click_reviews">Read our Google reviews</a></div></div>%s</div>',
+		esc_url( $url ),
+		$hint
+	);
 } );
 
 add_shortcode( 'solevo_instagram', function () {
@@ -319,7 +328,7 @@ add_shortcode( 'solevo_cta_band', function () {
 		$title = 'Ready to get moving again?';
 		$sub   = sprintf( 'Book a one-on-one appointment online in %s.', esc_html( $areas ) );
 		$btns  = $btn( $phys, '#cliniko' ) . ( solevo_opt( 'phone' ) ? $btn( 'Call us', '#phone', 'solevo-btn-ghost' ) : '' );
-		$alt   = '<p class="solevo-cta2__alt">Looking for Pilates or yoga classes? <a href="#mindbody">Book Studio</a></p>';
+		$alt   = '<p class="solevo-cta2__alt">Looking for Pilates classes? <a href="#mindbody">Book Studio</a></p>';
 	} elseif ( 'mindbody' === $booking ) {
 		$title = 'Find your class';
 		$sub   = 'See the live timetable and book your spot online.';

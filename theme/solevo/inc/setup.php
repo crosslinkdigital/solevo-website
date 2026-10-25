@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . '/blocks.php';
 require_once __DIR__ . '/components.php';
 require_once __DIR__ . '/scaffold-physio.php';
+require_once __DIR__ . '/scaffold-home.php';
 require_once __DIR__ . '/templates.php';
 
 /* ---------------------------------------------------------------------------
@@ -123,10 +124,7 @@ function solevo_scaffold( $page ) {
 
 	switch ( $type ) {
 		case 'home':
-			foreach ( array( 'home-hero', 'home-about', 'home-team', 'home-services', 'home-conditions', 'home-technology', 'home-why', 'home-studio', 'home-pricing', 'home-timetable', 'home-instagram', 'home-book' ) as $slug ) {
-				$c .= solevo_pattern_markup( $slug );
-			}
-			return $c;
+			return solevo_scaffold_home( $page ); // Physio-first homepage, see scaffold-home.php.
 
 		case 'hub':
 			if ( 'physio' === $path ) {

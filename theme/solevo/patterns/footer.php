@@ -42,17 +42,23 @@
 
 <!-- wp:list {"className":"solevo-footer__links"} -->
 <ul class="wp-block-list solevo-footer__links"><!-- wp:list-item -->
-<li><a href="/#physio">About</a></li>
+<li><a href="/physio">Physiotherapy</a></li>
 <!-- /wp:list-item -->
-
 <!-- wp:list-item -->
-<li><a href="/#services">Services</a></li>
+<li><a href="/physio/sports-physiotherapy">Sports physiotherapy</a></li>
 <!-- /wp:list-item -->
-
 <!-- wp:list-item -->
-<li><a href="/#team">Our Team</a></li>
+<li><a href="/physio/pelvic-floor-physiotherapy">Women's health</a></li>
 <!-- /wp:list-item -->
-
+<!-- wp:list-item -->
+<li><a href="/conditions">Conditions we treat</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="/about">About us</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="/contact">Contact</a></li>
+<!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><a href="#cliniko">Book Physio</a></li>
 <!-- /wp:list-item --></ul>
@@ -66,13 +72,17 @@
 
 <!-- wp:list {"className":"solevo-footer__links"} -->
 <ul class="wp-block-list solevo-footer__links"><!-- wp:list-item -->
-<li><a href="/#studio">Studio</a></li>
+<li><a href="/pilates">Pilates classes</a></li>
 <!-- /wp:list-item -->
-
 <!-- wp:list-item -->
-<li><a href="/#pricing">Pricing</a></li>
+<li><a href="/pilates/seniors">Seniors Pilates</a></li>
 <!-- /wp:list-item -->
-
+<!-- wp:list-item -->
+<li><a href="/pilates/clinical-pilates">Clinical Pilates</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="/book#pricing">Pricing</a></li>
+<!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><a href="#mindbody">Book Studio</a></li>
 <!-- /wp:list-item --></ul>
@@ -90,7 +100,7 @@
 <!-- /wp:shortcode -->
 
 <!-- wp:shortcode -->
-[solevo_contact show="address"]
+[solevo_contact show="address,phone"]
 <!-- /wp:shortcode --></div>
 <!-- /wp:group -->
 

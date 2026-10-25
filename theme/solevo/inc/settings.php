@@ -12,7 +12,7 @@ function solevo_setting_fields() {
 	return array(
 		'business_name' => array( 'label' => 'Business name', 'default' => 'Solevo Physio & Studio', 'type' => 'text' ),
 		'address'       => array( 'label' => 'Address', 'default' => '4/42-46 Mitchell Rd, Brookvale NSW 2100', 'type' => 'text' ),
-		'phone'         => array( 'label' => 'Phone (display)', 'default' => '', 'type' => 'text', 'help' => 'Shown in header, footer and Contact. Buttons linked to #phone call this number.' ),
+		'phone'         => array( 'label' => 'Phone (display)', 'default' => '1300 366 826', 'type' => 'text', 'help' => 'Shown in header, footer and Contact. Buttons linked to #phone call this number.' ),
 		'email'         => array( 'label' => 'Email', 'default' => 'hello@solevo.com.au', 'type' => 'email' ),
 		'hours'         => array( 'label' => 'Opening hours', 'default' => '', 'type' => 'textarea', 'help' => 'One line per day, e.g. "Mon to Fri: 6am to 7pm".' ),
 		'location1_area'    => array( 'label' => 'Location 1: suburb', 'default' => 'Brookvale', 'type' => 'text', 'help' => 'Main location. Uses the business name, address, phone and opening hours above.' ),
@@ -27,6 +27,7 @@ function solevo_setting_fields() {
 		'cliniko_url_location2' => array( 'label' => 'Cliniko link: location 2', 'default' => '', 'type' => 'url', 'help' => 'Optional. Same for location 2. Used by #cliniko-location2 buttons.' ),
 		'mindbody_url'  => array( 'label' => 'Mindbody booking URL (classes)', 'default' => '', 'type' => 'url', 'help' => 'Every button or link pointing to #mindbody uses this URL.' ),
 		'mindbody_embed'=> array( 'label' => 'Mindbody timetable embed code', 'default' => '', 'type' => 'code', 'help' => 'Paste the widget code from Mindbody (Branded Web Tools). Shown wherever the Timetable block is used.' ),
+		'google_reviews_url' => array( 'label' => 'Google reviews link', 'default' => '', 'type' => 'url', 'help' => 'The "Read reviews" link from the Solevo Google Business Profile. Used by the reviews section until the Trustindex feed is connected. Empty: links to Solevo on Google Maps.' ),
 		'instagram_url' => array( 'label' => 'Instagram URL', 'default' => 'https://www.instagram.com/solevo.studio/', 'type' => 'url' ),
 		'tfc_url'       => array( 'label' => 'The Foot Company URL', 'default' => '', 'type' => 'url' ),
 		'suburbs'       => array( 'label' => 'Suburbs served', 'default' => 'Brookvale, Dee Why, Manly, Freshwater, Curl Curl, Allambie Heights, Frenchs Forest, Narraweena, Cromer, Collaroy', 'type' => 'textarea', 'help' => 'Comma separated. Listed as plain text on Contact.' ),

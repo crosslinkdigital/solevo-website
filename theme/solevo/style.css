@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.2.1
+Version: 1.3.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -921,3 +921,34 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 .solevo-card a { box-sizing: border-box; flex: 1 1 auto; height: auto; min-height: 100%; border-radius: var(--ds-radius, 12px); background: var(--ds-card, #FFFDF9); }
 .solevo-card__text { font-size: 1.0625rem; color: var(--ds-soft, #57534C); }
 .solevo-card__more { font-weight: 500; color: var(--ds-olive-text, #4C573F); }
+
+/* =========================================================
+   Homepage on the design system (1.3.0, phase 5)
+   ========================================================= */
+/* Solid header on the new light hero (the old transparent header sat on a dark photo) */
+.home .solevo-header:not(.is-scrolled) { background: var(--s-paper); box-shadow: 0 1px 0 rgba(44,44,44,.06); }
+
+/* Header Call button: number on desktop, "Call" on small screens */
+.solevo-header__ctas { gap: .5rem; flex-wrap: nowrap; }
+.solevo-header__call .wp-block-button__link { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+.solevo-header__call-short { display: none; }
+@media (max-width: 600px) {
+	.solevo-header__call-num { display: none; }
+	.solevo-header__call-short { display: inline; }
+	.solevo-header__call .wp-block-button__link { padding-left: .9rem !important; padding-right: .9rem !important; }
+}
+
+/* Google reviews: link card until the Trustindex feed is connected */
+.solevo-reviews2 .solevo-sh { text-align: center; margin-inline: auto; }
+.solevo-revlink { max-width: 560px; margin: 0 auto; padding: 1.75rem 1.5rem; text-align: center; background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); box-shadow: var(--ds-shadow); }
+.solevo-revlink__text { margin: 0 0 1rem; color: var(--ds-soft); }
+.solevo-revlink .wp-block-buttons { justify-content: center; }
+
+/* Conditions pills on the homepage */
+.solevo-home-conds .is-style-pills { margin: 1.25rem 0; }
+.solevo-home-conds .is-style-pills li { border-radius: 999px; background: var(--ds-card); border-color: var(--ds-line); }
+.solevo-home-conds .is-style-pills li:hover { border-color: var(--ds-olive); }
+.solevo-home-conds .solevo-more { margin-top: .5rem !important; }
+
+/* Service cards: buttons under the grid */
+.solevo-services2 .solevo-scards + .wp-block-buttons { margin-top: 1.75rem; justify-content: center; }

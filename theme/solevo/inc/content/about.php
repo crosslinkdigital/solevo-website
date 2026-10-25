@@ -27,15 +27,6 @@ return array(
 			'bio'     => 'Emma grew up playing basketball and netball and has a passion for treating sports-related injuries and guiding clients through rehab in a way that keeps them moving and builds confidence. She manages a wide range of musculoskeletal conditions, with particular interest in acute sporting injuries, overuse and running injuries and post-operative rehabilitation, using hands-on treatment, targeted exercise, movement retraining and education.',
 			'points'  => array( 'AHPRA-registered physiotherapist', 'Clinical Pilates trained', 'Sports physiotherapy, ankle and ACL, shoulder and running injuries' ),
 		) ),
-		solevo_c_service_cards(
-			solevo_c_head( 'Solevo Studio', 'Our instructors' ),
-			array(
-				array( 'title' => 'Rikki Xu', 'text' => 'Pilates Instructor. Polestar-trained comprehensive Pilates instructor with a background in yoga. Calm, grounded teaching focused on functional strength, mobility and postural alignment.' ),
-				array( 'title' => 'Yasmin McFadden', 'text' => 'Yoga Instructor. Hatha, Vinyasa and Yin yoga teacher, trained in Bali, passionate about making yoga accessible and creating space to slow down and move with intention.' ),
-			),
-			'',
-			array( 'anchor' => 'instructors', 'bg' => '' )
-		),
 		solevo_c_why( solevo_c_head( 'Why Solevo', 'What makes Solevo different' ), array(
 			array( 'Individualised care', 'One-on-one physiotherapy and small classes, so you are never just a number.' ),
 			array( 'Treatment to training', 'A clear path from physio, to Clinical Pilates, to Studio classes.' ),
@@ -47,5 +38,5 @@ return array(
 		), array( 'anchor' => 'tfc-partner' ) ),
 		solevo_c_instagram( 'Follow along', 'Behind the scenes at Solevo Physio and Studio.' ),
 	),
-	'todo'      => array( 'Add the Solevo story (who founded it and why) in "Our approach" if Steph wants it. Confirm Rikki and Yasmin are happy to be listed, and whether to add their photos.' ),
+	'todo'      => array( 'Add the Solevo story (who founded it and why) in "Our approach" if Steph wants it.' ),
 );
