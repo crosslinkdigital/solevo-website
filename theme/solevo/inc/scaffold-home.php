@@ -95,7 +95,7 @@ function solevo_scaffold_home( $page ) {
 			array( 'Strength testing.', 'We measure strength and compare sides, so progress is tracked in numbers rather than guesswork.' ),
 			array( 'Gym-based rehabilitation.', 'Your exercises are taught, checked and progressed on real equipment, with your physio beside you.' ),
 		),
-		array( 'running-assessment' )
+		array( 'clinic-reformer-room' )
 	);
 
 	/* 8. Locations (NAP from Settings > Solevo) ------------------------- */
@@ -108,8 +108,8 @@ function solevo_scaffold_home( $page ) {
 		'paras'   => array(
 			'Once you are moving well, our studio helps you keep progressing. Seniors Pilates builds balance, strength and bone health in small, physio-designed groups, and Clinical Pilates is run by our physiotherapists.',
 		),
-		'list_title' => 'Explore the studio',
-		'list'    => array( solevo_c_link( 'pilates/seniors', 'Seniors Pilates' ), solevo_c_link( 'pilates/clinical-pilates', 'Clinical Pilates' ), solevo_c_link( 'pilates', 'All Pilates classes' ) ),
+		'after_text' => solevo_b_list( array( solevo_c_link( 'pilates/seniors', 'Seniors Pilates' ), solevo_c_link( 'pilates/clinical-pilates', 'Clinical Pilates' ), solevo_c_link( 'pilates', 'All Pilates classes' ) ), 'is-style-pills' ),
+		'image'   => 'clinic-studio-mats',
 		'bg'      => 'surface',
 		'anchor'  => 'studio',
 	) );

@@ -20,6 +20,8 @@ function solevo_image_registry() {
 		'why-stretch'        => array( 'why-stretch.jpg', 'Athlete stretching' ),
 		'why-strength'       => array( 'why-strength.jpg', 'Strength training with barbell' ),
 		'studio-stretch'     => array( 'studio-stretch.jpg', 'Movement and flexibility at Solevo Studio' ),
+		'clinic-reformer-room' => array( 'clinic-reformer-room.jpg', 'Reformer and rehab room at Solevo Physio & Studio, Brookvale' ),
+		'clinic-studio-mats'   => array( 'clinic-studio-mats.jpg', 'Mats and bolsters set up in the Solevo studio, Brookvale' ),
 	);
 }
 
