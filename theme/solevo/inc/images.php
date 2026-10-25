@@ -22,6 +22,8 @@ function solevo_image_registry() {
 		'studio-stretch'     => array( 'studio-stretch.jpg', 'Movement and flexibility at Solevo Studio' ),
 		'clinic-reformer-room' => array( 'clinic-reformer-room.jpg', 'Reformer and rehab room at Solevo Physio & Studio, Brookvale' ),
 		'clinic-studio-mats'   => array( 'clinic-studio-mats.jpg', 'Mats and bolsters set up in the Solevo studio, Brookvale' ),
+		'solevo-intro-poster'  => array( 'solevo-intro-poster.jpg', 'A clinician assessing a client\'s shoulder at Solevo, Brookvale' ),
+		'solevo-intro'         => array( 'solevo-intro.mp4', 'Solevo Physio and Movement: 30-second intro' ),
 	);
 }
 
@@ -61,6 +63,40 @@ function solevo_img( $key, $class = '', $size = 'large' ) {
 		wp_json_encode( $attrs, JSON_UNESCAPED_SLASHES ),
 		esc_attr( $classes ),
 		$img
+	);
+}
+
+/**
+ * Core video block (muted, looping, inline). Uses the Media Library copy when imported.
+ * Playback starts from site.js only on screens where the video is visible, so phones
+ * never download it. Editors can swap the file with "Replace" like any video block.
+ */
+function solevo_video( $key, $poster_key = '', $class = '' ) {
+	$reg = solevo_image_registry();
+	if ( ! isset( $reg[ $key ] ) ) {
+		return '';
+	}
+	$id     = solevo_image_id( $key );
+	$src    = $id ? wp_get_attachment_url( $id ) : SOLEVO_URI . '/assets/images/' . $reg[ $key ][0];
+	$poster = '';
+	if ( $poster_key && isset( $reg[ $poster_key ] ) ) {
+		$pid    = solevo_image_id( $poster_key );
+		$poster = $pid ? wp_get_attachment_image_url( $pid, 'large' ) : SOLEVO_URI . '/assets/images/' . $reg[ $poster_key ][0];
+	}
+	$attrs = array();
+	if ( $id ) {
+		$attrs['id'] = $id;
+	}
+	if ( $class ) {
+		$attrs['className'] = $class;
+	}
+	return sprintf(
+		"<!-- wp:video %s -->\n<figure class=\"%s\"><video loop muted%s preload=\"none\" src=\"%s\" playsinline aria-label=\"%s\"></video></figure>\n<!-- /wp:video -->",
+		wp_json_encode( $attrs ?: new stdClass() ),
+		esc_attr( trim( 'wp-block-video ' . $class ) ),
+		$poster ? ' poster="' . esc_url( $poster ) . '"' : '',
+		esc_url( $src ),
+		esc_attr( $reg[ $key ][1] )
 	);
 }
 

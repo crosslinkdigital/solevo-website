@@ -82,7 +82,8 @@ function solevo_c_hero( $a ) {
 		. ( ! empty( $a['jump'] ) ? solevo_b_p( implode( ' <span aria-hidden="true">·</span> ', array_map( function ( $j ) {
 			return sprintf( '<a href="%s">%s</a>', esc_attr( $j[1] ), $j[0] );
 		}, $a['jump'] ) ), 'solevo-jump' ) : '' );
-	$media = ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-hero2__media', 'large' ) : '';
+	$media = ! empty( $a['video'] ) ? solevo_video( $a['video'], $a['poster'] ?? '', 'solevo-hero2__media solevo-hero2__video' )
+		: ( ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-hero2__media', 'large' ) : '' );
 	$grid  = solevo_c_box( solevo_c_box( $text, 'solevo-hero2__text' ) . $media, 'solevo-hero2__grid' );
 	return solevo_b_section( $grid, array( 'class' => 'solevo-c solevo-hero2', 'anchor' => $a['anchor'] ?? '' ) );
 }

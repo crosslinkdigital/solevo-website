@@ -57,3 +57,36 @@
 		onScroll();
 	}
 })();
+
+// 5. Hero video: play only where it is visible (not on phones, not with reduced motion), with a sound toggle.
+(function () {
+	'use strict';
+	var fig = document.querySelector('.solevo-hero2__video');
+	var video = fig && fig.querySelector('video');
+	if (!video || !window.matchMedia) return;
+	var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	if (window.getComputedStyle(fig).display === 'none') return; // hidden on small screens: never loads
+	var btn = document.createElement('button');
+	btn.type = 'button';
+	btn.className = 'solevo-hero2__sound';
+	btn.textContent = 'Sound on';
+	btn.setAttribute('aria-pressed', 'false');
+	btn.addEventListener('click', function () {
+		video.muted = !video.muted;
+		if (!video.muted) { video.play(); }
+		btn.textContent = video.muted ? 'Sound on' : 'Sound off';
+		btn.setAttribute('aria-pressed', video.muted ? 'false' : 'true');
+	});
+	fig.appendChild(btn);
+	if (calm) { video.controls = true; return; }
+	if ('IntersectionObserver' in window) {
+		new IntersectionObserver(function (entries) {
+			entries.forEach(function (e) {
+				if (e.isIntersecting) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+				else { video.pause(); }
+			});
+		}, { threshold: 0.25 }).observe(video);
+	} else {
+		video.play();
+	}
+})();
