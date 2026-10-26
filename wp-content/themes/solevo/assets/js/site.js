@@ -58,35 +58,60 @@
 	}
 })();
 
-// 5. Hero video: play only where it is visible (not on phones, not with reduced motion), with a sound toggle.
+// 5. Hero video. Desktop (900px+): muted autoplay loop while visible, with a sound toggle.
+//    Phones and tablets: poster with a play button; nothing downloads until tapped.
+//    Reduced motion: poster with a play button on every screen.
 (function () {
 	'use strict';
 	var fig = document.querySelector('.solevo-hero2__video');
 	var video = fig && fig.querySelector('video');
 	if (!video || !window.matchMedia) return;
 	var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	if (window.getComputedStyle(fig).display === 'none') return; // hidden on small screens: never loads
-	var btn = document.createElement('button');
-	btn.type = 'button';
-	btn.className = 'solevo-hero2__sound';
-	btn.textContent = 'Sound on';
-	btn.setAttribute('aria-pressed', 'false');
-	btn.addEventListener('click', function () {
-		video.muted = !video.muted;
-		if (!video.muted) { video.play(); }
-		btn.textContent = video.muted ? 'Sound on' : 'Sound off';
-		btn.setAttribute('aria-pressed', video.muted ? 'false' : 'true');
-	});
-	fig.appendChild(btn);
-	if (calm) { video.controls = true; return; }
-	if ('IntersectionObserver' in window) {
-		new IntersectionObserver(function (entries) {
-			entries.forEach(function (e) {
-				if (e.isIntersecting) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
-				else { video.pause(); }
-			});
-		}, { threshold: 0.25 }).observe(video);
-	} else {
-		video.play();
+	var desktop = window.matchMedia('(min-width: 900px)').matches;
+
+	function button(cls, text) {
+		var b = document.createElement('button');
+		b.type = 'button';
+		b.className = cls;
+		b.textContent = text;
+		fig.appendChild(b);
+		return b;
 	}
+
+	if (desktop && !calm) {
+		var sound = button('solevo-hero2__sound', 'Sound on');
+		sound.setAttribute('aria-pressed', 'false');
+		sound.addEventListener('click', function () {
+			video.muted = !video.muted;
+			if (!video.muted) { video.play(); }
+			sound.textContent = video.muted ? 'Sound on' : 'Sound off';
+			sound.setAttribute('aria-pressed', video.muted ? 'false' : 'true');
+		});
+		if ('IntersectionObserver' in window) {
+			new IntersectionObserver(function (entries) {
+				entries.forEach(function (e) {
+					if (e.isIntersecting) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+					else { video.pause(); }
+				});
+			}, { threshold: 0.25 }).observe(video);
+		} else {
+			video.play();
+		}
+		return;
+	}
+
+	// Tap to play (with sound, since the visitor chose to start it).
+	fig.classList.add('is-tap');
+	var play = button('solevo-hero2__play', 'Play video');
+	play.setAttribute('aria-label', 'Play the 30-second Solevo intro video');
+	play.addEventListener('click', function () {
+		video.muted = false;
+		video.controls = true;
+		video.loop = false;
+		var p = video.play();
+		if (p && p.catch) p.catch(function () {});
+		play.remove();
+		fig.classList.remove('is-tap');
+		window.dataLayer && window.dataLayer.push({ event: 'video_play', video: 'solevo_intro', page_path: window.location.pathname });
+	});
 })();
