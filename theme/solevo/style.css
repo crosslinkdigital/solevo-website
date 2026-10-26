@@ -211,7 +211,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
    Olive sections (technology, booking band)
    ========================================================= */
 .solevo-olive {
-	background: var(--s-olive) radial-gradient(rgba(250,247,243,.07) 1px, transparent 1.4px) 0 0 / 24px 24px;
+	background: var(--s-olive);
 	color: var(--s-on-dark);
 }
 .solevo-olive .wp-block-heading { color: var(--s-on-dark); }
