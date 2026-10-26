@@ -226,6 +226,55 @@ function solevo_locations() {
 	return $locs;
 }
 
+/**
+ * [solevo_footer_locations] Both clinics side by side: map, address (street, entry note, suburb) and hours.
+ * Everything comes from Settings > Solevo, so the footer, location cards and schema never disagree.
+ */
+add_shortcode( 'solevo_footer_locations', function () {
+	$out = '';
+	foreach ( solevo_locations() as $loc ) {
+		$parts = array_map( 'trim', explode( ',', (string) $loc['address'], 2 ) );
+		$addr  = array();
+		if ( 'location2' === $loc['key'] && $loc['name'] ) {
+			$addr[] = esc_html( $loc['name'] );
+		}
+		$addr[] = esc_html( $parts[0] );
+		if ( 'location1' === $loc['key'] && solevo_opt( 'location1_access' ) ) {
+			$addr[] = '<span class="solevo-floc__access">(' . esc_html( lcfirst( solevo_opt( 'location1_access' ) ) ) . ')</span>';
+		}
+		if ( ! empty( $parts[1] ) ) {
+			$addr[] = esc_html( $parts[1] );
+		}
+		$rows = '';
+		foreach ( solevo_lines( $loc['hours'] ) as $line ) {
+			$bits  = array_map( 'trim', explode( ':', $line, 2 ) );
+			$rows .= isset( $bits[1] )
+				? '<li><span class="solevo-floc__day">' . esc_html( $bits[0] ) . '</span> <span>' . esc_html( $bits[1] ) . '</span></li>'
+				: '<li>' . esc_html( $line ) . '</li>';
+		}
+		$out .= sprintf(
+			'<div class="solevo-floc"><div class="solevo-floc__map"><iframe title="Map to Solevo %1$s" src="https://www.google.com/maps?q=%2$s&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="solevo-floc__grid"><div><p class="solevo-floc__label">%1$s</p><address class="solevo-floc__addr"><a href="%3$s" rel="noopener" data-track="click_directions">%4$s</a></address></div><div><p class="solevo-floc__label">Hours</p>%5$s</div></div></div>',
+			esc_html( $loc['area'] ),
+			rawurlencode( $loc['name'] . ' ' . $loc['address'] ),
+			esc_url( solevo_directions_url( $loc ) ),
+			implode( '<br>', $addr ),
+			$rows ? '<ul class="solevo-floc__hours">' . $rows . '</ul>' : ( current_user_can( 'edit_pages' ) ? solevo_admin_hint( 'Add opening hours in Settings > Solevo.' ) : '' )
+		);
+	}
+	return '<div class="solevo-flocs">' . $out . '</div>';
+} );
+
+/** [solevo_footer_contact] Big phone number and booking buttons for the top of the footer. */
+add_shortcode( 'solevo_footer_contact', function () {
+	$phone = solevo_opt( 'phone' );
+	$out   = '<p class="solevo-floc__label">Contact</p>';
+	if ( $phone ) {
+		$out .= sprintf( '<a class="solevo-footer__phone solevo-call" data-track="click_call" href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ), esc_html( $phone ) );
+	}
+	$out .= '<div class="wp-block-buttons solevo-footer__btns"><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#cliniko">Book Physio</a></div><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#mindbody">Book Studio</a></div></div>';
+	return solevo_rewrite_links( '<div class="solevo-footer__contact">' . $out . '</div>' );
+} );
+
 function solevo_directions_url( $loc ) {
 	return 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $loc['name'] . ' ' . $loc['address'] );
 }
@@ -270,6 +319,10 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 		$phone = ( 'location1' === $loc['key'] && solevo_opt( 'phone' ) )
 			? sprintf( '<br><a class="solevo-call" data-track="click_call" href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', solevo_opt( 'phone' ) ) ), esc_html( solevo_opt( 'phone' ) ) )
 			: '';
+		$access = ( 'location1' === $loc['key'] && solevo_opt( 'location1_access' ) )
+			? '<br><span class="solevo-loc__access">(' . esc_html( lcfirst( solevo_opt( 'location1_access' ) ) ) . ')</span>'
+			: '';
+		$phone  = $access . $phone;
 		$map = sprintf(
 			'<div class="solevo-loc__map"><iframe title="Map to %1$s" src="https://www.google.com/maps?q=%2$s&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>',
 			esc_attr( $loc['name'] ),

@@ -11,15 +11,16 @@ defined( 'ABSPATH' ) || exit;
 function solevo_setting_fields() {
 	return array(
 		'business_name' => array( 'label' => 'Business name', 'default' => 'Solevo Physio & Studio', 'type' => 'text' ),
-		'address'       => array( 'label' => 'Address', 'default' => '4/42-46 Mitchell Rd, Brookvale NSW 2100', 'type' => 'text' ),
+		'address'       => array( 'label' => 'Address', 'default' => '4/42-46 Wattle Road, Brookvale NSW 2100', 'type' => 'text', 'help' => 'Street address, a comma, then suburb, state and postcode. Exactly as on the Google Business Profile.' ),
 		'phone'         => array( 'label' => 'Phone (display)', 'default' => '1300 366 826', 'type' => 'text', 'help' => 'Shown in header, footer and Contact. Buttons linked to #phone call this number.' ),
 		'email'         => array( 'label' => 'Email', 'default' => 'hello@solevo.com.au', 'type' => 'email' ),
 		'hours'         => array( 'label' => 'Opening hours', 'default' => '', 'type' => 'textarea', 'help' => 'One line per day, e.g. "Mon to Fri: 6am to 7pm".' ),
 		'location1_area'    => array( 'label' => 'Location 1: suburb', 'default' => 'Brookvale', 'type' => 'text', 'help' => 'Main location. Uses the business name, address, phone and opening hours above.' ),
+		'location1_access'  => array( 'label' => 'Location 1: entry note', 'default' => 'Entry via Mitchell Road', 'type' => 'text', 'help' => 'Shown under the street address in the footer and on location cards. Kept out of the address itself so it still matches Google exactly. Leave empty to hide.' ),
 		'location1_note'    => array( 'label' => 'Location 1: what runs here', 'default' => 'Physiotherapy, Clinical Pilates and Studio classes. Shared with The Foot Company podiatry.', 'type' => 'text' ),
 		'location2_name'    => array( 'label' => 'Location 2: venue name', 'default' => 'Terrey Hills Medical Centre', 'type' => 'text', 'help' => 'Leave empty to hide the second location everywhere.' ),
 		'location2_area'    => array( 'label' => 'Location 2: suburb', 'default' => 'Terrey Hills', 'type' => 'text' ),
-		'location2_address' => array( 'label' => 'Location 2: address', 'default' => 'Terrey Hills NSW 2084', 'type' => 'text', 'help' => 'Full street address, exactly as on the Google Business Profile.' ),
+		'location2_address' => array( 'label' => 'Location 2: address', 'default' => '17 Yulong Avenue, Terrey Hills NSW 2084', 'type' => 'text', 'help' => 'Full street address, exactly as on the Google Business Profile.' ),
 		'location2_hours'   => array( 'label' => 'Location 2: physio hours', 'default' => 'Wednesday: 8:00am to 3:30pm', 'type' => 'textarea', 'help' => 'One line per day.' ),
 		'location2_note'    => array( 'label' => 'Location 2: what runs here', 'default' => 'Physiotherapy only.', 'type' => 'text' ),
 		'cliniko_url'   => array( 'label' => 'Cliniko booking URL (physio)', 'default' => '', 'type' => 'url', 'help' => 'Every button or link pointing to #cliniko uses this URL.' ),

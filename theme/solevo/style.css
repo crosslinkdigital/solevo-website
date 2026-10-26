@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.3.6
+Version: 1.3.7
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -973,4 +973,39 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 }
 @media (max-width: 599px) {
 	.solevo-hero2__media.solevo-hero2__video { display: block; margin-top: 1.5rem !important; }
+}
+
+/* 1.3.7: footer in the same structure as The Foot Company (logo + contact, links, both clinics) */
+.solevo-footer__top { align-items: flex-start !important; gap: 2rem !important; }
+.solevo-footer__logo { margin: 0 !important; }
+.solevo-footer__logo img { width: clamp(160px, 16vw, 220px); }
+.solevo-footer__contact { text-align: right; }
+.solevo-footer .solevo-floc__label { font-family: var(--wp--preset--font-family--body, sans-serif); font-size: .8125rem !important; letter-spacing: .12em; text-transform: uppercase; color: #9C9A95; margin: 0 0 1.1rem !important; font-weight: 400; }
+.solevo-footer__phone { display: block; font-family: var(--s-serif); font-weight: 400; font-size: clamp(2.25rem, 4.2vw, 3.5rem); line-height: 1; color: var(--s-on-dark) !important; margin-bottom: 1.5rem; }
+.solevo-footer__btns { justify-content: flex-end; gap: .75rem !important; }
+.solevo-footer__btns .wp-block-button__link { background: transparent !important; color: var(--s-on-dark) !important; border: 1px solid #6E6C68 !important; border-radius: 0 !important; padding: .85rem 1.6rem !important; font-size: .95rem; letter-spacing: .04em; }
+.solevo-footer__btns .wp-block-button__link:hover, .solevo-footer__btns .wp-block-button__link:focus-visible { border-color: var(--s-on-dark) !important; background: rgba(255,255,255,.06) !important; }
+.solevo-footer__line { border: 0 !important; height: 1px !important; background: #46443F !important; opacity: 1 !important; margin: clamp(2.5rem, 5vw, 4rem) auto !important; }
+.solevo-footer__grid { gap: 2rem !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+.solevo-footer__grid > .wp-block-column .solevo-floc__label { margin-top: 0 !important; }
+.solevo-footer__links { gap: .9rem; }
+.solevo-footer__links li { font-family: var(--s-serif); font-size: 1.2rem; color: #D6D3CE; }
+.solevo-footer__find { margin-top: 0 !important; }
+.solevo-flocs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(2rem, 4vw, 3.5rem); }
+.solevo-floc__map { border-radius: 8px; overflow: hidden; background: #3A3936; aspect-ratio: 5 / 2; }
+.solevo-floc__map iframe { display: block; width: 100%; height: 100%; border: 0; }
+.solevo-floc__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+.solevo-floc__addr { font-style: normal; font-size: 1.05rem; font-weight: 400; line-height: 1.75; color: #D6D3CE; }
+.solevo-floc__addr a { color: inherit !important; }
+.solevo-floc__hours { list-style: none; margin: 0; padding: 0; font-size: 1.05rem; font-weight: 400; line-height: 1.75; color: #D6D3CE; }
+.solevo-floc__hours li { font-weight: 400; }
+.solevo-floc__day { margin-right: .5rem; }
+.solevo-footer__base { margin-top: clamp(3rem, 6vw, 4.5rem) !important; padding-top: 1.5rem; border-top: 1px solid #46443F; }
+@media (max-width: 781px) {
+	.solevo-footer__contact { text-align: left; }
+	.solevo-footer__btns { justify-content: flex-start; }
+	.solevo-floc__map { aspect-ratio: 16 / 9; }
+}
+@media (max-width: 420px) {
+	.solevo-floc__grid { grid-template-columns: 1fr; gap: 1.25rem; }
 }
