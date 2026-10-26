@@ -261,7 +261,7 @@ add_shortcode( 'solevo_footer_locations', function () {
 			$rows ? '<ul class="solevo-floc__hours">' . $rows . '</ul>' : ( current_user_can( 'edit_pages' ) ? solevo_admin_hint( 'Add opening hours in Settings > Solevo.' ) : '' )
 		);
 	}
-	return '<div class="solevo-flocs">' . $out . '</div>';
+	return '<div class="solevo-flocs" id="find-us">' . $out . '</div>';
 } );
 
 /** [solevo_footer_contact] Big phone number and booking buttons for the top of the footer. */

@@ -128,3 +128,11 @@
 	function start() { v.src = v.dataset.src; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
 	if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
 })();
+
+// 7. Location chips and other #locations links: when a page has no Locations section,
+//    send them to both clinics in the footer instead.
+(function () {
+	'use strict';
+	if (document.getElementById('locations') || !document.getElementById('find-us')) return;
+	document.querySelectorAll('a[href="#locations"]').forEach(function (a) { a.setAttribute('href', '#find-us'); });
+})();

@@ -99,8 +99,7 @@ function solevo_scaffold_home( $page ) {
 		array( 'clinic-reformer-room' )
 	);
 
-	/* 8. Locations (NAP from Settings > Solevo) ------------------------- */
-	$c .= solevo_c_locations( 'Locations', 'Physio in Brookvale and Terrey Hills', 'Choose the clinic that suits you when you book.', 'physio' );
+	/* 8. Locations: shown once, in the footer on every page (Hayo, 26 Oct). */
 
 	/* 9. Studio, kept small and below the physio journey --------------- */
 	$c .= solevo_c_split( array(
