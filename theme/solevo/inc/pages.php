@@ -99,7 +99,7 @@ function solevo_site_pages() {
 			'meta' => 'Postnatal physiotherapy in Brookvale: a postnatal check, abdominal and pelvic floor assessment and a clear plan back to exercise. Book today.',
 			'excerpt' => 'Postnatal check and a clear plan back to exercise.',
 			'related' => array( 'physio/pelvic-floor-physiotherapy', 'pilates/postnatal-pilates', 'conditions/bladder-leakage-incontinence' ) ),
-		array( 'path' => 'physio/pre-and-post-surgery-rehab', 'title' => 'Pre and Post Surgery Rehab', 'h1' => 'Pre and Post Surgery Physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'post surgery physio brookvale',
+		array( 'path' => 'physio/pre-and-post-surgery-rehab', 'title' => 'Pre and Post Surgery Rehab', 'h1' => 'Pre and post surgery physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'post surgery physio brookvale',
 			'seo_title' => 'Pre and Post Surgery Physio Brookvale | Solevo',
 			'meta' => 'Physiotherapy in Brookvale before and after surgery: ACL, knee and hip replacement, shoulder and spinal surgery rehab that follows your surgeon\'s plan.',
 			'excerpt' => 'Rehab before and after surgery, following your surgeon\'s plan.',
