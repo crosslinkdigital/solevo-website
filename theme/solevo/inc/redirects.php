@@ -13,8 +13,6 @@ function solevo_redirects() {
 	return array(
 		// Steph, 25 Oct: pelvic floor is no longer offered as a service.
 		'physio/pelvic-floor-physiotherapy' => 'physio',
-		// Steph's audit, 20 Oct: remove the old Mums & Bubs campaign page.
-		'pilates/mums-and-bubs'             => 'physio/pregnancy-physiotherapy',
 	);
 }
 
