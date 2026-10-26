@@ -22,8 +22,8 @@ function solevo_image_registry() {
 		'studio-stretch'     => array( 'studio-stretch.jpg', 'Movement and flexibility at Solevo Studio' ),
 		'clinic-reformer-room' => array( 'clinic-reformer-room.jpg', 'Reformer and rehab room at Solevo Physio & Studio, Brookvale' ),
 		'clinic-studio-mats'   => array( 'clinic-studio-mats.jpg', 'Mats and bolsters set up in the Solevo studio, Brookvale' ),
-		'solevo-intro-poster-sign' => array( 'solevo-intro-poster-sign.jpg', 'The Foot Company and Solevo sign outside the Brookvale clinic' ),
-		'solevo-intro'         => array( 'solevo-intro.mp4', 'Solevo Physio and Movement: 30-second intro' ),
+		'solevo-intro-4x5-poster' => array( 'solevo-intro-4x5-poster.jpg', 'The Foot Company and Solevo sign outside the Brookvale clinic' ),
+		'solevo-intro-4x5'        => array( 'solevo-intro-4x5.mp4', 'Solevo Physio and Movement: 30-second intro' ),
 	);
 }
 
