@@ -59,7 +59,6 @@ function solevo_build_menus( $page_ids ) {
 			$link( 'physio/sports-physiotherapy', 'Sports physiotherapy' ),
 			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy' ),
 			$link( 'physio/postnatal-physiotherapy', 'Postnatal' ),
-			$link( 'physio/pelvic-floor-physiotherapy', 'Pelvic floor' ),
 			$link( 'physio/seniors-physiotherapy', 'Seniors' ),
 			$link( 'conditions', 'Conditions we treat' ),
 		) ),

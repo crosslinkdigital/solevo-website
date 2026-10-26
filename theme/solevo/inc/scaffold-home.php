@@ -71,7 +71,6 @@ function solevo_scaffold_home( $page ) {
 			array( 'title' => 'Sports physiotherapy', 'text' => 'Injury care and return-to-sport plans for active people, from weekend sport to competition.', 'more' => array( 'Sports physio', home_url( '/physio/sports-physiotherapy' ) ) ),
 			array( 'title' => 'Pregnancy physiotherapy', 'text' => 'Care for back, pelvic and rib pain in pregnancy, and safe exercise through every trimester.', 'more' => array( 'Pregnancy physio', home_url( '/physio/pregnancy-physiotherapy' ) ) ),
 			array( 'title' => 'Postnatal physiotherapy', 'text' => 'A postnatal check, abdominal and pelvic floor assessment and a clear plan back to exercise.', 'more' => array( 'Postnatal physio', home_url( '/physio/postnatal-physiotherapy' ) ) ),
-			array( 'title' => 'Pelvic floor physiotherapy', 'text' => 'Private, one-on-one care for leakage, prolapse and pelvic floor recovery.', 'more' => array( 'Pelvic floor physio', home_url( '/physio/pelvic-floor-physiotherapy' ) ) ),
 			array( 'title' => 'Physio for seniors', 'text' => 'Balance, strength and joint care to help you stay steady, active and independent.', 'more' => array( 'Seniors physio', home_url( '/physio/seniors-physiotherapy' ) ) ),
 		),
 		solevo_b_buttons( array( array( 'Book Physio', '#cliniko' ) ) )
