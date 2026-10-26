@@ -33,13 +33,18 @@
 
 <!-- wp:list {"className":"solevo-footer__links"} -->
 <ul class="wp-block-list solevo-footer__links"><!-- wp:list-item -->
-<li><a href="/physio">Physiotherapy</a></li>
+<li><a href="/physio/sports-physiotherapy">Sports injury physio</a></li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
-<li><a href="/physio/sports-physiotherapy">Sports physiotherapy</a></li>
+<li><a href="/physio">General physio</a></li>
 <!-- /wp:list-item -->
+<?php $solevo_surg = get_page_by_path( 'physio/pre-and-post-surgery-rehab' ); if ( $solevo_surg && 'publish' === $solevo_surg->post_status ) : ?>
 <!-- wp:list-item -->
-<li><a href="/physio/pregnancy-physiotherapy">Pregnancy physiotherapy</a></li>
+<li><a href="/physio/pre-and-post-surgery-rehab">Pre and post surgery rehab</a></li>
+<!-- /wp:list-item -->
+<?php endif; ?>
+<!-- wp:list-item -->
+<li><a href="/physio/pregnancy-physiotherapy">Pregnancy and postnatal</a></li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><a href="/physio/seniors-physiotherapy">Physio for seniors</a></li>

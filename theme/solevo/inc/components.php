@@ -215,7 +215,7 @@ function solevo_c_fees_faq( $head, $fees, $funding, $faqs, $fee_after = '', $aft
 	foreach ( $fees as $f ) {
 		$rows .= solevo_c_box( solevo_b_p( $f[0] . ( $f[1] ? '<br><span>' . $f[1] . '</span>' : '' ), 'solevo-fee__label' ) . solevo_b_p( $f[2], 'solevo-fee__price' ), 'solevo-fee' );
 	}
-	$card = solevo_b_h( 'Fees', 3 ) . solevo_c_box( $rows, 'solevo-fees__rows' )
+	$card = ( $rows ? solevo_b_h( 'Fees', 3 ) . solevo_c_box( $rows, 'solevo-fees__rows' ) : '' )
 		. ( $funding ? solevo_b_h( 'Funding and referrals', 3 ) . solevo_b_list( $funding, 'solevo-ticks' ) : '' ) . $fee_after;
 	$q = '';
 	foreach ( $faqs as $f ) {

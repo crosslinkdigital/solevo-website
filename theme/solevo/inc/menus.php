@@ -55,11 +55,11 @@ function solevo_build_menus( $page_ids ) {
 	// Full site menu (rebuild brief, section 19): Physio, Studio, Pricing, About, Contact + the header Book button.
 	$full = implode( '', array(
 		solevo_nav_submenu( 'Physio', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
-			$link( 'physio', 'Physiotherapy' ),
-			$link( 'physio/sports-physiotherapy', 'Sports physiotherapy' ),
-			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy' ),
-			$link( 'physio/postnatal-physiotherapy', 'Postnatal' ),
-			$link( 'physio/seniors-physiotherapy', 'Seniors' ),
+			$link( 'physio/sports-physiotherapy', 'Sports injury physio' ),
+			$link( 'physio', 'General physio' ),
+			$link( 'physio/pre-and-post-surgery-rehab', 'Pre and post surgery rehab' ),
+			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy and postnatal' ),
+			$link( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
 			$link( 'conditions', 'Conditions we treat' ),
 		) ),
 		solevo_nav_submenu( 'Studio', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(

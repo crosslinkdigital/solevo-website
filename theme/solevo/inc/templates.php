@@ -81,7 +81,7 @@ function solevo_physio_fees() {
 function solevo_physio_funding() {
 	return array(
 		'<strong>No referral needed.</strong> Book a private physio appointment directly.',
-		'<strong>Private health insurance.</strong> Physiotherapy is claimable on most extras policies. Your rebate depends on your fund and cover.',
+		'<strong>Private health insurance.</strong> Physiotherapy may be claimable on private health extras, depending on your fund and level of cover.',
 		'<strong>Medicare, DVA, workers compensation or CTP?</strong> Please call or email before booking so we can check the paperwork you need.',
 	);
 }
@@ -160,7 +160,7 @@ function solevo_build_service( $page, $d ) {
 		'buttons'   => solevo_hero_buttons( $page, array( 'What we help with', '#help', true ) ),
 		'locations' => true,
 		'trust'     => $d['trust'] ?? array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
-		'jump'      => array( array( 'Fees and FAQs', '#fees' ), array( 'Locations and hours', '#locations' ) ),
+		'jump'      => array( array( 'Funding and FAQs', '#fees' ) ),
 		'image'     => $d['image'] ?? '',
 	) );
 	$c .= solevo_todos( $d );
@@ -186,18 +186,19 @@ function solevo_build_service( $page, $d ) {
 	if ( ! empty( $d['practitioner'] ) ) {
 		$c .= solevo_c_practitioner( $d['practitioner'] );
 	}
+	// No physio prices anywhere on the site (Steph, 25 Oct).
 	$c .= solevo_c_fees_faq(
-		solevo_c_head( 'Fees and FAQs', 'Fees, funding and common questions' ),
-		$d['fees'] ?? solevo_physio_fees(),
+		solevo_c_head( 'Funding and FAQs', 'Funding and common questions' ),
+		array(),
 		$d['funding'] ?? solevo_physio_funding(),
 		$d['faq'],
-		solevo_c_todo( 'Confirm physio prices ($160 initial, $110 follow-up) and whether claims are processed on the spot (HICAPS).' ),
+		'',
 		solevo_c_reviewed()
 	);
 	if ( ! empty( $d['related'] ) ) {
 		$c .= solevo_c_link_cards( solevo_c_head( 'Related care', 'You may also be interested in' ), $d['related'], array( 'bg' => 'surface' ) );
 	}
-	$c .= solevo_c_locations( 'Locations', 'Physio in Brookvale and Terrey Hills', 'Choose the clinic that suits you when you book.' );
+	// Both clinics are in the footer on every page (26 Oct), so no Locations section here.
 	return $c;
 }
 
