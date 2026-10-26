@@ -115,3 +115,16 @@
 		window.dataLayer && window.dataLayer.push({ event: 'video_play', video: 'solevo_intro', page_path: window.location.pathname });
 	});
 })();
+
+// 6. Homepage background video (only when set in Settings). Starts after the page has loaded,
+//    so it never delays the first paint. Skipped for reduced motion and data saver: poster only.
+(function () {
+	'use strict';
+	var v = document.querySelector('.solevo-hero2__bgvideo');
+	if (!v || !v.dataset.src) return;
+	var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	var saver = navigator.connection && navigator.connection.saveData;
+	if (calm || saver) return;
+	function start() { v.src = v.dataset.src; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+	if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
+})();
