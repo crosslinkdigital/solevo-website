@@ -103,7 +103,7 @@
 	// Tap to play (with sound, since the visitor chose to start it).
 	fig.classList.add('is-tap');
 	var play = button('solevo-hero2__play', 'Play video');
-	play.setAttribute('aria-label', 'Play the 30-second Solevo intro video');
+	play.setAttribute('aria-label', 'Play the Solevo intro video');
 	play.addEventListener('click', function () {
 		video.muted = false;
 		video.controls = true;

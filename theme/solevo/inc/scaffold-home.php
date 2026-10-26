@@ -30,8 +30,8 @@ function solevo_scaffold_home( $page ) {
 		'buttons'   => $buttons,
 		'locations' => true,
 		'trust'     => array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
-		'video'     => 'solevo-intro-4x5',
-		'poster'    => 'solevo-intro-4x5-poster',
+		'video'     => 'solevo-intro-final',
+		'poster'    => 'solevo-intro-final-poster',
 	) );
 
 	/* 2. Meet Emma, directly under the hero ----------------------------- */
