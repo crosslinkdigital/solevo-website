@@ -385,7 +385,7 @@ add_shortcode( 'solevo_cta_band', function () {
 	} elseif ( 'mindbody' === $booking ) {
 		$title = 'Find your class';
 		$sub   = 'See the live timetable and book your spot online.';
-		$btns  = $btn( 'Book Studio', '#mindbody' ) . $btn( 'View pricing', esc_url( solevo_published_url( 'book', '/' ) . '#pricing' ), 'solevo-btn-ghost' );
+		$btns  = $btn( 'Book Studio', '#mindbody' ) . ( solevo_opt( 'phone' ) ? $btn( 'Call us', '#phone', 'solevo-btn-ghost' ) : '' );
 		$alt   = '<p class="solevo-cta2__alt">In pain or injured? Start with a physio. <a href="#cliniko">Book Physio</a></p>';
 	} else {
 		$title = 'Ready to move better?';

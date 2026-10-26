@@ -214,7 +214,7 @@ function solevo_build_studio( $page, $d ) {
 		'buttons'   => solevo_hero_buttons( $page ),
 		'locations' => false,
 		'trust'     => $d['trust'] ?? array( 'Brookvale studio', 'Small classes', 'Designed with physiotherapists' ),
-		'jump'      => array( array( 'Pricing', '#pricing' ), array( 'FAQs', '#faq' ) ),
+		'jump'      => array( array( 'FAQs', '#faq' ) ),
 		'image'     => $d['image'] ?? 'studio-stretch',
 	) );
 	$c .= solevo_todos( $d );

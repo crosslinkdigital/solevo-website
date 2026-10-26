@@ -78,7 +78,7 @@ function solevo_hash_redirects() {
 		'services'  => '/physio',
 		'team'      => '/about',
 		'studio'    => '/pilates',
-		'pricing'   => '/pilates#pricing',
+		'pricing'   => '/pilates',
 		'book'      => '/book',
 		'timetable' => '/book#timetable',
 	);
