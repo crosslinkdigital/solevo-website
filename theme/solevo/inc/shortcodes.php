@@ -277,6 +277,11 @@ add_shortcode( 'solevo_footer_contact', function () {
 	if ( $phone ) {
 		$out .= sprintf( '<a class="solevo-footer__phone solevo-call" data-track="click_call" href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ), esc_html( $phone ) );
 	}
+	$th = solevo_opt( 'location2_phone' );
+	if ( $th && solevo_opt( 'location2_name' ) ) {
+		// Terrey Hills is booked by phone through the medical centre (Steph, 28 Oct).
+		$out .= sprintf( '<p class="solevo-footer__th">%s: <a class="solevo-call" data-track="click_call" href="tel:%s">%s</a></p>', esc_html( solevo_opt( 'location2_area' ) ), esc_attr( preg_replace( '/[^0-9+]/', '', $th ) ), esc_html( $th ) );
+	}
 	$out .= '<div class="wp-block-buttons solevo-footer__btns"><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#cliniko">Book Physio</a></div><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#mindbody">Book Studio</a></div></div>';
 	return solevo_rewrite_links( '<div class="solevo-footer__contact">' . $out . '</div>' );
 } );
