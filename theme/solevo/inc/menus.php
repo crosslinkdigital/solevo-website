@@ -52,7 +52,8 @@ function solevo_build_menus( $page_ids ) {
 		solevo_nav_link( 'Pricing', '/#pricing' ),
 	) );
 
-	// Full site menu (rebuild brief, section 19): Physio, Studio, Pricing, About, Contact + the header Book button.
+	// Full site menu (agreed 29 Oct): logo links home, then Physio, Conditions, Studio, About, Contact, plus the phone and Book Physio buttons.
+	// Conditions is top level and also stays in the Physio dropdown. No Home item; Home is in the footer.
 	$full = implode( '', array(
 		solevo_nav_submenu( 'Physio', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
 			$link( 'physio/sports-physiotherapy', 'Sports injury physio' ),
@@ -62,6 +63,7 @@ function solevo_build_menus( $page_ids ) {
 			$link( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
 			$link( 'conditions', 'Conditions we treat' ),
 		) ),
+		$link( 'conditions', 'Conditions' ),
 		solevo_nav_submenu( 'Studio', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
 			$link( 'pilates', 'Reformer Pilates' ),
 			$link( 'pilates/clinical-pilates', 'Clinical Pilates' ),

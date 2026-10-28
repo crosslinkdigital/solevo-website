@@ -500,3 +500,21 @@ add_filter( 'attachment_fields_to_edit', function ( $fields, $post ) {
 	}
 	return $fields;
 }, 10, 2 );
+
+/**
+ * Editor lock (1.3.23): text blocks have no font, size, weight, spacing or line-height
+ * controls, so the type scale in style.css is the only source of text styling.
+ * Paste formatting from Word or Google Docs cannot add sizes either, because the
+ * blocks no longer accept them.
+ */
+add_filter( 'register_block_type_args', function ( $args, $name ) {
+	$locked = array(
+		'core/paragraph', 'core/heading', 'core/list', 'core/list-item', 'core/details', 'core/quote',
+		'core/pullquote', 'core/button', 'core/buttons', 'core/group', 'core/columns', 'core/column',
+		'core/cover', 'core/media-text', 'core/table', 'core/verse', 'core/preformatted',
+	);
+	if ( in_array( $name, $locked, true ) && isset( $args['supports']['typography'] ) ) {
+		$args['supports']['typography'] = array();
+	}
+	return $args;
+}, 10, 2 );

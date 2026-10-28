@@ -174,7 +174,16 @@
 					"size": "var(--fs-h1)",
 					"fluid": false
 				}
-			]
+			],
+			"customFontSize": false,
+			"lineHeight": false,
+			"letterSpacing": false,
+			"fontStyle": false,
+			"fontWeight": false,
+			"textTransform": false,
+			"textDecoration": false,
+			"dropCap": false,
+			"writingMode": false
 		},
 		"spacing": {
 			"units": [

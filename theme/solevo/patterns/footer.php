@@ -80,6 +80,9 @@
 
 <!-- wp:list {"className":"solevo-footer__links"} -->
 <ul class="wp-block-list solevo-footer__links"><!-- wp:list-item -->
+<li><a href="/">Home</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
 <li><a href="/about">About us</a></li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
