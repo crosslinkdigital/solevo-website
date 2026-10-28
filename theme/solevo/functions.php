@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SOLEVO_VERSION', '1.3.19' );
+define( 'SOLEVO_VERSION', '1.3.20' );
 define( 'SOLEVO_DIR', get_template_directory() );
 define( 'SOLEVO_URI', get_template_directory_uri() );
 

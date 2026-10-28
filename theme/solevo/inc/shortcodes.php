@@ -406,24 +406,24 @@ add_shortcode( 'solevo_cta_band', function () {
 	$btn     = function ( $label, $href, $style = 'solevo-btn-light' ) {
 		return sprintf( '<div class="wp-block-button %s"><a class="wp-block-button__link wp-element-button" href="%s">%s</a></div>', esc_attr( $style ), esc_attr( $href ), esc_html( $label ) );
 	};
+	// 1.3.20: one plain heading per booking type, no page-specific hooks (Hayo, 28 Oct).
 	$th_phone = solevo_opt( 'location2_phone' );
-	$th_line  = ( $th_phone && count( $locs ) > 1 )
-		? sprintf( ' For Terrey Hills, call the medical centre on <a href="tel:%s">%s</a>.', esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) )
-		: '';
+	$th_link  = $th_phone ? sprintf( '<a href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) ) : '';
 	$call     = solevo_opt( 'phone' ) ? $btn( 'Call ' . solevo_opt( 'phone' ), '#phone', 'solevo-btn-ghost' ) : '';
+	$multi    = $th_link && count( $locs ) > 1;
 	if ( 'cliniko' === $booking ) {
-		$title = $def['cta_title'] ?? 'Book a physiotherapy appointment';
-		$sub   = isset( $def['cta_sub'] ) ? esc_html( $def['cta_sub'] ) . $th_line : 'Book online for Brookvale.' . $th_line;
+		$title = 'Book an appointment';
+		$sub   = $multi ? 'Book online for Brookvale, or call Terrey Hills Medical Centre on ' . $th_link . '.' : 'Book online any time.';
 		$btns  = $btn( $phys, '#cliniko' ) . $call;
 		$alt   = '<p class="solevo-cta2__alt">Want a Pilates class? <a href="#mindbody">Book Studio</a></p>';
 	} elseif ( 'mindbody' === $booking ) {
-		$title = 'Find your class';
+		$title = 'Book a class';
 		$sub   = 'See the live timetable and book your spot online.';
 		$btns  = $btn( 'Book Studio', '#mindbody' ) . $call;
 		$alt   = '<p class="solevo-cta2__alt">In pain or injured? Start with a physio. <a href="#cliniko">Book Physio</a></p>';
 	} else {
-		$title = $def['cta_title'] ?? 'Book physio or a studio class';
-		$sub   = 'Physio appointments and Studio classes are booked separately.' . $th_line;
+		$title = 'Book an appointment or a class';
+		$sub   = 'Physio appointments and Studio classes are booked separately.' . ( $multi ? ' For Terrey Hills physio, call the medical centre on ' . $th_link . '.' : '' );
 		$btns  = $btn( 'Book Physio', '#cliniko' ) . $btn( 'Book Studio', '#mindbody', 'solevo-btn-ghost' );
 		$alt   = '';
 	}
