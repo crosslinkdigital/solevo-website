@@ -89,7 +89,7 @@ function solevo_physio_funding_faq() {
 		array( 'Do I need a GP referral?', 'Not for a private appointment. You only need one to claim a Medicare rebate.' ),
 		array( 'Can I claim through private health insurance?', 'Yes. Physiotherapy is claimable on most extras policies, depending on your cover, and you can claim on the spot with HICAPS.' ),
 		array( 'Can I claim a Medicare rebate?', 'Yes, with a valid referral from your GP under a Chronic Condition Management Plan. We process the rebate on the spot. Appointments aren’t bulk billed, so there is a gap to pay.' ),
-		array( 'Do you see workers compensation and NDIS clients?', 'Yes. Workers compensation is accepted where applicable, so please call before booking so we can check your claim. For NDIS, we see participants whose plans are self managed or plan managed.' ),
+		array( 'Do you see workers compensation and NDIS clients?', 'Yes, workers compensation is accepted where applicable. For NDIS, we see participants whose plans are self managed or plan managed.' ),
 	);
 }
 
