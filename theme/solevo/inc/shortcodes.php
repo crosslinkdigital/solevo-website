@@ -245,6 +245,11 @@ add_shortcode( 'solevo_footer_locations', function () {
 		if ( ! empty( $parts[1] ) ) {
 			$addr[] = esc_html( $parts[1] );
 		}
+		$book_line = '';
+		if ( 'location2' === $loc['key'] && solevo_opt( 'location2_phone' ) ) {
+			$th        = solevo_opt( 'location2_phone' );
+			$book_line = sprintf( '<p class="solevo-floc__book">Bookings by phone: <a class="solevo-call" data-track="click_call" href="tel:%s">%s</a></p>', esc_attr( preg_replace( '/[^0-9+]/', '', $th ) ), esc_html( $th ) );
+		}
 		$rows = '';
 		foreach ( solevo_lines( $loc['hours'] ) as $line ) {
 			$bits  = array_map( 'trim', explode( ':', $line, 2 ) );
@@ -253,12 +258,13 @@ add_shortcode( 'solevo_footer_locations', function () {
 				: '<li>' . esc_html( $line ) . '</li>';
 		}
 		$out .= sprintf(
-			'<div class="solevo-floc"><div class="solevo-floc__map"><iframe title="Map to Solevo %1$s" src="https://www.google.com/maps?q=%2$s&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="solevo-floc__grid"><div><p class="solevo-floc__label">%1$s</p><address class="solevo-floc__addr"><a href="%3$s" rel="noopener" data-track="click_directions">%4$s</a></address></div><div><p class="solevo-floc__label">Hours</p>%5$s</div></div></div>',
+			'<div class="solevo-floc"><div class="solevo-floc__map"><iframe title="Map to Solevo %1$s" src="https://www.google.com/maps?q=%2$s&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="solevo-floc__grid"><div><p class="solevo-floc__label">%1$s</p><address class="solevo-floc__addr"><a href="%3$s" rel="noopener" data-track="click_directions">%4$s</a></address>%6$s</div><div><p class="solevo-floc__label">Hours</p>%5$s</div></div></div>',
 			esc_html( $loc['area'] ),
 			rawurlencode( $loc['name'] . ' ' . $loc['address'] ),
 			esc_url( solevo_directions_url( $loc ) ),
 			implode( '<br>', $addr ),
-			$rows ? '<ul class="solevo-floc__hours">' . $rows . '</ul>' : ( current_user_can( 'edit_pages' ) ? solevo_admin_hint( 'Add opening hours in Settings > Solevo.' ) : '' )
+			$rows ? '<ul class="solevo-floc__hours">' . $rows . '</ul>' : ( current_user_can( 'edit_pages' ) ? solevo_admin_hint( 'Add opening hours in Settings > Solevo.' ) : '' ),
+			$book_line
 		);
 	}
 	return '<div class="solevo-flocs" id="find-us">' . $out . '</div>';
@@ -288,8 +294,18 @@ add_shortcode( 'solevo_location_chips', function () {
 	foreach ( solevo_locations() as $loc ) {
 		$hours  = solevo_lines( $loc['hours'] );
 		$detail = 'location1' === $loc['key'] ? $loc['address'] : ( $hours[0] ?? $loc['name'] );
+		$href   = '#locations';
+		$th     = 'location2' === $loc['key'] ? solevo_opt( 'location2_phone' ) : '';
+		if ( $th ) {
+			// Terrey Hills is booked by phone through the medical centre: the chip calls it.
+			$days   = preg_replace( '/:.*$/', 's', $hours[0] ?? '' );
+			$detail = trim( ( $days ? $days . ' · ' : '' ) . 'Call ' . $th );
+			$href   = 'tel:' . preg_replace( '/[^0-9+]/', '', $th );
+		}
 		$out   .= sprintf(
-			'<li><a href="#locations"><span class="solevo-chip__area">%s</span><span class="solevo-chip__detail">%s</span></a></li>',
+			'<li><a href="%s"%s><span class="solevo-chip__area">%s</span><span class="solevo-chip__detail">%s</span></a></li>',
+			esc_attr( $href ),
+			$th ? ' class="solevo-call" data-track="click_call"' : '',
 			esc_html( $loc['area'] ),
 			esc_html( $detail )
 		);
