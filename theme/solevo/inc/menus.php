@@ -67,7 +67,6 @@ function solevo_build_menus( $page_ids ) {
 			$link( 'pilates/clinical-pilates', 'Clinical Pilates' ),
 			$link( 'pilates/mat-pilates', 'Mat Pilates' ),
 			$link( 'pilates/private-pilates', 'Private Pilates' ),
-			$link( 'pilates/mums-and-bubs', 'Mums and Bubs' ),
 			$link( 'pilates/seniors', 'Seniors' ),
 			$link( 'pilates/pregnancy-pilates', 'Pregnancy' ),
 			$link( 'pilates/postnatal-pilates', 'Postnatal' ),

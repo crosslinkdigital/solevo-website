@@ -14,10 +14,10 @@ defined( 'ABSPATH' ) || exit;
 function solevo_site_pages() {
 	return array(
 		/* ---------- Core ---------- */
-		array( 'path' => '', 'title' => 'Home', 'h1' => 'Physiotherapy in Brookvale', 'type' => 'home', 'booking' => 'cliniko', 'keyword' => 'physio brookvale',
+		array( 'path' => '', 'cta_title' => 'Book a physiotherapy assessment',  'title' => 'Home', 'h1' => 'Physiotherapy in Brookvale', 'type' => 'home', 'booking' => 'cliniko', 'keyword' => 'physio brookvale',
 			'seo_title' => 'Physio Brookvale | Solevo Physio & Studio',
 			'meta' => 'Physiotherapy in Brookvale and Terrey Hills for pain, injury and sports rehab. One-on-one care, no GP referral needed and a rehab gym on site. Book online.' ),
-		array( 'path' => 'physio', 'title' => 'Physio', 'h1' => 'Physiotherapy in Brookvale & Terrey Hills', 'type' => 'hub', 'booking' => 'cliniko', 'keyword' => 'physio close to me',
+		array( 'path' => 'physio', 'cta_title' => 'Book a physiotherapy assessment',  'title' => 'Physio', 'h1' => 'Physiotherapy in Brookvale & Terrey Hills', 'type' => 'hub', 'booking' => 'cliniko', 'keyword' => 'physio close to me',
 			'seo_title' => 'Physio Brookvale & Terrey Hills | Solevo Physio',
 			'meta' => 'Physiotherapy in Brookvale and Terrey Hills for back, neck, shoulder, knee and sports injuries. One-on-one care and strength-based rehab. Book online.',
 			'excerpt' => 'Assessment, hands-on treatment and strength-led rehab for pain and injury.' ),
@@ -25,7 +25,7 @@ function solevo_site_pages() {
 			'seo_title' => 'Reformer Pilates Brookvale | Max 6 Per Class | Solevo',
 			'meta' => 'Boutique reformer Pilates, mat Pilates and yoga in Brookvale. Classes capped at six reformers, designed with physiotherapists. View the timetable and book.',
 			'excerpt' => 'Reformer, mat and clinical Pilates plus yoga, in classes of six reformers max.' ),
-		array( 'path' => 'conditions', 'title' => 'Conditions', 'h1' => 'Conditions we treat', 'type' => 'hub', 'booking' => 'cliniko', 'keyword' => '(index)',
+		array( 'path' => 'conditions', 'cta_title' => 'Not sure what is causing your pain? Book an assessment',  'title' => 'Conditions', 'h1' => 'Conditions we treat', 'type' => 'hub', 'booking' => 'cliniko', 'keyword' => '(index)',
 			'seo_title' => 'Conditions We Treat | Solevo Physio Brookvale',
 			'meta' => 'Back pain, sciatica, sports injuries, pregnancy pain, balance and bone health. See how Solevo physios assess and treat each condition in Brookvale.',
 			'excerpt' => 'What each condition is, how we treat it and when to book.' ),
@@ -45,7 +45,7 @@ function solevo_site_pages() {
 			'meta' => 'Six-week Mums and Bubs Pilates in Brookvale. A 1:1 assessment first, then small groups of six with three classes a week. A$79 per week. Book your spot.',
 			'excerpt' => 'Six-week program in groups of six, starting with a 1:1 assessment.',
 			'related' => array( 'pilates/pregnancy-pilates', 'pilates/postnatal-pilates', 'physio/pregnancy-physiotherapy', 'physio/postnatal-physiotherapy', 'physio/pelvic-floor-physiotherapy' ) ),
-		array( 'path' => 'pilates/seniors', 'title' => 'Seniors Pilates', 'h1' => 'Pilates for Seniors in Brookvale', 'type' => 'campaign', 'booking' => 'mindbody', 'keyword' => 'pilates for seniors near me',
+		array( 'path' => 'pilates/seniors', 'large_text' => true,  'title' => 'Seniors Pilates', 'h1' => 'Pilates for Seniors in Brookvale', 'type' => 'campaign', 'booking' => 'mindbody', 'keyword' => 'pilates for seniors near me',
 			'seo_title' => 'Pilates for Seniors Brookvale | Solevo',
 			'meta' => 'Pilates for seniors in Brookvale, designed with physiotherapists for balance, strength and bone health. Small groups and a 1:1 assessment first. Book now.',
 			'excerpt' => 'Balance, strength and bone health in small, physio-designed groups.',
@@ -61,12 +61,12 @@ function solevo_site_pages() {
 			'seo_title' => 'Pregnancy Pilates Brookvale | Prenatal Classes | Solevo',
 			'meta' => 'Prenatal Pilates classes in Brookvale, designed by health professionals. Pelvic floor, core support and posture, with modifications for every trimester.',
 			'excerpt' => 'Safe, supportive classes for every trimester.',
-			'related' => array( 'pilates/mums-and-bubs', 'physio/pregnancy-physiotherapy', 'conditions/pregnancy-back-pain' ) ),
+			'related' => array( 'pilates/postnatal-pilates', 'physio/pregnancy-physiotherapy', 'conditions/pregnancy-back-pain' ) ),
 		array( 'path' => 'pilates/postnatal-pilates', 'title' => 'Postnatal Pilates', 'h1' => 'Postnatal Pilates in Brookvale', 'type' => 'service', 'booking' => 'mindbody', 'keyword' => 'postnatal pilates',
 			'seo_title' => 'Postnatal Pilates Brookvale | Rebuild Your Core | Solevo',
 			'meta' => 'Postnatal Pilates in Brookvale to rebuild core and pelvic floor strength safely after birth. Small classes, physio-designed programs. Book a class.',
 			'excerpt' => 'Rebuild core and pelvic floor strength after birth.',
-			'related' => array( 'pilates/mums-and-bubs', 'physio/postnatal-physiotherapy', 'physio/pelvic-floor-physiotherapy', 'conditions/bladder-leakage-incontinence' ) ),
+			'related' => array( 'pilates/pregnancy-pilates', 'physio/pregnancy-physiotherapy' ) ),
 		array( 'path' => 'pilates/mat-pilates', 'title' => 'Mat Pilates', 'h1' => 'Mat Pilates in Brookvale', 'type' => 'service', 'booking' => 'mindbody', 'keyword' => 'mat pilates near me',
 			'seo_title' => 'Mat Pilates Brookvale | Strength & Sculpt | Solevo',
 			'meta' => 'Mat Pilates classes in Brookvale: Strength for deep core and hip control, Sculpt for a faster, metabolic session. 45 minutes, up to 14 places. Book now.',
@@ -84,27 +84,27 @@ function solevo_site_pages() {
 			'related' => array( 'pilates/seniors', 'physio/seniors-physiotherapy', 'conditions/balance-falls-prevention' ) ),
 
 		/* ---------- Physio services ---------- */
-		array( 'path' => 'physio/sports-physiotherapy', 'title' => 'Sports Physiotherapy', 'h1' => 'Sports Physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'sports physiotherapy near me',
+		array( 'path' => 'physio/sports-physiotherapy', 'cta_title' => 'Injured? Book a sports physio assessment',  'title' => 'Sports Physiotherapy', 'h1' => 'Sports Physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'sports physiotherapy near me',
 			'seo_title' => 'Sports Physio Brookvale | Return to Play | Solevo',
 			'meta' => 'Sports physiotherapy in Brookvale for sprains, strains, tendon and running injuries. Gait analysis, force plate testing and return to play plans. Book now.',
 			'excerpt' => 'Return to play programs for athletes and active people.',
 			'related' => array( 'conditions/sports-injuries-rehab', 'conditions/shin-splints', 'pilates/clinical-pilates' ) ),
-		array( 'path' => 'physio/pregnancy-physiotherapy', 'title' => 'Pregnancy Physiotherapy', 'h1' => 'Pregnancy Physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'pregnancy physiotherapy',
+		array( 'path' => 'physio/pregnancy-physiotherapy', 'cta_title' => 'Book a pregnancy or postnatal physio appointment',  'title' => 'Pregnancy Physiotherapy', 'h1' => 'Pregnancy Physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'pregnancy physiotherapy',
 			'seo_title' => 'Pregnancy Physio Brookvale | Back & Pelvic Pain | Solevo',
 			'meta' => 'Pregnancy physiotherapy in Brookvale for back, pelvic and rib pain. Hands-on care and safe exercise so you stay active through every trimester. Book now.',
 			'excerpt' => 'Relief for back, pelvic and rib pain in pregnancy.',
-			'related' => array( 'conditions/pregnancy-back-pain', 'pilates/pregnancy-pilates', 'pilates/mums-and-bubs' ) ),
+			'related' => array( 'conditions/pregnancy-back-pain', 'pilates/pregnancy-pilates', 'pilates/postnatal-pilates' ) ),
 		array( 'path' => 'physio/postnatal-physiotherapy', 'title' => 'Postnatal Physiotherapy', 'h1' => 'Postnatal Physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'post natal physiotherapy near me',
 			'seo_title' => 'Postnatal Physio Brookvale | Postnatal Check | Solevo',
 			'meta' => 'Postnatal physiotherapy in Brookvale: a postnatal check, abdominal and pelvic floor assessment and a clear plan back to exercise. Book today.',
 			'excerpt' => 'Postnatal check and a clear plan back to exercise.',
 			'related' => array( 'physio/pelvic-floor-physiotherapy', 'pilates/postnatal-pilates', 'conditions/bladder-leakage-incontinence' ) ),
-		array( 'path' => 'physio/pre-and-post-surgery-rehab', 'title' => 'Pre and Post Surgery Rehab', 'h1' => 'Pre and post surgery physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'post surgery physio brookvale',
+		array( 'path' => 'physio/pre-and-post-surgery-rehab', 'cta_title' => 'Booking surgery? Book a pre-op assessment', 'cta_sub' => 'Start before your operation, or book your first session after it once your surgeon has given the all clear.',  'title' => 'Pre and Post Surgery Rehab', 'h1' => 'Pre and post surgery physiotherapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'post surgery physio brookvale',
 			'seo_title' => 'Pre and Post Surgery Physio Brookvale | Solevo',
 			'meta' => 'Physiotherapy in Brookvale before and after surgery: ACL, knee and hip replacement, shoulder and spinal surgery rehab that follows your surgeon\'s plan.',
 			'excerpt' => 'Rehab before and after surgery, following your surgeon\'s plan.',
-			'related' => array( 'physio/sports-physiotherapy', 'conditions/sports-injuries-rehab', 'physio/seniors-physiotherapy' ) ),
-		array( 'path' => 'physio/seniors-physiotherapy', 'title' => 'Seniors Physiotherapy', 'h1' => 'Physiotherapy for Seniors in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'aged care physio',
+			'related' => array( 'physio/seniors-physiotherapy', 'physio/sports-physiotherapy', 'pilates/clinical-pilates' ) ),
+		array( 'path' => 'physio/seniors-physiotherapy', 'large_text' => true, 'cta_title' => 'Book a seniors physio assessment',  'title' => 'Seniors Physiotherapy', 'h1' => 'Physiotherapy for Seniors in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'aged care physio',
 			'seo_title' => 'Physio for Seniors Brookvale | Balance & Falls | Solevo',
 			'meta' => 'Physiotherapy for seniors in Brookvale: falls prevention, balance, arthritis and strength. Thorough assessments and exercise programs that keep you moving.',
 			'excerpt' => 'Falls prevention, balance and arthritis care.',
@@ -120,7 +120,7 @@ function solevo_site_pages() {
 			'seo_title' => 'Pregnancy Back Pain Relief | Physio Brookvale | Solevo',
 			'meta' => 'Why back and pelvic pain happen in pregnancy, which symptoms need a doctor, and how physio and prenatal Pilates at Solevo in Brookvale can ease them.',
 			'excerpt' => 'Why it happens and how physio and Pilates help.',
-			'related' => array( 'physio/pregnancy-physiotherapy', 'pilates/pregnancy-pilates', 'pilates/mums-and-bubs' ) ),
+			'related' => array( 'physio/pregnancy-physiotherapy', 'pilates/pregnancy-pilates', 'pilates/postnatal-pilates' ) ),
 		array( 'path' => 'conditions/sciatica', 'title' => 'Sciatica', 'h1' => 'Physiotherapy for Sciatica', 'type' => 'condition', 'booking' => 'cliniko', 'keyword' => 'physiotherapy for sciatica', 'service' => 'physio',
 			'seo_title' => 'Physiotherapy for Sciatica Brookvale | Solevo',
 			'meta' => 'Sciatica explained: symptoms, warning signs that need urgent care, and how physiotherapy at Solevo in Brookvale reduces nerve pain and rebuilds strength.',
@@ -131,8 +131,8 @@ function solevo_site_pages() {
 			'meta' => 'Herniated or bulging disc? Learn the symptoms, the red flags to act on, and how physio at Solevo in Brookvale helps you recover strength and movement.',
 			'excerpt' => 'Bulging or herniated discs and the path back to strength.',
 			'related' => array( 'conditions/sciatica', 'conditions/lower-back-pain', 'pilates/clinical-pilates' ) ),
-		array( 'path' => 'conditions/sports-injuries-rehab', 'title' => 'Sports Injuries Rehab', 'h1' => 'Sports Injury Rehab in Brookvale', 'type' => 'condition', 'booking' => 'cliniko', 'keyword' => 'physiotherapy sports injury clinic', 'service' => 'physio/sports-physiotherapy',
-			'seo_title' => 'Sports Injury Rehab Brookvale | Solevo Physio',
+		array( 'path' => 'conditions/sports-injuries-rehab', 'title' => 'Sports Injury Rehabilitation', 'h1' => 'Sports Injury Rehabilitation in Brookvale', 'type' => 'condition', 'booking' => 'cliniko', 'keyword' => 'physiotherapy sports injury clinic', 'service' => 'physio/sports-physiotherapy',
+			'seo_title' => 'Sports Injury Rehabilitation Brookvale | Solevo',
 			'meta' => 'Sports injury rehab in Brookvale for ankle sprains, muscle strains, ACL and running injuries. Assessment, force plate testing and a staged return to sport.',
 			'excerpt' => 'Sprains, strains, ACL and running injuries.',
 			'related' => array( 'physio/sports-physiotherapy', 'conditions/shin-splints' ) ),
@@ -184,3 +184,12 @@ function solevo_page_booking() {
 	$def = solevo_page_def();
 	return $def['booking'] ?? 'both';
 }
+
+/** 1.3.16: larger, darker text on pages for older readers (Steph, 28 Oct). */
+add_filter( 'body_class', function ( $classes ) {
+	$def = solevo_page_def();
+	if ( ! empty( $def['large_text'] ) ) {
+		$classes[] = 'solevo-large-text';
+	}
+	return $classes;
+} );

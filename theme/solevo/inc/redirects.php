@@ -15,6 +15,9 @@ function solevo_redirects() {
 		'physio/pelvic-floor-physiotherapy' => 'physio',
 		// Copy batch 1, approved by Hayo 28 Oct: postnatal merged into the pregnancy page.
 		'physio/postnatal-physiotherapy'    => 'physio/pregnancy-physiotherapy',
+		// Steph, 28 Oct: pelvic floor treatment is not advertised; Mums and Bubs is paused.
+		'conditions/bladder-leakage-incontinence' => 'conditions',
+		'pilates/mums-and-bubs'             => 'pilates',
 	);
 }
 
