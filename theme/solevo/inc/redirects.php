@@ -13,6 +13,8 @@ function solevo_redirects() {
 	return array(
 		// Steph, 25 Oct: pelvic floor is no longer offered as a service.
 		'physio/pelvic-floor-physiotherapy' => 'physio',
+		// Copy batch 1, approved by Hayo 28 Oct: postnatal merged into the pregnancy page.
+		'physio/postnatal-physiotherapy'    => 'physio/pregnancy-physiotherapy',
 	);
 }
 
