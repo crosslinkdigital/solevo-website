@@ -7,11 +7,39 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.3.21
+Version: 1.3.22
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
 */
+
+/* =========================================================
+   Type scale (1.3.22). The only font sizes in the theme.
+   Every font-size in this file uses one of these; a GitHub check
+   rejects any other value. Fluid between 375px and 1440px.
+   ========================================================= */
+:root {
+	--fs-h1: clamp(2.5rem, 1.972rem + 2.254vw, 4rem);          /* 40 to 64: page title */
+	--fs-h2: clamp(2rem, 1.736rem + 1.127vw, 2.75rem);         /* 32 to 44: section headings */
+	--fs-h3: clamp(1.375rem, 1.287rem + 0.3756vw, 1.625rem);     /* 22 to 26: block headings */
+	--fs-card: clamp(1.25rem, 1.206rem + 0.1878vw, 1.375rem);    /* 20 to 22: card titles */
+	--fs-lead: clamp(1.09375rem, 1.061rem + 0.1408vw, 1.1875rem);/* 17.5 to 19: hero and section intros */
+	--fs-body: clamp(1rem, 0.978rem + 0.0939vw, 1.0625rem);       /* 16 to 17: all body text */
+	--fs-small: clamp(0.90625rem, 0.8952rem + 0.04695vw, 0.9375rem);   /* 14.5 to 15: chips, subtitles, links, footer */
+	--fs-caption: .8125rem;                                  /* 13: breadcrumbs, captions, notes */
+	--fs-button: .9375rem;                                   /* 15: buttons and arrow links (uppercase) */
+	--fs-label: .78125rem;                                   /* 12.5: eyebrows and card tags (uppercase) */
+}
+/* Seniors pages: the same scale, one step larger */
+.solevo-large-text {
+	--fs-lead: 1.3125rem;
+	--fs-body: 1.1875rem;
+	--fs-small: 1.0625rem;
+	--fs-caption: .9375rem;
+	--fs-button: 1.0625rem;
+	--fs-label: .875rem;
+	--fs-card: 1.5rem;
+}
 
 /* =========================================================
    Tokens (sampled from the original site)
@@ -53,14 +81,14 @@ body::after {
 /* Type helpers */
 .wp-block-heading em, h1 em, h2 em { font-style: italic; color: var(--s-olive); font-weight: 600; }
 .solevo-eyebrow, .is-style-eyebrow {
-	font-family: var(--s-sans); font-size: .8125rem !important; font-weight: 400; line-height: 1.4;
-	letter-spacing: .32em; text-transform: uppercase; color: var(--s-olive); opacity: .9; margin-bottom: 1rem !important;
+	font-family: var(--s-sans); font-size: var(--fs-label) !important; font-weight: 400; line-height: 1.4;
+	letter-spacing: .2em; text-transform: uppercase; color: var(--s-olive); opacity: .9; margin-bottom: 1rem !important;
 }
 .solevo-center { text-align: center; }
 .solevo-left { text-align: left !important; }
-.solevo-small { font-size: var(--wp--preset--font-size--small); color: var(--s-text); }
-.solevo-sub { font-weight: 300; font-size: 1.125rem; color: var(--s-text); }
-.solevo-lead { font-size: 1.2rem; line-height: 1.6; font-weight: 300; color: var(--s-text); max-width: 46ch; }
+.solevo-small { font-size: var(--fs-small); color: var(--s-text); }
+.solevo-sub { font-weight: 300; font-size: var(--fs-lead); color: var(--s-text); }
+.solevo-lead { font-size: var(--fs-lead); line-height: 1.6; font-weight: 300; color: var(--s-text); max-width: 46ch; }
 .solevo-note, .solevo-footer__italic { font-style: italic; font-weight: 300; }
 
 /* =========================================================
@@ -86,7 +114,7 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 60; }
 }
 .solevo-primary-nav .wp-block-navigation__submenu-container .wp-block-navigation-item__content { padding: .5rem .75rem; letter-spacing: .08em; }
 .wp-block-navigation__responsive-container.is-menu-open { background: var(--s-paper) !important; padding: 2rem; }
-.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content { font-size: 1.1rem; }
+.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item__content { font-size: var(--fs-lead); }
 .solevo-header__ctas .wp-block-button__link { padding: .7rem 2.1rem; white-space: nowrap; }
 @media (max-width: 600px) {
 	.solevo-header__ctas .wp-block-button__link { padding: .6rem 1rem; }
@@ -101,10 +129,10 @@ header.wp-block-template-part { position: sticky; top: 0; z-index: 60; }
 .solevo-head { text-align: center; margin-bottom: clamp(2.25rem, 4.5vw, 4rem); }
 .solevo-head .solevo-eyebrow { text-align: center; }
 .solevo-head h2 { margin-top: 0; }
-h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500; line-height: 1.15; }
-.solevo-h2-xl { font-size: clamp(2.25rem, 3.9vw, 3.6rem) !important; line-height: 1.22 !important; }
-.solevo-h2-sm { font-size: clamp(2.1rem, 3.4vw, 3.1rem) !important; }
-.solevo-h2-light { font-size: clamp(1.6rem, 2.2vw, 1.9rem) !important; font-weight: 400 !important; }
+h2.wp-block-heading { font-size: var(--fs-h2); font-weight: 500; line-height: 1.15; }
+.solevo-h2-xl { font-size: var(--fs-h2) !important; line-height: 1.22 !important; }
+.solevo-h2-sm { font-size: var(--fs-h2) !important; }
+.solevo-h2-light { font-size: var(--fs-h3) !important; font-weight: 400 !important; }
 .solevo-h2-light em { font-weight: 400; color: var(--s-muted); }
 
 .solevo-wave::before {
@@ -134,13 +162,13 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-hero > * { margin-left: auto !important; margin-right: auto !important; }
 .solevo-hero .solevo-eyebrow { color: var(--s-text); margin-bottom: 2.5rem !important; }
 .solevo-hero__title {
-	font-size: clamp(3rem, 6.6vw, 6.25rem) !important; font-weight: 600 !important; line-height: 1.04 !important;
+	font-size: var(--fs-h1) !important; font-weight: 600 !important; line-height: 1.04 !important;
 	letter-spacing: -.005em; margin: 0 auto !important; text-align: center;
 }
 .solevo-hero__title em { font-weight: 700; }
-.solevo-hero__lead { font-weight: 300; font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--s-text); margin-top: 3rem !important; text-align: center; }
+.solevo-hero__lead { font-weight: 300; font-size: var(--fs-lead); color: var(--s-text); margin-top: 3rem !important; text-align: center; }
 .solevo-hero__cta { margin-top: 3.25rem !important; }
-.solevo-btn-lg .wp-block-button__link { padding: 1.3rem 3.3rem; font-size: .9375rem; letter-spacing: .2em; }
+.solevo-btn-lg .wp-block-button__link { padding: 1.3rem 3.3rem; font-size: var(--fs-button); letter-spacing: .12em; }
 .solevo-hero::after {
 	content: ""; position: absolute; left: 50%; bottom: 1.5rem; width: 1px; height: 46px; transform: translateX(-50%);
 	background: linear-gradient(rgba(74,74,74,0), rgba(74,74,74,.35));
@@ -155,7 +183,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-about__cols { gap: clamp(2rem, 6vw, 6rem) !important; }
 .solevo-about__offer .solevo-eyebrow { margin-top: .25rem; margin-bottom: 1.75rem !important; }
 .solevo-dots { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.6rem; }
-.solevo-dots li { position: relative; padding-left: 2rem; font-size: 1.125rem; font-weight: 300; color: var(--s-ink); line-height: 1.4; }
+.solevo-dots li { position: relative; padding-left: 2rem; font-size: var(--fs-body); font-weight: 300; color: var(--s-ink); line-height: 1.4; }
 .solevo-dots li::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: var(--s-olive); }
 .solevo-wide-photo { margin: clamp(3rem, 6vw, 5rem) 0 0 !important; }
 .solevo-wide-photo img { width: 100%; aspect-ratio: 2.35 / 1; object-fit: cover; border-radius: 10px; display: block; }
@@ -173,12 +201,12 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 	border: 1.5px solid #D9D3C7; border-radius: 16px; box-shadow: 0 10px 20px -18px rgba(0,0,0,.4);
 }
 .solevo-framed img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; box-shadow: 0 18px 30px -24px rgba(0,0,0,.45); }
-.solevo-member__name { font-size: clamp(1.9rem, 2.6vw, 2.35rem) !important; font-weight: 400 !important; margin: 0 0 .5rem; color: var(--s-ink); }
+.solevo-member__name { font-size: var(--fs-h3) !important; font-weight: 400 !important; margin: 0 0 .5rem; color: var(--s-ink); }
 .solevo-member__role { letter-spacing: .14em !important; margin-bottom: 1.75rem !important; opacity: 1 !important; }
-.solevo-member__text > p:not([class]) { font-size: 1.1rem; }
-.solevo-member__label { margin-top: 2.25rem !important; font-size: .75rem !important; letter-spacing: .22em !important; }
+.solevo-member__text > p:not([class]) { font-size: var(--fs-body); }
+.solevo-member__label { margin-top: 2.25rem !important; font-size: var(--fs-label) !important; letter-spacing: .2em!important; }
 .solevo-boxtags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .75rem; }
-.solevo-boxtags li { background: var(--s-paper); border: 1px solid var(--s-line); padding: .55rem 1.1rem; font-size: .95rem; font-weight: 400; color: var(--s-ink); line-height: 1.4; }
+.solevo-boxtags li { background: var(--s-paper); border: 1px solid var(--s-line); padding: .55rem 1.1rem; font-size: var(--fs-small); font-weight: 400; color: var(--s-ink); line-height: 1.4; }
 .solevo-note { margin-top: 2.25rem !important; color: var(--s-text); }
 
 /* =========================================================
@@ -187,12 +215,12 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-services-section { background: var(--s-linen-dark); padding-top: clamp(3rem, 6vw, 5rem); padding-bottom: calc(var(--s-section-y) + 2rem); }
 .solevo-service { gap: 2rem !important; padding: clamp(2.25rem, 4.5vw, 3.5rem) 0; border-bottom: 1px solid var(--s-line); margin: 0 !important; }
 .solevo-service:last-child { border-bottom: 0; }
-.solevo-service h3 { font-size: clamp(1.75rem, 2.4vw, 2.15rem) !important; font-weight: 500 !important; margin: 0 0 1rem; color: var(--s-ink); }
+.solevo-service h3 { font-size: var(--fs-h3) !important; font-weight: 500 !important; margin: 0 0 1rem; color: var(--s-ink); }
 .solevo-plaintags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .45rem 1.4rem; }
-.solevo-plaintags li { font-size: .9375rem; font-weight: 500; color: #525251; letter-spacing: .02em; }
-.solevo-service__desc { font-size: 1.15rem; font-weight: 400; color: var(--s-ink); line-height: 1.7; margin: 0 0 1.25rem; }
+.solevo-plaintags li { font-size: var(--fs-small); font-weight: 500; color: #525251; letter-spacing: .02em; }
+.solevo-service__desc { font-size: var(--fs-body); font-weight: 400; color: var(--s-ink); line-height: 1.7; margin: 0 0 1.25rem; }
 .solevo-textlink { margin: 0; }
-.solevo-textlink a { font-size: .875rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; color: var(--s-olive); }
+.solevo-textlink a { font-size: var(--fs-button); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--s-olive); }
 .solevo-textlink a:hover { color: var(--s-ink); }
 
 /* =========================================================
@@ -203,7 +231,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-condtags { list-style: none; padding: 0; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem .8rem; max-width: 1100px; }
 .solevo-condtags li a {
 	display: block; padding: .55rem 1.25rem; background: var(--s-cream); border: 1px solid var(--s-line);
-	font-size: .975rem; font-weight: 300; color: var(--s-text); text-decoration: none; transition: background .2s, color .2s, border-color .2s;
+	font-size: var(--fs-small); font-weight: 300; color: var(--s-text); text-decoration: none; transition: background .2s, color .2s, border-color .2s;
 }
 .solevo-condtags li a:hover { background: var(--s-olive); border-color: var(--s-olive); color: #fff; }
 
@@ -218,7 +246,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-olive .wp-block-heading em { color: var(--s-on-dark); font-weight: 600; }
 .solevo-olive .solevo-eyebrow { color: rgba(250,247,243,.62); letter-spacing: .38em; }
 .solevo-olive .solevo-sub { color: rgba(250,247,243,.72); }
-.solevo-olive .solevo-dots li { color: rgba(250,247,243,.88); font-size: 1.0625rem; }
+.solevo-olive .solevo-dots li { color: rgba(250,247,243,.88); font-size: var(--fs-body); }
 .solevo-olive .solevo-dots li::before { background: rgba(250,247,243,.45); width: 6px; height: 6px; }
 .solevo-tech__cols { gap: clamp(2rem, 6vw, 6rem) !important; align-items: flex-start !important; }
 .solevo-tech__cols h2 { margin: .5rem 0 2.25rem; }
@@ -230,7 +258,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-video__play { position: absolute; inset: 0; margin: 0 !important; display: flex; align-items: center; justify-content: center; z-index: 2; }
 .solevo-video__play a {
 	display: flex; flex-direction: column; align-items: center; gap: 1.4rem; padding-top: 4.5rem;
-	color: rgba(250,247,243,.72); text-decoration: none; text-transform: uppercase; letter-spacing: .26em; font-size: .9375rem;
+	color: rgba(250,247,243,.72); text-decoration: none; text-transform: uppercase; letter-spacing: .12em; font-size: var(--fs-button);
 }
 .solevo-video__play a::before {
 	content: ""; width: 92px; height: 92px; border-radius: 50%; border: 2px solid rgba(250,247,243,.4);
@@ -246,10 +274,10 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-why-section { background: linear-gradient(180deg, var(--s-cream) 0, var(--s-cream) 70px, #EFECE4 170px); padding-top: calc(var(--s-section-y) + 2.5rem); }
 .solevo-reasons { gap: 2rem !important; }
 .solevo-reason { text-align: center; }
-.solevo-num { font-family: var(--s-serif); font-weight: 300; font-size: clamp(4rem, 6vw, 5.5rem); line-height: 1; color: var(--s-num); margin: 0 0 1.75rem; }
-.solevo-reason h3 { font-size: clamp(1.5rem, 2vw, 1.8rem) !important; font-weight: 500 !important; color: var(--s-ink); margin: 0; }
+.solevo-num { font-family: var(--s-serif); font-weight: 300; font-size: var(--fs-h1); line-height: 1; color: var(--s-num); margin: 0 0 1.75rem; }
+.solevo-reason h3 { font-size: var(--fs-card) !important; font-weight: 500 !important; color: var(--s-ink); margin: 0; }
 .solevo-reason h3::after { content: ""; display: block; width: 32px; height: 1px; background: #C2C3B7; margin: 1.25rem auto; }
-.solevo-reason p:not(.solevo-num) { font-weight: 400; color: var(--s-ink); font-size: 1.0625rem; line-height: 1.65; max-width: 17.5rem; margin: 0 auto; }
+.solevo-reason p:not(.solevo-num) { font-weight: 400; color: var(--s-ink); font-size: var(--fs-body); line-height: 1.65; max-width: 17.5rem; margin: 0 auto; }
 .solevo-why__photos { gap: 1.5rem !important; margin-top: clamp(3.5rem, 7vw, 6rem) !important; }
 .solevo-photo { margin: 0 !important; }
 .solevo-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; display: block; }
@@ -260,19 +288,19 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
    ========================================================= */
 .solevo-studio-section { background: linear-gradient(180deg, #EFECE4 0, #F7F4F1 160px, var(--s-linen) 260px); }
 .solevo-studio__intro { gap: clamp(2rem, 6vw, 6rem) !important; }
-.solevo-studio__intro p:not([class]) { font-size: 1.125rem; }
+.solevo-studio__intro p:not([class]) { font-size: var(--fs-body); }
 .solevo-studio__note { margin-top: 2.5rem !important; letter-spacing: .26em !important; }
 .solevo-cat { gap: 1.5rem !important; margin-top: clamp(4rem, 7vw, 6.5rem) !important; margin-bottom: 2.25rem !important; }
-.solevo-cat h3 { font-size: clamp(1.6rem, 2.1vw, 1.95rem) !important; font-weight: 400 !important; margin: 0; white-space: nowrap; color: var(--s-ink); }
+.solevo-cat h3 { font-size: var(--fs-h3) !important; font-weight: 400 !important; margin: 0; white-space: nowrap; color: var(--s-ink); }
 .solevo-cat__rule { flex: 1 1 auto; border: 0 !important; height: 1px !important; background: var(--s-line) !important; margin: 0 !important; opacity: 1 !important; min-width: 2rem; }
-.solevo-cat__places { margin: 0 !important; white-space: nowrap; letter-spacing: .26em !important; font-size: .7rem !important; }
+.solevo-cat__places { margin: 0 !important; white-space: nowrap; letter-spacing: .2em!important; font-size: var(--fs-label) !important; }
 .solevo-class { background: var(--s-cream); border: 1px solid var(--s-line); padding: clamp(1.75rem, 3.6vw, 3.4rem) clamp(1.5rem, 3vw, 2.6rem); gap: 2rem !important; margin: 0 auto 1.25rem !important; }
-.solevo-class h4 { font-size: clamp(1.4rem, 1.9vw, 1.6rem) !important; font-weight: 400 !important; margin: 0; color: var(--s-ink); }
-.solevo-class__tag { font-style: italic; font-weight: 300; color: var(--s-olive); margin: .6rem 0 0; font-size: .85rem; }
-.solevo-class p:not([class]) { margin-top: 0; font-size: .95rem; line-height: 1.75; }
-.solevo-class__best { font-size: .72rem; letter-spacing: .14em; color: var(--s-muted); margin: 1rem 0 0; }
+.solevo-class h4 { font-size: var(--fs-card) !important; font-weight: 400 !important; margin: 0; color: var(--s-ink); }
+.solevo-class__tag { font-style: italic; font-weight: 300; color: var(--s-olive); margin: .6rem 0 0; font-size: var(--fs-small); }
+.solevo-class p:not([class]) { margin-top: 0; font-size: var(--fs-body); line-height: 1.75; }
+.solevo-class__best { font-size: var(--fs-label); letter-spacing: .2em; color: var(--s-muted); margin: 1rem 0 0; }
 .solevo-class__best strong { font-weight: 400; text-transform: uppercase; letter-spacing: .2em; }
-.solevo-events-note { margin-top: 3.75rem !important; font-size: 1.0625rem; max-width: 44rem; margin-left: auto !important; margin-right: auto !important; }
+.solevo-events-note { margin-top: 3.75rem !important; font-size: var(--fs-body); max-width: 44rem; margin-left: auto !important; margin-right: auto !important; }
 .solevo-events-note a { color: var(--s-text); text-underline-offset: 3px; }
 
 /* =========================================================
@@ -282,25 +310,25 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-pricing-section { padding-top: 2rem; }
 .solevo-prices { gap: 2rem !important; grid-template-columns: repeat(auto-fit, minmax(min(26rem, 100%), 1fr)) !important; }
 .solevo-price-card { background: var(--s-paper); border: 1px solid var(--s-line); border-radius: 8px; padding: clamp(1.75rem, 3.5vw, 2.9rem) clamp(1.5rem, 2.9vw, 2.6rem) clamp(1.75rem, 3vw, 2.4rem); }
-.solevo-price-card h3 { font-size: clamp(1.35rem, 1.7vw, 1.5rem) !important; font-weight: 500 !important; margin: 0; color: var(--s-ink); }
-.solevo-price-card__meta { margin: .6rem 0 0 !important; font-size: .68rem !important; color: var(--s-text) !important; letter-spacing: .26em !important; }
+.solevo-price-card h3 { font-size: var(--fs-card) !important; font-weight: 500 !important; margin: 0; color: var(--s-ink); }
+.solevo-price-card__meta { margin: .6rem 0 0 !important; font-size: var(--fs-label) !important; color: var(--s-text) !important; letter-spacing: .2em!important; }
 .solevo-price-rows { margin-top: 1.25rem !important; }
 .solevo-price-row { gap: 1rem; padding: .95rem 0; border-bottom: 1px solid var(--s-line-soft); margin: 0 !important; }
 .solevo-price-row:last-child { border-bottom: 0; }
-.solevo-price-row p { margin: 0; font-size: .98rem; font-weight: 400; color: var(--s-ink); line-height: 1.45; }
-.solevo-price-row p span { font-size: .76rem; font-weight: 300; color: var(--s-text); }
-.solevo-price { font-family: var(--s-serif); font-size: 1.3rem !important; font-weight: 500 !important; white-space: nowrap; line-height: 1.1 !important; }
+.solevo-price-row p { margin: 0; font-size: var(--fs-body); font-weight: 400; color: var(--s-ink); line-height: 1.45; }
+.solevo-price-row p span { font-size: var(--fs-caption); font-weight: 300; color: var(--s-text); }
+.solevo-price { font-family: var(--s-serif); font-size: var(--fs-card) !important; font-weight: 500 !important; white-space: nowrap; line-height: 1.1 !important; }
 .solevo-expiry { gap: 1rem 2.25rem !important; margin-top: 3.5rem !important; align-items: center !important; }
-.solevo-expiry__label { font-family: var(--s-serif); font-size: 1.1rem; font-weight: 500; color: var(--s-ink); margin: 0; }
+.solevo-expiry__label { font-family: var(--s-serif); font-size: var(--fs-card); font-weight: 500; color: var(--s-ink); margin: 0; }
 .solevo-expiry__list { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem 2.25rem; }
-.solevo-expiry__list li { font-weight: 400; font-size: .9rem; color: var(--s-text); position: relative; padding-left: 1.1rem; }
+.solevo-expiry__list li { font-weight: 400; font-size: var(--fs-small); color: var(--s-text); position: relative; padding-left: 1.1rem; }
 .solevo-expiry__list li::before { content: ""; position: absolute; left: 0; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: #C0BBB1; }
 .solevo-founders { margin-top: clamp(4rem, 7vw, 6rem) !important; background: var(--s-paper); border: 2px solid #CED0C6; border-radius: 8px; padding: clamp(2.5rem, 4.5vw, 3.6rem) 1.5rem; text-align: center; }
-.solevo-founders .solevo-eyebrow { color: var(--s-text); margin-bottom: 1rem !important; font-size: .72rem !important; }
-.solevo-founders h3 { font-size: clamp(1.8rem, 2.6vw, 2.25rem) !important; font-weight: 500 !important; margin: 0; color: var(--s-ink); }
-.solevo-founders__what { font-size: 1rem; font-weight: 400; color: var(--s-ink); margin: .5rem 0 0; }
-.solevo-founders__price { font-family: var(--s-serif); font-size: clamp(2.5rem, 4vw, 3.2rem); font-weight: 500; line-height: 1; color: var(--s-olive); margin: 2rem 0 .25rem; }
-.solevo-founders__per { font-weight: 400; font-size: .85rem; color: var(--s-ink); margin: 0 0 2rem; }
+.solevo-founders .solevo-eyebrow { color: var(--s-text); margin-bottom: 1rem !important; font-size: var(--fs-label) !important; }
+.solevo-founders h3 { font-size: var(--fs-h3) !important; font-weight: 500 !important; margin: 0; color: var(--s-ink); }
+.solevo-founders__what { font-size: var(--fs-body); font-weight: 400; color: var(--s-ink); margin: .5rem 0 0; }
+.solevo-founders__price { font-family: var(--s-serif); font-size: var(--fs-h2); font-weight: 500; line-height: 1; color: var(--s-olive); margin: 2rem 0 .25rem; }
+.solevo-founders__per { font-weight: 400; font-size: var(--fs-caption); color: var(--s-ink); margin: 0 0 2rem; }
 .solevo-founders .solevo-eyebrow:last-child { margin: 0 !important; letter-spacing: .24em; }
 .solevo-timetable-section { padding-top: 1rem; }
 .solevo-timetable-section .solevo-head { margin-bottom: 2.5rem; }
@@ -315,15 +343,15 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
    Booking band
    ========================================================= */
 .solevo-band { min-height: clamp(30rem, 48vw, 44rem); display: flex; flex-direction: column; justify-content: center; text-align: center; margin-top: var(--s-wave-h) !important; }
-.solevo-band__title { font-size: clamp(2.4rem, 4.5vw, 4.2rem) !important; font-weight: 500 !important; line-height: 1.25 !important; margin: 0 auto 2.5rem !important; max-width: none !important; }
+.solevo-band__title { font-size: var(--fs-h2) !important; font-weight: 500 !important; line-height: 1.25 !important; margin: 0 auto 2.5rem !important; max-width: none !important; }
 .solevo-band__ctas { gap: 0 !important; justify-content: center; }
 .solevo-band__cta { padding: 0 1.5rem; }
 .solevo-band__cta--second { border-left: 1px solid rgba(250,247,243,.22); }
-.solevo-btn-light .wp-block-button__link { background: var(--s-cream); color: var(--s-olive); padding: 1.15rem 2.95rem; letter-spacing: .26em; font-size: .8rem; }
+.solevo-btn-light .wp-block-button__link { background: var(--s-cream); color: var(--s-olive); padding: 1.15rem 2.95rem; letter-spacing: .12em; font-size: var(--fs-button); }
 .solevo-btn-light .wp-block-button__link:hover { background: #fff; color: var(--s-olive-deep); }
-.solevo-btn-ghost .wp-block-button__link { background: transparent; color: var(--s-cream); border: 1px solid rgba(244,240,233,.55); padding: calc(1.15rem - 1px) 2.95rem; letter-spacing: .26em; font-size: .8rem; }
+.solevo-btn-ghost .wp-block-button__link { background: transparent; color: var(--s-cream); border: 1px solid rgba(244,240,233,.55); padding: calc(1.15rem - 1px) 2.95rem; letter-spacing: .12em; font-size: var(--fs-button); }
 .solevo-btn-ghost .wp-block-button__link:hover { background: var(--s-cream); color: var(--s-olive); }
-.solevo-band__caption { font-size: .75rem; font-weight: 300; color: #B2B7A8; margin: 1rem 0 0; }
+.solevo-band__caption { font-size: var(--fs-caption); font-weight: 300; color: #B2B7A8; margin: 1rem 0 0; }
 @media (max-width: 640px) {
 	.solevo-band__ctas { flex-direction: column; gap: 2rem !important; }
 	.solevo-band__cta--second { border-left: 0; }
@@ -342,24 +370,24 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 }
 .solevo-footer a { color: inherit; text-decoration: none; }
 .solevo-footer a:hover { color: var(--s-on-dark); }
-.solevo-footer .solevo-eyebrow { color: #7D8B6D; opacity: 1; letter-spacing: .32em; font-size: .72rem !important; margin: 1.9rem 0 .6rem !important; }
+.solevo-footer .solevo-eyebrow { color: #7D8B6D; opacity: 1; letter-spacing: .2em; font-size: var(--fs-label) !important; margin: 1.9rem 0 .6rem !important; }
 .solevo-footer__grid { gap: 2rem !important; }
 .solevo-footer__logo { margin: 0 0 .5rem !important; }
 .solevo-footer__logo img { width: 160px; display: block; }
-.solevo-footer__brand p:not([class]) { margin: 0; font-weight: 300; font-size: .875rem; color: #BCBAB7; }
-.solevo-footer__italic { color: #93928F; margin-top: 2rem !important; font-size: .875rem; }
+.solevo-footer__brand p:not([class]) { margin: 0; font-weight: 300; font-size: var(--fs-small); color: #BCBAB7; }
+.solevo-footer__italic { color: #93928F; margin-top: 2rem !important; font-size: var(--fs-small); }
 .solevo-footer__grid > .wp-block-column:not(:first-child) .solevo-eyebrow { margin-top: .5rem !important; margin-bottom: 1.75rem !important; }
 .solevo-footer__links { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; }
-.solevo-footer__links li { color: #A8A6A4; font-weight: 400; font-size: .875rem; }
+.solevo-footer__links li { color: #A8A6A4; font-weight: 400; font-size: var(--fs-lead); }
 .solevo-footer__find { margin-top: clamp(3.5rem, 7vw, 6rem) !important; }
 .solevo-footer__find .solevo-map { aspect-ratio: auto; height: clamp(240px, 22vw, 320px); border-radius: 8px; margin-top: 1.5rem; background: #3A3A3A; }
-.solevo-footer__find .solevo-nap { color: #93928F; font-weight: 300; font-size: .9rem; margin-top: 1.5rem; }
+.solevo-footer__find .solevo-nap { color: #93928F; font-weight: 300; font-size: var(--fs-small); margin-top: 1.5rem; }
 .solevo-footer__mark { gap: 1.5rem !important; margin-top: clamp(3rem, 6vw, 5rem) !important; align-items: center !important; }
 .solevo-footer__rule { flex: 1 1 auto; border: 0 !important; height: 1px !important; background: #414040 !important; opacity: 1 !important; margin: 0 !important; }
-.solevo-footer__wordmark { font-family: var(--s-serif); font-style: italic; color: #555554; margin: 0; font-size: 1.1rem; }
+.solevo-footer__wordmark { font-family: var(--s-serif); font-style: italic; color: #555554; margin: 0; font-size: var(--fs-lead); }
 .solevo-footer__base { margin-top: 3rem !important; gap: 1rem !important; }
-.solevo-copyright { color: #7E7D7B; font-size: .8rem; font-weight: 300; margin: 0; }
-.solevo-social { display: flex; align-items: center; gap: 1.5rem; color: #93928F; font-size: .8rem; }
+.solevo-copyright { color: #7E7D7B; font-size: var(--fs-caption); font-weight: 300; margin: 0; }
+.solevo-social { display: flex; align-items: center; gap: 1.5rem; color: #93928F; font-size: var(--fs-small); }
 .solevo-social a { color: #93928F; display: flex; }
 
 /* =========================================================
@@ -367,11 +395,11 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
    ========================================================= */
 .solevo-nap { font-style: normal; line-height: 1.8; }
 .solevo-nap a { color: inherit; text-underline-offset: 3px; }
-.solevo-hours { list-style: none; padding: 0; font-size: var(--wp--preset--font-size--small); }
+.solevo-hours { list-style: none; padding: 0; font-size: var(--fs-small); }
 .solevo-map { border-radius: 8px; overflow: hidden; aspect-ratio: 4 / 3; background: var(--s-cream); }
 .solevo-map iframe { width: 100%; height: 100%; border: 0; display: block; }
 .solevo-find { background: var(--s-linen); }
-.solevo-admin-hint { border: 1.5px dashed var(--s-olive); padding: 1rem 1.25rem; background: rgba(95,107,82,.06); font-size: .9375rem; color: var(--s-ink); text-align: left; }
+.solevo-admin-hint { border: 1.5px dashed var(--s-olive); padding: 1rem 1.25rem; background: rgba(95,107,82,.06); font-size: var(--fs-caption); color: var(--s-ink); text-align: left; }
 .solevo-feed--placeholder { max-width: 760px; margin: 0 auto; }
 
 .wp-block-button.is-style-outline > .wp-block-button__link { background: transparent; color: var(--s-olive); border: 1px solid var(--s-olive); padding-top: calc(.75rem - 1px); padding-bottom: calc(.75rem - 1px); }
@@ -380,7 +408,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .wp-block-button__link { transition: background .2s ease, color .2s ease, border-color .2s ease; }
 
 .solevo-crumbs-wrap { padding-top: 1.5rem; }
-.solevo-breadcrumbs ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .4rem; font-size: .8125rem; letter-spacing: .08em; color: var(--s-muted); }
+.solevo-breadcrumbs ol { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .4rem; font-size: var(--fs-caption); letter-spacing: .08em; color: var(--s-muted); }
 .solevo-breadcrumbs li + li::before { content: "/"; margin-right: .4rem; opacity: .5; }
 .solevo-breadcrumbs a { color: inherit; text-decoration: none; }
 .solevo-breadcrumbs a:hover { color: var(--s-olive); }
@@ -388,14 +416,14 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-main { background: var(--s-linen); }
 .solevo-narrow > * { max-width: 760px; }
 .solevo-page-hero { padding-top: clamp(2.5rem, 5vw, 4rem) !important; }
-.solevo-page-hero h1 { font-size: clamp(2.75rem, 5vw, 4.5rem); font-weight: 500; margin-top: 0; }
-.solevo-page-hero .solevo-nap { margin-top: 1.25rem; font-size: .9375rem; color: var(--s-text); }
+.solevo-page-hero h1 { font-size: var(--fs-h1); font-weight: 500; margin-top: 0; }
+.solevo-page-hero .solevo-nap { margin-top: 1.25rem; font-size: var(--fs-small); color: var(--s-text); }
 .solevo-page-hero .wp-block-buttons { margin-top: 2rem; }
 .page-service .solevo-section, .page-condition .solevo-section { padding-top: clamp(3rem, 6vw, 4.5rem); padding-bottom: clamp(3rem, 6vw, 4.5rem); }
 .page-service .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c) + .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c),
 .page-condition .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c) + .solevo-section:not(.has-background):not(.solevo-wave):not(.solevo-c) { padding-top: 0; }
 .is-style-pills { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
-.is-style-pills li { font-size: .9375rem; padding: .5rem 1rem; background: var(--s-cream); border: 1px solid var(--s-line); }
+.is-style-pills li { font-size: var(--fs-small); padding: .5rem 1rem; background: var(--s-cream); border: 1px solid var(--s-line); }
 .is-style-pills li a { color: var(--s-text); text-decoration: none; }
 .is-style-ticks { list-style: none; padding: 0; display: grid; gap: .8rem; }
 .is-style-ticks li { position: relative; padding-left: 1.75rem; color: var(--s-ink); }
@@ -403,29 +431,29 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .is-style-card { background: var(--s-paper); border: 1px solid var(--s-line); border-radius: 8px; padding: clamp(1.5rem, 3vw, 2.5rem); }
 .is-style-rounded img { border-radius: 10px; }
 .solevo-portrait img { aspect-ratio: 3 / 4; object-fit: cover; width: 100%; }
-.solevo-person__role { font-size: .8125rem; letter-spacing: .16em; text-transform: uppercase; color: var(--s-olive); margin-top: 0; }
+.solevo-person__role { font-size: var(--fs-label); letter-spacing: .2em; text-transform: uppercase; color: var(--s-olive); margin-top: 0; }
 .solevo-split { gap: clamp(2rem, 6vw, 5rem) !important; align-items: center !important; }
 .solevo-practitioner > .wp-block-column:first-child { flex: 0 0 min(320px, 100%) !important; }
 .solevo-steps { counter-reset: step; list-style: none; padding: 0; display: grid; gap: 1rem; }
 .solevo-steps li { counter-increment: step; position: relative; padding: 1.2rem 1.4rem 1.2rem 4.25rem; background: var(--s-paper); border: 1px solid var(--s-line); }
-.solevo-steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 1.4rem; top: .9rem; font-family: var(--s-serif); font-size: 1.8rem; color: var(--s-num); line-height: 1; }
+.solevo-steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 1.4rem; top: .9rem; font-family: var(--s-serif); font-size: var(--fs-h3); color: var(--s-num); line-height: 1; }
 .solevo-redflags > .wp-block-group { background: var(--s-cream); border-left: 3px solid var(--s-olive); padding: 1.5rem 1.75rem; }
 .solevo-redflags h3 { margin-top: 0; }
 .solevo-redflags ul { padding-left: 1.2rem; }
-.solevo-reviewed { font-size: .8125rem; color: var(--s-muted); border-top: 1px solid var(--s-line); padding-top: 1rem; }
+.solevo-reviewed { font-size: var(--fs-caption); color: var(--s-muted); border-top: 1px solid var(--s-line); padding-top: 1rem; }
 .solevo-reviewed-wrap { padding-top: 0 !important; }
 .wp-block-details { border-bottom: 1px solid var(--s-line); padding: 1rem 0; }
 .wp-block-details summary { cursor: pointer; font-weight: 400; color: var(--s-ink); list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
 .wp-block-details summary::-webkit-details-marker { display: none; }
-.wp-block-details summary::after { content: "+"; font-size: 1.3rem; line-height: 1; color: var(--s-olive); }
+.wp-block-details summary::after { content: "+"; font-size: 1.25em; line-height: 1; color: var(--s-olive); }
 .wp-block-details[open] summary::after { content: "–"; }
 .solevo-cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.25rem; }
 .solevo-card a { display: flex; flex-direction: column; gap: .5rem; height: 100%; padding: 1.75rem; background: var(--s-paper); border: 1px solid var(--s-line); text-decoration: none; color: inherit; transition: border-color .2s ease, transform .2s ease; }
 .solevo-card a:hover { border-color: var(--s-olive); transform: translateY(-2px); }
-.solevo-card__title { font-family: var(--s-serif); font-size: 1.75rem; line-height: 1.15; color: var(--s-ink); font-weight: 500; }
-.solevo-card__text { color: var(--s-text); font-size: .9375rem; }
-.solevo-card__more { margin-top: auto; padding-top: .5rem; font-size: .8125rem; letter-spacing: .2em; text-transform: uppercase; color: var(--s-olive); }
-.solevo-arrow-link a { font-size: .875rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; }
+.solevo-card__title { font-family: var(--s-serif); font-size: var(--fs-card); line-height: 1.15; color: var(--s-ink); font-weight: 500; }
+.solevo-card__text { color: var(--s-text); font-size: var(--fs-body); }
+.solevo-card__more { margin-top: auto; padding-top: .5rem; font-size: var(--fs-button); letter-spacing: .12em; text-transform: uppercase; color: var(--s-olive); }
+.solevo-arrow-link a { font-size: var(--fs-button); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
 .solevo-404, .solevo-default { padding-top: var(--s-section-y); padding-bottom: var(--s-section-y); }
 
 /* =========================================================
@@ -439,11 +467,11 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 	.solevo-cat__rule { display: none; }
 	.solevo-hero { min-height: 88svh; }
 	.solevo-hero .solevo-eyebrow { margin-bottom: 1.5rem !important; }
-	.solevo-video__play a { padding-top: 2.75rem; gap: .75rem; font-size: .75rem; }
+	.solevo-video__play a { padding-top: 2.75rem; gap: .75rem; font-size: var(--fs-button); }
 	.solevo-video__play a::before { width: 64px; height: 64px; background-size: 22px; }
 	.solevo-wide-photo img { aspect-ratio: 16 / 9; }
 	.solevo-reason { margin-bottom: 1rem; }
-	.solevo-price-row p { font-size: 1rem; }
+	.solevo-price-row p { font-size: var(--fs-body); }
 }
 .wp-site-blocks > * + * { margin-block-start: 0; }
 
@@ -465,24 +493,24 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 	--ds-radius-lg: 18px;
 	--ds-y: clamp(3rem, 5.5vw, 4.5rem);
 	--ds-gap: clamp(1rem, 2vw, 1.5rem);
-	--ds-body: clamp(1.0625rem, 1rem + .25vw, 1.125rem);
+	--ds-body: var(--fs-body);
 	--ds-shadow: 0 1px 2px rgba(38,38,38,.04), 0 12px 28px -18px rgba(38,38,38,.28);
 }
 
 /* ---- Typography ---- */
-.solevo-ds { color: var(--ds-text); font-size: var(--ds-body); line-height: 1.65; font-variant-numeric: lining-nums; }
+.solevo-ds { color: var(--ds-text); font-size: var(--fs-body); line-height: 1.65; font-variant-numeric: lining-nums; }
 /* Grid and card children: no flow-layout top margins */
 .solevo-qgrid > *, .solevo-scards > *, .solevo-path__grid > *, .solevo-first__grid > *, .solevo-why4 > *, .solevo-feesfaq > *, .solevo-assess > *, .solevo-person2 > *, .solevo-hero2__grid > *, .solevo-assess__media > * { margin-block: 0 !important; }
 .solevo-ds p, .solevo-ds li { font-weight: 400; }
 .solevo-ds h1, .solevo-ds h2, .solevo-ds h3 { color: var(--ds-ink); font-family: var(--s-serif); text-wrap: balance; }
-.solevo-ds h1.wp-block-heading { font-size: clamp(2.5rem, 1.7rem + 3.2vw, 4rem); font-weight: 600; line-height: 1.06; letter-spacing: -.01em; margin: 0 0 1.25rem; }
-.solevo-ds h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weight: 600; line-height: 1.12; margin-bottom: .75rem; }
-.solevo-ds h3.wp-block-heading { font-size: clamp(1.4rem, 1.25rem + .45vw, 1.65rem); font-weight: 600; line-height: 1.2; margin-bottom: .5rem; }
+.solevo-ds h1.wp-block-heading { font-size: var(--fs-h1); font-weight: 600; line-height: 1.06; letter-spacing: -.01em; margin: 0 0 1.25rem; }
+.solevo-ds h2.wp-block-heading { font-size: var(--fs-h2); font-weight: 600; line-height: 1.12; margin-bottom: .75rem; }
+.solevo-ds h3.wp-block-heading { font-size: var(--fs-h3); font-weight: 600; line-height: 1.2; margin-bottom: .5rem; }
 .solevo-ds :is(p, ul, ol, .wp-block-buttons) + h3.wp-block-heading { margin-top: 2rem; }
-.solevo-ds .is-style-eyebrow, .solevo-ds .solevo-eyebrow { font-size: .78rem !important; letter-spacing: .22em; font-weight: 500; color: var(--ds-olive-text); opacity: 1; margin: 0 0 .85rem !important; }
+.solevo-ds .is-style-eyebrow, .solevo-ds .solevo-eyebrow { font-size: var(--fs-label) !important; letter-spacing: .2em; font-weight: 500; color: var(--ds-olive-text); opacity: 1; margin: 0 0 .85rem !important; }
 .solevo-ds a { color: var(--ds-olive-text); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .solevo-ds a:hover { color: var(--ds-ink); }
-.solevo-ds .solevo-intro { font-size: clamp(1.075rem, 1rem + .3vw, 1.2rem); color: var(--ds-soft); max-width: 62ch; margin: 0; }
+.solevo-ds .solevo-intro { font-size: var(--fs-lead); color: var(--ds-soft); max-width: 62ch; margin: 0; }
 .solevo-ds strong { font-weight: 600; color: var(--ds-ink); }
 
 /* ---- Sections ---- */
@@ -490,18 +518,18 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-ds .solevo-section.has-surface-background-color { border-top: 1px solid var(--ds-line); border-bottom: 1px solid var(--ds-line); }
 .solevo-ds .solevo-sh { max-width: 760px; margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem) !important; }
 .solevo-ds .solevo-crumbs-wrap { padding-top: 1rem; padding-bottom: 0; }
-.solevo-ds .solevo-breadcrumbs ol { color: var(--ds-soft); font-size: .8125rem; letter-spacing: .04em; }
+.solevo-ds .solevo-breadcrumbs ol { color: var(--ds-soft); font-size: var(--fs-caption); letter-spacing: .04em; }
 .solevo-ds .solevo-crumbs-wrap + .wp-block-post-content > .solevo-hero2:first-child { margin-top: -2.75rem !important; padding-top: 4.25rem; }
 
 /* ---- Buttons: one primary, one outline, one text link ---- */
-.solevo-ds .wp-block-button__link { font-size: .875rem; font-weight: 500; letter-spacing: .14em; padding: .95rem 1.9rem; border-radius: 0; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
+.solevo-ds .wp-block-button__link { font-size: var(--fs-button); font-weight: 500; letter-spacing: .12em; padding: .95rem 1.9rem; border-radius: 0; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; }
 .solevo-ds .wp-block-button:not(.is-style-outline):not(.solevo-btn-light):not(.solevo-btn-ghost) > .wp-block-button__link { background: var(--ds-olive); color: #fff; }
 .solevo-ds .wp-block-button:not(.is-style-outline):not(.solevo-btn-light):not(.solevo-btn-ghost) > .wp-block-button__link:hover { background: var(--s-olive-deep); color: #fff; }
 .solevo-ds .wp-block-button.is-style-outline > .wp-block-button__link { border: 1.5px solid var(--ds-olive); color: var(--ds-olive-text); background: transparent; padding-top: calc(.95rem - 1.5px); padding-bottom: calc(.95rem - 1.5px); }
 .solevo-ds .wp-block-button.is-style-outline > .wp-block-button__link:hover { background: var(--ds-olive); color: #fff; }
 .solevo-ds .wp-block-buttons { gap: .75rem; }
 .solevo-more { margin: auto 0 0 !important; padding-top: .75rem; }
-.solevo-more a { font-size: .8125rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--ds-olive-text); }
+.solevo-more a { font-size: var(--fs-button); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--ds-olive-text); }
 .solevo-more a:hover { color: var(--ds-ink); text-decoration: underline; }
 
 /* ---- 1. Hero ---- */
@@ -514,7 +542,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 }
 .solevo-hero2__grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
 .solevo-hero2__title { max-width: 17ch; }
-.solevo-hero2__lead { font-size: clamp(1.1rem, 1rem + .4vw, 1.25rem); color: var(--ds-text); max-width: 54ch; margin: 0 0 1.75rem; }
+.solevo-hero2__lead { font-size: var(--fs-lead); color: var(--ds-text); max-width: 54ch; margin: 0 0 1.75rem; }
 .solevo-hero2 .wp-block-buttons { margin-bottom: 1.5rem; }
 .solevo-hero2__media { margin: 0 !important; position: relative; isolation: isolate; }
 .solevo-hero2__media img { display: block; width: 100%; aspect-ratio: 4 / 5; max-height: 560px; object-fit: cover; object-position: center 20%; border-radius: var(--ds-radius-lg); box-shadow: var(--ds-shadow); }
@@ -523,10 +551,10 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-chips a { display: flex; flex-direction: column; gap: .1rem; padding: .6rem 1rem .6rem 2.4rem; background: rgba(255,253,249,.8); border: 1px solid var(--ds-line); border-radius: 10px; text-decoration: none; position: relative; transition: border-color .2s; }
 .solevo-chips a:hover { border-color: var(--ds-olive); }
 .solevo-chips a::before { content: ""; position: absolute; left: .9rem; top: .85rem; width: 16px; height: 16px; background: var(--ds-olive); -webkit-mask: var(--icon-pin) center / contain no-repeat; mask: var(--icon-pin) center / contain no-repeat; }
-.solevo-chip__area { font-weight: 600; color: var(--ds-ink); font-size: .95rem; line-height: 1.3; }
-.solevo-chip__detail { font-size: .85rem; color: var(--ds-soft); line-height: 1.3; }
+.solevo-chip__area { font-weight: 600; color: var(--ds-ink); font-size: var(--fs-small); line-height: 1.3; }
+.solevo-chip__detail { font-size: var(--fs-small); color: var(--ds-soft); line-height: 1.3; }
 .solevo-trustline { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; }
-.solevo-trustline li { position: relative; padding-left: 1.4rem; font-size: .9375rem; color: var(--ds-soft); }
+.solevo-trustline li { position: relative; padding-left: 1.4rem; font-size: var(--fs-small); color: var(--ds-soft); }
 .solevo-trustline li::before, .solevo-ticks li::before, .solevo-trust li::before { content: ""; position: absolute; left: 0; top: .32em; width: 15px; height: 15px; background: var(--ds-olive); -webkit-mask: var(--icon-tick) center / contain no-repeat; mask: var(--icon-tick) center / contain no-repeat; }
 
 /* ---- 2. Question boxes (core/details) ---- */
@@ -534,18 +562,18 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-ds .solevo-qbox { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); padding: 0; margin: 0 !important; transition: border-color .2s, box-shadow .2s; }
 .solevo-ds .solevo-qbox:hover { border-color: #C9C2B2; box-shadow: var(--ds-shadow); }
 .solevo-ds .solevo-qbox[open] { border-color: var(--ds-olive); box-shadow: var(--ds-shadow); }
-.solevo-ds .solevo-qbox summary { display: block; position: relative; padding: 4.1rem 3rem 1.25rem 1.35rem; font-family: var(--s-serif); font-size: 1.45rem; font-weight: 600; line-height: 1.15; color: var(--ds-ink); }
-.solevo-ds .solevo-qbox summary em { display: block; font-family: var(--s-sans); font-style: normal; font-size: .9rem; font-weight: 400; line-height: 1.4; color: var(--ds-soft); margin-top: .4rem; }
+.solevo-ds .solevo-qbox summary { display: block; position: relative; padding: 4.1rem 3rem 1.25rem 1.35rem; font-family: var(--s-serif); font-size: var(--fs-card); font-weight: 600; line-height: 1.15; color: var(--ds-ink); }
+.solevo-ds .solevo-qbox summary em { display: block; font-family: var(--s-sans); font-style: normal; font-size: var(--fs-small); font-weight: 400; line-height: 1.4; color: var(--ds-soft); margin-top: .4rem; }
 .solevo-ds .solevo-qbox summary::before { content: ""; position: absolute; left: 1.35rem; top: 1.3rem; width: 34px; height: 34px; border-radius: 50%; background: #E9ECE3; }
 .solevo-ds .solevo-qbox summary::after { content: ""; position: absolute; right: 1.1rem; top: 1.2rem; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--ds-line); background: var(--icon-plus) center / 12px no-repeat; transition: transform .2s; }
 .solevo-ds .solevo-qbox[open] summary::after { transform: rotate(45deg); background-color: var(--ds-olive); border-color: var(--ds-olive); background-image: var(--icon-plus-w); }
 .solevo-ds .solevo-qbox > :not(summary) { margin-left: 1.35rem; margin-right: 1.35rem; }
 .solevo-ds .solevo-qbox:not([open]) summary { min-height: 7.9rem; }
 .solevo-ds .solevo-qbox > :not(summary) { margin-top: 0 !important; margin-bottom: .75rem; }
-.solevo-ds .solevo-qbox > p:not(.solevo-more) { font-size: 1rem; }
+.solevo-ds .solevo-qbox > p:not(.solevo-more) { font-size: var(--fs-body); }
 .solevo-ds .solevo-qbox > :last-child { padding-bottom: 1.35rem; }
 .solevo-qbox__links, .solevo-scard__links { list-style: none; padding: 0; margin: .25rem 0 .25rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-.solevo-qbox__links a, .solevo-scard__links a { display: inline-block; font-size: .875rem; padding: .35rem .7rem; background: #F3F0E8; border: 1px solid var(--ds-line); border-radius: 6px; text-decoration: none; color: var(--ds-ink); }
+.solevo-qbox__links a, .solevo-scard__links a { display: inline-block; font-size: var(--fs-small); padding: .35rem .7rem; background: #F3F0E8; border: 1px solid var(--ds-line); border-radius: 6px; text-decoration: none; color: var(--ds-ink); }
 .solevo-qbox__links a:hover, .solevo-scard__links a:hover { border-color: var(--ds-olive); color: var(--ds-olive-text); }
 .solevo-help__after { margin-top: 1.75rem !important; color: var(--ds-soft); }
 .solevo-qbox { --i: var(--icon-plus); }
@@ -566,41 +594,41 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-scard:hover { border-color: #C9C2B2; box-shadow: var(--ds-shadow); }
 .solevo-scard > * { margin-top: 0 !important; }
 .solevo-scard > .solevo-more { margin-top: auto !important; }
-.solevo-scard p:not(.solevo-more) { font-size: 1rem; color: var(--ds-soft); margin-bottom: .5rem; }
+.solevo-scard p:not(.solevo-more) { font-size: var(--fs-body); color: var(--ds-soft); margin-bottom: .5rem; }
 .solevo-path { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
-.solevo-ds .solevo-path__title { font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem) !important; }
+.solevo-ds .solevo-path__title { font-size: var(--fs-h3) !important; }
 .solevo-path__intro { color: var(--ds-soft); margin: 0 0 1.5rem !important; }
 .solevo-path__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-gap); counter-reset: path; }
 .solevo-path__item { position: relative; background: transparent; border: 1px solid var(--ds-line); border-radius: var(--ds-radius); padding: 1.5rem; margin: 0 !important; display: flex; flex-direction: column; }
 .solevo-path__item > * { margin-top: 0 !important; }
 .solevo-path__item.is-current { background: var(--ds-card); border: 1.5px solid var(--ds-olive); box-shadow: var(--ds-shadow); }
 .solevo-path__item:not(:last-child)::after { content: ""; position: absolute; right: calc(-1 * var(--ds-gap) / 2 - 9px); top: 50%; width: 18px; height: 18px; margin-top: -9px; z-index: 2; border-radius: 50%; background: var(--s-linen) var(--icon-arrow) center / 10px no-repeat; border: 1px solid var(--ds-line); }
-.solevo-path__step { font-size: .75rem !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: var(--ds-olive-text); margin-bottom: .5rem !important; }
-.solevo-path__item p:not([class]) { font-size: 1rem; color: var(--ds-soft); }
-.solevo-path__booked { font-size: .875rem; color: var(--ds-soft); border-top: 1px solid var(--ds-line); padding-top: .75rem; margin: auto 0 1rem !important; }
+.solevo-path__step { font-size: var(--fs-label) !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: var(--ds-olive-text); margin-bottom: .5rem !important; }
+.solevo-path__item p:not([class]) { font-size: var(--fs-body); color: var(--ds-soft); }
+.solevo-path__booked { font-size: var(--fs-small); color: var(--ds-soft); border-top: 1px solid var(--ds-line); padding-top: .75rem; margin: auto 0 1rem !important; }
 .solevo-path__item .wp-block-buttons { margin: 0; }
 
 /* ---- 4. Journey ---- */
 .solevo-ds ol.solevo-journey { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-gap); counter-reset: j; }
-.solevo-journey li { counter-increment: j; position: relative; padding: 4.5rem 1.5rem 1.5rem; background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); font-size: 1rem; color: var(--ds-soft); }
-.solevo-journey li::before { content: counter(j); position: absolute; left: 1.5rem; top: 1.25rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--ds-olive); color: #fff; font-family: var(--s-serif); font-size: 1.35rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.solevo-journey li { counter-increment: j; position: relative; padding: 4.5rem 1.5rem 1.5rem; background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); font-size: var(--fs-body); color: var(--ds-soft); }
+.solevo-journey li::before { content: counter(j); position: absolute; left: 1.5rem; top: 1.25rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--ds-olive); color: #fff; font-family: var(--s-serif); font-size: var(--fs-card); font-weight: 600; display: flex; align-items: center; justify-content: center; }
 .solevo-journey li:not(:last-child)::after { content: ""; position: absolute; left: 4.4rem; right: -1rem; top: 2.45rem; height: 1px; background: repeating-linear-gradient(90deg, var(--ds-line) 0 6px, transparent 6px 11px); }
-.solevo-journey li strong { display: block; font-family: var(--s-serif); font-size: 1.45rem; line-height: 1.2; font-weight: 600; color: var(--ds-ink); margin-bottom: .5rem; }
+.solevo-journey li strong { display: block; font-family: var(--s-serif); font-size: var(--fs-card); line-height: 1.2; font-weight: 600; color: var(--ds-ink); margin-bottom: .5rem; }
 .solevo-first { margin-top: clamp(1.75rem, 3.5vw, 2.5rem) !important; background: #F2EEE6; border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 3vw, 2.25rem); }
-.solevo-ds .solevo-first__title { font-size: 1.4rem !important; margin-bottom: 1rem !important; }
+.solevo-ds .solevo-first__title { font-size: var(--fs-h3) !important; margin-bottom: 1rem !important; }
 .solevo-first__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
 .solevo-first__item > * { margin-top: 0 !important; }
-.solevo-ds .solevo-first__item h3 { font-family: var(--s-sans); font-size: .78rem !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--ds-olive-text); margin-bottom: .4rem; }
-.solevo-first__item p { font-size: .975rem; margin: 0; }
+.solevo-ds .solevo-first__item h3 { font-family: var(--s-sans); font-size: var(--fs-label) !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--ds-olive-text); margin-bottom: .4rem; }
+.solevo-first__item p { font-size: var(--fs-body); margin: 0; }
 
 /* ---- 5. Why (four reasons) ---- */
 .solevo-why4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ds-gap); }
 .solevo-why4__item { border-top: 2px solid var(--ds-olive); padding-top: 1.25rem; margin: 0 !important; }
 .solevo-why4__item > * { margin-top: 0 !important; }
-.solevo-why4__num { font-family: var(--s-serif); font-size: 2.25rem; line-height: 1; color: #9C9686; margin-bottom: .75rem !important; }
-.solevo-why4__item p:not(.solevo-why4__num) { font-size: 1rem; color: var(--ds-soft); }
+.solevo-why4__num { font-family: var(--s-serif); font-size: var(--fs-h2); line-height: 1; color: #9C9686; margin-bottom: .75rem !important; }
+.solevo-why4__item p:not(.solevo-why4__num) { font-size: var(--fs-body); color: var(--ds-soft); }
 .solevo-why4__extra { list-style: none; padding: 1.25rem 0 0; margin: clamp(2rem, 4vw, 2.75rem) 0 0; border-top: 1px solid var(--ds-line); display: flex; flex-wrap: wrap; gap: .5rem 2rem; }
-.solevo-why4__extra li { position: relative; padding-left: 1.1rem; font-size: .95rem; color: var(--ds-ink); }
+.solevo-why4__extra li { position: relative; padding-left: 1.1rem; font-size: var(--fs-small); color: var(--ds-ink); }
 .solevo-why4__extra li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--ds-olive); }
 
 /* ---- 6. Facilities (olive) ---- */
@@ -621,7 +649,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-ds .solevo-assess-wrap .is-style-eyebrow { color: #F1F2EC; }
 .solevo-ds .solevo-assess-wrap .solevo-intro, .solevo-ds .solevo-assess-wrap li { color: #F6F3EC; }
 .solevo-assess__list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .9rem; }
-.solevo-assess__list li { position: relative; padding: 0 0 .9rem 1.6rem; border-bottom: 1px solid rgba(250,247,243,.16); font-size: 1rem; }
+.solevo-assess__list li { position: relative; padding: 0 0 .9rem 1.6rem; border-bottom: 1px solid rgba(250,247,243,.16); font-size: var(--fs-body); }
 .solevo-assess__list li:last-child { border-bottom: 0; padding-bottom: 0; }
 .solevo-assess__list li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #DCE0D2; }
 
@@ -630,10 +658,10 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-person2__img { margin: 0 !important; }
 .solevo-person2__img img { width: 100%; display: block; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border-radius: var(--ds-radius-lg); }
 .solevo-person2__text > * { margin-top: 0 !important; }
-.solevo-ds .solevo-person2__name { font-size: clamp(1.8rem, 1.5rem + 1vw, 2.3rem) !important; margin-bottom: .25rem !important; }
-.solevo-person2__role { font-size: .9rem; color: var(--ds-olive-text); font-weight: 500; margin-bottom: 1rem !important; }
+.solevo-ds .solevo-person2__name { font-size: var(--fs-h3) !important; margin-bottom: .25rem !important; }
+.solevo-person2__role { font-size: var(--fs-small); color: var(--ds-olive-text); font-weight: 500; margin-bottom: 1rem !important; }
 .solevo-trust, .solevo-ticks { list-style: none; padding: 0; margin: 1.25rem 0 0; display: grid; gap: .55rem; }
-.solevo-trust li, .solevo-ticks li { position: relative; padding-left: 1.65rem; font-size: 1rem; }
+.solevo-trust li, .solevo-ticks li { position: relative; padding-left: 1.65rem; font-size: var(--fs-body); }
 .solevo-trust li::before, .solevo-ticks li::before { top: .35em; }
 
 /* ---- 8. Fees + FAQ ---- */
@@ -643,39 +671,39 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 .solevo-fees__rows { margin-bottom: 1.75rem !important; }
 .solevo-fee { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--ds-line); margin: 0 !important; }
 .solevo-fee:last-child { border-bottom: 0; }
-.solevo-fee__label { margin: 0 !important; font-weight: 500; color: var(--ds-ink); line-height: 1.35; font-size: 1rem; }
-.solevo-fee__label span { font-size: .85rem; font-weight: 400; color: var(--ds-soft); }
-.solevo-fee__price { margin: 0 !important; font-family: var(--s-serif); font-size: 1.6rem; font-weight: 600; color: var(--ds-ink); white-space: nowrap; }
-.solevo-fees .solevo-ticks li { font-size: .95rem; color: var(--ds-soft); }
+.solevo-fee__label { margin: 0 !important; font-weight: 500; color: var(--ds-ink); line-height: 1.35; font-size: var(--fs-body); }
+.solevo-fee__label span { font-size: var(--fs-caption); font-weight: 400; color: var(--ds-soft); }
+.solevo-fee__price { margin: 0 !important; font-family: var(--s-serif); font-size: var(--fs-card); font-weight: 600; color: var(--ds-ink); white-space: nowrap; }
+.solevo-fees .solevo-ticks li { font-size: var(--fs-body); color: var(--ds-soft); }
 .solevo-ds .solevo-faq2__col > h3 { margin: calc(clamp(1.5rem, 3vw, 2.25rem) + 1px) 0 .75rem !important; }
 .solevo-ds .solevo-feesfaq-wrap .solevo-reviewed { margin-top: 2rem; }
 .solevo-faq2 { border-top: 1px solid var(--ds-line); }
 .solevo-ds .solevo-faq2__item { border-bottom: 1px solid var(--ds-line); padding: 0; margin: 0 !important; }
-.solevo-ds .solevo-faq2__item summary { padding: 1.1rem 2.5rem 1.1rem 0; position: relative; font-weight: 500; color: var(--ds-ink); font-size: 1.05rem; display: block; }
+.solevo-ds .solevo-faq2__item summary { padding: 1.1rem 2.5rem 1.1rem 0; position: relative; font-weight: 500; color: var(--ds-ink); font-size: var(--fs-body); display: block; }
 .solevo-ds .solevo-faq2__item summary::after { content: ""; position: absolute; right: .25rem; top: 50%; margin-top: -12px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--ds-line); background: var(--icon-plus) center / 10px no-repeat; transition: transform .2s; }
 .solevo-ds .solevo-faq2__item[open] summary::after { transform: rotate(45deg); }
-.solevo-ds .solevo-faq2__item p { margin: 0 0 1.15rem; color: var(--ds-soft); font-size: 1rem; max-width: 64ch; }
+.solevo-ds .solevo-faq2__item p { margin: 0 0 1.15rem; color: var(--ds-soft); font-size: var(--fs-body); max-width: 64ch; }
 
 /* ---- 9. Locations ---- */
 .solevo-locs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr)); gap: var(--ds-gap); }
 .solevo-loc { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius-lg); padding: clamp(1.5rem, 3vw, 2.25rem); display: flex; flex-direction: column; }
 .solevo-loc > * { margin-top: 0; }
-.solevo-ds .solevo-loc__name { font-family: var(--s-serif); font-size: 1.6rem; font-weight: 600; line-height: 1.2; color: var(--ds-ink); margin: 0 0 .35rem; }
-.solevo-loc__note { color: var(--ds-soft); font-size: .95rem; margin: 0 0 1rem; }
-.solevo-loc .solevo-nap { font-size: 1rem; margin-bottom: .75rem; line-height: 1.6; }
-.solevo-loc__hours { list-style: none; padding: 0; margin: 0 0 1.25rem; font-size: .95rem; color: var(--ds-ink); }
+.solevo-ds .solevo-loc__name { font-family: var(--s-serif); font-size: var(--fs-h3); font-weight: 600; line-height: 1.2; color: var(--ds-ink); margin: 0 0 .35rem; }
+.solevo-loc__note { color: var(--ds-soft); font-size: var(--fs-small); margin: 0 0 1rem; }
+.solevo-loc .solevo-nap { font-size: var(--fs-small); margin-bottom: .75rem; line-height: 1.6; }
+.solevo-loc__hours { list-style: none; padding: 0; margin: 0 0 1.25rem; font-size: var(--fs-small); color: var(--ds-ink); }
 .solevo-loc .wp-block-buttons { display: flex; flex-direction: column; align-items: flex-start; margin-top: auto; }
 
 /* ---- 10. Final CTA band (template part) ---- */
 .solevo-ds .wp-block-post-content > .solevo-section:last-child { padding-bottom: calc(var(--ds-y) + var(--s-wave-h)) !important; }
 .solevo-cta2 { position: relative; text-align: center; margin-top: 0; padding: clamp(3.5rem, 7vw, 5.5rem) 1.25rem clamp(4rem, 8vw, 6rem); }
 .solevo-cta2__inner { max-width: 720px; margin: 0 auto; }
-.solevo-cta2 h2.wp-block-heading { font-family: var(--s-serif); font-size: clamp(2.1rem, 1.6rem + 2vw, 3.1rem); font-weight: 600; line-height: 1.12; color: var(--s-on-dark); margin: 0 0 .75rem; }
-.solevo-cta2__sub { color: #F6F3EC; font-size: 1.1rem; margin: 0 0 2rem; }
+.solevo-cta2 h2.wp-block-heading { font-family: var(--s-serif); font-size: var(--fs-h3); font-weight: 600; line-height: 1.12; color: var(--s-on-dark); margin: 0 0 .75rem; }
+.solevo-cta2__sub { color: #F6F3EC; font-size: var(--fs-lead); margin: 0 0 2rem; }
 .solevo-cta2__btns { justify-content: center; display: flex; flex-wrap: wrap; gap: .85rem; }
-.solevo-cta2 .solevo-btn-light .wp-block-button__link, .solevo-cta2 .solevo-btn-ghost .wp-block-button__link { padding: 1.05rem 2.4rem; font-size: .875rem; font-weight: 500; letter-spacing: .16em; min-height: 52px; }
+.solevo-cta2 .solevo-btn-light .wp-block-button__link, .solevo-cta2 .solevo-btn-ghost .wp-block-button__link { padding: 1.05rem 2.4rem; font-size: var(--fs-button); font-weight: 500; letter-spacing: .12em; min-height: 52px; }
 .solevo-cta2 .solevo-btn-light .wp-block-button__link { color: var(--s-olive-deep); }
-.solevo-cta2__alt { margin: 1.75rem 0 0; color: #F1EEE6; font-size: .95rem; }
+.solevo-cta2__alt { margin: 1.75rem 0 0; color: #F1EEE6; font-size: var(--fs-body); }
 .solevo-cta2__alt a { color: #fff; text-underline-offset: 3px; }
 
 /* ---- Related, reviewed, editor notes ---- */
@@ -688,7 +716,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 @media (max-width: 781px) {
 	.solevo-sticky { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; gap: .5rem; padding: .6rem .75rem calc(.6rem + env(safe-area-inset-bottom)); background: rgba(253,251,248,.96); backdrop-filter: blur(8px); box-shadow: 0 -1px 0 var(--ds-line), 0 -10px 24px -18px rgba(0,0,0,.35); transform: translateY(110%); transition: transform .25s ease; }
 	.solevo-sticky.is-visible { transform: none; }
-	.solevo-sticky__btn { flex: 1 1 0; display: flex; align-items: center; justify-content: center; min-height: 48px; font-family: var(--s-sans); font-size: .85rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--ds-olive); color: var(--ds-olive-text); background: transparent; }
+	.solevo-sticky__btn { flex: 1 1 0; display: flex; align-items: center; justify-content: center; min-height: 48px; font-family: var(--s-sans); font-size: var(--fs-button); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid var(--ds-olive); color: var(--ds-olive-text); background: transparent; }
 	.solevo-sticky__btn.is-primary { flex-grow: 2; background: var(--ds-olive); color: #fff; }
 	.solevo-sticky__btn.is-alt { background: var(--s-ink); border-color: var(--s-ink); }
 	body:has(.solevo-sticky) .solevo-footer { padding-bottom: 7rem; }
@@ -730,7 +758,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 	.solevo-person2__img { max-width: 260px; }
 	.solevo-why4 { grid-template-columns: 1fr; }
 	.solevo-first__grid { grid-template-columns: 1fr; gap: 1rem; }
-	.solevo-ds .solevo-qbox summary, .solevo-ds .solevo-qbox:not([open]) summary { min-height: 0; padding: 1.1rem 3rem 1.1rem 4.1rem; font-size: 1.3rem; }
+	.solevo-ds .solevo-qbox summary, .solevo-ds .solevo-qbox:not([open]) summary { min-height: 0; padding: 1.1rem 3rem 1.1rem 4.1rem; font-size: var(--fs-card); }
 	.solevo-ds .solevo-qbox summary::before { left: 1rem; top: 1.05rem; }
 	.solevo-ds .solevo-qbox::after { left: calc(1rem + 8px); top: calc(1.05rem + 8px); }
 	.solevo-ds .solevo-qbox summary::after { top: 1.1rem; right: .9rem; }
@@ -742,7 +770,7 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
 
 /* Question box booking button: solid like the primary button, compact, aligned with the box text */
 .solevo-ds .solevo-qbox > .solevo-qbox__cta { margin: .5rem 1.35rem 0 !important; padding-bottom: 1.35rem; }
-.solevo-qbox__cta a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: .55rem 1.25rem; background: var(--ds-olive); color: #fff !important; font-size: .8125rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+.solevo-qbox__cta a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: .55rem 1.25rem; background: var(--ds-olive); color: #fff !important; font-size: var(--fs-button); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
 .solevo-qbox__cta a:hover { background: var(--s-olive-deep); }
 @media (max-width: 781px) { .solevo-ds .solevo-qbox > .solevo-qbox__cta { margin-left: 1.1rem !important; margin-right: 1.1rem !important; } }
 
@@ -755,47 +783,47 @@ h2.wp-block-heading { font-size: clamp(2.25rem, 3.7vw, 3.4rem); font-weight: 500
    - every text colour on cream, olive and the dark footer meets WCAG AA (4.5:1+)
    - smaller heading-to-body gap, more line spacing, less empty space
    ========================================================= */
-body { font-size: var(--ds-body); line-height: 1.7; color: var(--ds-text); }
+body { font-size: var(--fs-body); line-height: 1.7; color: var(--ds-text); }
 p, li { font-weight: 400; }
 
 /* Type: supporting copy */
 .solevo-sub, .solevo-lead, .solevo-hero__lead { font-weight: 400 !important; color: var(--ds-text); }
-.solevo-sub { font-size: clamp(1.0625rem, 1rem + .3vw, 1.2rem); }
-.solevo-eyebrow, .is-style-eyebrow { color: var(--ds-olive-text) !important; opacity: 1 !important; font-weight: 500 !important; font-size: .8125rem !important; letter-spacing: .22em; }
-.solevo-dots li { font-weight: 400; font-size: var(--ds-body); line-height: 1.55; }
-.solevo-condtags li a { font-weight: 400; font-size: 1rem; color: var(--ds-ink); }
-.solevo-plaintags li { font-size: 1rem; color: var(--ds-soft); }
-.solevo-service__desc { font-size: var(--ds-body); color: var(--ds-text); }
-.solevo-textlink a, .solevo-card__more, .solevo-arrow-link a { font-size: .875rem; font-weight: 500; color: var(--ds-olive-text); }
-.solevo-member__text > p:not([class]), .solevo-studio__intro p:not([class]) { font-size: var(--ds-body); }
-.solevo-member__label { font-size: .8125rem !important; }
-.solevo-boxtags li { font-size: 1rem; }
-.solevo-reason p:not(.solevo-num) { font-size: var(--ds-body); max-width: 19rem; }
-.solevo-class p:not([class]) { font-size: 1.0625rem; line-height: 1.7; }
-.solevo-class__tag { font-weight: 400; font-size: .9375rem; color: var(--ds-olive-text); }
-.solevo-class__best { font-size: .8125rem; color: var(--ds-soft); }
-.solevo-cat__places { font-size: .78rem !important; color: var(--ds-soft) !important; }
-.solevo-price-row p { font-size: 1.0625rem; }
-.solevo-price-row p span { font-size: .875rem; font-weight: 400; color: var(--ds-soft); }
-.solevo-price-card__meta { font-size: .78rem !important; }
-.solevo-expiry__list li { font-size: 1rem; }
-.solevo-founders .solevo-eyebrow { font-size: .8125rem !important; }
-.solevo-founders__per { font-size: .9375rem; }
-.solevo-card__text, .is-style-pills li, .solevo-page-hero .solevo-nap { font-size: 1rem; }
-.solevo-person__role { font-size: .875rem; color: var(--ds-olive-text); }
-.solevo-reviewed { font-size: .9375rem; color: var(--ds-soft); }
-.solevo-breadcrumbs ol { font-size: .875rem; color: var(--ds-soft); }
+.solevo-sub { font-size: var(--fs-lead); }
+.solevo-eyebrow, .is-style-eyebrow { color: var(--ds-olive-text) !important; opacity: 1 !important; font-weight: 500 !important; font-size: var(--fs-label) !important; letter-spacing: .2em; }
+.solevo-dots li { font-weight: 400; font-size: var(--fs-body); line-height: 1.55; }
+.solevo-condtags li a { font-weight: 400; font-size: var(--fs-small); color: var(--ds-ink); }
+.solevo-plaintags li { font-size: var(--fs-small); color: var(--ds-soft); }
+.solevo-service__desc { font-size: var(--fs-body); color: var(--ds-text); }
+.solevo-textlink a, .solevo-card__more, .solevo-arrow-link a { font-size: var(--fs-button); font-weight: 500; color: var(--ds-olive-text); }
+.solevo-member__text > p:not([class]), .solevo-studio__intro p:not([class]) { font-size: var(--fs-body); }
+.solevo-member__label { font-size: var(--fs-label) !important; }
+.solevo-boxtags li { font-size: var(--fs-small); }
+.solevo-reason p:not(.solevo-num) { font-size: var(--fs-body); max-width: 19rem; }
+.solevo-class p:not([class]) { font-size: var(--fs-body); line-height: 1.7; }
+.solevo-class__tag { font-weight: 400; font-size: var(--fs-small); color: var(--ds-olive-text); }
+.solevo-class__best { font-size: var(--fs-label); color: var(--ds-soft); }
+.solevo-cat__places { font-size: var(--fs-label) !important; color: var(--ds-soft) !important; }
+.solevo-price-row p { font-size: var(--fs-body); }
+.solevo-price-row p span { font-size: var(--fs-caption); font-weight: 400; color: var(--ds-soft); }
+.solevo-price-card__meta { font-size: var(--fs-label) !important; }
+.solevo-expiry__list li { font-size: var(--fs-small); }
+.solevo-founders .solevo-eyebrow { font-size: var(--fs-label) !important; }
+.solevo-founders__per { font-size: var(--fs-caption); }
+.solevo-card__text, .is-style-pills li, .solevo-page-hero .solevo-nap { font-size: var(--fs-small); }
+.solevo-person__role { font-size: var(--fs-label); color: var(--ds-olive-text); }
+.solevo-reviewed { font-size: var(--fs-caption); color: var(--ds-soft); }
+.solevo-breadcrumbs ol { font-size: var(--fs-caption); color: var(--ds-soft); }
 
 /* Headings: keep the serif, narrow the gap to body copy */
-h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weight: 600; line-height: 1.12; }
-.solevo-h2-xl { font-size: clamp(2rem, 1.5rem + 1.9vw, 2.9rem) !important; line-height: 1.18 !important; }
-.solevo-h2-sm { font-size: clamp(1.9rem, 1.45rem + 1.5vw, 2.6rem) !important; }
-.solevo-hero__title { font-size: clamp(2.75rem, 1.9rem + 3.6vw, 4.9rem) !important; line-height: 1.06 !important; }
-.solevo-band__title { font-size: clamp(2rem, 1.5rem + 2vw, 3.1rem) !important; line-height: 1.2 !important; margin-bottom: 2rem !important; }
-.solevo-member__name { font-size: clamp(1.75rem, 1.45rem + 1vw, 2.2rem) !important; font-weight: 600 !important; }
-.solevo-service h3 { font-size: clamp(1.55rem, 1.35rem + .7vw, 1.9rem) !important; font-weight: 600 !important; }
+h2.wp-block-heading { font-size: var(--fs-h2); font-weight: 600; line-height: 1.12; }
+.solevo-h2-xl { font-size: var(--fs-h2) !important; line-height: 1.18 !important; }
+.solevo-h2-sm { font-size: var(--fs-h2) !important; }
+.solevo-hero__title { font-size: var(--fs-h1) !important; line-height: 1.06 !important; }
+.solevo-band__title { font-size: var(--fs-h2) !important; line-height: 1.2 !important; margin-bottom: 2rem !important; }
+.solevo-member__name { font-size: var(--fs-h3) !important; font-weight: 600 !important; }
+.solevo-service h3 { font-size: var(--fs-h3) !important; font-weight: 600 !important; }
 .solevo-reason h3, .solevo-cat h3, .solevo-class h4, .solevo-price-card h3 { font-weight: 600 !important; }
-.solevo-num { font-size: clamp(3rem, 4.5vw, 4rem); color: #9C9686; margin-bottom: 1rem; font-variant-numeric: lining-nums; }
+.solevo-num { font-size: var(--fs-h1); color: #9C9686; margin-bottom: 1rem; font-variant-numeric: lining-nums; }
 .solevo-price, .solevo-founders__price { font-variant-numeric: lining-nums; }
 
 /* Olive sections: solid light text, no translucent copy */
@@ -804,19 +832,19 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 .solevo-olive .solevo-sub, .solevo-olive .solevo-dots li, .solevo-olive p { color: #F6F3EC; }
 .solevo-olive .solevo-dots li::before { background: #EEF0E8; }
 .solevo-video__play a { color: #F6F3EC; }
-.solevo-band__caption { font-size: .9375rem; font-weight: 400; color: #F6F3EC; opacity: 1; }
-.solevo-btn-light .wp-block-button__link { color: var(--s-olive-deep); font-size: .875rem; font-weight: 500; }
-.solevo-btn-ghost .wp-block-button__link { color: #fff; border: 1.5px solid #F6F3EC; font-size: .875rem; font-weight: 500; }
+.solevo-band__caption { font-size: var(--fs-caption); font-weight: 400; color: #F6F3EC; opacity: 1; }
+.solevo-btn-light .wp-block-button__link { color: var(--s-olive-deep); font-size: var(--fs-button); font-weight: 500; }
+.solevo-btn-ghost .wp-block-button__link { color: #fff; border: 1.5px solid #F6F3EC; font-size: var(--fs-button); font-weight: 500; }
 
 /* Footer: larger text, AA on the dark background */
 .solevo-footer { color: #D6D3CE; padding-top: clamp(5.5rem, 9vw, 8rem); }
-.solevo-footer .solevo-eyebrow { color: #B9C2A9 !important; font-size: .8125rem !important; }
-.solevo-footer__brand p:not([class]) { font-weight: 400; font-size: 1rem; color: #D6D3CE; }
-.solevo-footer__italic { color: #BDBAB4; font-size: 1rem; font-weight: 400; }
-.solevo-footer__links li { color: #CFCCC6; font-size: 1rem; }
-.solevo-footer__find .solevo-nap { color: #BDBAB4; font-weight: 400; font-size: 1rem; }
-.solevo-copyright { color: #B3B0AA; font-size: .9375rem; font-weight: 400; }
-.solevo-social, .solevo-social a { color: #BDBAB4; font-size: .9375rem; }
+.solevo-footer .solevo-eyebrow { color: #B9C2A9 !important; font-size: var(--fs-label) !important; }
+.solevo-footer__brand p:not([class]) { font-weight: 400; font-size: var(--fs-small); color: #D6D3CE; }
+.solevo-footer__italic { color: #BDBAB4; font-size: var(--fs-small); font-weight: 400; }
+.solevo-footer__links li { color: #CFCCC6; font-size: var(--fs-lead); }
+.solevo-footer__find .solevo-nap { color: #BDBAB4; font-weight: 400; font-size: var(--fs-small); }
+.solevo-copyright { color: #B3B0AA; font-size: var(--fs-caption); font-weight: 400; }
+.solevo-social, .solevo-social a { color: #BDBAB4; font-size: var(--fs-small); }
 .solevo-footer__find { margin-top: clamp(2.5rem, 5vw, 4rem) !important; }
 .solevo-footer__mark { margin-top: clamp(2rem, 4vw, 3rem) !important; }
 
@@ -846,17 +874,17 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 /* Physio and inner pages: supporting copy at 17px, links at 14px */
 .solevo-scard p:not(.solevo-more), .solevo-qbox > p:not(.solevo-more):not(.solevo-qbox__cta), .solevo-path__item p:not([class]),
 .solevo-journey li, .solevo-why4__item p:not(.solevo-why4__num), .solevo-assess__list li, .solevo-trust li, .solevo-ticks li,
-.solevo-first__item p, .solevo-faq2__item p, .solevo-fees .solevo-ticks li { font-size: 1.0625rem; }
-.solevo-ds .solevo-qbox summary em { font-size: 1rem; }
-.solevo-chip__detail, .solevo-path__booked, .solevo-fee__label span, .solevo-loc__note, .solevo-loc__hours { font-size: .9375rem; }
-.solevo-trustline li, .solevo-why4__extra li { font-size: 1rem; }
-.solevo-more a, .solevo-qbox__cta a { font-size: .875rem; }
-.solevo-ds .solevo-faq2__item summary { font-size: 1.0625rem; }
+.solevo-first__item p, .solevo-faq2__item p, .solevo-fees .solevo-ticks li { font-size: var(--fs-body); }
+.solevo-ds .solevo-qbox summary em { font-size: var(--fs-small); }
+.solevo-chip__detail, .solevo-path__booked, .solevo-fee__label span, .solevo-loc__note, .solevo-loc__hours { font-size: var(--fs-small); }
+.solevo-trustline li, .solevo-why4__extra li { font-size: var(--fs-small); }
+.solevo-more a, .solevo-qbox__cta a { font-size: var(--fs-button); }
+.solevo-ds .solevo-faq2__item summary { font-size: var(--fs-body); }
 
 /* Location map, hero jump links, Instagram */
 .solevo-loc__map { margin: calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) calc(-1 * clamp(1.5rem, 3vw, 2.25rem)) 1.5rem; aspect-ratio: 16 / 8; background: #ECE7DE; border-radius: var(--ds-radius-lg) var(--ds-radius-lg) 0 0; overflow: hidden; }
 .solevo-loc__map iframe { display: block; width: 100%; height: 100%; border: 0; }
-.solevo-jump { margin: 1rem 0 0 !important; font-size: 1rem; color: var(--ds-soft); }
+.solevo-jump { margin: 1rem 0 0 !important; font-size: var(--fs-small); color: var(--ds-soft); }
 .solevo-jump a { font-weight: 500; }
 .solevo-ig__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem; margin-bottom: 1.5rem; }
 .solevo-ig__head .solevo-sh { margin-bottom: 0 !important; }
@@ -884,19 +912,19 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 .solevo-flagbox > * { margin-top: 0 !important; }
 .solevo-ds .solevo-flagbox .is-style-eyebrow { color: #7A4526 !important; }
 .solevo-flags { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: .6rem; }
-.solevo-flags li { position: relative; padding-left: 1.75rem; font-size: 1.0625rem; color: var(--ds-ink); }
-.solevo-flags li::before { content: "!"; position: absolute; left: 0; top: .2em; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: #9A5B34; color: #fff; font-size: .75rem; font-weight: 700; line-height: 1.15rem; text-align: center; }
-.solevo-flags__note { font-size: 1rem; color: var(--ds-text); margin: 0 !important; font-weight: 500; }
+.solevo-flags li { position: relative; padding-left: 1.75rem; font-size: var(--fs-body); color: var(--ds-ink); }
+.solevo-flags li::before { content: "!"; position: absolute; left: 0; top: .2em; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: #9A5B34; color: #fff; font-size: .75em; font-weight: 700; line-height: 1.15rem; text-align: center; }
+.solevo-flags__note { font-size: var(--fs-body); color: var(--ds-text); margin: 0 !important; font-weight: 500; }
 
 /* Classes and formats */
-.solevo-class2__meta { font-size: .78rem !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: var(--ds-olive-text); margin-bottom: .5rem !important; }
-.solevo-class2__tag { font-style: italic; color: var(--ds-olive-text) !important; font-size: 1rem !important; margin-bottom: .5rem !important; }
-.solevo-class2__best { margin-top: auto !important; padding-top: .75rem; border-top: 1px solid var(--ds-line); font-size: .9375rem !important; }
+.solevo-class2__meta { font-size: var(--fs-label) !important; letter-spacing: .2em; text-transform: uppercase; font-weight: 500; color: var(--ds-olive-text); margin-bottom: .5rem !important; }
+.solevo-class2__tag { font-style: italic; color: var(--ds-olive-text) !important; font-size: var(--fs-small) !important; margin-bottom: .5rem !important; }
+.solevo-class2__best { margin-top: auto !important; padding-top: .75rem; border-top: 1px solid var(--ds-line); font-size: var(--fs-small) !important; }
 
 /* Price cards */
 .solevo-prices2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); gap: var(--ds-gap); align-items: start; }
 .solevo-prices2 > * { margin-block: 0 !important; }
-.solevo-price2__meta { font-size: .9375rem; color: var(--ds-soft); margin: 0 0 .5rem !important; }
+.solevo-price2__meta { font-size: var(--fs-small); color: var(--ds-soft); margin: 0 0 .5rem !important; }
 .solevo-price2 .solevo-fees__rows { margin-bottom: 0 !important; }
 
 /* Timetable */
@@ -919,7 +947,7 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 .solevo-cards { align-items: stretch; }
 .solevo-card { display: flex; margin: 0 !important; }
 .solevo-card a { box-sizing: border-box; flex: 1 1 auto; height: auto; min-height: 100%; border-radius: var(--ds-radius, 12px); background: var(--ds-card, #FFFDF9); }
-.solevo-card__text { font-size: 1.0625rem; color: var(--ds-soft, #57534C); }
+.solevo-card__text { font-size: var(--fs-body); color: var(--ds-soft, #57534C); }
 .solevo-card__more { font-weight: 500; color: var(--ds-olive-text, #4C573F); }
 
 /* =========================================================
@@ -980,24 +1008,24 @@ h2.wp-block-heading { font-size: clamp(2rem, 1.5rem + 1.7vw, 2.75rem); font-weig
 .solevo-footer__logo { margin: 0 !important; }
 .solevo-footer__logo img { width: clamp(160px, 16vw, 220px); }
 .solevo-footer__contact { text-align: right; }
-.solevo-footer .solevo-floc__label { font-family: var(--wp--preset--font-family--body, sans-serif); font-size: .8125rem !important; letter-spacing: .12em; text-transform: uppercase; color: #9C9A95; margin: 0 0 1.1rem !important; font-weight: 400; }
-.solevo-footer__phone { display: block; font-family: var(--s-serif); font-weight: 400; font-size: clamp(2.25rem, 4.2vw, 3.5rem); line-height: 1; color: var(--s-on-dark) !important; margin-bottom: 1.5rem; }
+.solevo-footer .solevo-floc__label { font-family: var(--wp--preset--font-family--body, sans-serif); font-size: var(--fs-label) !important; letter-spacing: .2em; text-transform: uppercase; color: #9C9A95; margin: 0 0 1.1rem !important; font-weight: 400; }
+.solevo-footer__phone { display: block; font-family: var(--s-serif); font-weight: 400; font-size: var(--fs-h2); line-height: 1; color: var(--s-on-dark) !important; margin-bottom: 1.5rem; }
 .solevo-footer__btns { justify-content: flex-end; gap: .75rem !important; }
-.solevo-footer__btns .wp-block-button__link { background: transparent !important; color: var(--s-on-dark) !important; border: 1px solid #6E6C68 !important; border-radius: 0 !important; padding: .85rem 1.6rem !important; font-size: .95rem; letter-spacing: .04em; }
+.solevo-footer__btns .wp-block-button__link { background: transparent !important; color: var(--s-on-dark) !important; border: 1px solid #6E6C68 !important; border-radius: 0 !important; padding: .85rem 1.6rem !important; font-size: var(--fs-button); letter-spacing: .12em; }
 .solevo-footer__btns .wp-block-button__link:hover, .solevo-footer__btns .wp-block-button__link:focus-visible { border-color: var(--s-on-dark) !important; background: rgba(255,255,255,.06) !important; }
 .solevo-footer__line { border: 0 !important; height: 1px !important; background: #46443F !important; opacity: 1 !important; margin: clamp(2.5rem, 5vw, 4rem) auto !important; }
 .solevo-footer__grid { gap: 2rem !important; margin-top: 0 !important; margin-bottom: 0 !important; }
 .solevo-footer__grid > .wp-block-column .solevo-floc__label { margin-top: 0 !important; }
 .solevo-footer__links { gap: .9rem; }
-.solevo-footer__links li { font-family: var(--s-serif); font-size: 1.2rem; color: #D6D3CE; }
+.solevo-footer__links li { font-family: var(--s-serif); font-size: var(--fs-lead); color: #D6D3CE; }
 .solevo-footer__find { margin-top: 0 !important; }
 .solevo-flocs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(2rem, 4vw, 3.5rem); }
 .solevo-floc__map { border-radius: 8px; overflow: hidden; background: #3A3936; aspect-ratio: 5 / 2; }
 .solevo-floc__map iframe { display: block; width: 100%; height: 100%; border: 0; }
 .solevo-floc__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-.solevo-floc__addr { font-style: normal; font-size: 1.05rem; font-weight: 400; line-height: 1.75; color: #D6D3CE; }
+.solevo-floc__addr { font-style: normal; font-size: var(--fs-small); font-weight: 400; line-height: 1.75; color: #D6D3CE; }
 .solevo-floc__addr a { color: inherit !important; }
-.solevo-floc__hours { list-style: none; margin: 0; padding: 0; font-size: 1.05rem; font-weight: 400; line-height: 1.75; color: #D6D3CE; }
+.solevo-floc__hours { list-style: none; margin: 0; padding: 0; font-size: var(--fs-small); font-weight: 400; line-height: 1.75; color: #D6D3CE; }
 .solevo-floc__hours li { font-weight: 400; }
 .solevo-floc__day { margin-right: .5rem; }
 .solevo-footer__base { margin-top: clamp(3rem, 6vw, 4.5rem) !important; padding-top: 1.5rem; border-top: 1px solid #46443F; }
@@ -1065,22 +1093,22 @@ body { font-weight: 400; color: #2F2E2C; }
 .wp-block-button:not(.is-style-outline):not(.solevo-btn-light):not(.solevo-btn-ghost) > .wp-block-button__link:hover { background: #3A4330; color: #fff; }
 .wp-block-button.is-style-outline > .wp-block-button__link,
 .solevo-ds .wp-block-button.is-style-outline > .wp-block-button__link { border: 2px solid #4E5943; color: #3A4330; background: #FFFDF9; }
-.solevo-ds .wp-block-button__link { font-size: .9rem; letter-spacing: .12em; min-height: 52px; padding-left: 2.1rem; padding-right: 2.1rem; }
+.solevo-ds .wp-block-button__link { font-size: var(--fs-button); letter-spacing: .12em; min-height: 52px; padding-left: 2.1rem; padding-right: 2.1rem; }
 .solevo-header__ctas .wp-block-button__link { font-weight: 600 !important; }
 
 /* Closing booking band: darker, bigger, phone visible */
 .solevo-cta2.solevo-olive { background: #3A4330 !important; }
 .solevo-cta2 h2.wp-block-heading { color: #fff; }
-.solevo-cta2__sub { color: #fff; font-size: 1.15rem; line-height: 1.6; }
+.solevo-cta2__sub { color: #fff; font-size: var(--fs-lead); line-height: 1.6; }
 .solevo-cta2__sub a { color: #fff; font-weight: 600; text-underline-offset: 3px; white-space: nowrap; }
-.solevo-cta2 .solevo-btn-light .wp-block-button__link { background: #fff; color: #2F3727; font-size: 1rem; padding: 1.25rem 3rem; min-height: 60px; }
-.solevo-cta2 .solevo-btn-ghost .wp-block-button__link { border: 2px solid #fff; color: #fff; font-size: 1rem; padding: 1.25rem 2.6rem; min-height: 60px; }
+.solevo-cta2 .solevo-btn-light .wp-block-button__link { background: #fff; color: #2F3727; font-size: var(--fs-button); padding: 1.25rem 3rem; min-height: 60px; }
+.solevo-cta2 .solevo-btn-ghost .wp-block-button__link { border: 2px solid #fff; color: #fff; font-size: var(--fs-button); padding: 1.25rem 2.6rem; min-height: 60px; }
 .solevo-cta2__alt { color: #fff; }
 
 /* Photo placeholders (replaced when Steph's photos arrive) */
-.solevo-ph { display: flex !important; align-items: center; justify-content: center; text-align: center; aspect-ratio: 4 / 3; width: 100%; padding: 1.25rem; border: 2px dashed #B7AE9B; border-radius: var(--ds-radius, 12px); background: repeating-linear-gradient(135deg, #EFEAE1 0 14px, #F5F1EA 14px 28px); color: #57534C; font-size: .9rem; line-height: 1.45; margin: 0 !important; }
+.solevo-ph { display: flex !important; align-items: center; justify-content: center; text-align: center; aspect-ratio: 4 / 3; width: 100%; padding: 1.25rem; border: 2px dashed #B7AE9B; border-radius: var(--ds-radius, 12px); background: repeating-linear-gradient(135deg, #EFEAE1 0 14px, #F5F1EA 14px 28px); color: #57534C; font-size: var(--fs-caption); line-height: 1.45; margin: 0 !important; }
 .solevo-ph > p { margin: 0 !important; max-width: 28ch; }
-.solevo-ph > p::before { content: "Photo to come"; display: block; font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #414A36; margin-bottom: .4rem; }
+.solevo-ph > p::before { content: "Photo to come"; display: block; font-size: var(--fs-label); font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #414A36; margin-bottom: .4rem; }
 .solevo-hero2__media.solevo-ph { aspect-ratio: 4 / 5; max-height: 560px; }
 @media (max-width: 599px) { .solevo-hero2__media.solevo-ph { display: none !important; } }
 
@@ -1094,8 +1122,8 @@ body { font-weight: 400; color: #2F2E2C; }
 .solevo-icard .solevo-ph { border-radius: 0; border-width: 0 0 2px; }
 .solevo-icard__body { padding: 1.25rem 1.35rem 1.4rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
 .solevo-icard__body > * { margin: 0 !important; }
-.solevo-icard__body h3 { font-size: 1.35rem !important; line-height: 1.2; }
-.solevo-icard__tag { font-size: .75rem !important; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #414A36; }
+.solevo-icard__body h3 { font-size: var(--fs-card) !important; line-height: 1.2; }
+.solevo-icard__tag { font-size: var(--fs-label) !important; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #414A36; }
 .solevo-icard__body .wp-block-buttons { margin-top: auto !important; padding-top: .5rem; }
 .solevo-icard__meta { font-weight: 500; color: #2B2A28; }
 @media (max-width: 1023px) { .solevo-icards, .solevo-icards.is-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -1104,8 +1132,8 @@ body { font-weight: 400; color: #2F2E2C; }
 /* Compact "Meet your physio" block */
 .solevo-person2--compact { grid-template-columns: 120px minmax(0, 1fr) !important; gap: 1.5rem !important; max-width: 820px; align-items: start; }
 .solevo-person2--compact .solevo-person2__img img { aspect-ratio: 1; border-radius: 50%; }
-.solevo-ds .solevo-person2--compact .solevo-person2__name { font-size: 1.6rem !important; }
-.solevo-person2--compact p { font-size: 1rem; }
+.solevo-ds .solevo-person2--compact .solevo-person2__name { font-size: var(--fs-h3) !important; }
+.solevo-person2--compact p { font-size: var(--fs-body); }
 @media (max-width: 599px) { .solevo-person2--compact { grid-template-columns: 1fr !important; } .solevo-person2--compact .solevo-person2__img { max-width: 110px; } }
 
 /* Condition directory */
@@ -1113,7 +1141,7 @@ body { font-weight: 400; color: #2F2E2C; }
 .solevo-dir > * { margin-block: 0 !important; }
 .solevo-dir__cat { background: var(--ds-card, #FFFDF9); border: 1px solid var(--ds-line, #E3DCCD); border-radius: var(--ds-radius, 12px); padding: 1.35rem 1.5rem 1.5rem; }
 .solevo-dir__cat > * { margin-block: 0 !important; }
-.solevo-dir__cat h2, .solevo-dir__cat h3 { font-size: 1.45rem !important; margin-bottom: .75rem !important; }
+.solevo-dir__cat h2, .solevo-dir__cat h3 { font-size: var(--fs-h3) !important; margin-bottom: .75rem !important; }
 .solevo-dir__cat ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .1rem; }
 .solevo-dir__cat li a { display: block; padding: .5rem 0; border-bottom: 1px solid var(--ds-line, #E3DCCD); text-decoration: none; color: #2B2A28; font-weight: 500; }
 .solevo-dir__cat li:last-child a { border-bottom: 0; }
@@ -1123,11 +1151,11 @@ body { font-weight: 400; color: #2F2E2C; }
 @media (max-width: 599px) { .solevo-dir { grid-template-columns: 1fr; } }
 
 /* Larger, darker text for seniors pages */
-.solevo-large-text .solevo-ds { --ds-body: 1.25rem; }
-.solevo-large-text .solevo-ds p, .solevo-large-text .solevo-ds li { font-size: 1.2rem; line-height: 1.7; }
-.solevo-large-text .solevo-ds .is-style-eyebrow { font-size: .9rem !important; }
-.solevo-large-text .solevo-ds .wp-block-button__link { font-size: 1.05rem; min-height: 60px; padding-left: 2.4rem; padding-right: 2.4rem; }
-.solevo-large-text .solevo-ds summary { font-size: 1.2rem; }
+.solevo-large-text .solevo-ds { --ds-body: var(--fs-body); }
+.solevo-large-text .solevo-ds p, .solevo-large-text .solevo-ds li { font-size: var(--fs-body); line-height: 1.7; }
+.solevo-large-text .solevo-ds .is-style-eyebrow { font-size: var(--fs-label) !important; }
+.solevo-large-text .solevo-ds .wp-block-button__link { font-size: var(--fs-button); min-height: 60px; padding-left: 2.4rem; padding-right: 2.4rem; }
+.solevo-large-text .solevo-ds summary { font-size: var(--fs-body); }
 /* 1.3.17: wide cards use a landscape placeholder */
 .solevo-icards.is-2 .solevo-ph { aspect-ratio: 16 / 9; }
 /* 1.3.18: Terrey Hills booking phone in the footer */
@@ -1135,12 +1163,12 @@ body { font-weight: 400; color: #2F2E2C; }
 .solevo-floc__book a { color: #fff; font-weight: 500; text-underline-offset: 3px; white-space: nowrap; }
 /* 1.3.19: Terrey Hills booking line under the footer phone number */
 .solevo-footer__phone { margin-bottom: .6rem; }
-.solevo-footer__th { margin: 0 0 1.4rem !important; color: var(--s-on-dark); font-size: 1rem; }
+.solevo-footer__th { margin: 0 0 1.4rem !important; color: var(--s-on-dark); font-size: var(--fs-body); }
 .solevo-footer__th a { color: #fff; font-weight: 500; text-underline-offset: 3px; white-space: nowrap; }
 /* 1.3.20: calmer booking band; wave no longer overlaps the section above; centred */
 .solevo-cta2.solevo-wave { margin-top: var(--s-wave-h) !important; }
 .solevo-cta2 { padding-top: clamp(2.5rem, 5vw, 3.75rem); padding-bottom: clamp(3rem, 6vw, 4.5rem); }
 .solevo-cta2__inner { max-width: 860px; margin-left: auto !important; margin-right: auto !important; text-align: center; }
-.solevo-cta2 h2.wp-block-heading { font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem); font-weight: 500; margin-bottom: .6rem; }
-.solevo-cta2__sub { font-size: 1.05rem; margin-bottom: 1.75rem; }
+.solevo-cta2 h2.wp-block-heading { font-size: var(--fs-h3); font-weight: 500; margin-bottom: .6rem; }
+.solevo-cta2__sub { font-size: var(--fs-lead); margin-bottom: 1.75rem; }
 .solevo-cta2__btns { justify-content: center !important; }
