@@ -49,12 +49,10 @@ return array(
 	),
 	'fees'      => array(),
 	'faq'       => array(
-		array( 'Do I need a referral?', 'No. You can book a private physio appointment directly. Bring any protocol or letter from your surgeon to your first appointment.' ),
 		array( 'When should I start before surgery?', 'A few weeks before your operation is ideal, but even one or two appointments help you prepare.' ),
 		array( 'When can I start after surgery?', 'When your surgeon says rehab can begin. This is often within the first week or two, but it depends on your operation.' ),
 		array( 'Will you follow my surgeon\'s protocol?', 'Yes. Your rehab follows your surgeon\'s protocol, and we can keep your surgeon updated on your progress if you would like.' ),
 		array( 'How long does rehab take?', 'It depends on the surgery and your goals. Some people need a few weeks, others several months, for example after an ACL reconstruction. Your physio will give you a clear idea at your first appointment.' ),
-		array( 'Can I claim on private health insurance?', 'Physiotherapy may be claimable on private health extras, depending on your fund and level of cover.' ),
 	),
 	'related'   => array( 'physio/sports-physiotherapy', 'conditions/sports-injuries-rehab', 'physio/seniors-physiotherapy' ),
 );

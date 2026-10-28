@@ -38,7 +38,6 @@ return array(
 		array( 'Is physio safe in pregnancy?', 'Yes. Treatment and exercise are adjusted for your stage of pregnancy. Tell us how many weeks you are when you book.' ),
 		array( 'When should I come in?', 'Any time pain starts, or whenever you would like advice about exercise. Earlier is often easier.' ),
 		array( 'Do I need my obstetrician\'s permission?', 'Not for physio. If your pregnancy is complicated, let your care team know and share any advice with us.' ),
-		array( 'Can I claim on private health insurance?', 'Physiotherapy is covered by most private health extras policies. Your rebate depends on your fund and cover.' ),
 	),
 	'related'   => array( 'conditions/pregnancy-back-pain', 'pilates/pregnancy-pilates', 'physio/postnatal-physiotherapy', 'physio/pelvic-floor-physiotherapy' ),
 	'todo'      => array( 'Confirm which clinician sees pregnancy patients. Add a practitioner section and the reviewed-by line once confirmed.' ),

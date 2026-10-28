@@ -78,11 +78,18 @@ function solevo_physio_fees() {
 	);
 }
 
-function solevo_physio_funding() {
+/**
+ * Funding questions, confirmed by Steph (29 Oct): private health with HICAPS,
+ * Medicare with a GP Chronic Condition Management Plan (gap, not bulk billed),
+ * workers compensation where applicable, NDIS self or plan managed. No DVA or CTP.
+ * Added to the FAQs on physio service pages; there is no separate funding box.
+ */
+function solevo_physio_funding_faq() {
 	return array(
-		'<strong>No referral needed.</strong> Book a private physio appointment directly.',
-		'<strong>Private health insurance.</strong> Physiotherapy may be claimable on private health extras, depending on your fund and level of cover.',
-		'<strong>Medicare, DVA, workers compensation or CTP?</strong> Please call or email before booking so we can check the paperwork you need.',
+		array( 'Do I need a GP referral?', 'Not for a private appointment. You only need one to claim a Medicare rebate.' ),
+		array( 'Can I claim through private health insurance?', 'Yes. Physiotherapy is claimable on most extras policies, depending on your cover, and you can claim on the spot with HICAPS.' ),
+		array( 'Can I claim a Medicare rebate?', 'Yes, with a valid referral from your GP under a Chronic Condition Management Plan. We process the rebate on the spot. Appointments aren’t bulk billed, so there is a gap to pay.' ),
+		array( 'Do you see workers compensation and NDIS clients?', 'Yes. Workers compensation is accepted where applicable, so please call before booking so we can check your claim. For NDIS, we see participants whose plans are self managed or plan managed.' ),
 	);
 }
 
@@ -160,7 +167,7 @@ function solevo_build_service( $page, $d ) {
 		'buttons'   => solevo_hero_buttons( $page, array( 'What we help with', '#help', true ) ),
 		'locations' => true,
 		'trust'     => $d['trust'] ?? array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
-		'jump'      => array( array( 'Funding and FAQs', '#fees' ) ),
+		'jump'      => array( array( 'FAQs', '#faq' ) ),
 		'image'     => $d['image'] ?? '',
 	) );
 	$c .= solevo_todos( $d );
@@ -186,13 +193,10 @@ function solevo_build_service( $page, $d ) {
 	if ( ! empty( $d['practitioner'] ) ) {
 		$c .= solevo_c_practitioner( $d['practitioner'] );
 	}
-	// No physio prices anywhere on the site (Steph, 25 Oct).
-	$c .= solevo_c_fees_faq(
-		solevo_c_head( 'Funding and FAQs', 'Funding and common questions' ),
-		array(),
-		$d['funding'] ?? solevo_physio_funding(),
-		$d['faq'],
-		'',
+	// No physio prices anywhere on the site (Steph, 25 Oct). Funding sits in the FAQs, not a separate box (29 Oct).
+	$c .= solevo_c_faq(
+		$d['faq_title'] ?? 'Physiotherapy FAQs',
+		array_merge( $d['faq'], solevo_physio_funding_faq() ),
 		solevo_c_reviewed()
 	);
 	if ( ! empty( $d['related'] ) ) {
