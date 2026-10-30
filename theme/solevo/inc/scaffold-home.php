@@ -29,21 +29,12 @@ function solevo_scaffold_home( $page ) {
 		'lead'      => 'One-on-one physiotherapy for pain, injury and sports rehab, with a rehab gym and Pilates studio on site. Hands-on treatment and a clear plan to get you back to what you enjoy.',
 		'buttons'   => $buttons,
 		'locations' => true,
-		'trust'     => array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
+		'trust'     => array( 'No referral required', 'One-on-one appointments', 'Book online any time' ),
 		'video'     => 'solevo-intro-final',
 		'poster'    => 'solevo-intro-final-poster',
 	) );
 
-	/* 2. Meet Emma, directly under the hero ----------------------------- */
-	$c .= solevo_c_practitioner( array(
-		'image'   => 'emma-docker',
-		'eyebrow' => 'Meet your physio',
-		'name'    => 'Emma Docker',
-		'role'    => 'Physiotherapist · Bachelor of Sport &amp; Exercise Science · Master of Physiotherapy',
-		'bio'     => 'Emma treats a wide range of muscle, joint and tendon problems, with a particular interest in sports injuries, overuse and running injuries, and rehab after surgery. She combines hands-on treatment, targeted exercise, movement retraining and clear education, and works with people of all ages and fitness levels.',
-		'points'  => array( 'AHPRA-registered physiotherapist', 'Clinical Pilates trained', 'Works alongside The Foot Company podiatry' ),
-		'link'    => array( 'Book with Emma', '#cliniko' ),
-	) );
+	/* 2. Emma is not on the homepage (Steph, 30 Oct); she is on About and the service pages. */
 
 	/* 3. Google reviews (always visible; feed once Trustindex is connected) */
 	$c .= solevo_b_section(
@@ -60,7 +51,7 @@ function solevo_scaffold_home( $page ) {
 			array( 'Fully equipped rehabilitation gym', 'Strength equipment and reformers on site in Brookvale, so rehab happens with your physio, not on a handout.' ),
 			array( 'Physiotherapy and podiatry together', 'We share our Brookvale space with <a href="#tfc">The Foot Company podiatry</a>, so foot, heel and gait concerns can be managed in one joined-up plan.' ),
 		),
-		array( 'Book online any time', 'Two locations: Brookvale and Terrey Hills', 'No GP referral needed' )
+		array( 'Book online any time', 'Two locations: Brookvale and Terrey Hills', 'No referral required' )
 	);
 
 	/* 5. Physio services: links down to /physio and the five service pages */

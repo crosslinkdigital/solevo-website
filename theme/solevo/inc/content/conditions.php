@@ -6,7 +6,7 @@ return array(
 	'eyebrow'   => 'Conditions we treat',
 	'lead'      => 'Find your condition to see what it is, how our physiotherapists assess and treat it, and the warning signs that mean you should see a GP first.',
 	'buttons'   => array( array( 'Book Physio', '#cliniko' ), array( 'Browse conditions', '#help', true ) ),
-	'trust'     => array( 'No GP referral needed', 'Brookvale and Terrey Hills' ),
+	'trust'     => array( 'No referral required', 'Brookvale and Terrey Hills' ),
 	'sections'  => array(
 		solevo_c_help_grid(
 			solevo_c_head( 'Browse by area', 'What can we help you with?', 'Tap an area to see the conditions we commonly treat.' ),
@@ -21,7 +21,7 @@ return array(
 		solevo_b_section( solevo_c_head( 'All conditions', 'Condition guides' ) . solevo_b_shortcode( '[solevo_child_pages]' ), array( 'class' => 'solevo-c solevo-children2', 'bg' => 'surface', 'anchor' => 'all' ) ),
 		solevo_c_faq( 'Common questions', array(
 			array( 'Do I need a diagnosis before booking?', 'No. Part of your first appointment is working out what is going on. Book Physio and we will assess you.' ),
-			array( 'Do I need a GP referral?', 'No. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
+			array( 'Do I need a referral?', 'No. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
 			array( 'When should I see a GP first?', 'Each condition guide lists the warning signs that need a GP or urgent care before physio. In an emergency call 000.' ),
 		) ),
 		solevo_c_locations( 'Locations', 'Physio in Brookvale and Terrey Hills', 'Choose the clinic that suits you when you book.' ),

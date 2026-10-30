@@ -86,7 +86,7 @@ function solevo_physio_fees() {
  */
 function solevo_physio_funding_faq() {
 	return array(
-		array( 'Do I need a GP referral?', 'Not for a private appointment. You only need one to claim a Medicare rebate.' ),
+		array( 'Do I need a referral?', 'Not for a private appointment. You only need one to claim a Medicare rebate.' ),
 		array( 'Can I claim through private health insurance?', 'Yes. Physiotherapy is claimable on most extras policies, depending on your cover, and you can claim on the spot with HICAPS.' ),
 		array( 'Can I claim a Medicare rebate?', 'Yes, with a valid referral from your GP under a Chronic Condition Management Plan. We process the rebate on the spot. Appointments aren’t bulk billed, so there is a gap to pay.' ),
 		array( 'Do you see workers compensation and NDIS clients?', 'Yes, workers compensation is accepted where applicable. For NDIS, we see participants whose plans are self managed or plan managed.' ),
@@ -111,7 +111,7 @@ function solevo_build_condition( $page, $d ) {
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page, array( 'When to see a GP first', '#red-flags', true ) ),
 		'locations' => 'mindbody' !== $page['booking'],
-		'trust'     => $d['trust'] ?? array( 'No GP referral needed', 'One-on-one with a physiotherapist', 'Assessment before any exercise plan' ),
+		'trust'     => $d['trust'] ?? array( 'No referral required', 'One-on-one with a physiotherapist', 'Assessment before any exercise plan' ),
 		'jump'      => array( array( 'How physio helps', '#help-steps' ), array( 'FAQs', '#faq' ), array( 'Locations', '#locations' ) ),
 		'image'     => $d['image'] ?? '',
 	) );
@@ -166,7 +166,7 @@ function solevo_build_service( $page, $d ) {
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page, array( 'What we help with', '#help', true ) ),
 		'locations' => true,
-		'trust'     => $d['trust'] ?? array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
+		'trust'     => $d['trust'] ?? array( 'No referral required', 'One-on-one appointments', 'Book online any time' ),
 		'jump'      => array( array( 'FAQs', '#faq' ) ),
 		'image'     => $d['image'] ?? '',
 	) );

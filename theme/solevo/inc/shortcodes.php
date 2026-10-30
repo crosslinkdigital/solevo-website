@@ -307,11 +307,14 @@ add_shortcode( 'solevo_location_chips', function () {
 			$detail = trim( ( $days ? $days . ' · ' : '' ) . 'Call ' . $th );
 			$href   = 'tel:' . preg_replace( '/[^0-9+]/', '', $th );
 		}
+		// Terrey Hills shows its street address above the days and phone (Steph, 30 Oct).
+		$addr   = $th && ! empty( $loc['address'] ) ? '<span class="solevo-chip__detail">' . esc_html( $loc['address'] ) . '</span>' : '';
 		$out   .= sprintf(
-			'<li><a href="%s"%s><span class="solevo-chip__area">%s</span><span class="solevo-chip__detail">%s</span></a></li>',
+			'<li><a href="%s"%s><span class="solevo-chip__area">%s</span>%s<span class="solevo-chip__detail">%s</span></a></li>',
 			esc_attr( $href ),
 			$th ? ' class="solevo-call" data-track="click_call"' : '',
 			esc_html( $loc['area'] ),
+			$addr,
 			esc_html( $detail )
 		);
 	}

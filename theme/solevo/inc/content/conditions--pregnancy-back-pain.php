@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'eyebrow'    => 'Pregnancy and postnatal',
 	'lead'       => 'Back and pelvic pain are common in pregnancy, but they are not something you simply have to put up with. Physiotherapy and pregnancy Pilates can ease pain and help you stay active and comfortable through each trimester.',
-	'trust'      => array( 'Private one-on-one appointments', 'No GP referral needed', 'Safe exercise for every trimester' ),
+	'trust'      => array( 'Private one-on-one appointments', 'No referral required', 'Safe exercise for every trimester' ),
 	'what_title' => 'Why does back pain happen in pregnancy?',
 	'what'       => array(
 		'As your baby grows, your posture changes, your centre of gravity shifts and pregnancy hormones make ligaments more flexible. Together these change how your back and pelvis carry load, which can lead to pain in the lower back, the pelvis or around the pubic bone.',

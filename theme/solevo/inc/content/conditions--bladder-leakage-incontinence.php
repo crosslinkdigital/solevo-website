@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'eyebrow'    => 'Pelvic health',
 	'lead'       => 'Leaking when you cough, laugh, run or lift is common, especially after having a baby, but it is not something you have to live with. Pelvic floor physiotherapy is a recommended first treatment, in private one-on-one appointments.',
-	'trust'      => array( 'Private one-on-one appointments', 'No GP referral needed', 'Pelvic floor assessment' ),
+	'trust'      => array( 'Private one-on-one appointments', 'No referral required', 'Pelvic floor assessment' ),
 	'what_title' => 'What is bladder leakage?',
 	'what'       => array(
 		'Urinary incontinence is any unplanned leakage of urine. Stress incontinence is leakage with effort, such as coughing, sneezing, jumping or lifting. Urge incontinence is a sudden, strong need to go with leakage before you get there. Many people have a mix of both.',

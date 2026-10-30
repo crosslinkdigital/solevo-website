@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 return array(
 	'lead'      => 'Physiotherapy before and after surgery, with Emma in Brookvale and Terrey Hills. Building strength before an operation helps your recovery start well. Afterwards, we follow your surgeon\'s plan from the first steps back to full strength.',
-	'trust'     => array( 'One-on-one appointments', 'No GP referral needed', 'Follows your surgeon\'s protocol' ),
+	'trust'     => array( 'One-on-one appointments', 'No referral required', 'Follows your surgeon\'s protocol' ),
 	'who_title' => 'Rehab that starts before your operation',
 	'who'       => array(
 		'Many people only see a physio after surgery. Starting beforehand means you go into your operation stronger, you know your first exercises already, and the early weeks feel less daunting.',

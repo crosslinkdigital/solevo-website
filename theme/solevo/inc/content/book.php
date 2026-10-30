@@ -6,7 +6,7 @@ return array(
 	'eyebrow'   => 'Book',
 	'lead'      => 'Two ways to book. Physiotherapy and Clinical Pilates are booked through Cliniko. Reformer, mat, pregnancy and postnatal classes and yoga are booked through Mindbody.',
 	'buttons'   => array( array( 'Book Physio', '#cliniko' ), array( 'Book Studio', '#mindbody' ) ),
-	'trust'     => array( 'Book online any time', 'No GP referral needed for physio' ),
+	'trust'     => array( 'Book online any time', 'No referral required for physio' ),
 	'jump'      => array( array( 'Timetable', '#timetable' ), array( 'Prices', '#pricing' ), array( 'Locations', '#locations' ) ),
 	'sections'  => array(
 		solevo_c_booking_paths( solevo_c_head( 'Choose your booking', 'Physio or Studio?', 'In pain or injured? Start with physio. Looking for a class? Book Studio.' ) ),

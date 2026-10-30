@@ -22,7 +22,7 @@ function solevo_scaffold_physio( $page ) {
 		'lead'      => 'One-on-one physiotherapy for pain, injury and getting back to the things you enjoy. Hands-on treatment and progressive rehab for everyday people: desk workers, parents, weekend runners and athletes alike.',
 		'buttons'   => array( array( 'Book Physio', '#cliniko' ), array( 'What we treat', '#help', true ) ),
 		'locations' => true,
-		'trust'     => array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
+		'trust'     => array( 'No referral required', 'One-on-one appointments', 'Book online any time' ),
 		'jump'      => array( array( 'Fees and FAQs', '#fees' ), array( 'Locations and hours', '#locations' ) ),
 		'image'     => 'emma-docker',
 	) );

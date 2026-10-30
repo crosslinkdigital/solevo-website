@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 return array(
 	'lead'      => 'Physiotherapy for seniors in Brookvale and Terrey Hills: balance and falls prevention, arthritis, joint replacement rehab and strength, so you can stay active and independent.',
-	'trust'     => array( 'One-on-one appointments', 'No GP referral needed', 'Family welcome to attend' ),
+	'trust'     => array( 'One-on-one appointments', 'No referral required', 'Family welcome to attend' ),
 	'who_title' => 'Stay strong, steady and independent',
 	'who'       => array(
 		'Getting older does not have to mean giving up the things you enjoy. Strength, balance and joint health can all improve with the right exercise at any age.',
