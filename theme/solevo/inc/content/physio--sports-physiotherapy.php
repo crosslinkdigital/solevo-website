@@ -55,8 +55,6 @@ return array(
 		array( 'Do I need to be an athlete?', 'No. Sports physiotherapy suits anyone who is active, from walkers and weekend sport to competitive athletes.' ),
 		array( 'Can I keep training while injured?', 'Often yes, with changes. We help you stay as active as possible while the injury recovers.' ),
 		array( 'Do you do ACL rehab?', 'Yes, from the early weeks after surgery through to return to sport, following your surgeon\'s protocol.' ),
-		array( 'Do I need a referral?', 'No. You can book a private physio appointment directly.' ),
-		array( 'Can I claim on private health insurance?', 'Physiotherapy is covered by most private health extras policies. Your rebate depends on your fund and cover.' ),
 	),
 	'related'   => array( 'conditions/sports-injuries-rehab', 'pilates/clinical-pilates', 'physio' ),
 );

@@ -57,3 +57,82 @@
 		onScroll();
 	}
 })();
+
+// 5. Hero video. Desktop (900px+): muted autoplay loop while visible, with a sound toggle.
+//    Phones and tablets: poster with a play button; nothing downloads until tapped.
+//    Reduced motion: poster with a play button on every screen.
+(function () {
+	'use strict';
+	var fig = document.querySelector('.solevo-hero2__video');
+	var video = fig && fig.querySelector('video');
+	if (!video || !window.matchMedia) return;
+	var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	var desktop = window.matchMedia('(min-width: 900px)').matches;
+
+	function button(cls, text) {
+		var b = document.createElement('button');
+		b.type = 'button';
+		b.className = cls;
+		b.textContent = text;
+		fig.appendChild(b);
+		return b;
+	}
+
+	if (desktop && !calm) {
+		var sound = button('solevo-hero2__sound', 'Sound on');
+		sound.setAttribute('aria-pressed', 'false');
+		sound.addEventListener('click', function () {
+			video.muted = !video.muted;
+			if (!video.muted) { video.play(); }
+			sound.textContent = video.muted ? 'Sound on' : 'Sound off';
+			sound.setAttribute('aria-pressed', video.muted ? 'false' : 'true');
+		});
+		if ('IntersectionObserver' in window) {
+			new IntersectionObserver(function (entries) {
+				entries.forEach(function (e) {
+					if (e.isIntersecting) { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
+					else { video.pause(); }
+				});
+			}, { threshold: 0.25 }).observe(video);
+		} else {
+			video.play();
+		}
+		return;
+	}
+
+	// Tap to play (with sound, since the visitor chose to start it).
+	fig.classList.add('is-tap');
+	var play = button('solevo-hero2__play', 'Play video');
+	play.setAttribute('aria-label', 'Play the Solevo intro video');
+	play.addEventListener('click', function () {
+		video.muted = false;
+		video.controls = true;
+		video.loop = false;
+		var p = video.play();
+		if (p && p.catch) p.catch(function () {});
+		play.remove();
+		fig.classList.remove('is-tap');
+		window.dataLayer && window.dataLayer.push({ event: 'video_play', video: 'solevo_intro', page_path: window.location.pathname });
+	});
+})();
+
+// 6. Homepage background video (only when set in Settings). Starts after the page has loaded,
+//    so it never delays the first paint. Skipped for reduced motion and data saver: poster only.
+(function () {
+	'use strict';
+	var v = document.querySelector('.solevo-hero2__bgvideo');
+	if (!v || !v.dataset.src) return;
+	var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	var saver = navigator.connection && navigator.connection.saveData;
+	if (calm || saver) return;
+	function start() { v.src = v.dataset.src; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+	if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
+})();
+
+// 7. Location chips and other #locations links: when a page has no Locations section,
+//    send them to both clinics in the footer instead.
+(function () {
+	'use strict';
+	if (document.getElementById('locations') || !document.getElementById('find-us')) return;
+	document.querySelectorAll('a[href="#locations"]').forEach(function (a) { a.setAttribute('href', '#find-us'); });
+})();

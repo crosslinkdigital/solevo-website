@@ -57,7 +57,7 @@ return array(
 		array( 'Should I rest or keep moving?', 'For most people, gentle movement and staying at work or normal activities, with some changes, helps more than bed rest. Your physio will show you which movements are safe and how to build back up.' ),
 		array( 'How many sessions will I need?', 'It depends on how long you have had pain, how much it affects you and your goals. Your physio will explain the likely plan at your first appointment and review it as you progress.' ),
 		array( 'Can Clinical Pilates help with back pain?', 'Clinical Pilates is physio-led exercise on the reformer. It is one way to build trunk, hip and leg strength after your pain has settled, and is tailored to you after an assessment.' ),
-		array( 'Do I need a GP referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
+		array( 'Do I need a referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
 	),
 	'related'    => array( 'conditions/sciatica', 'conditions/herniated-disc', 'conditions/spinal-stenosis', 'conditions/pregnancy-back-pain' ),
 );

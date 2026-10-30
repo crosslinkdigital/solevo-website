@@ -82,6 +82,11 @@ add_filter( 'pre_get_document_title', function ( $title ) {
 		return $title;
 	}
 	$custom = get_post_meta( get_queried_object_id(), '_solevo_seo_title', true );
+	if ( ! $custom ) {
+		// Fall back to the SEO title in the page definitions (pages added after setup, e.g. surgery rehab).
+		$def    = function_exists( 'solevo_page_def' ) ? solevo_page_def() : null;
+		$custom = $def['seo_title'] ?? '';
+	}
 	return $custom ? $custom : $title;
 } );
 
@@ -92,6 +97,10 @@ add_action( 'wp_head', function () {
 	$desc = '';
 	if ( is_singular( 'page' ) ) {
 		$desc = get_post_meta( get_queried_object_id(), '_solevo_meta_description', true );
+		if ( ! $desc && function_exists( 'solevo_page_def' ) ) {
+			$def  = solevo_page_def();
+			$desc = $def['meta'] ?? '';
+		}
 	}
 	if ( ! $desc && is_front_page() ) {
 		$desc = get_bloginfo( 'description' );

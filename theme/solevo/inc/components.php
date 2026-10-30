@@ -82,7 +82,8 @@ function solevo_c_hero( $a ) {
 		. ( ! empty( $a['jump'] ) ? solevo_b_p( implode( ' <span aria-hidden="true">·</span> ', array_map( function ( $j ) {
 			return sprintf( '<a href="%s">%s</a>', esc_attr( $j[1] ), $j[0] );
 		}, $a['jump'] ) ), 'solevo-jump' ) : '' );
-	$media = ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-hero2__media', 'large' ) : '';
+	$media = ! empty( $a['video'] ) ? solevo_video( $a['video'], $a['poster'] ?? '', 'solevo-hero2__media solevo-hero2__video' )
+		: ( ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-hero2__media', 'large' ) : '' );
 	$grid  = solevo_c_box( solevo_c_box( $text, 'solevo-hero2__text' ) . $media, 'solevo-hero2__grid' );
 	return solevo_b_section( $grid, array( 'class' => 'solevo-c solevo-hero2', 'anchor' => $a['anchor'] ?? '' ) );
 }
@@ -214,7 +215,7 @@ function solevo_c_fees_faq( $head, $fees, $funding, $faqs, $fee_after = '', $aft
 	foreach ( $fees as $f ) {
 		$rows .= solevo_c_box( solevo_b_p( $f[0] . ( $f[1] ? '<br><span>' . $f[1] . '</span>' : '' ), 'solevo-fee__label' ) . solevo_b_p( $f[2], 'solevo-fee__price' ), 'solevo-fee' );
 	}
-	$card = solevo_b_h( 'Fees', 3 ) . solevo_c_box( $rows, 'solevo-fees__rows' )
+	$card = ( $rows ? solevo_b_h( 'Fees', 3 ) . solevo_c_box( $rows, 'solevo-fees__rows' ) : '' )
 		. ( $funding ? solevo_b_h( 'Funding and referrals', 3 ) . solevo_b_list( $funding, 'solevo-ticks' ) : '' ) . $fee_after;
 	$q = '';
 	foreach ( $faqs as $f ) {

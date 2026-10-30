@@ -78,7 +78,7 @@ function solevo_hash_redirects() {
 		'services'  => '/physio',
 		'team'      => '/about',
 		'studio'    => '/pilates',
-		'pricing'   => '/pilates#pricing',
+		'pricing'   => '/pilates',
 		'book'      => '/book',
 		'timetable' => '/book#timetable',
 	);
@@ -104,12 +104,17 @@ function solevo_published_url( $path, $fallback ) {
 	return $cache[ $path ];
 }
 
-// Hide the header Call button until a phone number is set.
+// Header Call button: hidden until a phone number is set, and always shows the current number.
 add_filter( 'render_block_core/button', function ( $content, $block ) {
-	if ( ! empty( $block['attrs']['className'] ) && false !== strpos( $block['attrs']['className'], 'solevo-header__call' ) && ! solevo_opt( 'phone' ) ) {
+	if ( empty( $block['attrs']['className'] ) || false === strpos( $block['attrs']['className'], 'solevo-header__call' ) ) {
+		return $content;
+	}
+	$phone = solevo_opt( 'phone' );
+	if ( ! $phone ) {
 		return '';
 	}
-	return $content;
+	$html = sprintf( '<div class="wp-block-button is-style-outline solevo-header__call"><a class="wp-block-button__link wp-element-button" href="#phone" aria-label="Call Solevo on %1$s"><span class="solevo-header__call-num">%1$s</span><span class="solevo-header__call-short">Call</span></a></div>', esc_html( $phone ) );
+	return solevo_rewrite_links( $html );
 }, 5, 2 );
 
 /**
@@ -117,7 +122,7 @@ add_filter( 'render_block_core/button', function ( $content, $block ) {
  * say Book Studio (Mindbody), everything else goes to /book. Keeps the two journeys apart.
  */
 add_filter( 'render_block_core/button', function ( $content, $block ) {
-	if ( empty( $block['attrs']['className'] ) || false === strpos( $block['attrs']['className'], 'solevo-header__book' ) || ! is_singular( 'page' ) || is_front_page() ) {
+	if ( empty( $block['attrs']['className'] ) || false === strpos( $block['attrs']['className'], 'solevo-header__book' ) || ! is_singular( 'page' ) ) {
 		return $content;
 	}
 	$booking = solevo_page_booking();
@@ -140,7 +145,7 @@ add_action( 'wp_footer', function () {
 	if ( ! is_singular( 'page' ) && ! is_front_page() ) {
 		return;
 	}
-	$def = is_front_page() ? array( 'type' => 'home', 'booking' => 'both' ) : solevo_page_def();
+	$def = solevo_page_def();
 	if ( ! $def || in_array( $def['type'], array( 'book', 'contact' ), true ) ) {
 		return;
 	}

@@ -149,10 +149,19 @@ add_shortcode( 'solevo_reviews', function () {
 	if ( shortcode_exists( 'trustindex' ) ) {
 		return '<div class="solevo-feed solevo-feed--reviews">' . do_shortcode( '[trustindex no-registration=google]' ) . '</div>';
 	}
-	if ( current_user_can( 'activate_plugins' ) ) {
-		return '<div class="solevo-feed solevo-feed--placeholder">' . solevo_admin_hint( 'Google reviews: install the free "Widgets for Google Reviews" plugin by Trustindex, connect the Solevo Google Business Profile, and this section fills automatically. Visitors do not see this section until then.' ) . '</div>';
+	// Not connected yet: still show the section, with a link to the real reviews on Google.
+	$url = solevo_opt( 'google_reviews_url' );
+	if ( ! $url ) {
+		$url = 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( solevo_opt( 'business_name' ) . ' ' . solevo_opt( 'address' ) );
 	}
-	return '';
+	$hint = current_user_can( 'activate_plugins' )
+		? solevo_admin_hint( 'Google reviews: install the free "Widgets for Google Reviews" plugin by Trustindex and connect the Solevo Google Business Profile to show the live feed here. Until then visitors see this link to Google. Paste the exact reviews link in Settings > Solevo.' )
+		: '';
+	return sprintf(
+		'<div class="solevo-feed solevo-revlink"><p class="solevo-revlink__text">See what our clients say about Solevo on Google.</p><div class="wp-block-buttons"><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="%s" target="_blank" rel="noopener" data-track="click_reviews">Read our Google reviews</a></div></div>%s</div>',
+		esc_url( $url ),
+		$hint
+	);
 } );
 
 add_shortcode( 'solevo_instagram', function () {
@@ -217,6 +226,66 @@ function solevo_locations() {
 	return $locs;
 }
 
+/**
+ * [solevo_footer_locations] Both clinics side by side: map, address (street, entry note, suburb) and hours.
+ * Everything comes from Settings > Solevo, so the footer, location cards and schema never disagree.
+ */
+add_shortcode( 'solevo_footer_locations', function () {
+	$out = '';
+	foreach ( solevo_locations() as $loc ) {
+		$parts = array_map( 'trim', explode( ',', (string) $loc['address'], 2 ) );
+		$addr  = array();
+		if ( 'location2' === $loc['key'] && $loc['name'] ) {
+			$addr[] = esc_html( $loc['name'] );
+		}
+		$addr[] = esc_html( $parts[0] );
+		if ( 'location1' === $loc['key'] && solevo_opt( 'location1_access' ) ) {
+			$addr[] = '<span class="solevo-floc__access">(' . esc_html( lcfirst( solevo_opt( 'location1_access' ) ) ) . ')</span>';
+		}
+		if ( ! empty( $parts[1] ) ) {
+			$addr[] = esc_html( $parts[1] );
+		}
+		$book_line = '';
+		if ( 'location2' === $loc['key'] && solevo_opt( 'location2_phone' ) ) {
+			$th        = solevo_opt( 'location2_phone' );
+			$book_line = sprintf( '<p class="solevo-floc__book">Bookings by phone: <a class="solevo-call" data-track="click_call" href="tel:%s">%s</a></p>', esc_attr( preg_replace( '/[^0-9+]/', '', $th ) ), esc_html( $th ) );
+		}
+		$rows = '';
+		foreach ( solevo_lines( $loc['hours'] ) as $line ) {
+			$bits  = array_map( 'trim', explode( ':', $line, 2 ) );
+			$rows .= isset( $bits[1] )
+				? '<li><span class="solevo-floc__day">' . esc_html( $bits[0] ) . '</span> <span>' . esc_html( $bits[1] ) . '</span></li>'
+				: '<li>' . esc_html( $line ) . '</li>';
+		}
+		$out .= sprintf(
+			'<div class="solevo-floc"><div class="solevo-floc__map"><iframe title="Map to Solevo %1$s" src="https://www.google.com/maps?q=%2$s&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div><div class="solevo-floc__grid"><div><p class="solevo-floc__label">%1$s</p><address class="solevo-floc__addr"><a href="%3$s" rel="noopener" data-track="click_directions">%4$s</a></address>%6$s</div><div><p class="solevo-floc__label">Hours</p>%5$s</div></div></div>',
+			esc_html( $loc['area'] ),
+			rawurlencode( $loc['name'] . ' ' . $loc['address'] ),
+			esc_url( solevo_directions_url( $loc ) ),
+			implode( '<br>', $addr ),
+			$rows ? '<ul class="solevo-floc__hours">' . $rows . '</ul>' : ( current_user_can( 'edit_pages' ) ? solevo_admin_hint( 'Add opening hours in Settings > Solevo.' ) : '' ),
+			$book_line
+		);
+	}
+	return '<div class="solevo-flocs" id="find-us">' . $out . '</div>';
+} );
+
+/** [solevo_footer_contact] Big phone number and booking buttons for the top of the footer. */
+add_shortcode( 'solevo_footer_contact', function () {
+	$phone = solevo_opt( 'phone' );
+	$out   = '<p class="solevo-floc__label">Contact</p>';
+	if ( $phone ) {
+		$out .= sprintf( '<a class="solevo-footer__phone solevo-call" data-track="click_call" href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ), esc_html( $phone ) );
+	}
+	$th = solevo_opt( 'location2_phone' );
+	if ( $th && solevo_opt( 'location2_name' ) ) {
+		// Terrey Hills is booked by phone through the medical centre (Steph, 28 Oct).
+		$out .= sprintf( '<p class="solevo-footer__th">%s: <a class="solevo-call" data-track="click_call" href="tel:%s">%s</a></p>', esc_html( solevo_opt( 'location2_area' ) ), esc_attr( preg_replace( '/[^0-9+]/', '', $th ) ), esc_html( $th ) );
+	}
+	$out .= '<div class="wp-block-buttons solevo-footer__btns"><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#cliniko">Book Physio</a></div><div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#mindbody">Book Studio</a></div></div>';
+	return solevo_rewrite_links( '<div class="solevo-footer__contact">' . $out . '</div>' );
+} );
+
 function solevo_directions_url( $loc ) {
 	return 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $loc['name'] . ' ' . $loc['address'] );
 }
@@ -230,9 +299,22 @@ add_shortcode( 'solevo_location_chips', function () {
 	foreach ( solevo_locations() as $loc ) {
 		$hours  = solevo_lines( $loc['hours'] );
 		$detail = 'location1' === $loc['key'] ? $loc['address'] : ( $hours[0] ?? $loc['name'] );
+		$href   = '#locations';
+		$th     = 'location2' === $loc['key'] ? solevo_opt( 'location2_phone' ) : '';
+		if ( $th ) {
+			// Terrey Hills is booked by phone through the medical centre: the chip calls it.
+			$days   = preg_replace( '/:.*$/', 's', $hours[0] ?? '' );
+			$detail = trim( ( $days ? $days . ' · ' : '' ) . 'Call ' . $th );
+			$href   = 'tel:' . preg_replace( '/[^0-9+]/', '', $th );
+		}
+		// Terrey Hills shows its street address above the days and phone (Steph, 30 Oct).
+		$addr   = $th && ! empty( $loc['address'] ) ? '<span class="solevo-chip__detail">' . esc_html( $loc['address'] ) . '</span>' : '';
 		$out   .= sprintf(
-			'<li><a href="#locations"><span class="solevo-chip__area">%s</span><span class="solevo-chip__detail">%s</span></a></li>',
+			'<li><a href="%s"%s><span class="solevo-chip__area">%s</span>%s<span class="solevo-chip__detail">%s</span></a></li>',
+			esc_attr( $href ),
+			$th ? ' class="solevo-call" data-track="click_call"' : '',
 			esc_html( $loc['area'] ),
+			$addr,
 			esc_html( $detail )
 		);
 	}
@@ -255,12 +337,24 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 		$book  = 'studio' === $atts['service']
 			? '<a class="wp-block-button__link wp-element-button" href="#mindbody">Book Studio</a>'
 			: ( 'clinical' === $atts['service'] ? '<a class="wp-block-button__link wp-element-button" href="#cliniko-location1">Book Clinical Pilates</a>' : '' );
+		$th_phone = 'location2' === $loc['key'] ? solevo_opt( 'location2_phone' ) : '';
+		if ( ! $book && $th_phone ) {
+			// Terrey Hills is booked by phone through the medical centre (Steph, 28 Oct).
+			$book = sprintf( '<a class="wp-block-button__link wp-element-button solevo-call" data-track="click_call" href="tel:%s">Call %s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) );
+		}
 		$book  = $book ?: ( 'studio' === $atts['service']
 			? ''
 			: sprintf( '<a class="wp-block-button__link wp-element-button" href="#cliniko-%s">Book Physio in %s</a>', esc_attr( $loc['key'] ), esc_html( $loc['area'] ) ) );
 		$phone = ( 'location1' === $loc['key'] && solevo_opt( 'phone' ) )
 			? sprintf( '<br><a class="solevo-call" data-track="click_call" href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', solevo_opt( 'phone' ) ) ), esc_html( solevo_opt( 'phone' ) ) )
 			: '';
+		$access = ( 'location1' === $loc['key'] && solevo_opt( 'location1_access' ) )
+			? '<br><span class="solevo-loc__access">(' . esc_html( lcfirst( solevo_opt( 'location1_access' ) ) ) . ')</span>'
+			: '';
+		if ( $th_phone ) {
+			$phone = sprintf( '<br><span class="solevo-loc__access">Bookings: %s</span>', esc_html( $loc['name'] ) );
+		}
+		$phone  = $access . $phone;
 		$map = sprintf(
 			'<div class="solevo-loc__map"><iframe title="Map to %1$s" src="https://www.google.com/maps?q=%2$s&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>',
 			esc_attr( $loc['name'] ),
@@ -315,19 +409,24 @@ add_shortcode( 'solevo_cta_band', function () {
 	$btn     = function ( $label, $href, $style = 'solevo-btn-light' ) {
 		return sprintf( '<div class="wp-block-button %s"><a class="wp-block-button__link wp-element-button" href="%s">%s</a></div>', esc_attr( $style ), esc_attr( $href ), esc_html( $label ) );
 	};
+	// 1.3.20: one plain heading per booking type, no page-specific hooks (Hayo, 28 Oct).
+	$th_phone = solevo_opt( 'location2_phone' );
+	$th_link  = $th_phone ? sprintf( '<a href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) ) : '';
+	$call     = solevo_opt( 'phone' ) ? $btn( 'Call ' . solevo_opt( 'phone' ), '#phone', 'solevo-btn-ghost' ) : '';
+	$multi    = $th_link && count( $locs ) > 1;
 	if ( 'cliniko' === $booking ) {
-		$title = 'Ready to get moving again?';
-		$sub   = sprintf( 'Book a one-on-one appointment online in %s.', esc_html( $areas ) );
-		$btns  = $btn( $phys, '#cliniko' ) . ( solevo_opt( 'phone' ) ? $btn( 'Call us', '#phone', 'solevo-btn-ghost' ) : '' );
-		$alt   = '<p class="solevo-cta2__alt">Looking for Pilates or yoga classes? <a href="#mindbody">Book Studio</a></p>';
+		$title = 'Book an appointment';
+		$sub   = $multi ? 'Book online for Brookvale, or call Terrey Hills Medical Centre on ' . $th_link . '.' : 'Book online any time.';
+		$btns  = $btn( $phys, '#cliniko' ) . $call;
+		$alt   = '<p class="solevo-cta2__alt">Want a Pilates class? <a href="#mindbody">Book Studio</a></p>';
 	} elseif ( 'mindbody' === $booking ) {
-		$title = 'Find your class';
+		$title = 'Book a class';
 		$sub   = 'See the live timetable and book your spot online.';
-		$btns  = $btn( 'Book Studio', '#mindbody' ) . $btn( 'View pricing', esc_url( solevo_published_url( 'book', '/' ) . '#pricing' ), 'solevo-btn-ghost' );
+		$btns  = $btn( 'Book Studio', '#mindbody' ) . $call;
 		$alt   = '<p class="solevo-cta2__alt">In pain or injured? Start with a physio. <a href="#cliniko">Book Physio</a></p>';
 	} else {
-		$title = 'Ready to move better?';
-		$sub   = 'Physio appointments and Studio classes are booked separately.';
+		$title = 'Book an appointment or a class';
+		$sub   = 'Physio appointments and Studio classes are booked separately.' . ( $multi ? ' For Terrey Hills physio, call the medical centre on ' . $th_link . '.' : '' );
 		$btns  = $btn( 'Book Physio', '#cliniko' ) . $btn( 'Book Studio', '#mindbody', 'solevo-btn-ghost' );
 		$alt   = '';
 	}

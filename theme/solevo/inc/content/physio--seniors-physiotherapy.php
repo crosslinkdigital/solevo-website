@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 
 return array(
 	'lead'      => 'Physiotherapy for seniors in Brookvale and Terrey Hills: balance and falls prevention, arthritis, joint replacement rehab and strength, so you can stay active and independent.',
-	'trust'     => array( 'One-on-one appointments', 'No GP referral needed', 'Family welcome to attend' ),
+	'trust'     => array( 'One-on-one appointments', 'No referral required', 'Family welcome to attend' ),
 	'who_title' => 'Stay strong, steady and independent',
 	'who'       => array(
 		'Getting older does not have to mean giving up the things you enjoy. Strength, balance and joint health can all improve with the right exercise at any age.',
@@ -47,9 +47,8 @@ return array(
 	'faq'       => array(
 		array( 'Am I too old to start exercising?', 'No. Strength and balance improve with exercise at any age. Programs start where you are.' ),
 		array( 'Can physio help my arthritis?', 'Yes. Exercise and strength work are recommended first treatments for knee and hip osteoarthritis and can ease pain and improve function.' ),
-		array( 'Can I use Medicare?', 'If your GP has given you a Chronic Disease Management plan, please call before booking so we can check the paperwork and gap.' ),
 		array( 'Is there parking?', 'Please see the Contact page for parking and access details.' ),
 	),
 	'related'   => array( 'conditions/balance-falls-prevention', 'pilates/seniors', 'conditions/osteoporosis-pilates', 'conditions/spinal-stenosis' ),
-	'todo'      => array( 'Confirm whether Solevo accepts Medicare Chronic Disease Management referrals, and add parking and access details to Contact.' ),
+	'todo'      => array( 'Add parking and access details to Contact.' ),
 );

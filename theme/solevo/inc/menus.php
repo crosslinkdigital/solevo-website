@@ -52,29 +52,28 @@ function solevo_build_menus( $page_ids ) {
 		solevo_nav_link( 'Pricing', '/#pricing' ),
 	) );
 
-	// Full site menu (rebuild brief, section 19): Physio, Studio, Pricing, About, Contact + the header Book button.
+	// Full site menu (agreed 29 Oct): logo links home, then Physio, Conditions, Studio, About, Contact, plus the phone and Book Physio buttons.
+	// Conditions is top level and also stays in the Physio dropdown. No Home item; Home is in the footer.
 	$full = implode( '', array(
 		solevo_nav_submenu( 'Physio', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
-			$link( 'physio', 'Physiotherapy' ),
-			$link( 'physio/sports-physiotherapy', 'Sports physiotherapy' ),
-			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy' ),
-			$link( 'physio/postnatal-physiotherapy', 'Postnatal' ),
-			$link( 'physio/pelvic-floor-physiotherapy', 'Pelvic floor' ),
-			$link( 'physio/seniors-physiotherapy', 'Seniors' ),
+			$link( 'physio/sports-physiotherapy', 'Sports injury physio' ),
+			$link( 'physio', 'General physio' ),
+			$link( 'physio/pre-and-post-surgery-rehab', 'Pre and post surgery rehab' ),
+			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy and postnatal' ),
+			$link( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
 			$link( 'conditions', 'Conditions we treat' ),
 		) ),
+		$link( 'conditions', 'Conditions' ),
 		solevo_nav_submenu( 'Studio', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
 			$link( 'pilates', 'Reformer Pilates' ),
 			$link( 'pilates/clinical-pilates', 'Clinical Pilates' ),
 			$link( 'pilates/mat-pilates', 'Mat Pilates' ),
 			$link( 'pilates/private-pilates', 'Private Pilates' ),
-			$link( 'pilates/mums-and-bubs', 'Mums and Bubs' ),
 			$link( 'pilates/seniors', 'Seniors' ),
 			$link( 'pilates/pregnancy-pilates', 'Pregnancy' ),
 			$link( 'pilates/postnatal-pilates', 'Postnatal' ),
 			$link( 'pilates/over-50s-fitness', 'Over 50s fitness' ),
 		) ),
-		solevo_nav_link( 'Pricing', home_url( '/book#pricing' ) ),
 		$link( 'about', 'About' ),
 		$link( 'contact', 'Contact' ),
 	) );

@@ -48,7 +48,7 @@ return array(
 		array( 'Do I need an MRI?', 'Not usually at first. Imaging is generally recommended when symptoms are severe, getting worse, or not improving, or when surgery or an injection is being considered.' ),
 		array( 'Should I stretch my hamstrings?', 'Not always. Stretching can aggravate an irritated nerve. Your physio will show you movements that suit your symptoms.' ),
 		array( 'Can I keep working and exercising?', 'Usually yes, with changes. Staying as active as your symptoms allow tends to help. We will help you adjust sitting, lifting and training while things settle.' ),
-		array( 'Do I need a GP referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
+		array( 'Do I need a referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
 	),
 	'related'    => array( 'conditions/lower-back-pain', 'conditions/herniated-disc', 'conditions/spinal-stenosis' ),
 );

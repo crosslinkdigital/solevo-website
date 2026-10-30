@@ -22,7 +22,7 @@ function solevo_scaffold_physio( $page ) {
 		'lead'      => 'One-on-one physiotherapy for pain, injury and getting back to the things you enjoy. Hands-on treatment and progressive rehab for everyday people: desk workers, parents, weekend runners and athletes alike.',
 		'buttons'   => array( array( 'Book Physio', '#cliniko' ), array( 'What we treat', '#help', true ) ),
 		'locations' => true,
-		'trust'     => array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
+		'trust'     => array( 'No referral required', 'One-on-one appointments', 'Book online any time' ),
 		'jump'      => array( array( 'Fees and FAQs', '#fees' ), array( 'Locations and hours', '#locations' ) ),
 		'image'     => 'emma-docker',
 	) );
@@ -76,7 +76,7 @@ function solevo_scaffold_physio( $page ) {
 				'title' => 'Women\'s health',
 				'hint'  => 'Pregnancy, postnatal, pelvic floor',
 				'body'  => 'Back and pelvic pain in pregnancy, recovery after birth and pelvic floor concerns such as leakage, in private one-on-one appointments.',
-				'links' => array( solevo_c_link( 'physio/pregnancy-physiotherapy' ), solevo_c_link( 'physio/postnatal-physiotherapy' ), solevo_c_link( 'physio/pelvic-floor-physiotherapy' ) ),
+				'links' => array( solevo_c_link( 'physio/pregnancy-physiotherapy' ), solevo_c_link( 'physio/postnatal-physiotherapy' ) ),
 			),
 			array(
 				'icon'  => 'strength',
@@ -127,7 +127,7 @@ function solevo_scaffold_physio( $page ) {
 			array( 'title' => 'Everyday joint and muscle pain', 'text' => 'Back, neck, shoulder, hip and knee pain that gets in the way of work, sleep, exercise or looking after family.', 'more' => array( 'Book Physio', '#cliniko' ) ),
 			array( 'title' => 'Post-operative rehab', 'text' => 'From early movement after surgery back to full strength, following your surgeon\'s protocol at each stage.', 'more' => array( 'Book Physio', '#cliniko' ) ),
 			array( 'title' => 'Workplace injuries', 'text' => 'Neck and back pain from desk work, lifting strains and injuries from physical jobs, with a plan to keep you working.', 'more' => array( 'Book Physio', '#cliniko' ) ),
-			array( 'title' => 'Women\'s health physiotherapy', 'text' => 'Private, one-on-one care in pregnancy, after birth and for pelvic floor concerns.', 'links' => array( solevo_c_link( 'physio/pregnancy-physiotherapy', 'Pregnancy' ), solevo_c_link( 'physio/postnatal-physiotherapy', 'Postnatal' ), solevo_c_link( 'physio/pelvic-floor-physiotherapy', 'Pelvic floor' ) ) ),
+			array( 'title' => 'Women\'s health physiotherapy', 'text' => 'Private, one-on-one care in pregnancy and after birth.', 'links' => array( solevo_c_link( 'physio/pregnancy-physiotherapy', 'Pregnancy' ), solevo_c_link( 'physio/postnatal-physiotherapy', 'Postnatal' ) ) ),
 			array( 'title' => 'Physio for seniors', 'text' => 'Balance, strength and joint care to help you stay steady, active and independent.', 'more' => array( 'Seniors physio', home_url( '/physio/seniors-physiotherapy' ) ) ),
 		),
 		$pathway . solevo_c_todo( 'Workplace injuries: does Solevo accept workers compensation (icare) and CTP claims? If yes, say so on this card and in the funding list.' )
