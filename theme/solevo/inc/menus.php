@@ -56,7 +56,7 @@ function solevo_build_menus( $page_ids ) {
 	// Conditions is top level and also stays in the Physio dropdown. No Home item; Home is in the footer.
 	$full = implode( '', array(
 		solevo_nav_submenu( 'Physio', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
-			$link( 'physio/sports-physiotherapy', 'Sports injury physio' ),
+			$link( 'physio/sports-physiotherapy', 'Sports physio' ),
 			$link( 'physio', 'General physio' ),
 			$link( 'physio/pre-and-post-surgery-rehab', 'Pre and post surgery rehab' ),
 			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy and postnatal' ),

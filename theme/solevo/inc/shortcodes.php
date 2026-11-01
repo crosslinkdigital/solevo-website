@@ -300,19 +300,17 @@ add_shortcode( 'solevo_location_chips', function () {
 		$hours  = solevo_lines( $loc['hours'] );
 		$detail = 'location1' === $loc['key'] ? $loc['address'] : ( $hours[0] ?? $loc['name'] );
 		$href   = '#locations';
-		$th     = 'location2' === $loc['key'] ? solevo_opt( 'location2_phone' ) : '';
+		$th     = 'location2' === $loc['key'];
 		if ( $th ) {
-			// Terrey Hills is booked by phone through the medical centre: the chip calls it.
-			$days   = preg_replace( '/:.*$/', 's', $hours[0] ?? '' );
-			$detail = trim( ( $days ? $days . ' · ' : '' ) . 'Call ' . $th );
-			$href   = 'tel:' . preg_replace( '/[^0-9+]/', '', $th );
+			// 1.3.28: both chips match (name, address, day). The Terrey Hills phone
+			// lives in the booking band and footer, not the hero (Steph, 1 Nov).
+			$detail = preg_replace( '/:.*$/', 's', $hours[0] ?? '' );
 		}
-		// Terrey Hills shows its street address above the days and phone (Steph, 30 Oct).
 		$addr   = $th && ! empty( $loc['address'] ) ? '<span class="solevo-chip__detail">' . esc_html( $loc['address'] ) . '</span>' : '';
 		$out   .= sprintf(
 			'<li><a href="%s"%s><span class="solevo-chip__area">%s</span>%s<span class="solevo-chip__detail">%s</span></a></li>',
 			esc_attr( $href ),
-			$th ? ' class="solevo-call" data-track="click_call"' : '',
+			'',
 			esc_html( $loc['area'] ),
 			$addr,
 			esc_html( $detail )
@@ -414,11 +412,13 @@ add_shortcode( 'solevo_cta_band', function () {
 	$th_link  = $th_phone ? sprintf( '<a href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) ) : '';
 	$call     = solevo_opt( 'phone' ) ? $btn( 'Call ' . solevo_opt( 'phone' ), '#phone', 'solevo-btn-ghost' ) : '';
 	$multi    = $th_link && count( $locs ) > 1;
+	// 1.3.28: online booking leads; Terrey Hills phone is a small second line (Steph, 1 Nov).
+	$th_line = $multi ? '<p class="solevo-cta2__alt">Terrey Hills physio on Wednesdays: call the medical centre on ' . $th_link . '</p>' : '';
 	if ( 'cliniko' === $booking ) {
 		$title = 'Book an appointment';
-		$sub   = $multi ? 'Book online for Brookvale, or call Terrey Hills Medical Centre on ' . $th_link . '.' : 'Book online any time.';
+		$sub   = 'Book online any time.';
 		$btns  = $btn( $phys, '#cliniko' ) . $call;
-		$alt   = '<p class="solevo-cta2__alt">Want a Pilates class? <a href="#mindbody">Book Studio</a></p>';
+		$alt   = $th_line . '<p class="solevo-cta2__alt">Want a Pilates class? <a href="#mindbody">Book Studio</a></p>';
 	} elseif ( 'mindbody' === $booking ) {
 		$title = 'Book a class';
 		$sub   = 'See the live timetable and book your spot online.';
@@ -426,9 +426,9 @@ add_shortcode( 'solevo_cta_band', function () {
 		$alt   = '<p class="solevo-cta2__alt">In pain or injured? Start with a physio. <a href="#cliniko">Book Physio</a></p>';
 	} else {
 		$title = 'Book an appointment or a class';
-		$sub   = 'Physio appointments and Studio classes are booked separately.' . ( $multi ? ' For Terrey Hills physio, call the medical centre on ' . $th_link . '.' : '' );
+		$sub   = 'Physio appointments and Studio classes are booked separately.';
 		$btns  = $btn( 'Book Physio', '#cliniko' ) . $btn( 'Book Studio', '#mindbody', 'solevo-btn-ghost' );
-		$alt   = '';
+		$alt   = $th_line;
 	}
 	$html = sprintf(
 		'<section class="solevo-cta2 solevo-olive solevo-wave solevo-wave--olive-band" id="book"><div class="solevo-cta2__inner"><h2 class="wp-block-heading">%s</h2><p class="solevo-cta2__sub">%s</p><div class="wp-block-buttons solevo-cta2__btns">%s</div>%s</div></section>',

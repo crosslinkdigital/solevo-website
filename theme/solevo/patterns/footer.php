@@ -33,7 +33,7 @@
 
 <!-- wp:list {"className":"solevo-footer__links"} -->
 <ul class="wp-block-list solevo-footer__links"><!-- wp:list-item -->
-<li><a href="/physio/sports-physiotherapy">Sports injury physio</a></li>
+<li><a href="/physio/sports-physiotherapy">Sports physio</a></li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><a href="/physio">General physio</a></li>
