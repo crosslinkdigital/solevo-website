@@ -300,20 +300,15 @@ add_shortcode( 'solevo_location_chips', function () {
 		$hours  = solevo_lines( $loc['hours'] );
 		$detail = 'location1' === $loc['key'] ? $loc['address'] : ( $hours[0] ?? $loc['name'] );
 		$href   = '#locations';
-		$th     = 'location2' === $loc['key'];
-		if ( $th ) {
-			// 1.3.28: both chips match (name, address, day). The Terrey Hills phone
-			// lives in the booking band and footer, not the hero (Steph, 1 Nov).
-			$detail = preg_replace( '/:.*$/', 's', $hours[0] ?? '' );
-		}
-		$addr   = $th && ! empty( $loc['address'] ) ? '<span class="solevo-chip__detail">' . esc_html( $loc['address'] ) . '</span>' : '';
-		$out   .= sprintf(
-			'<li><a href="%s"%s><span class="solevo-chip__area">%s</span>%s<span class="solevo-chip__detail">%s</span></a></li>',
+		// 1.3.29: both chips are two lines, name then address. Terrey Hills shows its
+		// day next to the name; its phone lives in the booking band and footer (Steph, 1 Nov).
+		$day  = 'location2' === $loc['key'] ? preg_replace( '/:.*$/', 's', $hours[0] ?? '' ) : '';
+		$out .= sprintf(
+			'<li><a href="%s"><span class="solevo-chip__area">%s%s</span><span class="solevo-chip__detail">%s</span></a></li>',
 			esc_attr( $href ),
-			'',
 			esc_html( $loc['area'] ),
-			$addr,
-			esc_html( $detail )
+			$day ? ' <span class="solevo-chip__day">· ' . esc_html( $day ) . '</span>' : '',
+			esc_html( $loc['address'] ?: $detail )
 		);
 	}
 	return '<ul class="solevo-chips" aria-label="Locations">' . $out . '</ul>';
