@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.4.4
+Version: 1.4.5
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -1243,4 +1243,23 @@ body { font-weight: 400; color: #2F2E2C; }
 @media (min-width: 1024px) {
 	.solevo-first__grid:has(> :nth-child(3):last-child), .solevo-why4:has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.solevo-first__grid:has(> :nth-child(2):last-child), .solevo-why4:has(> :nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* 1.4.5: phones. The 140px logo floor (1.4.2) is for desktop only; on small screens the logo goes back to 112px
+   and, below 420px, the header Call button hides (Call is in the bottom bar and the menu), so nothing overflows */
+@media (max-width: 600px) {
+	.solevo-logo img { min-width: 0; width: 112px; }
+}
+@media (max-width: 420px) {
+	.solevo-header__call { display: none !important; }
+}
+/* 1.4.5: mobile menu. Left-aligned list with the three groups as small headings, no desktop dropdown boxes */
+@media (max-width: 1199px) {
+	.solevo-primary-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-content,
+	.solevo-primary-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container,
+	.solevo-primary-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation-item { align-items: flex-start !important; text-align: left; }
+	.solevo-primary-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container { gap: 1.75rem !important; }
+	.solevo-primary-nav .is-menu-open .wp-block-navigation__submenu-container { border: 0 !important; padding: .4rem 0 0 !important; box-shadow: none !important; background: none !important; min-width: 0 !important; border-radius: 0 !important; display: flex !important; flex-direction: column; gap: .1rem; }
+	.solevo-primary-nav .is-menu-open .solevo-mega > .wp-block-navigation-item__content { font-size: var(--fs-label) !important; letter-spacing: .18em !important; text-transform: uppercase; color: var(--ds-olive-text); font-weight: 600; }
+	.solevo-primary-nav .is-menu-open .solevo-mega .wp-block-navigation__submenu-container .wp-block-navigation-item__content { font-size: var(--fs-lead) !important; padding: .4rem 0 !important; letter-spacing: 0 !important; text-transform: none; }
+	.solevo-primary-nav .is-menu-open .wp-block-navigation__submenu-icon { display: none; }
 }
