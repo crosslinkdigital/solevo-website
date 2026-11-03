@@ -22,6 +22,17 @@ function solevo_page_content( $path ) {
 	return file_exists( $file ) ? include $file : null;
 }
 
+/**
+ * 1.4.4: page title with an optional controlled line break. 'h1_lines' => [ first line, second line ];
+ * the second line never wraps, so e.g. "Brookvale & Terrey Hills" stays together.
+ */
+function solevo_page_h1( $page ) {
+	if ( empty( $page['h1_lines'] ) ) {
+		return esc_html( $page['h1'] );
+	}
+	return esc_html( $page['h1_lines'][0] ) . '<br><span class="solevo-nowrap">' . esc_html( $page['h1_lines'][1] ) . '</span>';
+}
+
 /** Built page markup, or '' to fall back to the original scaffold. */
 function solevo_build_page( $page ) {
 	$d = solevo_page_content( $page['path'] );
@@ -107,7 +118,7 @@ function solevo_steps_items( $steps ) {
 function solevo_build_condition( $page, $d ) {
 	$c  = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Conditions we treat',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page, array( 'When to see a GP first', '#red-flags', true ) ),
 		'locations' => 'mindbody' !== $page['booking'],
@@ -162,7 +173,7 @@ function solevo_build_condition( $page, $d ) {
 function solevo_build_service( $page, $d ) {
 	$c  = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Solevo Physio',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page, array( 'What we help with', '#help', true ) ),
 		'locations' => true,
@@ -214,7 +225,7 @@ function solevo_build_service( $page, $d ) {
 function solevo_build_studio( $page, $d ) {
 	$c  = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Solevo Studio',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page ),
 		'locations' => false,
@@ -280,7 +291,7 @@ function solevo_build_studio( $page, $d ) {
 function solevo_build_general( $page, $d ) {
 	$c = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Solevo',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => $d['buttons'] ?? solevo_hero_buttons( $page ),
 		'locations' => $d['locations'] ?? true,

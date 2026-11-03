@@ -5,6 +5,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'eyebrow'   => 'Physiotherapy for work injuries',
 	'lead'      => 'Injured at work? We provide assessment, treatment and progressive rehabilitation for workplace injuries, helping you recover strength, restore movement and return to work safely.',
+	'image'     => 'clinic-reformer-room',
 	'trust'     => array( 'Workers compensation clients', 'Brookvale and Terrey Hills', 'One-on-one appointments' ),
 	'who_title' => 'Rehab built around your job',
 	'who'       => array(

@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.4.3
+Version: 1.4.4
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -1235,3 +1235,12 @@ body { font-weight: 400; color: #2F2E2C; }
 /* 1.4.2: the logo keeps its 140px width; longer menu labels no longer squeeze it */
 .solevo-header__bar > .wp-block-site-logo, .solevo-header__bar > .solevo-logo { flex-shrink: 0; }
 .solevo-logo img { min-width: 140px; }
+/* 1.4.4: titles with a controlled line break use the full text column; the second line never wraps */
+.solevo-nowrap { white-space: nowrap; }
+.solevo-hero2__title:has(.solevo-nowrap) { max-width: none !important; }
+@media (max-width: 600px) { .solevo-nowrap { white-space: normal; } }
+/* 1.4.4: "Your first appointment" and the numbered "Why" cards fill the full width when a page has 2 or 3 items instead of 4 */
+@media (min-width: 1024px) {
+	.solevo-first__grid:has(> :nth-child(3):last-child), .solevo-why4:has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+	.solevo-first__grid:has(> :nth-child(2):last-child), .solevo-why4:has(> :nth-child(2):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

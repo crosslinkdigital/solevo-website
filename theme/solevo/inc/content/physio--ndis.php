@@ -4,7 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 return array(
 	'eyebrow'   => 'NDIS physiotherapy',
-	'lead'      => 'Physiotherapy for NDIS participants with self-managed or plan-managed funding, in Brookvale and Terrey Hills. One-on-one care and exercise programs built around the goals in your plan. Solevo is not a registered NDIS provider, so we can\'t see NDIA-managed (agency-managed) participants.',
+	'lead'      => 'Physiotherapy for NDIS participants in Brookvale and Terrey Hills, with strength, mobility and balance programs built around the goals in your plan.',
+	'image'     => 'studio-stretch',
 	'trust'     => array( 'Self-managed and plan-managed NDIS', 'Brookvale and Terrey Hills', 'One-on-one appointments' ),
 	'who_eyebrow' => 'NDIS funding',
 	'who_title' => 'Who we can see under the NDIS',
