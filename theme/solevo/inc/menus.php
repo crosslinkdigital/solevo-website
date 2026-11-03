@@ -55,11 +55,8 @@ function solevo_build_menus( $page_ids ) {
 		solevo_nav_link( 'Pricing', '/#pricing' ),
 	) );
 
-	// Only link to pages that are live, so a draft (e.g. NDIS before Emma's review) never shows in the menu.
-	$live = function ( $path, $label = null ) use ( $page_ids, $link ) {
-		$id = $page_ids[ $path ] ?? 0;
-		return ( $id && 'publish' === get_post_status( $id ) ) ? $link( $path, $label ) : '';
-	};
+	// Every page goes in the menu; links to pages that are not published are hidden when the menu renders (see the filter at the end of this file).
+	$live = $link;
 
 	// Full site menu, 1.4.0 (Steph, 3 Nov; like Beachlife, PhysioWard and Rebound Health):
 	// What we treat / Exercise & programs / Services dropdowns only, plus the phone and Book buttons. About and Contact live in the footer (Steph, 3 Nov).
@@ -111,3 +108,15 @@ function solevo_build_menus( $page_ids ) {
 	}
 	return $ids;
 }
+
+/**
+ * 1.4.3: hide menu links to pages that are not published (drafts, private, binned), so a page
+ * appears in the menu the moment it is published, without running setup again.
+ */
+add_filter( 'render_block_core/navigation-link', function ( $content, $block ) {
+	$attrs = $block['attrs'] ?? array();
+	if ( ! empty( $attrs['id'] ) && 'page' === ( $attrs['type'] ?? '' ) && 'publish' !== get_post_status( (int) $attrs['id'] ) ) {
+		return '';
+	}
+	return $content;
+}, 10, 2 );
