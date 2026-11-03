@@ -66,7 +66,7 @@ return array(
 		array( 'I have never done Pilates. Is that OK?', 'Yes. Everything is taught from the start and adjusted to you.' ),
 		array( 'How often should I come?', 'Many people come once or twice a week. Your physiotherapist will recommend a plan based on your goals.' ),
 	),
-	'related'    => array( 'physio', 'conditions/lower-back-pain', 'pilates/private-pilates', 'pilates' ),
+	'related'    => array( 'physio', 'conditions/lower-back-pain', 'pilates' ),
 	'instagram'  => false,
 	'todo'       => array( 'Confirm who runs Clinical Pilates sessions and whether they are claimable on private health (check with Solevo\'s provider number setup).' ),
 );

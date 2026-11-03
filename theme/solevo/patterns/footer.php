@@ -44,11 +44,13 @@
 <!-- /wp:list-item -->
 <?php endif; ?>
 <!-- wp:list-item -->
-<li><a href="/physio/pregnancy-physiotherapy">Pregnancy and postnatal</a></li>
-<!-- /wp:list-item -->
-<!-- wp:list-item -->
 <li><a href="/physio/seniors-physiotherapy">Physio for seniors</a></li>
 <!-- /wp:list-item -->
+<?php foreach ( array( 'physio/workers-compensation' => 'WorkCover physio', 'physio/ndis' => 'NDIS physio' ) as $solevo_fp => $solevo_fl ) : $solevo_fpage = get_page_by_path( $solevo_fp ); if ( $solevo_fpage && 'publish' === $solevo_fpage->post_status ) : ?>
+<!-- wp:list-item -->
+<li><a href="/<?php echo esc_attr( $solevo_fp ); ?>"><?php echo esc_html( $solevo_fl ); ?></a></li>
+<!-- /wp:list-item -->
+<?php endif; endforeach; ?>
 <!-- wp:list-item -->
 <li><a href="/conditions">Conditions we treat</a></li>
 <!-- /wp:list-item --></ul>
@@ -88,6 +90,11 @@
 <!-- wp:list-item -->
 <li><a href="/contact">Contact</a></li>
 <!-- /wp:list-item -->
+<?php $solevo_faqp = get_page_by_path( 'faq' ); if ( $solevo_faqp && 'publish' === $solevo_faqp->post_status ) : ?>
+<!-- wp:list-item -->
+<li><a href="/faq">FAQs</a></li>
+<!-- /wp:list-item -->
+<?php endif; ?>
 <!-- wp:list-item -->
 <li><a href="/book">Book online</a></li>
 <!-- /wp:list-item -->

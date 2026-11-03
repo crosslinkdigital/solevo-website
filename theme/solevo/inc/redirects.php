@@ -13,11 +13,17 @@ function solevo_redirects() {
 	return array(
 		// Steph, 25 Oct: pelvic floor is no longer offered as a service.
 		'physio/pelvic-floor-physiotherapy' => 'physio',
-		// Copy batch 1, approved by Hayo 28 Oct: postnatal merged into the pregnancy page.
-		'physio/postnatal-physiotherapy'    => 'physio/pregnancy-physiotherapy',
-		// Steph, 28 Oct: pelvic floor treatment is not advertised; Mums and Bubs is paused.
+		// Steph, 28 Oct: pelvic floor treatment is not advertised.
 		'conditions/bladder-leakage-incontinence' => 'conditions',
-		'pilates/mums-and-bubs'             => 'pilates',
+		// 1.4.0 (Steph's feedback, 3 Nov): no pregnancy or postnatal physio, no pregnancy classes,
+		// Over 50s merged into Seniors, Private Pilates dropped. Postnatal physio goes straight to /physio (no chain).
+		'physio/pregnancy-physiotherapy'    => 'physio',
+		'physio/postnatal-physiotherapy'    => 'physio',
+		'pilates/pregnancy-pilates'         => 'pilates',
+		'pilates/over-50s-fitness'          => 'pilates/seniors',
+		'pilates/private-pilates'           => 'pilates',
+		// Hayo, 3 Nov: Mums and Bubs points at the postnatal class page.
+		'pilates/mums-and-bubs'             => 'pilates/postnatal-pilates',
 	);
 }
 

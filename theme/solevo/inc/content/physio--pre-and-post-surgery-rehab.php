@@ -30,7 +30,7 @@ return array(
 	'steps'     => array(
 		array( 'Before surgery', 'An assessment, then strength and movement work so you go into your operation as strong as possible and know your first exercises.' ),
 		array( 'Early recovery', 'Settling pain and swelling, getting moving safely and protecting the repair, following your surgeon\'s protocol.' ),
-		array( 'Back to full strength', 'Progressive strength work in our rehab gym, with clear checkpoints before you return to sport, work or running.' ),
+		array( 'Back to full strength', 'Progressive strength work in our Brookvale rehab gym, with clear checkpoints before you return to sport, work or running.' ),
 	),
 	'first'     => array(
 		array( 'What happens', 'We talk through your surgery, your goals and any protocol from your surgeon, then assess how you are moving.' ),

@@ -31,8 +31,11 @@ function solevo_nav_link( $label, $url, $page_id = 0 ) {
 	return '<!-- wp:navigation-link ' . wp_json_encode( $attrs, JSON_UNESCAPED_SLASHES ) . ' /-->';
 }
 
-function solevo_nav_submenu( $label, $url, $page_id, $children ) {
+function solevo_nav_submenu( $label, $url, $page_id, $children, $class = '' ) {
 	$attrs = array( 'label' => $label, 'url' => $url, 'type' => 'page', 'id' => $page_id, 'kind' => 'post-type' );
+	if ( $class ) {
+		$attrs['className'] = $class;
+	}
 	return '<!-- wp:navigation-submenu ' . wp_json_encode( $attrs, JSON_UNESCAPED_SLASHES ) . ' -->' . implode( '', $children ) . '<!-- /wp:navigation-submenu -->';
 }
 
@@ -52,28 +55,44 @@ function solevo_build_menus( $page_ids ) {
 		solevo_nav_link( 'Pricing', '/#pricing' ),
 	) );
 
-	// Full site menu (agreed 29 Oct): logo links home, then Physio, Conditions, Studio, About, Contact, plus the phone and Book Physio buttons.
-	// Conditions is top level and also stays in the Physio dropdown. No Home item; Home is in the footer.
+	// Only link to pages that are live, so a draft (e.g. NDIS before Emma's review) never shows in the menu.
+	$live = function ( $path, $label = null ) use ( $page_ids, $link ) {
+		$id = $page_ids[ $path ] ?? 0;
+		return ( $id && 'publish' === get_post_status( $id ) ) ? $link( $path, $label ) : '';
+	};
+
+	// Full site menu, 1.4.0 (Steph, 3 Nov; like Beachlife, PhysioWard and Rebound Health):
+	// What we treat / Exercise & programs / Services dropdowns, then About and Contact, plus the phone and Book buttons.
 	$full = implode( '', array(
-		solevo_nav_submenu( 'Physio', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
-			$link( 'physio/sports-physiotherapy', 'Sports physio' ),
-			$link( 'physio', 'General physio' ),
-			$link( 'physio/pre-and-post-surgery-rehab', 'Pre and post surgery rehab' ),
-			$link( 'physio/pregnancy-physiotherapy', 'Pregnancy and postnatal' ),
-			$link( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
-			$link( 'conditions', 'Conditions we treat' ),
-		) ),
-		$link( 'conditions', 'Conditions' ),
-		solevo_nav_submenu( 'Studio', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
+		solevo_nav_submenu( 'What we treat', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
+			$link( 'conditions', 'All conditions' ),
+			$live( 'conditions/lower-back-pain', 'Lower back pain' ),
+			$live( 'conditions/sciatica', 'Sciatica' ),
+			$live( 'conditions/herniated-disc', 'Herniated disc' ),
+			$live( 'conditions/spinal-stenosis', 'Spinal stenosis' ),
+			$live( 'conditions/sports-injuries-rehab', 'Sports injuries' ),
+			$live( 'conditions/shin-splints', 'Shin splints' ),
+			$live( 'conditions/pregnancy-back-pain', 'Pregnancy back pain' ),
+			$live( 'conditions/balance-falls-prevention', 'Balance and falls' ),
+			$live( 'conditions/osteoporosis-pilates', 'Osteoporosis' ),
+		), 'solevo-mega solevo-mega--2col' ),
+		solevo_nav_submenu( 'Exercise &amp; programs', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
 			$link( 'pilates', 'Reformer Pilates' ),
-			$link( 'pilates/clinical-pilates', 'Clinical Pilates' ),
-			$link( 'pilates/mat-pilates', 'Mat Pilates' ),
-			$link( 'pilates/private-pilates', 'Private Pilates' ),
-			$link( 'pilates/seniors', 'Seniors' ),
-			$link( 'pilates/pregnancy-pilates', 'Pregnancy' ),
-			$link( 'pilates/postnatal-pilates', 'Postnatal' ),
-			$link( 'pilates/over-50s-fitness', 'Over 50s fitness' ),
-		) ),
+			$live( 'pilates/clinical-pilates', 'Clinical Pilates' ),
+			$live( 'pilates/mat-pilates', 'Mat Pilates' ),
+			solevo_nav_link( 'Yoga', home_url( '/pilates#classes' ) ),
+			$live( 'pilates/seniors', 'Seniors Pilates' ),
+			$live( 'pilates/postnatal-pilates', 'Postnatal Pilates' ),
+		), 'solevo-mega' ),
+		solevo_nav_submenu( 'Services', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
+			$live( 'physio/sports-physiotherapy', 'Sports physio' ),
+			$link( 'physio', 'General physio' ),
+			$live( 'physio/pre-and-post-surgery-rehab', 'Pre and post surgery rehab' ),
+			$live( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
+			$live( 'physio/shockwave-therapy', 'Shockwave therapy' ),
+			$live( 'physio/workers-compensation', 'WorkCover physio' ),
+			$live( 'physio/ndis', 'NDIS physio' ),
+		), 'solevo-mega' ),
 		$link( 'about', 'About' ),
 		$link( 'contact', 'Contact' ),
 	) );

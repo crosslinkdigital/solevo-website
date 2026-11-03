@@ -34,7 +34,7 @@ return array(
 	'steps'      => array(
 		array( 'Assessment', 'We ask about your pain, work, sleep and goals, check for warning signs, then test how you move, bend and lift and how strong your hips and trunk are.' ),
 		array( 'Settle the pain', 'Hands-on treatment, short-term changes to aggravating activities and simple exercises to calm things down and keep you moving.' ),
-		array( 'Build strength and confidence', 'A progressive strength program, in our rehab gym or at home, so your back copes with the things you need to do. Many people continue in Clinical Pilates.' ),
+		array( 'Build strength and confidence', 'A progressive strength program, in our Brookvale rehab gym or at home, so your back copes with the things you need to do. Many people continue in Clinical Pilates.' ),
 	),
 	'expect'     => array(
 		array( 'Scans', 'Most people do not need an X-ray or MRI. We will tell you if your symptoms suggest a scan or a GP review is needed.' ),

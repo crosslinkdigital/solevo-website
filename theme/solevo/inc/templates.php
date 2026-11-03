@@ -172,7 +172,7 @@ function solevo_build_service( $page, $d ) {
 	) );
 	$c .= solevo_todos( $d );
 	$c .= solevo_c_split( array(
-		'eyebrow'    => 'Who it is for',
+		'eyebrow'    => $d['who_eyebrow'] ?? 'Who it is for',
 		'title'      => $d['who_title'],
 		'paras'      => $d['who'],
 		'list_title' => $d['who_list_title'] ?? 'This may suit you if',

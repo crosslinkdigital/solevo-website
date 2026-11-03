@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.3.29
+Version: 1.4.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -1193,3 +1193,38 @@ body { font-weight: 400; color: #2F2E2C; }
 .solevo-ds .alignwide > .solevo-sh .solevo-intro { max-width: none; }
 /* Numbered "why" cards: titles share one row height, so the text below starts on the same line in every card */
 .solevo-why4__item { display: grid; grid-template-rows: subgrid; grid-row: span 3; row-gap: 0; align-content: start; }
+/* 1.4.0: three dropdowns (What we treat / Exercise & programs / Services), roomier panels; What we treat in two columns */
+.solevo-primary-nav .solevo-mega > .wp-block-navigation__submenu-container { padding: .75rem !important; min-width: 260px !important; border-radius: var(--ds-radius); }
+@media (min-width: 1200px) {
+	.solevo-primary-nav .solevo-mega--2col > .wp-block-navigation__submenu-container { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: .5rem; min-width: 460px !important; }
+}
+.solevo-primary-nav .solevo-mega .wp-block-navigation__submenu-container .wp-block-navigation-item__content { letter-spacing: .02em; text-transform: none; border-radius: 8px; }
+.solevo-primary-nav .solevo-mega .wp-block-navigation__submenu-container .wp-block-navigation-item__content:hover { background: var(--s-linen); }
+/* 1.4.0: calmer FAQ section (Steph, 3 Nov): one centred column, more air, olive plus icon, link to the full FAQ page */
+.solevo-ds .solevo-faq-wrap .solevo-narrow { max-width: 760px; margin-left: auto !important; margin-right: auto !important; }
+.solevo-ds .solevo-faq-wrap h2.wp-block-heading { margin-bottom: 1.5rem; }
+.solevo-ds .solevo-faq2 { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); padding: 0 clamp(1.25rem, 3vw, 2rem); }
+.solevo-ds .solevo-faq2__item:last-child { border-bottom: 0; }
+.solevo-ds .solevo-faq2__item summary { padding: 1.35rem 3rem 1.35rem 0; line-height: 1.45; cursor: pointer; }
+.solevo-ds .solevo-faq2__item summary::-webkit-details-marker { display: none; }
+.solevo-ds .solevo-faq2__item summary::after { border-color: var(--ds-olive); }
+.solevo-ds .solevo-faq2__item[open] summary { color: var(--ds-olive-text); }
+.solevo-ds .solevo-faq2__item p { margin-bottom: 1.4rem; line-height: 1.65; }
+.solevo-ds .solevo-faq2__all { margin-top: 1.25rem !important; font-size: var(--fs-button); }
+.solevo-ds .solevo-faq2__all a { color: var(--ds-olive-text); text-decoration: none; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+.solevo-ds .solevo-faq2__all a::after { content: " \2192"; }
+/* Older pages built before 1.3.21 still carry the two-column fees and FAQ layout: stack it in one column */
+.solevo-ds .solevo-feesfaq { grid-template-columns: 1fr; max-width: 760px; margin-left: auto; margin-right: auto; }
+/* 1.4.0: conditions overview, every condition with a short description and a Read more link */
+.solevo-clist__group { margin-top: clamp(2rem, 4vw, 3rem); }
+.solevo-clist__group > h2.wp-block-heading { font-size: var(--fs-h3); margin-bottom: 1rem; padding-bottom: .6rem; border-bottom: 1px solid var(--ds-line); }
+.solevo-clist__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: var(--ds-gap); }
+.solevo-ds .solevo-clist__grid > * { margin-block: 0 !important; }
+.solevo-clist__item { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); padding: 1.25rem 1.35rem; display: flex; flex-direction: column; }
+.solevo-clist__item h3.wp-block-heading { font-size: var(--fs-card); margin: 0 0 .4rem; }
+.solevo-clist__item p { margin: 0; color: var(--ds-soft); font-size: var(--fs-body); line-height: 1.55; }
+.solevo-clist__item .solevo-clist__more { margin-top: auto !important; padding-top: .9rem; }
+.solevo-clist__more a { color: var(--ds-olive-text); text-decoration: none; font-size: var(--fs-button); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+.solevo-clist__more a::after { content: " \2192"; }
+/* 1.4.0: visually hidden text for screen readers (Read more links name their condition) */
+.screen-reader-text { border: 0; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute !important; width: 1px; word-wrap: normal !important; }

@@ -26,7 +26,7 @@ function solevo_scaffold_home( $page ) {
 	$c .= solevo_c_hero( array(
 		'eyebrow'   => 'Solevo Physio · Brookvale',
 		'h1'        => esc_html( $page['h1'] ),
-		'lead'      => 'One-on-one physiotherapy for pain, injury and sports rehab, with a rehab gym and Pilates studio on site. Hands-on treatment and a clear plan to get you back to what you enjoy.',
+		'lead'      => 'One-on-one physiotherapy for pain, injury and sports rehab, with a rehab gym and Pilates studio in Brookvale. Hands-on treatment and a clear plan to get you back to what you enjoy.',
 		'buttons'   => $buttons,
 		'locations' => true,
 		'trust'     => array( 'No referral required', 'One-on-one appointments', 'Book online any time' ),
@@ -54,21 +54,22 @@ function solevo_scaffold_home( $page ) {
 		array( 'Book online any time', 'Two locations: Brookvale and Terrey Hills', 'No referral required' )
 	);
 
-	/* 5. Physio services: links down to /physio and the five service pages */
+	/* 5. Physio services: links down to /physio and the service pages (1.4.0: pregnancy out, WorkCover and NDIS in) */
 	$c .= solevo_c_service_cards(
-		solevo_c_head( 'Our physiotherapy', 'Physiotherapy services', 'From everyday aches and pains to sports injuries, pregnancy and rehab after surgery.' ),
+		solevo_c_head( 'Our physiotherapy', 'Physiotherapy services', 'From everyday aches and pains to sports injuries, work injuries and rehab after surgery.' ),
 		array(
 			array( 'title' => 'General physiotherapy', 'text' => 'Assessment, hands-on treatment and strength-led rehab for back, neck, shoulder, hip and knee pain.', 'more' => array( 'Physiotherapy', home_url( '/physio' ) ), 'featured' => true ),
 			array( 'title' => 'Sports physiotherapy', 'text' => 'Injury care and return-to-sport plans for active people, from weekend sport to competition.', 'more' => array( 'Sports physio', home_url( '/physio/sports-physiotherapy' ) ) ),
-			array( 'title' => 'Pregnancy physiotherapy', 'text' => 'Care for back, pelvic and rib pain in pregnancy, and safe exercise through every trimester.', 'more' => array( 'Pregnancy physio', home_url( '/physio/pregnancy-physiotherapy' ) ) ),
-			array( 'title' => 'Postnatal physiotherapy', 'text' => 'A postnatal check, abdominal and pelvic floor assessment and a clear plan back to exercise.', 'more' => array( 'Postnatal physio', home_url( '/physio/postnatal-physiotherapy' ) ) ),
+			array( 'title' => 'Pre and post surgery rehab', 'text' => 'Prehab before your operation and structured rehab afterwards, following your surgeon\'s protocol.', 'more' => array( 'Surgery rehab', home_url( '/physio/pre-and-post-surgery-rehab' ) ) ),
 			array( 'title' => 'Physio for seniors', 'text' => 'Balance, strength and joint care to help you stay steady, active and independent.', 'more' => array( 'Seniors physio', home_url( '/physio/seniors-physiotherapy' ) ) ),
+			array( 'title' => 'WorkCover physiotherapy', 'text' => 'Assessment, treatment and rehab for workplace injuries, tailored to your job and recovery goals.', 'more' => array( 'WorkCover physio', home_url( '/physio/workers-compensation' ) ) ),
+			array( 'title' => 'NDIS physiotherapy', 'text' => 'Physiotherapy for NDIS participants with self-managed or plan-managed funding.', 'more' => array( 'NDIS physio', home_url( '/physio/ndis' ) ) ),
 		),
 		solevo_b_buttons( array( array( 'Book Physio', '#cliniko' ) ) )
 	);
 
 	/* 6. Conditions we treat ------------------------------------------- */
-	$conditions = array( 'conditions/lower-back-pain', 'conditions/sciatica', 'conditions/herniated-disc', 'conditions/sports-injuries-rehab', 'conditions/pregnancy-back-pain', 'conditions/spinal-stenosis', 'conditions/osteoporosis-pilates', 'conditions/balance-falls-prevention', 'conditions/bladder-leakage-incontinence' );
+	$conditions = array( 'conditions/lower-back-pain', 'conditions/sciatica', 'conditions/herniated-disc', 'conditions/sports-injuries-rehab', 'conditions/pregnancy-back-pain', 'conditions/spinal-stenosis', 'conditions/osteoporosis-pilates', 'conditions/balance-falls-prevention', 'conditions/shin-splints' );
 	$c .= solevo_b_section(
 		solevo_c_head( 'Conditions we treat', 'Not sure what is going on?', 'Read about common conditions, the warning signs that need a GP first, and how we treat them. Or book an assessment and we will work it out together.' )
 		. solevo_b_list( array_map( 'solevo_c_link', $conditions ), 'is-style-pills' )
