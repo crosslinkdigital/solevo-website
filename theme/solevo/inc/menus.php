@@ -62,7 +62,7 @@ function solevo_build_menus( $page_ids ) {
 	};
 
 	// Full site menu, 1.4.0 (Steph, 3 Nov; like Beachlife, PhysioWard and Rebound Health):
-	// What we treat / Exercise & programs / Services dropdowns, then About and Contact, plus the phone and Book buttons.
+	// What we treat / Exercise & programs / Services dropdowns only, plus the phone and Book buttons. About and Contact live in the footer (Steph, 3 Nov).
 	$full = implode( '', array(
 		solevo_nav_submenu( 'What we treat', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
 			$link( 'conditions', 'All conditions' ),
@@ -93,8 +93,6 @@ function solevo_build_menus( $page_ids ) {
 			$live( 'physio/workers-compensation', 'WorkCover physio' ),
 			$live( 'physio/ndis', 'NDIS physio' ),
 		), 'solevo-mega' ),
-		$link( 'about', 'About' ),
-		$link( 'contact', 'Contact' ),
 	) );
 
 	$ids = get_option( 'solevo_menu_ids', array() );

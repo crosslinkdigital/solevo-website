@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.4.1
+Version: 1.4.2
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -1228,3 +1228,10 @@ body { font-weight: 400; color: #2F2E2C; }
 .solevo-clist__more a::after { content: " \2192"; }
 /* 1.4.0: visually hidden text for screen readers (Read more links name their condition) */
 .screen-reader-text { border: 0; clip: rect(1px, 1px, 1px, 1px); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute !important; width: 1px; word-wrap: normal !important; }
+/* 1.4.2: the two-column What we treat panel opens to the right of its item, so it no longer runs off the left of the screen */
+@media (min-width: 1200px) {
+	.solevo-primary-nav .solevo-mega--2col > .wp-block-navigation__submenu-container { left: 0 !important; right: auto !important; }
+}
+/* 1.4.2: the logo keeps its 140px width; longer menu labels no longer squeeze it */
+.solevo-header__bar > .wp-block-site-logo, .solevo-header__bar > .solevo-logo { flex-shrink: 0; }
+.solevo-logo img { min-width: 140px; }
