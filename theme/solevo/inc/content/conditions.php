@@ -15,19 +15,18 @@ return array(
 					array( 'title' => 'Lower back pain', 'body' => 'Pain, stiffness or tightness between your ribs and pelvis, from everyday aches to persistent pain.', 'path' => 'conditions/lower-back-pain' ),
 					array( 'title' => 'Sciatica', 'body' => 'Nerve pain that travels from the lower back into the buttock and leg.', 'path' => 'conditions/sciatica' ),
 					array( 'title' => 'Herniated disc', 'body' => 'Disc-related back pain, with or without pain into the leg.', 'path' => 'conditions/herniated-disc' ),
-					array( 'title' => 'Spinal stenosis', 'body' => 'Back and leg pain that limits walking and standing.', 'path' => 'conditions/spinal-stenosis' ),
-					array( 'title' => 'Neck pain', 'body' => 'From everyday stiffness to persistent neck pain. We assess the cause and build a treatment and exercise plan to restore movement.' ),
+					array( 'title' => 'Neck pain & headaches', 'body' => 'From everyday stiffness to persistent neck pain. We assess the cause and build a treatment and exercise plan to restore movement.', 'path' => 'conditions/neck-pain-headaches' ),
 				) ),
 				array( 'title' => 'Sports and running', 'items' => array(
 					array( 'title' => 'Sports injury rehab', 'body' => 'Sudden injuries and overuse problems, with a staged return to training and competition.', 'path' => 'conditions/sports-injuries-rehab' ),
 					array( 'title' => 'Shin splints', 'body' => 'Pain along the shin that builds with running, and a plan to get you running again.', 'path' => 'conditions/shin-splints' ),
-					array( 'title' => 'Sprains and muscle strains', 'body' => 'Ankle, hamstring, calf and groin injuries, with progressive rehab back to running and sport.' ),
+					array( 'title' => 'Foot & ankle', 'body' => 'Ankle and foot pain can affect walking, running, exercise and everyday activities.', 'path' => 'conditions/foot-ankle' ),
 					array( 'title' => 'Tendon pain', 'body' => 'Achilles, patellar, gluteal tendons and tennis elbow, managed with targeted strength and loading programs.' ),
 				) ),
 				array( 'title' => 'Shoulder, hip and knee', 'items' => array(
-					array( 'title' => 'Shoulder pain', 'body' => 'Rotator cuff injuries, frozen shoulder and stiffness affecting reaching, lifting, dressing or sleeping.' ),
-					array( 'title' => 'Hip and knee pain', 'body' => 'Joint, muscle and tendon problems affecting walking, stairs and exercise.' ),
-					array( 'title' => 'Knee injuries', 'body' => 'ACL, meniscus and kneecap pain, including rehab before and after surgery.' ),
+					array( 'title' => 'Shoulder & arm pain', 'body' => 'Rotator cuff injuries, frozen shoulder and stiffness affecting reaching, lifting, dressing or sleeping.', 'path' => 'conditions/shoulder-arm-pain' ),
+					array( 'title' => 'Hip & groin pain', 'body' => 'Joint, muscle and tendon problems affecting walking, stairs and exercise.', 'path' => 'conditions/hip-groin-pain' ),
+					array( 'title' => 'Knee pain & injury', 'body' => 'ACL, meniscus and kneecap pain, including rehab before and after surgery.', 'path' => 'conditions/knee-pain' ),
 					array( 'title' => 'Rehab after surgery', 'body' => 'Knee and hip replacements, ACL reconstruction and shoulder surgery, following your surgeon\'s protocol.', 'path' => 'physio/pre-and-post-surgery-rehab' ),
 				) ),
 				array( 'title' => 'Pregnancy', 'items' => array(
@@ -36,7 +35,7 @@ return array(
 				) ),
 				array( 'title' => 'Seniors and bone health', 'items' => array(
 					array( 'title' => 'Balance and falls prevention', 'body' => 'Strength and balance work to feel steadier and more confident, including after a fall.', 'path' => 'conditions/balance-falls-prevention' ),
-					array( 'title' => 'Osteoporosis', 'body' => 'Safe strength and weight-bearing exercise selected with your bone health in mind.', 'path' => 'conditions/osteoporosis-pilates' ),
+					array( 'title' => 'Osteoporosis', 'body' => 'Safe strength and weight-bearing exercise selected with your bone health in mind.', 'path' => 'conditions/osteoporosis' ),
 					array( 'title' => 'Arthritis and joint pain', 'body' => 'Exercise and hands-on treatment to manage joint pain and keep you moving.', 'path' => 'physio/seniors-physiotherapy' ),
 				) ),
 			)

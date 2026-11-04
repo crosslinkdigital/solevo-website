@@ -40,7 +40,7 @@ return array(
 		array( 'Can I claim it on my health fund?', 'Some funds cover Pilates in some circumstances. Please check with your fund.' ),
 		array( 'I have had a fall. Should I see a physio first?', 'A physio assessment is a good first step after a fall, so we can check your balance and strength before you join a class.' ),
 	),
-	'related'    => array( 'physio/seniors-physiotherapy', 'conditions/balance-falls-prevention', 'conditions/osteoporosis-pilates' ),
+	'related'    => array( 'physio/seniors-physiotherapy', 'conditions/balance-falls-prevention', 'conditions/osteoporosis' ),
 	'related_title' => 'Seniors care at Solevo',
 	'todo'       => array( 'Confirm with Steph: Seniors Pilates price, group size, class length, program length and timetable. Add a pricing section once confirmed (working assumption for ads was A$79 per week, not shown on the page).' ),
 );

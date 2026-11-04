@@ -50,5 +50,5 @@ return array(
 		array( 'Can I keep working and exercising?', 'Usually yes, with changes. Staying as active as your symptoms allow tends to help. We will help you adjust sitting, lifting and training while things settle.' ),
 		array( 'Do I need a referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
 	),
-	'related'    => array( 'conditions/lower-back-pain', 'conditions/herniated-disc', 'conditions/spinal-stenosis' ),
+	'related'    => array( 'conditions/lower-back-pain', 'conditions/herniated-disc' ),
 );

@@ -47,5 +47,5 @@ return array(
 		array( 'Can I exercise with a herniated disc?', 'Yes, in most cases, with the right choice of exercise. We find movements you can do comfortably and build from there.' ),
 		array( 'How long does it take to recover?', 'It varies. Many people improve over weeks to a few months. Your physio will give you a realistic plan and adjust it as you progress.' ),
 	),
-	'related'    => array( 'conditions/sciatica', 'conditions/lower-back-pain', 'conditions/spinal-stenosis' ),
+	'related'    => array( 'conditions/sciatica', 'conditions/lower-back-pain' ),
 );

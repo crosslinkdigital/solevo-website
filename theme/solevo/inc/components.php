@@ -101,7 +101,8 @@ function solevo_c_help_grid( $head, $items, $after = '' ) {
 		}
 		$cta    = $it['cta'] ?? array( 'Book Physio', '#cliniko' );
 		$inner .= solevo_b_p( sprintf( '<a href="%s">%s</a>', esc_attr( $cta[1] ), $cta[0] ), 'solevo-qbox__cta' );
-		$boxes .= solevo_c_details( $it['title'] . '<br><em>' . $it['hint'] . '</em>', $inner, 'solevo-qbox solevo-icon--' . $it['icon'] );
+		$summary = $it['title'] . ( ! empty( $it['hint'] ) ? '<br><em>' . $it['hint'] . '</em>' : '' );
+		$boxes  .= solevo_c_details( $summary, $inner, 'solevo-qbox solevo-icon--' . $it['icon'] );
 	}
 	return solevo_b_section( $head . solevo_c_box( $boxes, 'solevo-qgrid' ) . $after, array( 'class' => 'solevo-c solevo-help', 'anchor' => 'help' ) );
 }
@@ -307,7 +308,14 @@ function solevo_c_split( $a ) {
 	}
 	$text .= $a['after_text'] ?? '';
 	$side = '';
-	if ( ! empty( $a['list'] ) ) {
+	if ( ! empty( $a['list_groups'] ) ) {
+		// 1.4.6: one card, a short heading per group (e.g. Neck pain / Neck-related headaches).
+		$g = ! empty( $a['list_title'] ) ? solevo_b_h( $a['list_title'], 3 ) : '';
+		foreach ( $a['list_groups'] as $grp ) {
+			$g .= solevo_b_p( '<strong>' . $grp[0] . '</strong>', 'solevo-split2__group' ) . solevo_b_list( $grp[1], 'solevo-ticks' );
+		}
+		$side = solevo_c_box( $g, 'solevo-split2__card' );
+	} elseif ( ! empty( $a['list'] ) ) {
 		$side = solevo_c_box( ( ! empty( $a['list_title'] ) ? solevo_b_h( $a['list_title'], 3 ) : '' ) . solevo_b_list( $a['list'], 'solevo-ticks' ), 'solevo-split2__card' );
 	} elseif ( ! empty( $a['image'] ) ) {
 		$side = solevo_img( $a['image'], 'solevo-split2__img', 'large' );

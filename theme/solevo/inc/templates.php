@@ -104,6 +104,23 @@ function solevo_physio_funding_faq() {
 	);
 }
 
+/**
+ * FAQPage JSON-LD that mirrors the visible FAQ accordion (1.4.6). Same format as the blocks
+ * added by hand on the older pages, so every page carries one schema block that matches its FAQs.
+ */
+function solevo_faq_schema( $faqs ) {
+	$items = array();
+	foreach ( $faqs as $f ) {
+		$items[] = array(
+			'@type'          => 'Question',
+			'name'           => wp_strip_all_tags( $f[0] ),
+			'acceptedAnswer' => array( '@type' => 'Answer', 'text' => wp_strip_all_tags( $f[1] ) ),
+		);
+	}
+	$json = wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $items ), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	return "<!-- wp:html -->\n<script type=\"application/ld+json\">\n{$json}\n</script>\n<!-- /wp:html -->\n\n";
+}
+
 function solevo_steps_items( $steps ) {
 	return array_map( function ( $s ) {
 		return array( $s[0], $s[1] );
@@ -127,13 +144,24 @@ function solevo_build_condition( $page, $d ) {
 		'image'     => $d['image'] ?? '',
 	) );
 	$c .= solevo_todos( $d );
+	// 1.4.6: a second "what is" topic (what_more: [[title, paras]]) and grouped symptom lists
+	// (symptom_groups: [[title, items]]) for pages that cover two related problems (neck pain & headaches).
+	$more = '';
+	foreach ( (array) ( $d['what_more'] ?? array() ) as $m ) {
+		$more .= solevo_b_h( $m[0], 3 );
+		foreach ( (array) $m[1] as $para ) {
+			$more .= solevo_b_p( $para );
+		}
+	}
 	$c .= solevo_c_split( array(
-		'eyebrow'    => 'Understanding it',
-		'title'      => $d['what_title'],
-		'paras'      => $d['what'],
-		'list_title' => $d['symptoms_title'] ?? 'Common symptoms',
-		'list'       => $d['symptoms'],
-		'anchor'     => 'about',
+		'eyebrow'     => 'Understanding it',
+		'title'       => $d['what_title'],
+		'paras'       => $d['what'],
+		'after_text'  => $more,
+		'list_title'  => $d['symptoms_title'] ?? 'Common symptoms',
+		'list'        => $d['symptoms'] ?? array(),
+		'list_groups' => $d['symptom_groups'] ?? array(),
+		'anchor'      => 'about',
 	) );
 	if ( ! empty( $d['causes'] ) ) {
 		$c .= solevo_c_service_cards(
@@ -150,14 +178,14 @@ function solevo_build_condition( $page, $d ) {
 		solevo_steps_items( $d['steps'] ),
 		$d['expect'] ?? array(),
 		! empty( $d['note'] ) ? solevo_b_p( $d['note'], 'solevo-help__after' ) : '',
-		'What to expect',
+		$d['expect_title'] ?? 'What to expect',
 		array( 'anchor' => 'help-steps' )
 	);
 	if ( ! empty( $d['services'] ) ) {
 		$c .= solevo_c_link_cards( solevo_c_head( 'Care at Solevo', $d['services_title'] ?? 'Services that can help' ), $d['services'], array( 'bg' => 'surface', 'anchor' => 'services' ) );
 	}
 	$c .= solevo_c_redflags( $d['flags_title'] ?? 'When to see a GP or get urgent care first', $d['flags'], $d['flags_note'] ?? 'If any of these apply, see your GP before booking. In an emergency call 000.' );
-	$c .= solevo_c_faq( 'Common questions', $d['faq'], solevo_c_reviewed() );
+	$c .= solevo_c_faq( $d['faq_title'] ?? 'Common questions', $d['faq'], solevo_c_reviewed() . ( ! empty( $d['faq_schema'] ) ? solevo_faq_schema( $d['faq'] ) : '' ) );
 	if ( ! empty( $d['related'] ) ) {
 		$c .= solevo_c_related( 'Related conditions', $d['related'] );
 	}
@@ -204,6 +232,7 @@ function solevo_build_service( $page, $d ) {
 	if ( ! empty( $d['practitioner'] ) ) {
 		$c .= solevo_c_practitioner( $d['practitioner'] );
 	}
+	$c .= $d['before_faq'] ?? '';
 	// No physio prices anywhere on the site (Steph, 25 Oct). Funding sits in the FAQs, not a separate box (29 Oct).
 	$c .= solevo_c_faq(
 		$d['faq_title'] ?? 'Physiotherapy FAQs',

@@ -45,5 +45,5 @@ return array(
 		array( 'How often do I need to exercise?', 'Regular practice matters most. Your physio will suggest a weekly plan you can stick to, at home and with us.' ),
 		array( 'Can my family come with me?', 'Yes. You are welcome to bring a family member or carer to your appointment.' ),
 	),
-	'related'    => array( 'conditions/osteoporosis-pilates', 'conditions/spinal-stenosis' ),
+	'related'    => array( 'conditions/osteoporosis' ),
 );

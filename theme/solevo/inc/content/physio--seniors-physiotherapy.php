@@ -21,8 +21,8 @@ return array(
 		array( 'icon' => 'strength', 'title' => 'Balance and falls', 'hint' => 'Testing and training', 'body' => 'Balance testing and exercise that reduces the risk of falls.', 'links' => array( solevo_c_link( 'conditions/balance-falls-prevention' ) ) ),
 		array( 'icon' => 'knee', 'title' => 'Arthritis and joint pain', 'hint' => 'Knees, hips, hands, back', 'body' => 'Exercise and strength work is the first-line treatment for knee and hip osteoarthritis.' ),
 		array( 'icon' => 'surgery', 'title' => 'Joint replacement rehab', 'hint' => 'Hip and knee', 'body' => 'Rehab before and after hip and knee replacement, following your surgeon\'s protocol.' ),
-		array( 'icon' => 'back', 'title' => 'Back pain and stenosis', 'hint' => 'Walking further, standing longer', 'body' => 'Help with back and leg pain that limits walking.', 'links' => array( solevo_c_link( 'conditions/spinal-stenosis' ) ) ),
-		array( 'icon' => 'tendon', 'title' => 'Bone health', 'hint' => 'Osteoporosis and osteopenia', 'body' => 'Safe, progressive strength exercise for bone health.', 'links' => array( solevo_c_link( 'conditions/osteoporosis-pilates' ) ) ),
+		array( 'icon' => 'back', 'title' => 'Back pain and sciatica', 'hint' => 'Walking further, standing longer', 'body' => 'Help with back and leg pain that limits walking.', 'links' => array( solevo_c_link( 'conditions/sciatica' ) ) ),
+		array( 'icon' => 'tendon', 'title' => 'Bone health', 'hint' => 'Osteoporosis and osteopenia', 'body' => 'Safe, progressive strength exercise for bone health.', 'links' => array( solevo_c_link( 'conditions/osteoporosis' ) ) ),
 	),
 	'steps'     => array(
 		array( 'Thorough assessment', 'We review your health and medications, then test strength, balance, walking and the movements you find hard.' ),
@@ -49,6 +49,6 @@ return array(
 		array( 'Can physio help my arthritis?', 'Yes. Exercise and strength work are recommended first treatments for knee and hip osteoarthritis and can ease pain and improve function.' ),
 		array( 'Is there parking?', 'Please see the Contact page for parking and access details.' ),
 	),
-	'related'   => array( 'conditions/balance-falls-prevention', 'pilates/seniors', 'conditions/osteoporosis-pilates', 'conditions/spinal-stenosis' ),
+	'related'   => array( 'conditions/balance-falls-prevention', 'pilates/seniors', 'conditions/osteoporosis' ),
 	'todo'      => array( 'Add parking and access details to Contact.' ),
 );

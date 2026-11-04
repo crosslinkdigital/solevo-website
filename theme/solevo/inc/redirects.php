@@ -24,6 +24,9 @@ function solevo_redirects() {
 		'pilates/private-pilates'           => 'pilates',
 		// Hayo, 3 Nov: Mums and Bubs points at the postnatal class page.
 		'pilates/mums-and-bubs'             => 'pilates/postnatal-pilates',
+		// 1.4.6 (Steph's feedback, 4 Nov): spinal stenosis page dropped; osteoporosis moved to its own URL.
+		'conditions/spinal-stenosis'        => 'conditions/sciatica',
+		'conditions/osteoporosis-pilates'   => 'conditions/osteoporosis',
 	);
 }
 

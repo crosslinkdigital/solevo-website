@@ -63,22 +63,27 @@ function solevo_build_menus( $page_ids ) {
 	$full = implode( '', array(
 		solevo_nav_submenu( 'What we treat', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
 			$link( 'conditions', 'All conditions' ),
+			// 1.4.6 order (Steph's Areas we treat doc, Hayo, 4 Nov).
 			$live( 'conditions/lower-back-pain', 'Lower back pain' ),
 			$live( 'conditions/sciatica', 'Sciatica' ),
 			$live( 'conditions/herniated-disc', 'Herniated disc' ),
-			$live( 'conditions/spinal-stenosis', 'Spinal stenosis' ),
-			$live( 'conditions/sports-injuries-rehab', 'Sports injuries' ),
+			$live( 'conditions/neck-pain-headaches', 'Neck pain & headaches' ),
+			$live( 'conditions/shoulder-arm-pain', 'Shoulder & arm pain' ),
+			$live( 'conditions/hip-groin-pain', 'Hip & groin pain' ),
+			$live( 'conditions/knee-pain', 'Knee pain & injury' ),
+			$live( 'conditions/foot-ankle', 'Foot & ankle' ),
 			$live( 'conditions/shin-splints', 'Shin splints' ),
-			$live( 'conditions/pregnancy-back-pain', 'Pregnancy back pain' ),
+			$live( 'conditions/sports-injuries-rehab', 'Sports injuries' ),
 			$live( 'conditions/balance-falls-prevention', 'Balance and falls' ),
-			$live( 'conditions/osteoporosis-pilates', 'Osteoporosis' ),
+			$live( 'conditions/osteoporosis', 'Osteoporosis' ),
+			$live( 'conditions/pregnancy-back-pain', 'Pregnancy back pain' ),
 		), 'solevo-mega solevo-mega--2col' ),
 		solevo_nav_submenu( 'Exercise &amp; programs', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
 			$link( 'pilates', 'Reformer Pilates' ),
 			$live( 'pilates/clinical-pilates', 'Clinical Pilates' ),
 			$live( 'pilates/mat-pilates', 'Mat Pilates' ),
-			solevo_nav_link( 'Yoga', home_url( '/pilates#classes' ) ),
-			$live( 'pilates/seniors', 'Seniors Pilates' ),
+			solevo_nav_link( 'Yoga', home_url( '/pilates#yoga' ) ), // 1.4.6: was #classes, the reformer section (Steph, 4 Nov)
+			$live( 'pilates/seniors', 'Active Seniors' ),
 			$live( 'pilates/postnatal-pilates', 'Postnatal Pilates' ),
 		), 'solevo-mega' ),
 		solevo_nav_submenu( 'Services', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
@@ -86,6 +91,7 @@ function solevo_build_menus( $page_ids ) {
 			$link( 'physio', 'General physio' ),
 			$live( 'physio/pre-and-post-surgery-rehab', 'Pre and post surgery rehab' ),
 			$live( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
+			$live( 'physio/adolescent-sports-physiotherapy', 'Adolescent sports injuries' ),
 			$live( 'physio/shockwave-therapy', 'Shockwave therapy' ),
 			$live( 'physio/workers-compensation', 'WorkCover physio' ),
 			$live( 'physio/ndis', 'NDIS physio' ),
