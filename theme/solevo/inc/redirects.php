@@ -27,6 +27,9 @@ function solevo_redirects() {
 		// 1.4.6 (Steph's feedback, 4 Nov): spinal stenosis page dropped; osteoporosis moved to its own URL.
 		'conditions/spinal-stenosis'        => 'conditions/sciatica',
 		'conditions/osteoporosis-pilates'   => 'conditions/osteoporosis',
+		// 1.4.7: holding redirect while the shin splints draft waits for Steph and Emma.
+		// Stops by itself the moment the page is published.
+		'conditions/shin-splints'           => 'conditions/foot-ankle',
 	);
 }
 
