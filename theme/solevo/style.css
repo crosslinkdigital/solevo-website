@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.4.7
+Version: 1.4.8
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -1074,6 +1074,12 @@ div.solevo-social, div.solevo-social a { color: #BDBAB4; font-size: var(--fs-sma
 #find-us { scroll-margin-top: 110px; }
 
 /* 1.3.14: service cards, equal size, last row centred (homepage and /physio) */
+/* 1.4.8: five cards on desktop = three on top, two wider below, no empty slot (Hayo's visual check, 4 Nov). */
+@media (min-width: 1024px) {
+	.solevo-scards:has(> :nth-child(5):last-child), .solevo-qgrid:has(> :nth-child(5):last-child) { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+	.solevo-scards:has(> :nth-child(5):last-child) > *, .solevo-qgrid:has(> :nth-child(5):last-child) > * { grid-column: span 2; }
+	.solevo-scards:has(> :nth-child(5):last-child) > :nth-child(n+4), .solevo-qgrid:has(> :nth-child(5):last-child) > :nth-child(n+4) { grid-column: span 3; }
+}
 .solevo-scards--center { display: flex !important; flex-wrap: wrap; justify-content: center; }
 .solevo-scards--center > .solevo-scard { flex: 0 1 calc((100% - 2 * var(--ds-gap)) / 3); min-width: 0; }
 @media (max-width: 1023px) { .solevo-scards--center > .solevo-scard { flex-basis: calc((100% - var(--ds-gap)) / 2); } }
