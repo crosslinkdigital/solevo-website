@@ -13,12 +13,22 @@
 
 	// 2. Click events: click_book_physio, click_book_class, click_book, click_call, click_email.
 	window.dataLayer = window.dataLayer || [];
+	// Every event goes to the dataLayer (GTM) and, when the GA4 Google tag is on the page, to GA4 too.
+	function track(data) {
+		window.dataLayer.push(data);
+		if (typeof window.gtag === 'function') {
+			var params = {};
+			for (var k in data) { if (k !== 'event') params[k] = data[k]; }
+			window.gtag('event', data.event, params);
+		}
+	}
+	window.solevoTrack = track;
 	document.addEventListener('click', function (e) {
 		var link = e.target.closest && e.target.closest('a[data-track], a[href^="tel:"], a[href^="mailto:"]');
 		if (!link) return;
 		var event = link.getAttribute('data-track') ||
 			(link.href.indexOf('tel:') === 0 ? 'click_call' : 'click_email');
-		window.dataLayer.push({
+		track({
 			event: event,
 			link_url: link.href,
 			link_text: (link.textContent || '').trim().slice(0, 80),
@@ -31,7 +41,7 @@
 	document.addEventListener('submit', function (e) {
 		var form = e.target;
 		if (form && form.matches && form.matches('form:not([role="search"])')) {
-			window.dataLayer.push({ event: 'form_submit', form_id: form.id || '', page_path: window.location.pathname });
+			track({ event: 'form_submit', form_id: form.id || '', page_path: window.location.pathname });
 		}
 	});
 
@@ -112,7 +122,7 @@
 		if (p && p.catch) p.catch(function () {});
 		play.remove();
 		fig.classList.remove('is-tap');
-		window.dataLayer && window.dataLayer.push({ event: 'video_play', video: 'solevo_intro', page_path: window.location.pathname });
+		(window.solevoTrack || function (d) { (window.dataLayer = window.dataLayer || []).push(d); })({ event: 'video_play', video: 'solevo_intro', page_path: window.location.pathname });
 	});
 })();
 
