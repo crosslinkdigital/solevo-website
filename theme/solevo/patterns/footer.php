@@ -40,7 +40,7 @@
 <!-- /wp:list-item -->
 <?php $solevo_surg = get_page_by_path( 'physio/pre-and-post-surgery-rehab' ); if ( $solevo_surg && 'publish' === $solevo_surg->post_status ) : ?>
 <!-- wp:list-item -->
-<li><a href="/physio/pre-and-post-surgery-rehab">Pre and post surgery rehab</a></li>
+<li><a href="/physio/pre-and-post-surgery-rehab">Pre &amp; Post Surgical Rehab</a></li>
 <!-- /wp:list-item -->
 <?php endif; ?>
 <!-- wp:list-item -->

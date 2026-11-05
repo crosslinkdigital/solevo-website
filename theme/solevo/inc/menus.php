@@ -89,7 +89,7 @@ function solevo_build_menus( $page_ids ) {
 		solevo_nav_submenu( 'Services', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
 			$live( 'physio/sports-physiotherapy', 'Sports physio' ),
 			$link( 'physio', 'General physio' ),
-			$live( 'physio/pre-and-post-surgery-rehab', 'Pre and post surgery rehab' ),
+			$live( 'physio/pre-and-post-surgery-rehab', 'Pre &amp; Post Surgical Rehab' ), // 1.4.11: Steph, 5 Nov
 			$live( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
 			$live( 'physio/adolescent-sports-physiotherapy', 'Adolescent sports injuries' ),
 			$live( 'physio/shockwave-therapy', 'Shockwave therapy' ),
