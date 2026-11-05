@@ -35,8 +35,7 @@ function solevo_setting_fields() {
 		'instagram_url' => array( 'label' => 'Instagram URL', 'default' => 'https://www.instagram.com/solevo.studio/', 'type' => 'url' ),
 		'tfc_url'       => array( 'label' => 'The Foot Company URL', 'default' => '', 'type' => 'url' ),
 		'suburbs'       => array( 'label' => 'Suburbs served', 'default' => 'Brookvale, Dee Why, Manly, Freshwater, Curl Curl, Allambie Heights, Frenchs Forest, Narraweena, Cromer, Collaroy', 'type' => 'textarea', 'help' => 'Comma separated. Listed as plain text on Contact.' ),
-		'ga4_id'        => array( 'label' => 'GA4 measurement ID', 'default' => 'G-2SWCETLZ9B', 'type' => 'text', 'help' => 'Format G-XXXXXXXXXX. The Google tag only loads on solevo.com.au, never on staging, and not for logged-in editors.' ),
-		'gtm_id'        => array( 'label' => 'Google Tag Manager ID', 'default' => '', 'type' => 'text', 'help' => 'Optional. Format GTM-XXXXXXX. Not needed for GA4 page views (the GA4 ID above does that).' ),
+		'gtm_id'        => array( 'label' => 'Google Tag Manager ID', 'default' => 'GTM-MQFNQD4R', 'type' => 'text', 'help' => 'Format GTM-XXXXXXX. All tracking (GA4 included) is set up inside Tag Manager. Not loaded for logged-in editors.' ),
 	);
 }
 
@@ -79,10 +78,6 @@ function solevo_sanitize_settings( $input ) {
 			default:
 				$clean[ $key ] = sanitize_text_field( $value );
 		}
-	}
-	if ( $clean['ga4_id'] && ! preg_match( '/^G-[A-Z0-9]+$/', $clean['ga4_id'] ) ) {
-		add_settings_error( 'solevo_settings', 'ga4', 'The GA4 measurement ID should look like G-XXXXXXXXXX. It was not saved.' );
-		$clean['ga4_id'] = '';
 	}
 	if ( $clean['gtm_id'] && ! preg_match( '/^GTM-[A-Z0-9]+$/', $clean['gtm_id'] ) ) {
 		add_settings_error( 'solevo_settings', 'gtm', 'The Tag Manager ID should look like GTM-XXXXXXX. It was not saved.' );
