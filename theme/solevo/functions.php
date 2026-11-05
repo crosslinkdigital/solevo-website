@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SOLEVO_VERSION', '1.4.12' );
+define( 'SOLEVO_VERSION', '1.4.13' );
 define( 'SOLEVO_DIR', get_template_directory() );
 define( 'SOLEVO_URI', get_template_directory_uri() );
 
@@ -23,6 +23,7 @@ require SOLEVO_DIR . '/inc/pages.php';
 require SOLEVO_DIR . '/inc/blocks.php';
 require SOLEVO_DIR . '/inc/components.php';
 require SOLEVO_DIR . '/inc/schema.php';
+require SOLEVO_DIR . '/inc/blog.php';
 require SOLEVO_DIR . '/inc/menus.php';
 require SOLEVO_DIR . '/inc/setup.php';
 

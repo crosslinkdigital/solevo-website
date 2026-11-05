@@ -1,0 +1,57 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"solevo-main solevo-ds solevo-blog","layout":{"type":"default"}} -->
+<main class="wp-block-group solevo-main solevo-ds solevo-blog"><!-- wp:group {"className":"solevo-crumbs-wrap","layout":{"type":"constrained"}} -->
+<div class="wp-block-group solevo-crumbs-wrap"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:shortcode -->
+[solevo_breadcrumbs]
+<!-- /wp:shortcode --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"solevo-blog__head","layout":{"type":"constrained"}} -->
+<div class="wp-block-group solevo-blog__head"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:html -->
+[solevo_blog_hero]
+<!-- /wp:html --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
+
+<!-- wp:group {"className":"solevo-blog__list","layout":{"type":"constrained"}} -->
+<div class="wp-block-group solevo-blog__list"><!-- wp:query {"queryId":1,"query":{"perPage":12,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","inherit":true},"align":"wide"} -->
+<div class="wp-block-query alignwide"><!-- wp:post-template {"className":"solevo-bcards","layout":{"type":"default"}} -->
+<!-- wp:group {"tagName":"article","className":"solevo-bcard","layout":{"type":"default"}} -->
+<article class="wp-block-group solevo-bcard"><!-- wp:post-featured-image {"isLink":true,"aspectRatio":"3/2","sizeSlug":"medium_large","className":"solevo-bcard__img"} /-->
+
+<!-- wp:group {"className":"solevo-bcard__body","layout":{"type":"default"}} -->
+<div class="wp-block-group solevo-bcard__body"><!-- wp:post-date {"format":"j F Y","className":"solevo-bcard__date"} /-->
+
+<!-- wp:post-title {"level":2,"isLink":true,"className":"solevo-bcard__title"} /-->
+
+<!-- wp:post-excerpt {"showMoreOnNewLine":false,"excerptLength":32,"className":"solevo-bcard__excerpt"} /-->
+
+<!-- wp:read-more {"content":"Read article","className":"solevo-bcard__more"} /--></div>
+<!-- /wp:group --></article>
+<!-- /wp:group -->
+<!-- /wp:post-template -->
+
+<!-- wp:query-pagination {"className":"solevo-pager","layout":{"type":"flex","justifyContent":"center"}} -->
+<!-- wp:query-pagination-previous {"label":"Newer"} /-->
+
+<!-- wp:query-pagination-numbers /-->
+
+<!-- wp:query-pagination-next {"label":"Older"} /-->
+<!-- /wp:query-pagination -->
+
+<!-- wp:query-no-results -->
+<!-- wp:paragraph -->
+<p>New articles are on their way. In the meantime, <a href="/physio">see how our physios can help</a>.</p>
+<!-- /wp:paragraph -->
+<!-- /wp:query-no-results --></div>
+<!-- /wp:query --></div>
+<!-- /wp:group --></main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"booking-band"} /-->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

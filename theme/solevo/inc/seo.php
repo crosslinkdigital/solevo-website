@@ -15,17 +15,22 @@ function solevo_seo_plugin_active() {
 }
 
 add_action( 'init', function () {
-	foreach ( array( '_solevo_seo_title', '_solevo_meta_description', '_solevo_keyword' ) as $key ) {
-		register_post_meta( 'page', $key, array(
-			'type'          => 'string',
-			'single'        => true,
-			'show_in_rest'  => false,
-			'auth_callback' => function () {
-				return current_user_can( 'edit_pages' );
-			},
-		) );
+	// 1.4.13: posts get the same SEO fields as pages.
+	foreach ( array( 'page', 'post' ) as $type ) {
+		foreach ( array( '_solevo_seo_title', '_solevo_meta_description', '_solevo_keyword' ) as $key ) {
+			register_post_meta( $type, $key, array(
+				'type'          => 'string',
+				'single'        => true,
+				'show_in_rest'  => 'post' === $type, // posts are created through the REST API
+				'auth_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
+			) );
+		}
+		register_post_meta( $type, '_solevo_noindex', array( 'type' => 'boolean', 'single' => true, 'show_in_rest' => 'post' === $type, 'auth_callback' => function () {
+			return current_user_can( 'edit_posts' );
+		} ) );
 	}
-	register_post_meta( 'page', '_solevo_noindex', array( 'type' => 'boolean', 'single' => true, 'show_in_rest' => false ) );
 } );
 
 /* ---------- Edit screen box ---------- */
@@ -34,7 +39,7 @@ add_action( 'add_meta_boxes', function () {
 	if ( solevo_seo_plugin_active() ) {
 		return;
 	}
-	add_meta_box( 'solevo-seo', 'Search appearance (SEO)', 'solevo_seo_box', 'page', 'normal', 'high' );
+	add_meta_box( 'solevo-seo', 'Search appearance (SEO)', 'solevo_seo_box', array( 'page', 'post' ), 'normal', 'high' );
 } );
 
 function solevo_seo_box( $post ) {
@@ -62,27 +67,44 @@ function solevo_seo_box( $post ) {
 	<?php
 }
 
-add_action( 'save_post_page', function ( $post_id ) {
+function solevo_seo_save( $post_id ) {
 	if ( ! isset( $_POST['solevo_seo_nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['solevo_seo_nonce'] ), 'solevo_seo' ) ) {
 		return;
 	}
-	if ( ! current_user_can( 'edit_page', $post_id ) || wp_is_post_revision( $post_id ) ) {
+	if ( ! current_user_can( 'edit_post', $post_id ) || wp_is_post_revision( $post_id ) ) {
 		return;
 	}
 	update_post_meta( $post_id, '_solevo_seo_title', sanitize_text_field( wp_unslash( $_POST['solevo_seo_title'] ?? '' ) ) );
 	update_post_meta( $post_id, '_solevo_meta_description', sanitize_textarea_field( wp_unslash( $_POST['solevo_meta_description'] ?? '' ) ) );
 	update_post_meta( $post_id, '_solevo_keyword', sanitize_text_field( wp_unslash( $_POST['solevo_keyword'] ?? '' ) ) );
 	update_post_meta( $post_id, '_solevo_noindex', ! empty( $_POST['solevo_noindex'] ) );
-} );
+}
+add_action( 'save_post_page', 'solevo_seo_save' );
+add_action( 'save_post_post', 'solevo_seo_save' );
+
+/** Post ID whose SEO fields apply to this view: the page or post, or the Posts page on the blog index. */
+function solevo_seo_object_id() {
+	if ( is_singular( array( 'page', 'post' ) ) ) {
+		return get_queried_object_id();
+	}
+	if ( is_home() && ! is_front_page() ) {
+		return (int) get_option( 'page_for_posts' );
+	}
+	return 0;
+}
 
 /* ---------- Front end output ---------- */
 
 add_filter( 'pre_get_document_title', function ( $title ) {
-	if ( solevo_seo_plugin_active() || ! is_singular( 'page' ) ) {
+	$id = solevo_seo_object_id();
+	if ( solevo_seo_plugin_active() || ! $id ) {
 		return $title;
 	}
-	$custom = get_post_meta( get_queried_object_id(), '_solevo_seo_title', true );
-	if ( ! $custom ) {
+	$custom = get_post_meta( $id, '_solevo_seo_title', true );
+	if ( $custom && is_home() && is_paged() ) {
+		$custom .= sprintf( ' | Page %d', (int) get_query_var( 'paged' ) );
+	}
+	if ( ! $custom && is_singular( 'page' ) ) {
 		// Fall back to the SEO title in the page definitions (pages added after setup, e.g. surgery rehab).
 		$def    = function_exists( 'solevo_page_def' ) ? solevo_page_def() : null;
 		$custom = $def['seo_title'] ?? '';
@@ -95,9 +117,13 @@ add_action( 'wp_head', function () {
 		return;
 	}
 	$desc = '';
-	if ( is_singular( 'page' ) ) {
-		$desc = get_post_meta( get_queried_object_id(), '_solevo_meta_description', true );
-		if ( ! $desc && function_exists( 'solevo_page_def' ) ) {
+	$seo_id = solevo_seo_object_id();
+	if ( $seo_id && ! is_paged() ) {
+		$desc = get_post_meta( $seo_id, '_solevo_meta_description', true );
+		if ( ! $desc && is_singular( 'post' ) ) {
+			$desc = get_the_excerpt( $seo_id );
+		}
+		if ( ! $desc && is_singular( 'page' ) && function_exists( 'solevo_page_def' ) ) {
 			$def  = solevo_page_def();
 			$desc = $def['meta'] ?? '';
 		}
@@ -112,7 +138,7 @@ add_action( 'wp_head', function () {
 	if ( is_singular() ) {
 		printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( wp_get_document_title() ) );
 		printf( '<meta property="og:url" content="%s">' . "\n", esc_url( get_permalink() ) );
-		echo '<meta property="og:type" content="website">' . "\n";
+		echo is_singular( 'post' ) ? '<meta property="og:type" content="article">' . "\n" : '<meta property="og:type" content="website">' . "\n";
 		if ( $desc ) {
 			printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( $desc ) );
 		}
@@ -151,7 +177,7 @@ function solevo_og_image( $post_id ) {
 }
 
 add_filter( 'wp_robots', function ( $robots ) {
-	if ( ! solevo_seo_plugin_active() && is_singular( 'page' ) && get_post_meta( get_queried_object_id(), '_solevo_noindex', true ) ) {
+	if ( ! solevo_seo_plugin_active() && is_singular( array( 'page', 'post' ) ) && get_post_meta( get_queried_object_id(), '_solevo_noindex', true ) ) {
 		$robots['noindex'] = true;
 		$robots['follow']  = true;
 	}
@@ -169,7 +195,7 @@ add_filter( 'wp_sitemaps_taxonomies', function () {
 } );
 
 add_filter( 'wp_sitemaps_posts_query_args', function ( $args, $post_type ) {
-	if ( 'page' === $post_type ) {
+	if ( in_array( $post_type, array( 'page', 'post' ), true ) ) {
 		$args['meta_query'] = array(
 			'relation' => 'OR',
 			array( 'key' => '_solevo_noindex', 'compare' => 'NOT EXISTS' ),

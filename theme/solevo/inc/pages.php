@@ -209,6 +209,10 @@ function solevo_page_def( $post = null ) {
 
 /** Booking path for the page being viewed: cliniko | mindbody | both. */
 function solevo_page_booking() {
+	// 1.4.13: blog posts and the blog index book physio.
+	if ( function_exists( 'solevo_is_blog' ) && solevo_is_blog() ) {
+		return 'cliniko';
+	}
 	$def = solevo_page_def();
 	return $def['booking'] ?? 'both';
 }

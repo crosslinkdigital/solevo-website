@@ -40,15 +40,26 @@ add_shortcode( 'solevo_social', function ( $atts ) {
 } );
 
 add_shortcode( 'solevo_breadcrumbs', function () {
-	if ( is_front_page() || ! is_singular() ) {
+	if ( is_front_page() || ! ( is_singular() || solevo_is_blog() ) ) {
 		return '';
 	}
-	$post  = get_queried_object();
 	$trail = array( array( 'name' => 'Home', 'url' => home_url( '/' ) ) );
-	foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
-		$trail[] = array( 'name' => get_the_title( $ancestor ), 'url' => get_permalink( $ancestor ) );
+	// 1.4.13: blog index, posts and categories sit under Blog.
+	if ( solevo_is_blog() ) {
+		$blog    = solevo_blog_page();
+		$trail[] = array( 'name' => $blog ? get_the_title( $blog ) : 'Blog', 'url' => solevo_blog_url() );
+		if ( is_singular( 'post' ) ) {
+			$trail[] = array( 'name' => get_the_title(), 'url' => get_permalink() );
+		} elseif ( is_category() || is_tag() ) {
+			$trail[] = array( 'name' => single_term_title( '', false ), 'url' => get_term_link( get_queried_object() ) );
+		}
+	} else {
+		$post = get_queried_object();
+		foreach ( array_reverse( get_post_ancestors( $post ) ) as $ancestor ) {
+			$trail[] = array( 'name' => get_the_title( $ancestor ), 'url' => get_permalink( $ancestor ) );
+		}
+		$trail[] = array( 'name' => get_the_title( $post ), 'url' => get_permalink( $post ) );
 	}
-	$trail[] = array( 'name' => get_the_title( $post ), 'url' => get_permalink( $post ) );
 
 	$items = array();
 	$ld    = array();
@@ -391,7 +402,7 @@ add_shortcode( 'solevo_todo', function ( $atts, $content = '' ) {
 
 add_shortcode( 'solevo_cta_band', function () {
 	$def     = solevo_page_def();
-	$booking = $def['booking'] ?? 'both';
+	$booking = solevo_page_booking();
 	$phys    = $def['cta'] ?? 'Book Physio';
 	$locs    = solevo_locations();
 	// Clinical Pilates and other studio services run in Brookvale only.

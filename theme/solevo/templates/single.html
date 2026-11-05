@@ -1,11 +1,39 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","className":"solevo-main solevo-default","layout":{"type":"constrained"}} -->
-<main class="wp-block-group solevo-main solevo-default"><!-- wp:post-title {"level":1} /-->
+<!-- wp:group {"tagName":"main","className":"solevo-main solevo-ds solevo-post","layout":{"type":"default"}} -->
+<main class="wp-block-group solevo-main solevo-ds solevo-post"><!-- wp:group {"className":"solevo-crumbs-wrap","layout":{"type":"constrained"}} -->
+<div class="wp-block-group solevo-crumbs-wrap"><!-- wp:group {"align":"wide","layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide"><!-- wp:shortcode -->
+[solevo_breadcrumbs]
+<!-- /wp:shortcode --></div>
+<!-- /wp:group --></div>
+<!-- /wp:group -->
 
-<!-- wp:post-date /-->
+<!-- wp:group {"tagName":"article","className":"solevo-article","layout":{"type":"default"}} -->
+<article class="wp-block-group solevo-article"><!-- wp:group {"className":"solevo-article__head","layout":{"type":"default"}} -->
+<div class="wp-block-group solevo-article__head"><!-- wp:html -->
+[solevo_post_meta]
+<!-- /wp:html -->
 
-<!-- wp:post-content {"layout":{"type":"constrained"}} /--></main>
+<!-- wp:post-title {"level":1,"className":"solevo-article__title"} /-->
+
+<!-- wp:html -->
+[solevo_post_lead]
+<!-- /wp:html --></div>
+<!-- /wp:group -->
+
+<!-- wp:post-featured-image {"aspectRatio":"16/9","sizeSlug":"large","className":"solevo-article__img"} /-->
+
+<!-- wp:post-content {"className":"solevo-article__body","layout":{"type":"default"}} /-->
+
+<!-- wp:html -->
+[solevo_post_physio]
+<!-- /wp:html --></article>
+<!-- /wp:group -->
+
+<!-- wp:html -->
+[solevo_related_posts]
+<!-- /wp:html --></main>
 <!-- /wp:group -->
 
 <!-- wp:template-part {"slug":"booking-band"} /-->

@@ -122,7 +122,7 @@ add_filter( 'render_block_core/button', function ( $content, $block ) {
  * say Book Studio (Mindbody), everything else goes to /book. Keeps the two journeys apart.
  */
 add_filter( 'render_block_core/button', function ( $content, $block ) {
-	if ( empty( $block['attrs']['className'] ) || false === strpos( $block['attrs']['className'], 'solevo-header__book' ) || ! is_singular( 'page' ) ) {
+	if ( empty( $block['attrs']['className'] ) || false === strpos( $block['attrs']['className'], 'solevo-header__book' ) || ! ( is_singular( 'page' ) || solevo_is_blog() ) ) {
 		return $content;
 	}
 	$booking = solevo_page_booking();
@@ -142,10 +142,10 @@ add_filter( 'render_block_core/button', function ( $content, $block ) {
 
 /** Mobile sticky booking bar on physio and studio pages. */
 add_action( 'wp_footer', function () {
-	if ( ! is_singular( 'page' ) && ! is_front_page() ) {
+	if ( ! is_singular( 'page' ) && ! is_front_page() && ! solevo_is_blog() ) {
 		return;
 	}
-	$def = solevo_page_def();
+	$def = solevo_is_blog() ? array( 'type' => 'blog', 'booking' => 'cliniko' ) : solevo_page_def();
 	if ( ! $def || in_array( $def['type'], array( 'book', 'contact' ), true ) ) {
 		return;
 	}

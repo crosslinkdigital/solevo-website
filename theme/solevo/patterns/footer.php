@@ -95,6 +95,11 @@
 <li><a href="/faq">FAQs</a></li>
 <!-- /wp:list-item -->
 <?php endif; ?>
+<?php $solevo_blogp = (int) get_option( 'page_for_posts' ); if ( $solevo_blogp && 'publish' === get_post_status( $solevo_blogp ) ) : ?>
+<!-- wp:list-item -->
+<li><a href="<?php echo esc_url( get_permalink( $solevo_blogp ) ); ?>">Blog</a></li>
+<!-- /wp:list-item -->
+<?php endif; ?>
 <!-- wp:list-item -->
 <li><a href="/book">Book online</a></li>
 <!-- /wp:list-item -->

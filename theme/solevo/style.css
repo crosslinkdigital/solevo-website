@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.4.12
+Version: 1.4.13
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -1271,3 +1271,76 @@ body { font-weight: 400; color: #2F2E2C; }
 	.solevo-primary-nav .is-menu-open .solevo-mega .wp-block-navigation__submenu-container .wp-block-navigation-item__content { font-size: var(--fs-lead) !important; padding: .4rem 0 !important; letter-spacing: 0 !important; text-transform: none; }
 	.solevo-primary-nav .is-menu-open .wp-block-navigation__submenu-icon { display: none; }
 }
+
+/* =========================================================
+   1.4.13: Blog (/blog index, posts, category archives)
+   ========================================================= */
+.solevo-blog__head { padding-top: clamp(1.5rem, 3vw, 2.5rem); padding-bottom: clamp(1.5rem, 3vw, 2.25rem); }
+.solevo-bhero { max-width: 760px; }
+.solevo-bhero > * { margin-block: 0; }
+.solevo-ds .solevo-bhero h1.wp-block-heading { margin-bottom: 1rem; }
+.solevo-bhero__lead { font-size: var(--fs-lead); color: var(--ds-text); max-width: 60ch; }
+.solevo-blog__list { padding-bottom: var(--ds-y); }
+
+/* Article cards: index, archives and "More from the blog" */
+.solevo-bcards, .wp-block-post-template.solevo-bcards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-gap); list-style: none; padding: 0; margin: 0; }
+.solevo-bcards > li { margin: 0 !important; display: flex; }
+.solevo-bcard { background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); overflow: hidden; display: flex; flex-direction: column; width: 100%; transition: border-color .2s, box-shadow .2s; }
+.solevo-bcard:hover { border-color: #CFC6B4; box-shadow: var(--ds-shadow); }
+.solevo-bcard > * { margin-block: 0 !important; }
+.solevo-bcard__img { margin: 0 !important; display: block; }
+.solevo-bcard__img img, .solevo-bcard__img a { display: block; width: 100%; }
+.solevo-bcard__img img { aspect-ratio: 3 / 2; object-fit: cover; }
+.solevo-bcard__body { padding: 1.2rem 1.35rem 1.4rem; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
+.solevo-bcard__body > * { margin: 0 !important; }
+.solevo-bcard__date { font-size: var(--fs-label) !important; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--ds-olive-text); }
+.solevo-ds .solevo-bcard__title, .solevo-ds .solevo-bcard__title.wp-block-post-title { font-family: var(--s-serif); font-size: var(--fs-card) !important; font-weight: 600; line-height: 1.22; color: var(--ds-ink); }
+.solevo-ds .solevo-bcard__title a { color: inherit; text-decoration: none; }
+.solevo-ds .solevo-bcard__title a:hover { color: var(--ds-olive-text); text-decoration: underline; }
+.solevo-bcard__excerpt, .solevo-bcard__excerpt p { font-size: var(--fs-small); color: var(--ds-soft); line-height: 1.55; margin: 0; }
+.solevo-ds .solevo-bcard__more { margin-top: auto !important; padding-top: .35rem; font-size: var(--fs-button); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--ds-olive-text); }
+.solevo-ds .solevo-bcard__more:hover { color: var(--ds-ink); text-decoration: underline; }
+.solevo-pager { margin-top: 2.25rem !important; gap: .75rem; font-size: var(--fs-small); }
+.solevo-pager .page-numbers.current { font-weight: 600; color: var(--ds-ink); }
+@media (max-width: 1023px) { .solevo-bcards, .wp-block-post-template.solevo-bcards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .solevo-bcards, .wp-block-post-template.solevo-bcards { grid-template-columns: 1fr; } }
+
+/* Single post */
+.solevo-article { max-width: 760px; margin: 0 auto; padding: clamp(1.5rem, 3vw, 2.5rem) 16px var(--ds-y); box-sizing: content-box; }
+.solevo-article > * { margin-block: 0; }
+.solevo-pmeta { font-size: var(--fs-label) !important; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--ds-olive-text); margin: 0 0 .9rem !important; }
+.solevo-pmeta a { text-decoration: none; }
+.solevo-pmeta > * { white-space: nowrap; }
+.solevo-ds h1.solevo-article__title { font-size: var(--fs-h1); font-weight: 600; line-height: 1.08; letter-spacing: -.01em; margin: 0 0 1rem; }
+.solevo-plead { font-size: var(--fs-lead); color: var(--ds-text); margin: 0 !important; max-width: 60ch; }
+.solevo-article__img { margin: clamp(1.5rem, 3vw, 2.25rem) 0 0 !important; }
+.solevo-article__img img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--ds-radius); display: block; }
+.solevo-article__body { margin-top: clamp(1.5rem, 3vw, 2.25rem) !important; }
+.solevo-article__body > * { margin-block: 0 0 1.1rem; }
+.solevo-article__body p, .solevo-article__body li { font-size: var(--fs-body); line-height: 1.75; }
+.solevo-ds .solevo-article__body h2.wp-block-heading { font-size: var(--fs-h3); margin: 2.25rem 0 .75rem; }
+.solevo-ds .solevo-article__body h3.wp-block-heading { font-size: var(--fs-card); margin: 1.75rem 0 .5rem; }
+.solevo-article__body ul { padding-left: 1.2rem; }
+.solevo-article__body li { margin-bottom: .55rem; }
+.solevo-article__body li::marker { color: var(--ds-olive); }
+.solevo-article__body .solevo-tipbox { background: var(--ds-card); border: 1px solid var(--ds-line); border-left: 3px solid var(--ds-olive); border-radius: var(--ds-radius); padding: 1.25rem 1.5rem; margin: 1.75rem 0; }
+.solevo-article__body .solevo-tipbox > * { margin: 0 0 .6rem; }
+.solevo-article__body .solevo-tipbox > *:last-child { margin-bottom: 0; }
+.solevo-ds .solevo-article__body .solevo-tipbox h2.wp-block-heading { margin-top: 0; }
+.solevo-article__body .solevo-download { font-size: var(--fs-small); }
+.solevo-article__body .solevo-download a::before { content: "↓ "; }
+
+/* "Your physio" box under each post */
+.solevo-pbox { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 1.5rem; align-items: start; margin-top: 2.5rem !important; padding: 1.5rem; background: var(--ds-card); border: 1px solid var(--ds-line); border-radius: var(--ds-radius); }
+.solevo-pbox__img { width: 112px; height: 112px; object-fit: cover; object-position: center 20%; border-radius: 50%; display: block; }
+.solevo-pbox__text > * { margin: 0 0 .6rem !important; }
+.solevo-pbox__text > *:last-child { margin-bottom: 0 !important; }
+.solevo-pbox__name { font-family: var(--s-serif); font-size: var(--fs-h3) !important; font-weight: 600; color: var(--ds-ink); line-height: 1.2; }
+.solevo-pbox .wp-block-buttons { display: flex; flex-wrap: wrap; margin-top: 1rem !important; }
+@media (max-width: 599px) { .solevo-pbox { grid-template-columns: 1fr; } .solevo-pbox__img { width: 88px; height: 88px; } }
+
+/* More from the blog */
+.solevo-related-posts { background: var(--s-cream); border-top: 1px solid var(--ds-line); padding: var(--ds-y) 16px; }
+.solevo-related-posts__inner { max-width: 1152px; margin: 0 auto; }
+.solevo-ds .solevo-related-posts h2.wp-block-heading { margin: 0 0 1.75rem; }
+.solevo-related-posts .solevo-more { margin-top: 1.5rem !important; }
