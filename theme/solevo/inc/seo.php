@@ -116,8 +116,39 @@ add_action( 'wp_head', function () {
 		if ( $desc ) {
 			printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( $desc ) );
 		}
+		echo '<meta property="og:site_name" content="Solevo Physio &amp; Studio">' . "\n";
+		echo '<meta property="og:locale" content="en_AU">' . "\n";
+		$img = solevo_og_image( get_queried_object_id() );
+		if ( $img ) {
+			printf( '<meta property="og:image" content="%s">' . "\n", esc_url( $img[0] ) );
+			if ( ! empty( $img[1] ) && ! empty( $img[2] ) ) {
+				printf( '<meta property="og:image:width" content="%d">' . "\n" . '<meta property="og:image:height" content="%d">' . "\n", (int) $img[1], (int) $img[2] );
+			}
+			echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+		}
 	}
 }, 2 );
+
+/**
+ * Link-preview image: featured image, else the page's hero photo, else its first photo, else the studio photo.
+ * Returns array( url, width, height ).
+ */
+function solevo_og_image( $post_id ) {
+	$id = get_post_thumbnail_id( $post_id );
+	if ( ! $id ) {
+		$content = (string) get_post_field( 'post_content', $post_id );
+		if ( preg_match( '/wp:image \{"id":(\d+)[^}]*solevo-hero2__media/', $content, $m ) || preg_match( '/wp-image-(\d+)/', $content, $m ) ) {
+			$id = (int) $m[1];
+		}
+	}
+	if ( $id ) {
+		$src = wp_get_attachment_image_src( $id, 'large' );
+		if ( $src ) {
+			return array( $src[0], $src[1], $src[2] );
+		}
+	}
+	return array( get_theme_file_uri( 'assets/images/clinic-reformer-room.jpg' ), 0, 0 );
+}
 
 add_filter( 'wp_robots', function ( $robots ) {
 	if ( ! solevo_seo_plugin_active() && is_singular( 'page' ) && get_post_meta( get_queried_object_id(), '_solevo_noindex', true ) ) {
