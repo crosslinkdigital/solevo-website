@@ -101,6 +101,9 @@ add_filter( 'pre_get_document_title', function ( $title ) {
 		return $title;
 	}
 	$custom = get_post_meta( $id, '_solevo_seo_title', true );
+	if ( ! $custom && is_home() ) {
+		$custom = 'Physio Blog | Tips for Staying Active | Solevo Brookvale';
+	}
 	if ( $custom && is_home() && is_paged() ) {
 		$custom .= sprintf( ' | Page %d', (int) get_query_var( 'paged' ) );
 	}
@@ -120,6 +123,9 @@ add_action( 'wp_head', function () {
 	$seo_id = solevo_seo_object_id();
 	if ( $seo_id && ! is_paged() ) {
 		$desc = get_post_meta( $seo_id, '_solevo_meta_description', true );
+		if ( ! $desc && is_home() ) {
+			$desc = 'Physio tips from Solevo in Brookvale and Terrey Hills: strength, healthy ageing, golf and tennis injuries, and rehab before and after joint replacement.';
+		}
 		if ( ! $desc && is_singular( 'post' ) ) {
 			$desc = get_the_excerpt( $seo_id );
 		}
