@@ -59,9 +59,29 @@ function solevo_build_menus( $page_ids ) {
 	$live = $link;
 
 	// Full site menu, 1.4.0 (Steph, 3 Nov; like Beachlife, PhysioWard and Rebound Health):
-	// What we treat / Exercise & programs / Services dropdowns only, plus the phone and Book buttons. About and Contact live in the footer (Steph, 3 Nov).
+	// dropdowns plus the phone and Book buttons. About and Contact live in the footer (Steph, 3 Nov).
+	// 1.4.16 (Steph, 7 Nov): order Services, Exercise & Programs, Conditions We Treat (was What We Treat), Blog last before the Book button.
+	$blog_id = (int) get_option( 'page_for_posts' );
 	$full = implode( '', array(
-		solevo_nav_submenu( 'What We Treat', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
+		solevo_nav_submenu( 'Services', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
+			$live( 'physio/sports-physiotherapy', 'Sports Physio' ),
+			$link( 'physio', 'General Physio' ),
+			$live( 'physio/pre-and-post-surgery-rehab', 'Pre &amp; Post Surgical Rehab' ), // 1.4.11: Steph, 5 Nov
+			$live( 'physio/seniors-physiotherapy', 'Physio for Seniors' ),
+			$live( 'physio/adolescent-sports-physiotherapy', 'Adolescent Sports Injuries' ),
+			$live( 'physio/shockwave-therapy', 'Shockwave Therapy' ),
+			$live( 'physio/workers-compensation', 'WorkCover Physio' ),
+			$live( 'physio/ndis', 'NDIS Physio' ),
+		), 'solevo-mega' ),
+		solevo_nav_submenu( 'Exercise &amp; Programs', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
+			$link( 'pilates', 'Reformer Pilates' ),
+			$live( 'pilates/clinical-pilates', 'Clinical Pilates' ),
+			$live( 'pilates/mat-pilates', 'Mat Pilates' ),
+			solevo_nav_link( 'Yoga', home_url( '/pilates#yoga' ) ), // 1.4.6: was #classes, the reformer section (Steph, 4 Nov)
+			$live( 'pilates/seniors', 'Active Seniors' ),
+			$live( 'pilates/postnatal-pilates', 'Postnatal Pilates' ),
+		), 'solevo-mega' ),
+		solevo_nav_submenu( 'Conditions We Treat', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
 			$link( 'conditions', 'All Conditions' ),
 			// 1.4.6 order (Steph's Areas we treat doc, Hayo, 4 Nov). 1.4.14: labels in title case, herniated disc removed (Steph, 6 Nov).
 			$live( 'conditions/lower-back-pain', 'Lower Back Pain' ),
@@ -77,24 +97,7 @@ function solevo_build_menus( $page_ids ) {
 			$live( 'conditions/osteoporosis', 'Osteoporosis' ),
 			$live( 'conditions/pregnancy-back-pain', 'Pregnancy Back Pain' ),
 		), 'solevo-mega solevo-mega--2col' ),
-		solevo_nav_submenu( 'Exercise &amp; Programs', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
-			$link( 'pilates', 'Reformer Pilates' ),
-			$live( 'pilates/clinical-pilates', 'Clinical Pilates' ),
-			$live( 'pilates/mat-pilates', 'Mat Pilates' ),
-			solevo_nav_link( 'Yoga', home_url( '/pilates#yoga' ) ), // 1.4.6: was #classes, the reformer section (Steph, 4 Nov)
-			$live( 'pilates/seniors', 'Active Seniors' ),
-			$live( 'pilates/postnatal-pilates', 'Postnatal Pilates' ),
-		), 'solevo-mega' ),
-		solevo_nav_submenu( 'Services', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
-			$live( 'physio/sports-physiotherapy', 'Sports Physio' ),
-			$link( 'physio', 'General Physio' ),
-			$live( 'physio/pre-and-post-surgery-rehab', 'Pre &amp; Post Surgical Rehab' ), // 1.4.11: Steph, 5 Nov
-			$live( 'physio/seniors-physiotherapy', 'Physio for Seniors' ),
-			$live( 'physio/adolescent-sports-physiotherapy', 'Adolescent Sports Injuries' ),
-			$live( 'physio/shockwave-therapy', 'Shockwave Therapy' ),
-			$live( 'physio/workers-compensation', 'WorkCover Physio' ),
-			$live( 'physio/ndis', 'NDIS Physio' ),
-		), 'solevo-mega' ),
+		solevo_nav_link( 'Blog', $blog_id ? get_permalink( $blog_id ) : home_url( '/blog/' ), $blog_id ),
 	) );
 
 	$ids = get_option( 'solevo_menu_ids', array() );
