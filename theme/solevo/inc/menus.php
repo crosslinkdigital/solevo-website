@@ -90,7 +90,7 @@ function solevo_build_menus( $page_ids ) {
 			$live( 'conditions/shoulder-arm-pain', 'Shoulder & Arm Pain' ),
 			$live( 'conditions/hip-groin-pain', 'Hip & Groin Pain' ),
 			$live( 'conditions/knee-pain', 'Knee Pain & Injury' ),
-			$live( 'conditions/foot-ankle', 'Foot & ankle' ),
+			$live( 'conditions/foot-ankle', 'Foot & Ankle' ),
 			$live( 'conditions/shin-splints', 'Shin Splints' ),
 			$live( 'conditions/sports-injuries-rehab', 'Sports Injuries' ),
 			$live( 'conditions/balance-falls-prevention', 'Balance and Falls' ),
