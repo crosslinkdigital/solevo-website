@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'eyebrow'   => 'Solevo Physio · Women\'s health',
 	'lead'      => 'Private, one-on-one pelvic floor physiotherapy for leakage, heaviness, pregnancy and postnatal recovery. A calm, confidential space to talk about symptoms many women live with for years.',
-	'trust'     => array( 'Private one-on-one appointments', 'No GP referral needed', 'Internal assessment always optional' ),
+	'trust'     => array( 'Private one-on-one appointments', 'No referral required', 'Internal assessment always optional' ),
 	'who_title' => 'What pelvic floor physiotherapy is',
 	'who'       => array(
 		'Your pelvic floor is a group of muscles that supports your bladder, bowel and uterus and helps control leakage. Pregnancy, birth, menopause, heavy lifting and high-impact sport can all affect how well it works.',

@@ -34,7 +34,7 @@ return array(
 	'steps'      => array(
 		array( 'Assessment', 'We ask about your pain, work, sleep and goals, check for warning signs, then test how you move, bend and lift and how strong your hips and trunk are.' ),
 		array( 'Settle the pain', 'Hands-on treatment, short-term changes to aggravating activities and simple exercises to calm things down and keep you moving.' ),
-		array( 'Build strength and confidence', 'A progressive strength program, in our rehab gym or at home, so your back copes with the things you need to do. Many people continue in Clinical Pilates.' ),
+		array( 'Build strength and confidence', 'A progressive strength program, in our Brookvale rehab gym or at home, so your back copes with the things you need to do. Many people continue in Clinical Pilates.' ),
 	),
 	'expect'     => array(
 		array( 'Scans', 'Most people do not need an X-ray or MRI. We will tell you if your symptoms suggest a scan or a GP review is needed.' ),
@@ -57,7 +57,7 @@ return array(
 		array( 'Should I rest or keep moving?', 'For most people, gentle movement and staying at work or normal activities, with some changes, helps more than bed rest. Your physio will show you which movements are safe and how to build back up.' ),
 		array( 'How many sessions will I need?', 'It depends on how long you have had pain, how much it affects you and your goals. Your physio will explain the likely plan at your first appointment and review it as you progress.' ),
 		array( 'Can Clinical Pilates help with back pain?', 'Clinical Pilates is physio-led exercise on the reformer. It is one way to build trunk, hip and leg strength after your pain has settled, and is tailored to you after an assessment.' ),
-		array( 'Do I need a GP referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
+		array( 'Do I need a referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
 	),
-	'related'    => array( 'conditions/sciatica', 'conditions/herniated-disc', 'conditions/spinal-stenosis', 'conditions/pregnancy-back-pain' ),
+	'related'    => array( 'conditions/sciatica', 'conditions/pregnancy-back-pain' ),
 );

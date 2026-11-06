@@ -44,7 +44,7 @@ return array(
 		array( 'Can I do classes while pregnant?', 'Yes. Our Pre and Post Natal classes are designed by health professionals with modifications for every stage.' ),
 		array( 'How do I book?', 'Studio classes are booked through Mindbody. Physio and Clinical Pilates are booked separately through Cliniko.' ),
 	),
-	'related'    => array( 'pilates/clinical-pilates', 'pilates/mat-pilates', 'pilates/private-pilates', 'pilates/mums-and-bubs', 'pilates/seniors', 'pilates/pregnancy-pilates', 'pilates/postnatal-pilates', 'pilates/over-50s-fitness' ),
+	'related'    => array( 'pilates/clinical-pilates', 'pilates/mat-pilates', 'pilates/seniors', 'pilates/postnatal-pilates' ),
 	'related_title' => 'All Studio classes and programs',
 	'instagram'  => true,
 	'todo'       => array( 'Confirm class pack expiry terms and add them under pricing if Solevo wants them shown.' ),

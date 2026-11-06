@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'eyebrow'    => 'Pregnancy and postnatal',
 	'lead'       => 'Back and pelvic pain are common in pregnancy, but they are not something you simply have to put up with. Physiotherapy and pregnancy Pilates can ease pain and help you stay active and comfortable through each trimester.',
-	'trust'      => array( 'Private one-on-one appointments', 'No GP referral needed', 'Safe exercise for every trimester' ),
+	'trust'      => array( 'Private one-on-one appointments', 'No referral required', 'Safe exercise for every trimester' ),
 	'what_title' => 'Why does back pain happen in pregnancy?',
 	'what'       => array(
 		'As your baby grows, your posture changes, your centre of gravity shifts and pregnancy hormones make ligaments more flexible. Together these change how your back and pelvis carry load, which can lead to pain in the lower back, the pelvis or around the pubic bone.',
@@ -29,7 +29,7 @@ return array(
 		array( 'Relief and support', 'Hands-on treatment, advice on sleeping positions, sitting, lifting and getting in and out of bed, and support options where useful.' ),
 		array( 'Safe strength', 'Gentle, pregnancy-safe exercise for your hips, trunk and pelvic floor. Many women continue in pregnancy Pilates.' ),
 	),
-	'services'   => array( 'physio/pregnancy-physiotherapy', 'pilates/pregnancy-pilates', 'pilates/mums-and-bubs' ),
+	'services'   => array( 'physio' ),
 	'flags_title' => 'When to call your maternity team or GP first',
 	'flags'      => array(
 		'Vaginal bleeding or a leak of fluid',
@@ -46,6 +46,6 @@ return array(
 		array( 'Will the pain go away after birth?', 'For many women it improves after birth, but not always. A postnatal check helps you return to exercise safely.' ),
 		array( 'Can I do Pilates while pregnant?', 'Yes, with the right modifications. Our pregnancy classes are designed by health professionals and adjusted for each trimester.' ),
 	),
-	'related'    => array( 'conditions/lower-back-pain', 'conditions/bladder-leakage-incontinence' ),
+	'related'    => array( 'conditions/lower-back-pain' ),
 	'todo'       => array( 'Confirm which clinician sees pregnancy patients and add their name to the "Clinically reviewed by" line.' ),
 );

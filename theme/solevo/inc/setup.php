@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit;
 require_once __DIR__ . '/blocks.php';
 require_once __DIR__ . '/components.php';
 require_once __DIR__ . '/scaffold-physio.php';
+require_once __DIR__ . '/scaffold-home.php';
 require_once __DIR__ . '/templates.php';
 
 /* ---------------------------------------------------------------------------
@@ -123,10 +124,7 @@ function solevo_scaffold( $page ) {
 
 	switch ( $type ) {
 		case 'home':
-			foreach ( array( 'home-hero', 'home-about', 'home-team', 'home-services', 'home-conditions', 'home-technology', 'home-why', 'home-studio', 'home-pricing', 'home-timetable', 'home-instagram', 'home-book' ) as $slug ) {
-				$c .= solevo_pattern_markup( $slug );
-			}
-			return $c;
+			return solevo_scaffold_home( $page ); // Physio-first homepage, see scaffold-home.php.
 
 		case 'hub':
 			if ( 'physio' === $path ) {
@@ -292,6 +290,15 @@ function solevo_template_for( $type, $path = '' ) {
 /**
  * @param array $args rebuild_home (bool), rebuild_all (bool), log (callable)
  */
+/**
+ * True when a page's content is exactly what setup last wrote (1.4.7). Pages without a stored
+ * build fingerprint (built before 1.4.7, or created by hand) count as edited and are never rebuilt.
+ */
+function solevo_page_untouched( $post ) {
+	$hash = get_post_meta( $post->ID, '_solevo_built_hash', true );
+	return $hash && md5( (string) $post->post_content ) === $hash;
+}
+
 function solevo_run_setup( $args = array() ) {
 	$args = wp_parse_args( $args, array( 'rebuild_home' => false, 'rebuild_all' => false, 'rebuild' => array(), 'log' => null ) );
 	$log  = is_callable( $args['log'] ) ? $args['log'] : function () {};
@@ -327,6 +334,12 @@ function solevo_run_setup( $args = array() ) {
 		$slug = $is_home ? 'home' : basename( $path );
 
 		$overwrite = $existing && ( $args['rebuild_all'] || ( $is_home && $args['rebuild_home'] ) || in_array( $path, (array) $args['rebuild'], true ) );
+		// 1.4.7 lock (Hayo, 4 Nov): a rebuild only goes ahead when the page is exactly as setup left it.
+		// Any page edited since it was built (by hand, by the API or before this lock existed) is kept.
+		if ( $overwrite && ! solevo_page_untouched( $existing ) ) {
+			$log( sprintf( 'Locked   /%s (edited since it was built, so it was not rebuilt)', $path ) );
+			$overwrite = false;
+		}
 		if ( $existing && ! $overwrite ) {
 			$ids[ $path ] = $existing->ID;
 			$log( sprintf( 'Kept     /%s (%s)', $path, $existing->post_status ) );
@@ -354,6 +367,7 @@ function solevo_run_setup( $args = array() ) {
 			continue;
 		}
 		$ids[ $path ] = $id;
+		update_post_meta( $id, '_solevo_built_hash', md5( (string) get_post_field( 'post_content', $id ) ) );
 
 		$template = solevo_template_for( $page['type'], $page['path'] );
 		if ( $template ) {
@@ -444,8 +458,8 @@ function solevo_render_setup_page() {
 		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<?php wp_nonce_field( 'solevo_setup' ); ?>
 			<input type="hidden" name="action" value="solevo_setup">
-			<p><label><input type="checkbox" name="rebuild_home" value="1"> Reset the homepage to the theme design (overwrites homepage edits)</label></p>
-			<details style="margin:1em 0"><summary><strong>Rebuild pages from the design system</strong> (replaces their content; the previous version stays under Revisions)</summary>
+			<p><label><input type="checkbox" name="rebuild_home" value="1"> Reset the homepage to the theme design (only if nobody has edited it since it was built)</label></p>
+			<details style="margin:1em 0"><summary><strong>Rebuild pages from the design system</strong> (only pages nobody has edited since setup built them; edited pages are locked)</summary>
 				<p style="margin:.5em 0">Only tick pages nobody has written in yet, or whose copy you want replaced.</p>
 				<p><label><input type="checkbox" id="solevo-all"> Select all</label></p>
 				<?php foreach ( solevo_site_pages() as $p ) : if ( '' === $p['path'] ) { continue; } ?>
@@ -501,4 +515,22 @@ add_filter( 'attachment_fields_to_edit', function ( $fields, $post ) {
 		$fields['solevo_placeholder'] = array( 'label' => 'Placeholder', 'input' => 'html', 'html' => '<strong>Replace this image with the real photo.</strong>' );
 	}
 	return $fields;
+}, 10, 2 );
+
+/**
+ * Editor lock (1.3.23): text blocks have no font, size, weight, spacing or line-height
+ * controls, so the type scale in style.css is the only source of text styling.
+ * Paste formatting from Word or Google Docs cannot add sizes either, because the
+ * blocks no longer accept them.
+ */
+add_filter( 'register_block_type_args', function ( $args, $name ) {
+	$locked = array(
+		'core/paragraph', 'core/heading', 'core/list', 'core/list-item', 'core/details', 'core/quote',
+		'core/pullquote', 'core/button', 'core/buttons', 'core/group', 'core/columns', 'core/column',
+		'core/cover', 'core/media-text', 'core/table', 'core/verse', 'core/preformatted',
+	);
+	if ( in_array( $name, $locked, true ) && isset( $args['supports']['typography'] ) ) {
+		$args['supports']['typography'] = array();
+	}
+	return $args;
 }, 10, 2 );

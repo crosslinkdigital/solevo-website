@@ -1,6 +1,7 @@
 <?php
 /**
- * Google Tag Manager container (ID set in Settings > Solevo).
+ * Google Tag Manager container (ID in Settings > Solevo, default GTM-MQFNQD4R).
+ * GA4 and any other tags are configured inside Tag Manager; the theme loads no GA4 code itself.
  * Click events pushed to the dataLayer by assets/js/site.js:
  *   click_book_physio, click_book_class, click_call, click_email, form_submit
  *

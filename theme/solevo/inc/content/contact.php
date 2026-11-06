@@ -17,7 +17,7 @@ return array(
 			'after_text' => solevo_b_shortcode( '[solevo_contact show="name,address,phone,email"]' ) . solevo_b_shortcode( '[solevo_hours]' ),
 			'list_title' => 'Good to know',
 			'list'       => array(
-				'No GP referral needed for private physio',
+				'No referral required for private physio',
 				'Physio and Studio classes are booked separately',
 				'Studio classes run at Brookvale only',
 				'Foot and heel concerns: <a href="#tfc">The Foot Company podiatry</a>, in the same space',

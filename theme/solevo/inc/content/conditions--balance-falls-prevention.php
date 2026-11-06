@@ -31,7 +31,7 @@ return array(
 		array( 'Your program', 'Exercises that challenge your balance safely and build leg strength, plus practical advice on footwear and your home.' ),
 		array( 'Stay steady', 'Continue in one-on-one sessions or small physio-designed classes and re-test to track progress.' ),
 	),
-	'services'   => array( 'physio/seniors-physiotherapy', 'pilates/seniors', 'pilates/over-50s-fitness' ),
+	'services'   => array( 'physio/seniors-physiotherapy', 'pilates/seniors' ),
 	'flags'      => array(
 		'Sudden dizziness, fainting or blackouts',
 		'New confusion, slurred speech, facial droop or arm weakness (call 000)',
@@ -45,5 +45,5 @@ return array(
 		array( 'How often do I need to exercise?', 'Regular practice matters most. Your physio will suggest a weekly plan you can stick to, at home and with us.' ),
 		array( 'Can my family come with me?', 'Yes. You are welcome to bring a family member or carer to your appointment.' ),
 	),
-	'related'    => array( 'conditions/osteoporosis-pilates', 'conditions/spinal-stenosis' ),
+	'related'    => array( 'conditions/osteoporosis' ),
 );

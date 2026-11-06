@@ -22,6 +22,17 @@ function solevo_page_content( $path ) {
 	return file_exists( $file ) ? include $file : null;
 }
 
+/**
+ * 1.4.4: page title with an optional controlled line break. 'h1_lines' => [ first line, second line ];
+ * the second line never wraps, so e.g. "Brookvale & Terrey Hills" stays together.
+ */
+function solevo_page_h1( $page ) {
+	if ( empty( $page['h1_lines'] ) ) {
+		return esc_html( $page['h1'] );
+	}
+	return esc_html( $page['h1_lines'][0] ) . '<br><span class="solevo-nowrap">' . esc_html( $page['h1_lines'][1] ) . '</span>';
+}
+
 /** Built page markup, or '' to fall back to the original scaffold. */
 function solevo_build_page( $page ) {
 	$d = solevo_page_content( $page['path'] );
@@ -78,12 +89,36 @@ function solevo_physio_fees() {
 	);
 }
 
-function solevo_physio_funding() {
+/**
+ * Funding questions, confirmed by Steph (29 Oct): private health with HICAPS,
+ * Medicare with a GP Chronic Condition Management Plan (gap, not bulk billed),
+ * workers compensation where applicable, NDIS self or plan managed. No DVA or CTP.
+ * Added to the FAQs on physio service pages; there is no separate funding box.
+ */
+function solevo_physio_funding_faq() {
 	return array(
-		'<strong>No referral needed.</strong> Book a private physio appointment directly.',
-		'<strong>Private health insurance.</strong> Physiotherapy is claimable on most extras policies. Your rebate depends on your fund and cover.',
-		'<strong>Medicare, DVA, workers compensation or CTP?</strong> Please call or email before booking so we can check the paperwork you need.',
+		array( 'Do I need a referral?', 'Not for a private appointment. You only need one to claim a Medicare rebate.' ),
+		array( 'Can I claim through private health insurance?', 'Yes. Physiotherapy is claimable on most extras policies, depending on your cover, and you can claim on the spot with HICAPS.' ),
+		array( 'Can I claim a Medicare rebate?', 'Yes, with a valid referral from your GP under a Chronic Condition Management Plan. We process the rebate on the spot. Appointments aren’t bulk billed, so there is a gap to pay.' ),
+		array( 'Do you see workers compensation and NDIS clients?', 'Yes, workers compensation is accepted where applicable. For NDIS, we see participants whose plans are self managed or plan managed.' ),
 	);
+}
+
+/**
+ * FAQPage JSON-LD that mirrors the visible FAQ accordion (1.4.6). Same format as the blocks
+ * added by hand on the older pages, so every page carries one schema block that matches its FAQs.
+ */
+function solevo_faq_schema( $faqs ) {
+	$items = array();
+	foreach ( $faqs as $f ) {
+		$items[] = array(
+			'@type'          => 'Question',
+			'name'           => wp_strip_all_tags( $f[0] ),
+			'acceptedAnswer' => array( '@type' => 'Answer', 'text' => wp_strip_all_tags( $f[1] ) ),
+		);
+	}
+	$json = wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $items ), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	return "<!-- wp:html -->\n<script type=\"application/ld+json\">\n{$json}\n</script>\n<!-- /wp:html -->\n\n";
 }
 
 function solevo_steps_items( $steps ) {
@@ -100,22 +135,33 @@ function solevo_steps_items( $steps ) {
 function solevo_build_condition( $page, $d ) {
 	$c  = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Conditions we treat',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page, array( 'When to see a GP first', '#red-flags', true ) ),
 		'locations' => 'mindbody' !== $page['booking'],
-		'trust'     => $d['trust'] ?? array( 'No GP referral needed', 'One-on-one with a physiotherapist', 'Assessment before any exercise plan' ),
+		'trust'     => $d['trust'] ?? array( 'No referral required', 'One-on-one with a physiotherapist', 'Assessment before any exercise plan' ),
 		'jump'      => array( array( 'How physio helps', '#help-steps' ), array( 'FAQs', '#faq' ), array( 'Locations', '#locations' ) ),
 		'image'     => $d['image'] ?? '',
 	) );
 	$c .= solevo_todos( $d );
+	// 1.4.6: a second "what is" topic (what_more: [[title, paras]]) and grouped symptom lists
+	// (symptom_groups: [[title, items]]) for pages that cover two related problems (neck pain & headaches).
+	$more = '';
+	foreach ( (array) ( $d['what_more'] ?? array() ) as $m ) {
+		$more .= solevo_b_h( $m[0], 3 );
+		foreach ( (array) $m[1] as $para ) {
+			$more .= solevo_b_p( $para );
+		}
+	}
 	$c .= solevo_c_split( array(
-		'eyebrow'    => 'Understanding it',
-		'title'      => $d['what_title'],
-		'paras'      => $d['what'],
-		'list_title' => $d['symptoms_title'] ?? 'Common symptoms',
-		'list'       => $d['symptoms'],
-		'anchor'     => 'about',
+		'eyebrow'     => 'Understanding it',
+		'title'       => $d['what_title'],
+		'paras'       => $d['what'],
+		'after_text'  => $more,
+		'list_title'  => $d['symptoms_title'] ?? 'Common symptoms',
+		'list'        => $d['symptoms'] ?? array(),
+		'list_groups' => $d['symptom_groups'] ?? array(),
+		'anchor'      => 'about',
 	) );
 	if ( ! empty( $d['causes'] ) ) {
 		$c .= solevo_c_service_cards(
@@ -132,14 +178,14 @@ function solevo_build_condition( $page, $d ) {
 		solevo_steps_items( $d['steps'] ),
 		$d['expect'] ?? array(),
 		! empty( $d['note'] ) ? solevo_b_p( $d['note'], 'solevo-help__after' ) : '',
-		'What to expect',
+		$d['expect_title'] ?? 'What to expect',
 		array( 'anchor' => 'help-steps' )
 	);
 	if ( ! empty( $d['services'] ) ) {
 		$c .= solevo_c_link_cards( solevo_c_head( 'Care at Solevo', $d['services_title'] ?? 'Services that can help' ), $d['services'], array( 'bg' => 'surface', 'anchor' => 'services' ) );
 	}
 	$c .= solevo_c_redflags( $d['flags_title'] ?? 'When to see a GP or get urgent care first', $d['flags'], $d['flags_note'] ?? 'If any of these apply, see your GP before booking. In an emergency call 000.' );
-	$c .= solevo_c_faq( 'Common questions', $d['faq'], solevo_c_reviewed() );
+	$c .= solevo_c_faq( $d['faq_title'] ?? 'Common questions', $d['faq'], solevo_c_reviewed() . ( ! empty( $d['faq_schema'] ) ? solevo_faq_schema( $d['faq'] ) : '' ) );
 	if ( ! empty( $d['related'] ) ) {
 		$c .= solevo_c_related( 'Related conditions', $d['related'] );
 	}
@@ -155,17 +201,17 @@ function solevo_build_condition( $page, $d ) {
 function solevo_build_service( $page, $d ) {
 	$c  = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Solevo Physio',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page, array( 'What we help with', '#help', true ) ),
 		'locations' => true,
-		'trust'     => $d['trust'] ?? array( 'No GP referral needed', 'One-on-one appointments', 'Book online any time' ),
-		'jump'      => array( array( 'Fees and FAQs', '#fees' ), array( 'Locations and hours', '#locations' ) ),
+		'trust'     => $d['trust'] ?? array( 'No referral required', 'One-on-one appointments', 'Book online any time' ),
+		'jump'      => array( array( 'FAQs', '#faq' ) ),
 		'image'     => $d['image'] ?? '',
 	) );
 	$c .= solevo_todos( $d );
 	$c .= solevo_c_split( array(
-		'eyebrow'    => 'Who it is for',
+		'eyebrow'    => $d['who_eyebrow'] ?? 'Who it is for',
 		'title'      => $d['who_title'],
 		'paras'      => $d['who'],
 		'list_title' => $d['who_list_title'] ?? 'This may suit you if',
@@ -186,18 +232,17 @@ function solevo_build_service( $page, $d ) {
 	if ( ! empty( $d['practitioner'] ) ) {
 		$c .= solevo_c_practitioner( $d['practitioner'] );
 	}
-	$c .= solevo_c_fees_faq(
-		solevo_c_head( 'Fees and FAQs', 'Fees, funding and common questions' ),
-		$d['fees'] ?? solevo_physio_fees(),
-		$d['funding'] ?? solevo_physio_funding(),
-		$d['faq'],
-		solevo_c_todo( 'Confirm physio prices ($160 initial, $110 follow-up) and whether claims are processed on the spot (HICAPS).' ),
+	$c .= $d['before_faq'] ?? '';
+	// No physio prices anywhere on the site (Steph, 25 Oct). Funding sits in the FAQs, not a separate box (29 Oct).
+	$c .= solevo_c_faq(
+		$d['faq_title'] ?? 'Physiotherapy FAQs',
+		array_merge( $d['faq'], solevo_physio_funding_faq() ),
 		solevo_c_reviewed()
 	);
 	if ( ! empty( $d['related'] ) ) {
 		$c .= solevo_c_link_cards( solevo_c_head( 'Related care', 'You may also be interested in' ), $d['related'], array( 'bg' => 'surface' ) );
 	}
-	$c .= solevo_c_locations( 'Locations', 'Physio in Brookvale and Terrey Hills', 'Choose the clinic that suits you when you book.' );
+	// Both clinics are in the footer on every page (26 Oct), so no Locations section here.
 	return $c;
 }
 
@@ -209,12 +254,12 @@ function solevo_build_service( $page, $d ) {
 function solevo_build_studio( $page, $d ) {
 	$c  = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Solevo Studio',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => solevo_hero_buttons( $page ),
 		'locations' => false,
 		'trust'     => $d['trust'] ?? array( 'Brookvale studio', 'Small classes', 'Designed with physiotherapists' ),
-		'jump'      => array( array( 'Pricing', '#pricing' ), array( 'FAQs', '#faq' ) ),
+		'jump'      => array( array( 'FAQs', '#faq' ) ),
 		'image'     => $d['image'] ?? 'studio-stretch',
 	) );
 	$c .= solevo_todos( $d );
@@ -275,7 +320,7 @@ function solevo_build_studio( $page, $d ) {
 function solevo_build_general( $page, $d ) {
 	$c = solevo_c_hero( array(
 		'eyebrow'   => $d['eyebrow'] ?? 'Solevo',
-		'h1'        => esc_html( $page['h1'] ),
+		'h1'        => solevo_page_h1( $page ),
 		'lead'      => $d['lead'],
 		'buttons'   => $d['buttons'] ?? solevo_hero_buttons( $page ),
 		'locations' => $d['locations'] ?? true,

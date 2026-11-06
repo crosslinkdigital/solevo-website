@@ -1,0 +1,11 @@
+name: Type scale check
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  type-scale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: tools/checks/type-scale.sh

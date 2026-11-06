@@ -62,7 +62,7 @@ Design tokens (`:root` in `style.css`): body 17px mobile to 18px desktop; charco
 
 | Page type | Template | Pages |
 |---|---|---|
-| Homepage (bespoke) | `front-page` | `/` (phase 5 moves it onto the design system) |
+| Homepage | `front-page` (design system, 1.3.0) | `/` |
 | Service | `page-service` | `/physio` (gold standard), `/physio/sports-physiotherapy`, `/physio/pregnancy-physiotherapy`, `/physio/postnatal-physiotherapy`, `/physio/pelvic-floor-physiotherapy`, `/physio/seniors-physiotherapy` |
 | Condition | `page-condition` | the 10 `/conditions/*` pages |
 | Studio / class | `page-studio` | `/pilates` and its 8 children (Clinical Pilates is the reference page) |
@@ -86,6 +86,23 @@ Copy rules applied: patient language, no outcome promises, no testimonials, no u
 Shin splints is held: The Foot Company's keyword plan also targets it, so it stays a placeholder draft until Hayo decides which site owns it. Links to it are left out everywhere.
 
 Links to pages that are still drafts are hidden from visitors automatically, so publishing pages in any order never creates a 404.
+
+### Homepage on the design system (1.3.0, 26 Oct)
+
+Physio-first, from Steph's 20 Oct list. Built by `inc/scaffold-home.php`, applied with Solevo setup > "Reset the homepage".
+
+1. Hero: H1 "Physiotherapy in Brookvale", Book Physio + Call (number from Settings), location chips, trust line.
+2. Meet Emma, directly under the hero (no dry needling tag).
+3. Google reviews: always visible. Live Trustindex feed once connected; until then a "Read our Google reviews" link (Settings > Solevo > Google reviews link, else Google Maps).
+4. Why choose Solevo Physio (same four reasons as /physio, with the one TFC link).
+5. Physio services: /physio plus the five service pages.
+6. Conditions we treat: pills to the condition pages.
+7. Assessment and facilities.
+8. Locations: Brookvale and Terrey Hills.
+9. Small Studio band: Seniors Pilates, Clinical Pilates, all classes.
+10. Booking band (physio first) from the front-page template.
+
+Removed from the homepage: studio section, studio pricing, class packs, founders offer, timetable, workshop email, Rikki and Yasmin, "Performance Hub", adjunct therapies. Also in 1.3.0: header Call button (shows the number, "Call" on mobile), header and sticky bar show Book Physio on the homepage, footer links point to real pages, phone defaults to 1300 366 826, Rikki and Yasmin removed from the About page content file.
 
 ## D. Physio page decisions
 
@@ -150,4 +167,3 @@ Page-level items are also shown on each page as editor-only "To confirm" notes.
 | Brookvale opening hours and phone | Location card, header Call, schema |
 | Authentic clinic photos (treatment, rehab gym, reformer studio, Terrey Hills) | Facilities section, hero |
 | Condition pages the brief names but the 30-page list does not have (neck, shoulder, hip and knee, tendon, post-surgical) | Question boxes link to the closest existing page for now |
-| Emma's profile on the homepage lists Dry Needling | Homepage team section (phase 5) |

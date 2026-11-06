@@ -82,7 +82,8 @@ function solevo_c_hero( $a ) {
 		. ( ! empty( $a['jump'] ) ? solevo_b_p( implode( ' <span aria-hidden="true">·</span> ', array_map( function ( $j ) {
 			return sprintf( '<a href="%s">%s</a>', esc_attr( $j[1] ), $j[0] );
 		}, $a['jump'] ) ), 'solevo-jump' ) : '' );
-	$media = ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-hero2__media', 'large' ) : '';
+	$media = ! empty( $a['video'] ) ? solevo_video( $a['video'], $a['poster'] ?? '', 'solevo-hero2__media solevo-hero2__video' )
+		: ( ! empty( $a['image'] ) ? solevo_img( $a['image'], 'solevo-hero2__media', 'large' ) : '' );
 	$grid  = solevo_c_box( solevo_c_box( $text, 'solevo-hero2__text' ) . $media, 'solevo-hero2__grid' );
 	return solevo_b_section( $grid, array( 'class' => 'solevo-c solevo-hero2', 'anchor' => $a['anchor'] ?? '' ) );
 }
@@ -100,7 +101,8 @@ function solevo_c_help_grid( $head, $items, $after = '' ) {
 		}
 		$cta    = $it['cta'] ?? array( 'Book Physio', '#cliniko' );
 		$inner .= solevo_b_p( sprintf( '<a href="%s">%s</a>', esc_attr( $cta[1] ), $cta[0] ), 'solevo-qbox__cta' );
-		$boxes .= solevo_c_details( $it['title'] . '<br><em>' . $it['hint'] . '</em>', $inner, 'solevo-qbox solevo-icon--' . $it['icon'] );
+		$summary = $it['title'] . ( ! empty( $it['hint'] ) ? '<br><em>' . $it['hint'] . '</em>' : '' );
+		$boxes  .= solevo_c_details( $summary, $inner, 'solevo-qbox solevo-icon--' . $it['icon'] );
 	}
 	return solevo_b_section( $head . solevo_c_box( $boxes, 'solevo-qgrid' ) . $after, array( 'class' => 'solevo-c solevo-help', 'anchor' => 'help' ) );
 }
@@ -214,7 +216,7 @@ function solevo_c_fees_faq( $head, $fees, $funding, $faqs, $fee_after = '', $aft
 	foreach ( $fees as $f ) {
 		$rows .= solevo_c_box( solevo_b_p( $f[0] . ( $f[1] ? '<br><span>' . $f[1] . '</span>' : '' ), 'solevo-fee__label' ) . solevo_b_p( $f[2], 'solevo-fee__price' ), 'solevo-fee' );
 	}
-	$card = solevo_b_h( 'Fees', 3 ) . solevo_c_box( $rows, 'solevo-fees__rows' )
+	$card = ( $rows ? solevo_b_h( 'Fees', 3 ) . solevo_c_box( $rows, 'solevo-fees__rows' ) : '' )
 		. ( $funding ? solevo_b_h( 'Funding and referrals', 3 ) . solevo_b_list( $funding, 'solevo-ticks' ) : '' ) . $fee_after;
 	$q = '';
 	foreach ( $faqs as $f ) {
@@ -226,12 +228,42 @@ function solevo_c_fees_faq( $head, $fees, $funding, $faqs, $fee_after = '', $aft
 }
 
 /** FAQ accordion on its own (condition, studio and info pages). $faqs: [[q, a_html]] */
-function solevo_c_faq( $title, $faqs, $after = '' ) {
-	$q = '';
+function solevo_c_faq( $title, $faqs, $after = '', $args = array() ) {
+	$args = wp_parse_args( $args, array( 'anchor' => 'faq', 'eyebrow' => 'FAQs', 'all_link' => true, 'bg' => '' ) );
+	$q    = '';
 	foreach ( $faqs as $f ) {
 		$q .= solevo_c_details( $f[0], solevo_b_p( $f[1] ), 'solevo-faq2__item' );
 	}
-	return solevo_b_section( solevo_b_p( 'FAQs', 'is-style-eyebrow' ) . solevo_b_h( $title, 2 ) . solevo_c_box( $q, 'solevo-faq2' ) . $after, array( 'class' => 'solevo-c solevo-faq-wrap', 'inner_class' => 'solevo-narrow', 'anchor' => 'faq' ) );
+	// 1.4.0: every page FAQ ends with a link to the central FAQ page (Steph, 3 Nov).
+	$all = $args['all_link'] ? solevo_b_p( '<a href="' . esc_url( home_url( '/faq' ) ) . '">See all FAQs</a>', 'solevo-faq2__all' ) : '';
+	$sec = array( 'class' => 'solevo-c solevo-faq-wrap', 'inner_class' => 'solevo-narrow', 'anchor' => $args['anchor'] );
+	if ( $args['bg'] ) {
+		$sec['bg'] = $args['bg'];
+	}
+	return solevo_b_section( ( $args['eyebrow'] ? solevo_b_p( $args['eyebrow'], 'is-style-eyebrow' ) : '' ) . solevo_b_h( $title, 2 ) . solevo_c_box( $q, 'solevo-faq2' ) . $all . $after, $sec );
+}
+
+/**
+ * 1.4.0 Conditions overview (Steph, 3 Nov): one scrollable page, every condition with a short
+ * description and a Read more link to its own page. $groups: [ title, intro, items[ title, body, path? ] ]
+ */
+function solevo_c_condition_list( $head, $groups ) {
+	$out = '';
+	foreach ( $groups as $g ) {
+		$cards = '';
+		foreach ( $g['items'] as $it ) {
+			$inner = solevo_b_h( $it['title'], 3 ) . solevo_b_p( $it['body'] );
+			if ( ! empty( $it['path'] ) ) {
+				$inner .= solevo_b_p( '<a href="' . esc_url( home_url( '/' . $it['path'] ) ) . '">Read more<span class="screen-reader-text"> about ' . esc_html( $it['title'] ) . '</span></a>', 'solevo-clist__more' );
+			}
+			$cards .= solevo_c_box( $inner, 'solevo-clist__item' );
+		}
+		$out .= solevo_c_box(
+			solevo_b_h( $g['title'], 2 ) . ( ! empty( $g['intro'] ) ? solevo_b_p( $g['intro'], 'solevo-clist__intro' ) : '' ) . solevo_c_box( $cards, 'solevo-clist__grid' ),
+			'solevo-clist__group'
+		);
+	}
+	return solevo_b_section( $head . $out, array( 'class' => 'solevo-c solevo-clist', 'anchor' => 'all' ) );
 }
 
 /** Instagram: heading and Follow button always; the live feed appears once Smash Balloon is connected. */
@@ -276,7 +308,14 @@ function solevo_c_split( $a ) {
 	}
 	$text .= $a['after_text'] ?? '';
 	$side = '';
-	if ( ! empty( $a['list'] ) ) {
+	if ( ! empty( $a['list_groups'] ) ) {
+		// 1.4.6: one card, a short heading per group (e.g. Neck pain / Neck-related headaches).
+		$g = ! empty( $a['list_title'] ) ? solevo_b_h( $a['list_title'], 3 ) : '';
+		foreach ( $a['list_groups'] as $grp ) {
+			$g .= solevo_b_p( '<strong>' . $grp[0] . '</strong>', 'solevo-split2__group' ) . solevo_b_list( $grp[1], 'solevo-ticks' );
+		}
+		$side = solevo_c_box( $g, 'solevo-split2__card' );
+	} elseif ( ! empty( $a['list'] ) ) {
 		$side = solevo_c_box( ( ! empty( $a['list_title'] ) ? solevo_b_h( $a['list_title'], 3 ) : '' ) . solevo_b_list( $a['list'], 'solevo-ticks' ), 'solevo-split2__card' );
 	} elseif ( ! empty( $a['image'] ) ) {
 		$side = solevo_img( $a['image'], 'solevo-split2__img', 'large' );

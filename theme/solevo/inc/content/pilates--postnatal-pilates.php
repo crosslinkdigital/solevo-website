@@ -37,7 +37,7 @@ return array(
 		array( 'Is this the same as Mums and Bubs?', 'Postnatal classes are casual or class-pack classes. Mums and Bubs is a structured six-week program with an assessment to start.' ),
 		array( 'Can I bring my baby?', 'Please contact us to check before your first class.' ),
 	),
-	'related'    => array( 'pilates/mums-and-bubs', 'physio/postnatal-physiotherapy', 'physio/pelvic-floor-physiotherapy', 'conditions/bladder-leakage-incontinence' ),
+	'related'    => array( 'pilates', 'pilates/clinical-pilates' ),
 	'related_title' => 'Postnatal care at Solevo',
 	'todo'       => array( 'Confirm whether babies can attend postnatal classes and update the FAQ.' ),
 );

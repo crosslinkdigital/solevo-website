@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'eyebrow'   => 'Solevo Physio · Women\'s health',
 	'lead'      => 'Private, one-on-one physiotherapy for back, pelvic and rib pain in pregnancy, plus safe exercise so you can stay active and comfortable through every trimester.',
-	'trust'     => array( 'Private one-on-one appointments', 'No GP referral needed', 'Safe for every trimester' ),
+	'trust'     => array( 'Private one-on-one appointments', 'No referral required', 'Safe for every trimester' ),
 	'who_title' => 'Physio through your pregnancy',
 	'who'       => array(
 		'Your body changes quickly in pregnancy. Posture shifts, ligaments soften and the load on your back and pelvis increases. Pain is common, but it is not something you have to simply put up with.',
@@ -38,7 +38,6 @@ return array(
 		array( 'Is physio safe in pregnancy?', 'Yes. Treatment and exercise are adjusted for your stage of pregnancy. Tell us how many weeks you are when you book.' ),
 		array( 'When should I come in?', 'Any time pain starts, or whenever you would like advice about exercise. Earlier is often easier.' ),
 		array( 'Do I need my obstetrician\'s permission?', 'Not for physio. If your pregnancy is complicated, let your care team know and share any advice with us.' ),
-		array( 'Can I claim on private health insurance?', 'Physiotherapy is covered by most private health extras policies. Your rebate depends on your fund and cover.' ),
 	),
 	'related'   => array( 'conditions/pregnancy-back-pain', 'pilates/pregnancy-pilates', 'physio/postnatal-physiotherapy', 'physio/pelvic-floor-physiotherapy' ),
 	'todo'      => array( 'Confirm which clinician sees pregnancy patients. Add a practitioner section and the reviewed-by line once confirmed.' ),

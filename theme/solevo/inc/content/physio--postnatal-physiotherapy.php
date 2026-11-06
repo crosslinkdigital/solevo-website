@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit;
 return array(
 	'eyebrow'   => 'Solevo Physio · Women\'s health',
 	'lead'      => 'A postnatal check and a clear, safe plan back to exercise. We assess your tummy muscles and pelvic floor, treat back and pelvic pain, and help you return to the activities you enjoy.',
-	'trust'     => array( 'Private one-on-one appointments', 'No GP referral needed', 'Vaginal or caesarean birth' ),
+	'trust'     => array( 'Private one-on-one appointments', 'No referral required', 'Vaginal or caesarean birth' ),
 	'who_title' => 'Recovery after birth, at your pace',
 	'who'       => array(
 		'Whether you had a vaginal birth or a caesarean, your body has been through a lot. A postnatal physio check looks at your abdominal muscles, pelvic floor, back and posture, and gives you a plan that fits life with a new baby.',

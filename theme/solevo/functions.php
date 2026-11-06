@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SOLEVO_VERSION', '1.2.1' );
+define( 'SOLEVO_VERSION', '1.4.18' );
 define( 'SOLEVO_DIR', get_template_directory() );
 define( 'SOLEVO_URI', get_template_directory_uri() );
 
@@ -15,12 +15,15 @@ require SOLEVO_DIR . '/inc/settings.php';
 require SOLEVO_DIR . '/inc/images.php';
 require SOLEVO_DIR . '/inc/booking.php';
 require SOLEVO_DIR . '/inc/shortcodes.php';
+require SOLEVO_DIR . '/inc/hero-bg.php';
+require SOLEVO_DIR . '/inc/redirects.php';
 require SOLEVO_DIR . '/inc/seo.php';
 require SOLEVO_DIR . '/inc/tracking.php';
 require SOLEVO_DIR . '/inc/pages.php';
 require SOLEVO_DIR . '/inc/blocks.php';
 require SOLEVO_DIR . '/inc/components.php';
 require SOLEVO_DIR . '/inc/schema.php';
+require SOLEVO_DIR . '/inc/blog.php';
 require SOLEVO_DIR . '/inc/menus.php';
 require SOLEVO_DIR . '/inc/setup.php';
 

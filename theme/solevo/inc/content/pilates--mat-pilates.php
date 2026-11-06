@@ -31,7 +31,7 @@ return array(
 		array( 'What should I bring?', 'Comfortable activewear and a water bottle.' ),
 		array( 'I have an injury. Can I join?', 'Tell your instructor before class. For pain or a recent injury, start with Clinical Pilates or a physio appointment.' ),
 	),
-	'related'    => array( 'pilates', 'pilates/clinical-pilates', 'pilates/private-pilates' ),
+	'related'    => array( 'pilates', 'pilates/clinical-pilates' ),
 	'related_title' => 'More from Solevo Studio',
 	'todo'       => array( 'Confirm whether mats are provided or clients should bring their own.' ),
 );
