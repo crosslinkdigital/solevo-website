@@ -30,6 +30,8 @@ function solevo_redirects() {
 		// 1.4.7: holding redirect while the shin splints draft waits for Steph and Emma.
 		// Stops by itself the moment the page is published.
 		'conditions/shin-splints'           => 'conditions/foot-ankle',
+		// 1.4.14 (Steph, 6 Nov): disc injuries are covered on the lower back pain page.
+		'conditions/herniated-disc'         => 'conditions/lower-back-pain',
 	);
 }
 

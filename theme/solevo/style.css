@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.4.13
+Version: 1.4.14
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -1137,6 +1137,8 @@ body { font-weight: 400; color: #2F2E2C; }
 .solevo-icard__body h3 { font-size: var(--fs-card) !important; line-height: 1.2; }
 .solevo-icard__tag { font-size: var(--fs-label) !important; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #414A36; }
 .solevo-icard__body .wp-block-buttons { margin-top: auto !important; padding-top: .5rem; }
+/* 1.4.14: "more" links sit on the bottom of the card, so links in one row line up (Steph, 6 Nov). */
+.solevo-icard__body > .solevo-more { margin-top: auto !important; }
 .solevo-icard__meta { font-weight: 500; color: #2B2A28; }
 @media (max-width: 1023px) { .solevo-icards, .solevo-icards.is-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 599px) { .solevo-icards, .solevo-icards.is-2, .solevo-icards.is-4 { grid-template-columns: 1fr; } }

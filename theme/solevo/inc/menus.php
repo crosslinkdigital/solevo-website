@@ -61,24 +61,23 @@ function solevo_build_menus( $page_ids ) {
 	// Full site menu, 1.4.0 (Steph, 3 Nov; like Beachlife, PhysioWard and Rebound Health):
 	// What we treat / Exercise & programs / Services dropdowns only, plus the phone and Book buttons. About and Contact live in the footer (Steph, 3 Nov).
 	$full = implode( '', array(
-		solevo_nav_submenu( 'What we treat', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
-			$link( 'conditions', 'All conditions' ),
-			// 1.4.6 order (Steph's Areas we treat doc, Hayo, 4 Nov).
-			$live( 'conditions/lower-back-pain', 'Lower back pain' ),
+		solevo_nav_submenu( 'What We Treat', home_url( '/conditions' ), $page_ids['conditions'] ?? 0, array(
+			$link( 'conditions', 'All Conditions' ),
+			// 1.4.6 order (Steph's Areas we treat doc, Hayo, 4 Nov). 1.4.14: labels in title case, herniated disc removed (Steph, 6 Nov).
+			$live( 'conditions/lower-back-pain', 'Lower Back Pain' ),
 			$live( 'conditions/sciatica', 'Sciatica' ),
-			$live( 'conditions/herniated-disc', 'Herniated disc' ),
-			$live( 'conditions/neck-pain-headaches', 'Neck pain & headaches' ),
-			$live( 'conditions/shoulder-arm-pain', 'Shoulder & arm pain' ),
-			$live( 'conditions/hip-groin-pain', 'Hip & groin pain' ),
-			$live( 'conditions/knee-pain', 'Knee pain & injury' ),
+			$live( 'conditions/neck-pain-headaches', 'Neck Pain & Headaches' ),
+			$live( 'conditions/shoulder-arm-pain', 'Shoulder & Arm Pain' ),
+			$live( 'conditions/hip-groin-pain', 'Hip & Groin Pain' ),
+			$live( 'conditions/knee-pain', 'Knee Pain & Injury' ),
 			$live( 'conditions/foot-ankle', 'Foot & ankle' ),
-			$live( 'conditions/shin-splints', 'Shin splints' ),
-			$live( 'conditions/sports-injuries-rehab', 'Sports injuries' ),
-			$live( 'conditions/balance-falls-prevention', 'Balance and falls' ),
+			$live( 'conditions/shin-splints', 'Shin Splints' ),
+			$live( 'conditions/sports-injuries-rehab', 'Sports Injuries' ),
+			$live( 'conditions/balance-falls-prevention', 'Balance and Falls' ),
 			$live( 'conditions/osteoporosis', 'Osteoporosis' ),
-			$live( 'conditions/pregnancy-back-pain', 'Pregnancy back pain' ),
+			$live( 'conditions/pregnancy-back-pain', 'Pregnancy Back Pain' ),
 		), 'solevo-mega solevo-mega--2col' ),
-		solevo_nav_submenu( 'Exercise &amp; programs', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
+		solevo_nav_submenu( 'Exercise &amp; Programs', home_url( '/pilates' ), $page_ids['pilates'] ?? 0, array(
 			$link( 'pilates', 'Reformer Pilates' ),
 			$live( 'pilates/clinical-pilates', 'Clinical Pilates' ),
 			$live( 'pilates/mat-pilates', 'Mat Pilates' ),
@@ -87,14 +86,14 @@ function solevo_build_menus( $page_ids ) {
 			$live( 'pilates/postnatal-pilates', 'Postnatal Pilates' ),
 		), 'solevo-mega' ),
 		solevo_nav_submenu( 'Services', home_url( '/physio' ), $page_ids['physio'] ?? 0, array(
-			$live( 'physio/sports-physiotherapy', 'Sports physio' ),
-			$link( 'physio', 'General physio' ),
+			$live( 'physio/sports-physiotherapy', 'Sports Physio' ),
+			$link( 'physio', 'General Physio' ),
 			$live( 'physio/pre-and-post-surgery-rehab', 'Pre &amp; Post Surgical Rehab' ), // 1.4.11: Steph, 5 Nov
-			$live( 'physio/seniors-physiotherapy', 'Physio for seniors' ),
-			$live( 'physio/adolescent-sports-physiotherapy', 'Adolescent sports injuries' ),
-			$live( 'physio/shockwave-therapy', 'Shockwave therapy' ),
-			$live( 'physio/workers-compensation', 'WorkCover physio' ),
-			$live( 'physio/ndis', 'NDIS physio' ),
+			$live( 'physio/seniors-physiotherapy', 'Physio for Seniors' ),
+			$live( 'physio/adolescent-sports-physiotherapy', 'Adolescent Sports Injuries' ),
+			$live( 'physio/shockwave-therapy', 'Shockwave Therapy' ),
+			$live( 'physio/workers-compensation', 'WorkCover Physio' ),
+			$live( 'physio/ndis', 'NDIS Physio' ),
 		), 'solevo-mega' ),
 	) );
 

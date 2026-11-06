@@ -36,7 +36,7 @@ function solevo_scaffold_physio( $page ) {
 				'title' => 'Back and neck pain',
 				'hint'  => 'Stiffness, disc pain, sciatica',
 				'body'  => 'Low back and neck pain, stiffness from desk work, disc injuries and nerve pain down the leg. We look at how your spine, hips and daily load fit together, not just the sore spot.',
-				'links' => array( solevo_c_link( 'conditions/lower-back-pain' ), solevo_c_link( 'conditions/sciatica' ), solevo_c_link( 'conditions/herniated-disc' ) ),
+				'links' => array( solevo_c_link( 'conditions/lower-back-pain' ), solevo_c_link( 'conditions/sciatica' ) ),
 			),
 			array(
 				'icon'  => 'shoulder',

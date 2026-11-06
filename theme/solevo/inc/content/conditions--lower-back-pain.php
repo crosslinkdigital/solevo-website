@@ -59,5 +59,5 @@ return array(
 		array( 'Can Clinical Pilates help with back pain?', 'Clinical Pilates is physio-led exercise on the reformer. It is one way to build trunk, hip and leg strength after your pain has settled, and is tailored to you after an assessment.' ),
 		array( 'Do I need a referral?', 'No. You can book a private physio appointment directly. You only need a referral if you are using Medicare, workers compensation or a CTP claim.' ),
 	),
-	'related'    => array( 'conditions/sciatica', 'conditions/herniated-disc', 'conditions/pregnancy-back-pain' ),
+	'related'    => array( 'conditions/sciatica', 'conditions/pregnancy-back-pain' ),
 );

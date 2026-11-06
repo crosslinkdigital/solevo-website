@@ -14,7 +14,6 @@ return array(
 				array( 'title' => 'Back and neck', 'items' => array(
 					array( 'title' => 'Lower back pain', 'body' => 'Pain, stiffness or tightness between your ribs and pelvis, from everyday aches to persistent pain.', 'path' => 'conditions/lower-back-pain' ),
 					array( 'title' => 'Sciatica', 'body' => 'Nerve pain that travels from the lower back into the buttock and leg.', 'path' => 'conditions/sciatica' ),
-					array( 'title' => 'Herniated disc', 'body' => 'Disc-related back pain, with or without pain into the leg.', 'path' => 'conditions/herniated-disc' ),
 					array( 'title' => 'Neck pain & headaches', 'body' => 'From everyday stiffness to persistent neck pain. We assess the cause and build a treatment and exercise plan to restore movement.', 'path' => 'conditions/neck-pain-headaches' ),
 				) ),
 				array( 'title' => 'Sports and running', 'items' => array(

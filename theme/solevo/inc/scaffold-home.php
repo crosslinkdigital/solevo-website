@@ -69,7 +69,8 @@ function solevo_scaffold_home( $page ) {
 	);
 
 	/* 6. Conditions we treat ------------------------------------------- */
-	$conditions = array( 'conditions/lower-back-pain', 'conditions/sciatica', 'conditions/herniated-disc', 'conditions/sports-injuries-rehab', 'conditions/pregnancy-back-pain', 'conditions/osteoporosis', 'conditions/balance-falls-prevention', 'conditions/shin-splints' );
+	// 1.4.14 (Steph, 6 Nov): a broader range, not back heavy.
+	$conditions = array( 'conditions/sports-injuries-rehab', 'conditions/lower-back-pain', 'conditions/neck-pain-headaches', 'conditions/knee-pain', 'conditions/shoulder-arm-pain', 'conditions/hip-groin-pain', 'conditions/foot-ankle', 'conditions/balance-falls-prevention', 'conditions/osteoporosis' );
 	$c .= solevo_b_section(
 		solevo_c_head( 'Conditions we treat', 'Not sure what is going on?', 'Read about common conditions, the warning signs that need a GP first, and how we treat them. Or book an assessment and we will work it out together.' )
 		. solevo_b_list( array_map( 'solevo_c_link', $conditions ), 'is-style-pills' )
