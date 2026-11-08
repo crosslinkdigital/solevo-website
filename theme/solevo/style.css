@@ -7,7 +7,7 @@ Description: Custom block theme for Solevo Physio & Studio, Brookvale. A replica
 Requires at least: 6.6
 Tested up to: 7.1
 Requires PHP: 8.0
-Version: 1.4.18
+Version: 1.4.19
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: solevo
@@ -727,6 +727,19 @@ div.solevo-social a { color: #93928F; display: flex; }
 }
 @media (max-width: 599px) { .solevo-hero2__media { display: none; } }
 @media (prefers-reduced-motion: reduce) { .solevo-sticky { transition: none; } }
+
+/* ---- Clinic chooser (1.4.19): Book Physio asks Brookvale or Terrey Hills ---- */
+.solevo-chooser { width: min(92vw, 26rem); max-width: none; padding: 0; border: 0; background: var(--s-paper); color: var(--s-text); box-shadow: 0 24px 60px -20px rgba(0,0,0,.45); }
+.solevo-chooser::backdrop { background: rgba(44,44,44,.55); }
+.solevo-chooser__box { position: relative; padding: 2rem 1.5rem 1.5rem; }
+.solevo-chooser__title { margin: 0 2.25rem 1.25rem 0; font-family: var(--s-serif); font-size: var(--fs-h3); line-height: 1.2; color: var(--s-ink); }
+.solevo-chooser__list { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.solevo-chooser__opt { display: block; padding: 1rem 1.25rem; border: 1.5px solid var(--ds-olive); color: var(--s-ink); text-decoration: none; transition: background-color .15s ease, color .15s ease; }
+.solevo-chooser__opt:hover, .solevo-chooser__opt:focus-visible { background: var(--ds-olive); color: #fff; }
+.solevo-chooser__area { display: block; font-family: var(--s-sans); font-size: var(--fs-button); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+.solevo-chooser__detail { display: block; margin-top: .3rem; font-size: var(--fs-small); }
+.solevo-chooser__close { position: absolute; top: .4rem; right: .4rem; width: 44px; height: 44px; padding: 0; border: 0; background: none; font-size: 1.75rem; line-height: 1; color: var(--s-ink); cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .solevo-chooser__opt { transition: none; } }
 
 /* ---- Icons (masks) ---- */
 :root {

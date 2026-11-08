@@ -51,6 +51,9 @@ function solevo_rewrite_links( $html ) {
 			if ( $t['external'] ) {
 				$p->set_attribute( 'rel', 'noopener' );
 			}
+			if ( '#cliniko' === $href && solevo_clinic_chooser_on() ) {
+				$p->set_attribute( 'data-choose', 'clinic' );
+			}
 		} elseif ( 0 === strpos( $href, 'tel:' ) ) {
 			$p->add_class( 'solevo-call' );
 			$p->set_attribute( 'data-track', 'click_call' );
@@ -58,6 +61,53 @@ function solevo_rewrite_links( $html ) {
 	}
 	return $p->get_updated_html();
 }
+
+/**
+ * 1.4.19: clinic chooser (Hayo and Steph, 8 Nov). Every Book Physio (#cliniko) button stays
+ * where it is and opens a small pop-up first: Brookvale (Cliniko) or Terrey Hills (the
+ * online booking link in Settings > Solevo > "Cliniko link: location 2").
+ * On only when that link is set. Pilates pages skip it: Clinical Pilates is Brookvale only.
+ * Book Studio, location cards and other #cliniko-location links go straight through.
+ * Without JavaScript the button still goes straight to Cliniko.
+ */
+function solevo_clinic_chooser_on() {
+	if ( ! solevo_opt( 'location2_name' ) || ! solevo_opt( 'cliniko_url_location2' ) ) {
+		return false;
+	}
+	$def = solevo_page_def();
+	return ! ( $def && 0 === strpos( (string) $def['path'], 'pilates' ) );
+}
+
+add_action( 'wp_footer', function () {
+	if ( is_admin() || ! solevo_clinic_chooser_on() ) {
+		return;
+	}
+	$locs = solevo_locations();
+	if ( count( $locs ) < 2 ) {
+		return;
+	}
+	$opts = '';
+	foreach ( $locs as $loc ) {
+		if ( 'location1' === $loc['key'] ) {
+			$detail = trim( (string) strtok( (string) $loc['address'], ',' ) );
+		} else {
+			$hours  = solevo_lines( $loc['hours'] );
+			$day    = preg_replace( '/:.*$/', 's', $hours[0] ?? '' );
+			$detail = trim( ( $day ? $day . ', ' : '' ) . $loc['name'] );
+		}
+		$opts .= sprintf(
+			'<li><a class="solevo-chooser__opt" href="#cliniko-%s"><span class="solevo-chooser__area">%s</span><span class="solevo-chooser__detail">%s</span></a></li>',
+			esc_attr( $loc['key'] ),
+			esc_html( $loc['area'] ),
+			esc_html( $detail )
+		);
+	}
+	$html = '<dialog class="solevo-chooser" id="solevo-chooser" aria-labelledby="solevo-chooser-title"><div class="solevo-chooser__box">'
+		. '<button type="button" class="solevo-chooser__close" aria-label="Close">&times;</button>'
+		. '<p class="solevo-chooser__title" id="solevo-chooser-title">Which clinic would you like to book?</p>'
+		. '<ul class="solevo-chooser__list">' . $opts . '</ul></div></dialog>';
+	echo solevo_rewrite_links( $html ); // phpcs:ignore WordPress.Security.EscapeOutput
+} );
 
 add_filter( 'render_block', function ( $content, $block ) {
 	$names = array( 'core/button', 'core/paragraph', 'core/list-item', 'core/heading', 'core/navigation-link', 'core/html' );

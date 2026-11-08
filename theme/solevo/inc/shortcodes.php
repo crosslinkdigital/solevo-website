@@ -341,8 +341,10 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 		$book  = 'studio' === $atts['service']
 			? '<a class="wp-block-button__link wp-element-button" href="#mindbody">Book Studio</a>'
 			: ( 'clinical' === $atts['service'] ? '<a class="wp-block-button__link wp-element-button" href="#cliniko-location1">Book Clinical Pilates</a>' : '' );
-		$th_phone = 'location2' === $loc['key'] ? solevo_opt( 'location2_phone' ) : '';
-		if ( ! $book && $th_phone ) {
+		$th_phone  = 'location2' === $loc['key'] ? solevo_opt( 'location2_phone' ) : '';
+		// 1.4.19: once the Terrey Hills booking link is set, its card books online; the phone stays as a line.
+		$th_online = 'location2' === $loc['key'] && solevo_opt( 'cliniko_url_location2' );
+		if ( ! $book && $th_phone && ! $th_online ) {
 			// Terrey Hills is booked by phone through the medical centre (Steph, 28 Oct).
 			$book = sprintf( '<a class="wp-block-button__link wp-element-button solevo-call" data-track="click_call" href="tel:%s">Call %s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) );
 		}
@@ -356,7 +358,9 @@ add_shortcode( 'solevo_locations', function ( $atts ) {
 			? '<br><span class="solevo-loc__access">(' . esc_html( lcfirst( solevo_opt( 'location1_access' ) ) ) . ')</span>'
 			: '';
 		if ( $th_phone ) {
-			$phone = sprintf( '<br><span class="solevo-loc__access">Bookings: %s</span>', esc_html( $loc['name'] ) );
+			$phone = $th_online
+				? sprintf( '<br><span class="solevo-loc__access">Or call %s on <a class="solevo-call" data-track="click_call" href="tel:%s">%s</a></span>', esc_html( $loc['name'] ), esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) )
+				: sprintf( '<br><span class="solevo-loc__access">Bookings: %s</span>', esc_html( $loc['name'] ) );
 		}
 		$phone  = $access . $phone;
 		$map = sprintf(

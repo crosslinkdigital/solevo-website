@@ -24,6 +24,7 @@
 	}
 	window.solevoTrack = track;
 	document.addEventListener('click', function (e) {
+		if (e.solevoChooser) return; // opened the clinic chooser; the clinic picked is tracked instead
 		var link = e.target.closest && e.target.closest('a[data-track], a[href^="tel:"], a[href^="mailto:"]');
 		if (!link) return;
 		var event = link.getAttribute('data-track') ||
@@ -145,4 +146,51 @@
 	'use strict';
 	if (document.getElementById('locations') || !document.getElementById('find-us')) return;
 	document.querySelectorAll('a[href="#locations"]').forEach(function (a) { a.setAttribute('href', '#find-us'); });
+})();
+
+// 8. Clinic chooser (1.4.19). Book Physio buttons open a pop-up: Brookvale (Cliniko) or
+//    Terrey Hills (its own booking link). The pick is tracked as click_book_physio with
+//    location brookvale / terrey-hills; opening the pop-up is booking_chooser_open.
+//    No pop-up on the page (link not set, Pilates page) or an old browser: buttons go straight to Cliniko.
+(function () {
+	'use strict';
+	var dlg = document.getElementById('solevo-chooser');
+	if (!dlg || typeof dlg.showModal !== 'function') return;
+	var cfg = window.solevoSite || {};
+	var cliniko = '';
+	try { cliniko = cfg.cliniko ? new URL(cfg.cliniko, window.location.href).href : ''; } catch (err) { cliniko = ''; }
+	var opener = null;
+
+	function opensChooser(a) {
+		if (!a || dlg.contains(a)) return false;
+		if (a.hasAttribute('data-choose')) return true;
+		// Plain Cliniko links typed into text (e.g. "Book online" in blog posts). Book Studio uses the same link: skip it.
+		return !!cliniko && a.href === cliniko && !a.hasAttribute('data-location') && !a.classList.contains('solevo-book-class');
+	}
+
+	document.addEventListener('click', function (e) {
+		if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+		var a = e.target.closest && e.target.closest('a[href]');
+		if (!opensChooser(a)) return;
+		e.preventDefault();
+		e.solevoChooser = true;
+		opener = a;
+		dlg.showModal();
+		(window.solevoTrack || function (d) { (window.dataLayer = window.dataLayer || []).push(d); })({
+			event: 'booking_chooser_open',
+			link_text: (a.textContent || '').trim().slice(0, 80),
+			page_path: window.location.pathname
+		});
+	}, true);
+
+	// Close: the X, a click outside the box, or Esc (built into <dialog>).
+	dlg.addEventListener('click', function (e) {
+		if (e.target === dlg || (e.target.closest && e.target.closest('.solevo-chooser__close'))) dlg.close();
+	});
+	dlg.addEventListener('close', function () {
+		if (opener && opener.focus) opener.focus();
+		opener = null;
+	});
+	// Coming back with the browser's Back button: don't leave the pop-up open.
+	window.addEventListener('pageshow', function () { if (dlg.open) dlg.close(); });
 })();

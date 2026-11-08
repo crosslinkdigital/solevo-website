@@ -7,7 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SOLEVO_VERSION', '1.4.18' );
+define( 'SOLEVO_VERSION', '1.4.19' );
 define( 'SOLEVO_DIR', get_template_directory() );
 define( 'SOLEVO_URI', get_template_directory_uri() );
 
@@ -47,6 +47,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_localize_script( 'solevo', 'solevoSite', array(
 		'home'      => home_url( '/' ),
 		'redirects' => solevo_hash_redirects(),
+		// 1.4.19: plain Cliniko links typed into page or post text also open the clinic chooser.
+		'cliniko'   => solevo_clinic_chooser_on() ? solevo_opt( 'cliniko_url' ) : '',
 	) );
 } );
 
