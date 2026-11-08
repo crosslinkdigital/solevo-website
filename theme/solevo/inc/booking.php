@@ -66,7 +66,8 @@ function solevo_rewrite_links( $html ) {
  * 1.4.19: clinic chooser (Hayo and Steph, 8 Nov). Every Book Physio (#cliniko) button stays
  * where it is and opens a small pop-up first: Brookvale (Cliniko) or Terrey Hills (the
  * online booking link in Settings > Solevo > "Cliniko link: location 2").
- * On only when that link is set. Pilates pages skip it: Clinical Pilates is Brookvale only.
+ * On only when that link is set. Brookvale-only pages skip it: Pilates pages, and pages
+ * marked 'brookvale_only' in pages.php (Shockwave, Steph 8 Nov).
  * Book Studio, location cards and other #cliniko-location links go straight through.
  * Without JavaScript the button still goes straight to Cliniko.
  */
@@ -75,7 +76,7 @@ function solevo_clinic_chooser_on() {
 		return false;
 	}
 	$def = solevo_page_def();
-	return ! ( $def && 0 === strpos( (string) $def['path'], 'pilates' ) );
+	return ! ( $def && ( 0 === strpos( (string) $def['path'], 'pilates' ) || ! empty( $def['brookvale_only'] ) ) );
 }
 
 add_action( 'wp_footer', function () {

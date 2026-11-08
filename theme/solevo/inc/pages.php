@@ -79,7 +79,7 @@ function solevo_site_pages() {
 			'meta' => 'Sports physiotherapy in Brookvale for sprains, strains, tendon and running injuries. Gait analysis, force plate testing and return to play plans. Book now.',
 			'excerpt' => 'Return to play programs for athletes and active people.',
 			'related' => array( 'conditions/sports-injuries-rehab', 'conditions/shin-splints', 'pilates/clinical-pilates' ) ),
-		array( 'path' => 'physio/shockwave-therapy', 'cta_title' => 'Book a shockwave assessment', 'cta_sub' => 'Your first appointment checks whether shockwave suits your injury before any treatment starts.', 'title' => 'Shockwave Therapy', 'h1' => 'Shockwave Therapy in Brookvale', 'type' => 'service', 'booking' => 'cliniko', 'keyword' => 'shockwave therapy brookvale',
+		array( 'path' => 'physio/shockwave-therapy', 'cta_title' => 'Book a shockwave assessment', 'cta_sub' => 'Your first appointment checks whether shockwave suits your injury before any treatment starts.', 'title' => 'Shockwave Therapy', 'h1' => 'Shockwave Therapy in Brookvale', 'type' => 'service', 'brookvale_only' => true, 'booking' => 'cliniko', 'keyword' => 'shockwave therapy brookvale',
 			'seo_title' => 'Shockwave Therapy Brookvale | Solevo Physio',
 			'meta' => 'Shockwave therapy in Brookvale for stubborn tendon pain, including Achilles, patellar, gluteal and tennis elbow, combined with a strength program. Book online.',
 			'excerpt' => 'Shockwave therapy for persistent tendon pain, alongside strength rehabilitation.',

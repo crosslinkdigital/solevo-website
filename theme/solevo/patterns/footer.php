@@ -67,7 +67,7 @@
 <li><a href="/pilates">Pilates classes</a></li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
-<li><a href="/pilates/seniors">Seniors Pilates</a></li>
+<li><a href="/pilates/seniors">Active Seniors</a></li>
 <!-- /wp:list-item -->
 <!-- wp:list-item -->
 <li><a href="/pilates/clinical-pilates">Clinical Pilates</a></li>

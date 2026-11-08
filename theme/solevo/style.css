@@ -728,6 +728,9 @@ div.solevo-social a { color: #93928F; display: flex; }
 @media (max-width: 599px) { .solevo-hero2__media { display: none; } }
 @media (prefers-reduced-motion: reduce) { .solevo-sticky { transition: none; } }
 
+/* 1.4.19: footer 1300 number in the body font, same size as the Terrey Hills line under it (Steph, 8 Nov) */
+.solevo-footer .solevo-footer__phone { font-family: var(--s-sans); font-size: var(--fs-body); font-weight: 500; line-height: 1.5; letter-spacing: 0; }
+
 /* ---- Clinic chooser (1.4.19): Book Physio asks Brookvale or Terrey Hills ---- */
 .solevo-chooser { width: min(92vw, 26rem); max-width: none; padding: 0; border: 0; background: var(--s-paper); color: var(--s-text); box-shadow: 0 24px 60px -20px rgba(0,0,0,.45); }
 .solevo-chooser::backdrop { background: rgba(44,44,44,.55); }
