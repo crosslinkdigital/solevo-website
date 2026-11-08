@@ -76,6 +76,9 @@ function solevo_clinic_chooser_on() {
 		return false;
 	}
 	$def = solevo_page_def();
+	if ( $def && ! empty( $def['both_clinics'] ) ) {
+		return true; // 1.4.21: Active Seniors runs at both clinics (Steph, 8 Nov).
+	}
 	return ! ( $def && ( 0 === strpos( (string) $def['path'], 'pilates' ) || ! empty( $def['brookvale_only'] ) ) );
 }
 

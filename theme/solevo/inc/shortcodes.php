@@ -410,7 +410,7 @@ add_shortcode( 'solevo_cta_band', function () {
 	$phys    = $def['cta'] ?? 'Book Physio';
 	$locs    = solevo_locations();
 	// Clinical Pilates, other studio services and pages marked brookvale_only (Shockwave) run in Brookvale only.
-	if ( $def && ( 'pilates' === strtok( $def['path'], '/' ) || ! empty( $def['brookvale_only'] ) ) ) {
+	if ( $def && empty( $def['both_clinics'] ) && ( 'pilates' === strtok( $def['path'], '/' ) || ! empty( $def['brookvale_only'] ) ) ) {
 		$locs = array_slice( $locs, 0, 1 );
 	}
 	$areas   = implode( ' or ', array_filter( wp_list_pluck( $locs, 'area' ) ) );
@@ -420,7 +420,8 @@ add_shortcode( 'solevo_cta_band', function () {
 	// 1.3.20: one plain heading per booking type, no page-specific hooks (Hayo, 28 Oct).
 	$th_phone = solevo_opt( 'location2_phone' );
 	$th_link  = $th_phone ? sprintf( '<a href="tel:%s">%s</a>', esc_attr( preg_replace( '/[^0-9+]/', '', $th_phone ) ), esc_html( $th_phone ) ) : '';
-	$call     = solevo_opt( 'phone' ) ? $btn( 'Call ' . solevo_opt( 'phone' ), '#phone', 'solevo-btn-ghost' ) : '';
+	// 1.4.21: the number in the Call button uses the normal text font (Steph, 8 Nov).
+	$call     = solevo_opt( 'phone' ) ? str_replace( esc_html( 'Call ' . solevo_opt( 'phone' ) ), 'Call <span class="solevo-callnum">' . esc_html( solevo_opt( 'phone' ) ) . '</span>', $btn( 'Call ' . solevo_opt( 'phone' ), '#phone', 'solevo-btn-ghost' ) ) : '';
 	$multi    = $th_link && count( $locs ) > 1;
 	// 1.3.28: online booking leads; Terrey Hills phone is a small second line (Steph, 1 Nov).
 	$th_line = $multi ? '<p class="solevo-cta2__alt">Terrey Hills physio on Wednesdays: call the medical centre on ' . $th_link . '</p>' : '';
@@ -428,7 +429,7 @@ add_shortcode( 'solevo_cta_band', function () {
 		$title = 'Book an appointment';
 		$sub   = 'Book online any time.';
 		$btns  = $btn( $phys, '#cliniko' ) . $call;
-		$alt   = $th_line . '<p class="solevo-cta2__alt">Want a Pilates class? <a href="#mindbody">Book Studio</a></p>';
+		$alt   = $th_line . ( empty( $def['both_clinics'] ) ? '<p class="solevo-cta2__alt">Want a Pilates class? <a href="#mindbody">Book Studio</a></p>' : '' );
 	} elseif ( 'mindbody' === $booking ) {
 		$title = 'Book a class';
 		$sub   = 'See the live timetable and book your spot online.';

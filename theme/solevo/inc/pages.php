@@ -50,7 +50,7 @@ function solevo_site_pages() {
 			'meta' => 'Answers to common questions about physiotherapy, Pilates classes, health funds, Medicare, WorkCover, NDIS and booking at Solevo in Brookvale and Terrey Hills.',
 			'excerpt' => 'Physio, classes, funding and bookings in one place.' ),
 		// Hayo/Steph, 4 Nov: Seniors Pilates becomes Active Seniors (slug kept: Google Ads lands here).
-		array( 'path' => 'pilates/seniors', 'large_text' => true,  'title' => 'Active Seniors', 'h1' => 'Active Seniors Exercise Program in Brookvale', 'type' => 'campaign', 'booking' => 'mindbody', 'keyword' => 'seniors exercise classes',
+		array( 'path' => 'pilates/seniors', 'large_text' => true,  'title' => 'Active Seniors', 'h1' => 'Active Seniors Exercise Program in Brookvale', 'type' => 'campaign', 'booking' => 'cliniko', 'cta' => 'Book an assessment', 'both_clinics' => true, 'keyword' => 'seniors exercise classes',
 			'seo_title' => 'Active Seniors Exercise Classes Brookvale | Solevo',
 			'meta' => 'Physiotherapist-led seniors exercise classes in Brookvale for strength, balance, bone health and mobility. Small groups on Mondays and Fridays.',
 			'excerpt' => 'Physiotherapist-led classes for strength, balance and bone health.',
