@@ -432,7 +432,7 @@ add_shortcode( 'solevo_cta_band', function () {
 		$alt   = $th_line . ( empty( $def['both_clinics'] ) ? '<p class="solevo-cta2__alt">Want a Pilates class? <a href="#mindbody">Book Studio</a></p>' : '' );
 	} elseif ( 'mindbody' === $booking ) {
 		$title = 'Book a class';
-		$sub   = 'See the live timetable and book your spot online.';
+		$sub   = 'Book your spot online.';
 		$btns  = $btn( 'Book Studio', '#mindbody' ) . $call;
 		$alt   = '<p class="solevo-cta2__alt">In pain or injured? Start with a physio. <a href="#cliniko">Book Physio</a></p>';
 	} else {
