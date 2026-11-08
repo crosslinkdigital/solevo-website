@@ -409,8 +409,8 @@ add_shortcode( 'solevo_cta_band', function () {
 	$booking = solevo_page_booking();
 	$phys    = $def['cta'] ?? 'Book Physio';
 	$locs    = solevo_locations();
-	// Clinical Pilates and other studio services run in Brookvale only.
-	if ( $def && 'pilates' === strtok( $def['path'], '/' ) ) {
+	// Clinical Pilates, other studio services and pages marked brookvale_only (Shockwave) run in Brookvale only.
+	if ( $def && ( 'pilates' === strtok( $def['path'], '/' ) || ! empty( $def['brookvale_only'] ) ) ) {
 		$locs = array_slice( $locs, 0, 1 );
 	}
 	$areas   = implode( ' or ', array_filter( wp_list_pluck( $locs, 'area' ) ) );
