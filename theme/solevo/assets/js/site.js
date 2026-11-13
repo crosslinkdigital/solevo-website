@@ -136,7 +136,9 @@
 	var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	var saver = navigator.connection && navigator.connection.saveData;
 	if (calm || saver) return;
-	function start() { v.src = v.dataset.src; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+	// 1.4.23: phones (up to 781px, the theme's mobile breakpoint) get the smaller file when one is set.
+	var small = v.dataset.srcMobile && window.matchMedia && window.matchMedia('(max-width: 781px)').matches;
+	function start() { v.src = small ? v.dataset.srcMobile : v.dataset.src; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
 	if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
 })();
 
