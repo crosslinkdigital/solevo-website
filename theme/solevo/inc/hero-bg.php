@@ -31,15 +31,7 @@ add_action( 'wp_head', function () {
 			$poster = html_entity_decode( $p[1] );
 		}
 	}
-	if ( ! $poster ) {
-		return;
-	}
-	/* 1.4.24: phones up to 480px get the narrow crop when one is set; media queries match the <picture> below. */
-	$mobile = solevo_opt( 'hero_bg_poster_mobile' );
-	if ( $mobile ) {
-		printf( '<link rel="preload" href="%s" as="image" fetchpriority="high" media="(max-width: 480px)">' . "\n", esc_url( $mobile ) );
-		printf( '<link rel="preload" href="%s" as="image" fetchpriority="high" media="(min-width: 481px)">' . "\n", esc_url( $poster ) );
-	} else {
+	if ( $poster ) {
 		printf( '<link rel="preload" href="%s" as="image" fetchpriority="high">' . "\n", esc_url( $poster ) );
 	}
 }, 1 );
@@ -67,24 +59,11 @@ add_filter( 'render_block', function ( $content, $block ) {
 				$poster = html_entity_decode( $p[1] );
 			}
 		}
-		/*
-		 * 1.4.24: the still image is a <picture> behind the video instead of the video's poster, so the
-		 * browser finds it straight away and phones can get a smaller crop. The video stays transparent
-		 * until its first frame, so the still shows while it loads (and for reduced motion or data saver).
-		 * 1.4.26: skip-lazy / data-no-lazy keep the Bluehost plugin from adding loading="lazy" to it.
-		 */
-		$picture = '';
-		if ( $poster ) {
-			$poster_m = solevo_opt( 'hero_bg_poster_mobile' );
-			$picture  = '<picture class="solevo-hero2__poster">'
-				. ( $poster_m ? '<source media="(max-width: 480px)" srcset="' . esc_url( $poster_m ) . '">' : '' )
-				. '<img class="skip-lazy" data-no-lazy="1" src="' . esc_url( $poster ) . '" alt="" loading="eager" fetchpriority="high" decoding="async"></picture>';
-		}
 		$bg = sprintf(
-			'<div class="solevo-hero2__bg" aria-hidden="true">%s<video class="solevo-hero2__bgvideo" muted loop playsinline preload="none" data-src="%s"%s></video></div>',
-			$picture,
+			'<div class="solevo-hero2__bg" aria-hidden="true"><video class="solevo-hero2__bgvideo" muted loop playsinline preload="none" data-src="%s"%s%s></video></div>',
 			esc_url( $url ),
-			$mobile ? ' data-src-mobile="' . esc_url( $mobile ) . '"' : ''
+			$mobile ? ' data-src-mobile="' . esc_url( $mobile ) . '"' : '',
+			$poster ? ' poster="' . esc_url( $poster ) . '"' : ''
 		);
 		$content = preg_replace( '/^(\s*<section\b[^>]*?class=")/', '$1has-bg-video ', $content, 1 );
 		$content = preg_replace( '/^(\s*<section\b[^>]*>)/', '$1' . $bg, $content, 1 );
