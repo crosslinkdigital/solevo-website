@@ -158,7 +158,8 @@ add_shortcode( 'solevo_child_pages', function ( $atts ) {
  */
 add_shortcode( 'solevo_reviews', function () {
 	if ( shortcode_exists( 'trustindex' ) ) {
-		return '<div class="solevo-feed solevo-feed--reviews">' . do_shortcode( '[trustindex no-registration=google]' ) . '</div>';
+		/* 1.4.25: Trustindex prints its stylesheet inside the widget; load it without blocking (the widget stays hidden until its CSS is in). */
+		return '<div class="solevo-feed solevo-feed--reviews">' . solevo_defer_plugin_css( do_shortcode( '[trustindex no-registration=google]' ) ) . '</div>';
 	}
 	// Not connected yet: still show the section, with a link to the real reviews on Google.
 	$url = solevo_opt( 'google_reviews_url' );

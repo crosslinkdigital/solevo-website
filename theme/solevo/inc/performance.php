@@ -1,6 +1,6 @@
 <?php
 /**
- * 1.4.24: plugin stylesheets that only style widgets below the first screen load without
+ * 1.4.24 / 1.4.25: plugin stylesheets that only style widgets below the first screen load without
  * blocking the first paint (Google reviews by Trustindex, Instagram Feed by Smash Balloon).
  *
  * They are printed in wp_head by the plugins themselves (Trustindex echoes its own <link>), so
@@ -21,6 +21,8 @@ function solevo_deferred_css_patterns() {
 }
 
 function solevo_defer_plugin_css( $html ) {
+	/* Trustindex also preloads its stylesheet at high priority in the head, competing with the hero image: drop that hint. */
+	$html = preg_replace( '/<link\b[^>]*rel=[\'"]preload[\'"][^>]*trustindex-google-widget\.css[^>]*>\s*/i', '', $html );
 	return preg_replace_callback( '/<link\b[^>]*rel=[\'"]stylesheet[\'"][^>]*>/i', function ( $m ) {
 		$tag = $m[0];
 		$hit = false;

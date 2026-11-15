@@ -77,7 +77,7 @@ add_filter( 'render_block', function ( $content, $block ) {
 			$poster_m = solevo_opt( 'hero_bg_poster_mobile' );
 			$picture  = '<picture class="solevo-hero2__poster">'
 				. ( $poster_m ? '<source media="(max-width: 480px)" srcset="' . esc_url( $poster_m ) . '">' : '' )
-				. '<img src="' . esc_url( $poster ) . '" alt="" fetchpriority="high" decoding="async"></picture>';
+				. '<img src="' . esc_url( $poster ) . '" alt="" loading="eager" fetchpriority="high" decoding="async"></picture>';
 		}
 		$bg = sprintf(
 			'<div class="solevo-hero2__bg" aria-hidden="true">%s<video class="solevo-hero2__bgvideo" muted loop playsinline preload="none" data-src="%s"%s></video></div>',
